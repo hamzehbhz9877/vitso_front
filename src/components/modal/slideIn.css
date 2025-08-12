@@ -1,0 +1,27 @@
+.more {
+  @apply text-right bg-white leading-6 inline-block
+  translate-x-2/4 shadow-[rgba(14,30,37,0.12)_0px_2px_4px_0px,rgba(14,30,37,0.32)_0px_2px_16px_0px]
+  opacity-0  pr-[15px] p-2.5 rounded-[11px] right-2/4;
+  position: fixed;
+  bottom: -100%;
+  display: block;
+  width: 100%;
+  border-radius: 24px 24px 0 0;
+  padding: 16px;
+  z-index: 1100;
+  transition: all 0.3s ease-in-out 0s;
+}
+.more li a {
+  color: #42484F;
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+.more.open {
+  bottom: 0;
+  @apply opacity-100;
+}
+
+/*# sourceMappingURL=slideIn.css.map */

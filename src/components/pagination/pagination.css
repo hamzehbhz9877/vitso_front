@@ -1,0 +1,29 @@
+.pagination {
+  @apply my-[20px] gap-[20px] flex flex-row items-center justify-between px-[15px] md:px-0;
+}
+.pagination__list {
+  @apply flex items-center;
+}
+.pagination .next, .pagination .prev {
+  @apply flex gap-[7px] items-center cursor-pointer text-sm;
+}
+.pagination .next span, .pagination .prev span {
+  @apply hidden lg:block;
+}
+.pagination .next svg, .pagination .prev svg {
+  @apply w-[10px] md:w-[20px];
+}
+.pagination .next.disabled, .pagination .prev.disabled {
+  @apply cursor-not-allowed text-[#ced0d0];
+}
+.pagination__link {
+  @apply w-full flex justify-center;
+}
+.pagination__item {
+  @apply border border-solid mx-[2px] md:mx-[4px] rounded-[8px] text-black w-[35px]  md:w-[40px] text-xs md:text-sm h-[35px] md:h-[40px] cursor-pointer flex items-center justify-between;
+}
+.pagination__item--active {
+  @apply bg-[#4859f9] text-[#fff] h-[38px] w-[38px] md:h-[43px] md:w-[43px] text-[14px] md:text-[16px] rounded-[8px];
+}
+
+/*# sourceMappingURL=pagination.css.map */

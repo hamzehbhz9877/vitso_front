@@ -1,0 +1,72 @@
+$sidebarWidth: 320px;
+$panelBgHeight: 227px;
+//body {
+//  @apply bg-[#FAFAFA] #{!important};
+//}
+
+
+.userPanel {
+  //&__bg {
+  //  @apply absolute right-0 z-[-1] left-0 top-[-100px] h-[#{$panelBgHeight}] bg-base-300;
+  //}
+
+  .sideBar {
+    @apply w-full lg:w-[#{$sidebarWidth}]  ;
+    &__top {
+      @apply bg-base-300 rounded-xl pt-[20px] pr-[20px] pl-[14px] pb-[18px];
+      box-shadow: 0px 4px 30px 0px #B0AFAF1A;
+
+      .user {
+        .profile {
+          @apply flex gap-[26px] items-center;
+        }
+
+        img {
+          @apply rounded-full border border-c-primary;
+        }
+
+        &__name {
+          @apply text-[18px] text-base-content font-bold leading-[38px];
+        }
+
+        &__phone {
+          @apply text-right text-[14px] lg:text-[16px] text-base-content leading-[31px];
+        }
+
+        &__wallet {
+          @apply mt-[30px] flex justify-between items-center;
+          span {
+            @apply text-[14px] lg:text-[16px] text-base-content;
+          }
+        }
+      }
+    }
+
+    &__bottom {
+      box-shadow: 0px 4px 30px 0px #B0AFAF1A;
+      @apply py-[10px] mt-4 px-[15px] ;
+      .title {
+        @apply text-base-content;
+      }
+
+      ul {
+        @apply flex flex-col;
+        li {
+          @apply py-[20px] mr-[25px] px-[4px] flex items-center justify-between;
+          &.active {
+            .title {
+              @apply text-[#F04438];
+            }
+
+            svg {
+              @apply fill-[#F04438];
+            }
+          }
+        }
+        a + a {
+          @apply border-t-[.5px]  border-t-[#ABAFB1];
+        }
+      }
+    }
+  }
+}

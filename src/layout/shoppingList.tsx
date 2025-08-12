@@ -1,0 +1,132 @@
+'use client'
+
+import React from 'react';
+import {ShoppingBag} from "lucide-react";
+import Image from "next/image";
+import {useMutation, useQuery} from "@tanstack/react-query";
+import {RequestShoppingCart, RequestShoppingCartDeleteItem} from "@/services/ShoppingCart";
+import {cn} from "@/lib/utils";
+
+import EmptyCart from "../../public/images/images.png"
+import {useRouter} from "next/navigation";
+import {IoClose} from "react-icons/io5";
+
+const ShoppingList = () => {
+
+
+
+    const router=useRouter();
+
+    const {data,refetch} = useQuery<ApiResponse<ShoppingCart>>({
+        queryFn: RequestShoppingCart,
+        queryKey: ["shoppingCart"],
+    });
+
+
+
+    const {mutate, isPending} = useMutation({
+        mutationFn: RequestShoppingCartDeleteItem,
+        onSettled: async (_, error) => {
+            if (!error) {
+                refetch()
+            }
+        }
+    });
+
+
+    return (
+        <div className="dropdown dropdown-end">
+            <div tabIndex={0}><a className="btn btn-circle btn-primary btn-soft relative">
+                <ShoppingBag className={"text-base-content/50"}/>
+                <span
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center font-semibold">
+                {data?.data.count??0}
+              </span>
+
+            </a></div>
+            <div
+                tabIndex={0}
+                className="dropdown-content top-[calc(100%+20px)] card card-sm bg-base-100 z-1 w-96 shadow-md">
+                <div className="card-body  text-sm p-0">
+                    <div className={" header-carter rounded-t-lg py-1.5 px-2 flex justify-between"}>
+                        <span>تعداد دوره ها</span>
+                        <span className="em-plus cart-counter">{data?.data.count}</span>
+                    </div>
+                    {data?.data.items.length > 0 ?  <div className={"p-2"}>
+                        {data?.data.items.map((item, index) => (
+                            <div key={index}>
+                                <div className={"flex gap-2 items-center"} >
+                                   <div className={"relative"}>
+                                       <Image className={"aspect-auto rounded-xl w-max"}
+                                              src={item.image}
+                                              alt={item.name} width={130} height={130}/>
+                                       <IoClose  className={cn("absolute -top-1 border border-red-500 bg-white rounded-full -right-1  text-red-500 cursor-pointer", isPending && "opacity-20")}
+                                                 size={21}
+                                                         onClick={() => isPending ? () => {
+                                                         } : mutate(item.itemId)}/>
+                                   </div>
+                                    <div
+                                        className={"flex flex-col h-[-webkit-fill-available] gap-2 text-xs justify-between"}>
+                                        <span className={"line-clamp-2 leading-5"}>{item.name}</span>
+                                        <div className={"flex gap-2 text-base-content"}>
+                                            <div className="flex gap-1">
+                                                <div className="flex items-center gap-x-2.5">
+
+                                                    {item.discountPercentage ?
+                                                        <div className="text-xs p-1 rounded bg-c-primary text-white">
+                                                            {item.discountPercentage}%
+                                                        </div> : ""}
+                                                    {item.discountPercentage ? <div className="flex flex-col">
+                                        <span
+                                            className="text-xs text-slate-500 dark:text-white/70 -mb-1.5 line-through">{item.price}</span>
+                                                        <span className="text-c-primary text-sm">
+                            {item.payablePrice} <span className=" text-xs">تومان</span>
+                                        </span>
+                                                    </div> : <span className="text-c-primary text-sm">
+                            {item.payablePrice} <span className="text-xs">تومان</span>
+                                        </span>}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {index === data.data.items.length - 1 ? "" :
+                                    <hr className={"border-[#ABAFB320] my-[10px]"}/>}
+                            </div>
+                        ))}
+
+
+                            <>
+                                <hr className={"border-[#ABAFB31] my-[10px]"}/>
+                                <div className={"p-4"}>
+                                    <div className={"flex gap-2 items-center justify-between"}>
+                                        <span>مبلغ قابل پرداخت</span>
+                                        <div>
+                                            <span className={"font-bold"}>{data?.data.payablePrice}</span>
+                                            <span className="mr-1">تومان</span>
+                                        </div>
+                                    </div>
+                                    <button onClick={() => router.push("/cart")}
+                                            className={"btn btn-primary mx-auto mt-3 w-full"}>مشاهده سبد خرید
+                                    </button>
+                                </div>
+                            </>
+
+
+                    </div>
+                    :
+                    <div className={"p-4"}>
+                        <Image width={200} height={200} alt={"empty-cart"} src={EmptyCart}
+                               className={"mx-auto rounded-full"}/>
+                        <p className={" text-center mt-1"}>هیچ محصولی در سبد خرید نیست.</p>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    )
+        ;
+};
+
+export default ShoppingList;

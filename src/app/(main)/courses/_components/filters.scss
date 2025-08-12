@@ -1,0 +1,10 @@
+.filter-collapse.collapse-arrow .collapse-title::after {
+  width: 0.43rem !important;
+  height: 0.43rem !important;
+  top: 1.6rem !important;
+}
+
+.menu :where(li ul):before{
+  top: .5rem;
+  bottom: .5rem;
+}

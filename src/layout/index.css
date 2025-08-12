@@ -1,0 +1,14 @@
+.header-carter {
+  color: #fff;
+  @apply bg-c-primary;
+}
+.header-carter span {
+  margin-left: 0;
+  font-weight: 600;
+  position: relative;
+  top: 2px;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+/*# sourceMappingURL=index.css.map */
