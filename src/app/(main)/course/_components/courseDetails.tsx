@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import dynamic from 'next/dynamic'
 
 const PlyrPlayer = dynamic(() => import('@/components/player/player'), {ssr: false})
-import "./index.scss"
+import "./index.css"
 import CourseStat from "@/app/(main)/course/_components/courseStat";
 import RegisterCourse from "@/app/(main)/course/_components/registerCourse";
 import CourseLinks from "@/app/(main)/course/_components/courseLinks";
@@ -29,7 +29,8 @@ const CourseDetails = ({
 
                            status,
                            seasons,
-
+authorId,
+    authorAvatar,
                            shortLink,
                            level,
                            time, image,
@@ -57,7 +58,7 @@ const CourseDetails = ({
                     </div>
                     <div className="gap-1 ">
                         <div
-                            className="flex-1 single-course px-[18px] pt-[15px] pb-[15px] lg:px-[24px] dark:bg-base-300 rounded-b-lg">
+                            className="flex-1 single-course before:bg-primary px-[18px] pt-[15px] pb-[15px] lg:px-[24px] dark:bg-base-300 rounded-b-lg">
                             <div className={"flex justify-between items-center mb-3"}>
                                 <h3 className="text-lg md:text-xl  font-bold">{title}<span
                                     className="badge badge-soft badge-primary text-sm  me-2 px-2.5 py-0.5 rounded-lg ms-2">{level}</span>
@@ -74,7 +75,7 @@ const CourseDetails = ({
                         </div>
                     </div>
 
-                    <div className={"block lg:hidden  flex-1 mt-5 single-course px-[18px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg"}>
+                    <div className={"block lg:hidden  flex-1 mt-5 single-course before:bg-primary px-[18px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg"}>
                         <CourseStatTable status={status} commentCount={commentCount} time={time}
                                          studentCount={studentCount}
                                          countEpisode={countEpisode}/>
@@ -90,8 +91,8 @@ const CourseDetails = ({
 
                     </div>
 
-                    <div className="flex gap-[20px] my-[40px] single-course px-[18px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg">
-                        <CourseTabs authorName={authorName} id={id} description={description} seasons={seasons}/>
+                    <div className="flex gap-[20px] my-[40px] single-course before:bg-primary px-[18px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg">
+                        <CourseTabs  author={{authorName,authorAvatar,authorId}} id={id} description={description} seasons={seasons}/>
                     </div>
                 </div>
                 <div className="mb-20 h-max hidden lg:block">
@@ -104,7 +105,7 @@ const CourseDetails = ({
                         </div>
                     </div>
                     <div className={"w-[350px] shadow mt-4 dark:bg-base-300  p-3 rounded-lg"}>
-                        <AuthorProfile authorName={authorName}/>
+                        <AuthorProfile author={{authorName,authorAvatar,authorId}} />
                     </div>
                     <div className={"w-[350px] shadow mt-4 dark:bg-base-300 p-4 rounded-lg"}>
                         <CourseLinks shortLink={shortLink} tagList={tagList} categoryName={categoryName}/>

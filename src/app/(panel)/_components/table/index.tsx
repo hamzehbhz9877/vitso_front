@@ -102,84 +102,67 @@ export default function ReactTable({
 
     return (
         <div className="p-2">
-            <div
-                className={`flex gap-y-3 flex-col items-start lg:flex-row lg:items-center ${
-                    headerActions ? 'lg:justify-between' : 'lg:justify-end'
-                } mb-5`}
-            >                {headerActions}
-             <div className={"flex items-center gap-3  w-full sm:w-max"}>
-                 <DebouncedInput
-                     value={globalFilter}
-                     onChange={value => setGlobalFilter(String(value))}
-                     className="px-2 py-3 w-full sm:w-[300px]  text-[14px] shadow border border-block"
-                     placeholder={searchPlaceholder??'جستجو کنید ...'}
-                 />
-                 <DropdownMenu>
-                     <DropdownMenuTrigger asChild>
-                         <Button variant="ghost" className="ml-auto">
-                             <Columns3 /><span className={"hidden lg:block"}>نمایش ستون ها</span> <ChevronDown />
-                         </Button>
-                     </DropdownMenuTrigger>
-                     <DropdownMenuContent align="end">
-                         <div className="relative">
-                             <Input
-                                 value={searchQuery}
-                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                 className="!pr-8"
-                                 dir={"rtl"}
-                                 placeholder="جستجو"
-                                 onKeyDown={(e) => e.stopPropagation()}
-                             />
-                             <SearchIcon className="absolute inset-y-0 my-auto right-2 h-4 w-4" />
-                         </div>
-                         <DropdownMenuSeparator />
-                         {table
-                             .getAllColumns()
-                             .filter((column) => column.getCanHide())
-                             .map((column) => {
-                                 if (
-                                     searchQuery &&
-                                     !column.id.toLowerCase().includes(searchQuery.toLowerCase())
-                                 ) {
-                                     return null;
-                                 }
 
-                                 return (
-                                     <DropdownMenuCheckboxItem
-                                         key={column.id}
-                                         dir={"rtl"}
-                                         className="capitalize"
-                                         checked={column.getIsVisible()}
-                                         onCheckedChange={(value) =>
-                                             column.toggleVisibility(!!value)
-                                         }
-                                         onSelect={(e) => e.preventDefault()}
-                                     >
-                                         {column.id}
-                                     </DropdownMenuCheckboxItem>
-                                 );
-                             })}
-                         <DropdownMenuSeparator />
-                         <DropdownMenuItem
-                             onClick={() => {
-                                 table.resetColumnVisibility();
-                                 setSearchQuery("");
-                             }}
-                         >
-                             <RefreshCcw /> بازنشانی
-                         </DropdownMenuItem>
-                     </DropdownMenuContent>
-                 </DropdownMenu>
-             </div>
+            <div className="flex flex-col gap-3 mb-5 lg:flex-row lg:items-center lg:justify-between">
+                {/* بخش راست: headerActions + ستون‌ها */}
+                <div className="flex items-center gap-2">
+                    {headerActions && <div>{headerActions}</div>}
+
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline">
+                                <Columns3/>
+                                <span className="hidden sm:inline-block">ستون‌ها</span>
+                                <ChevronDown size={13}/>
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="w-[12rem]">
+                            {table
+                                .getAllColumns()
+                                .filter((column) => column.getCanHide())
+                                .map((column) => (
+                                    <DropdownMenuCheckboxItem
+                                        key={column.id}
+                                        dir="rtl"
+                                        className="capitalize"
+                                        checked={column.getIsVisible()}
+                                        onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                                        onSelect={(e) => e.preventDefault()}
+                                    >
+                                        {column.id}
+                                    </DropdownMenuCheckboxItem>
+                                ))}
+                            <DropdownMenuSeparator/>
+                            <DropdownMenuItem
+                                onClick={() => {
+                                    table.resetColumnVisibility()
+                                    setSearchQuery("")
+                                }}
+                            >
+                                <RefreshCcw/> بازنشانی
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
+
+                {/* بخش چپ: سرچ */}
+                <div className="w-full sm:w-auto">
+                    <DebouncedInput
+                        value={globalFilter}
+                        onChange={(value) => setGlobalFilter(String(value))}
+                        className="px-2 py-3 w-full sm:w-[300px]"
+                        placeholder={searchPlaceholder ?? 'جستجو کنید ...'}
+                    />
+                </div>
             </div>
 
 
-                <Table>
-                    <TableHeader>
+            <Table>
+                <TableHeader>
                     {table.getHeaderGroups().map(headerGroup => (
-                        <TableRow  key={headerGroup.id}>
+                        <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map(header => (
-                                <TableHead className={"text-center bg-gray-200 text-black"}  key={header.id} colSpan={header.colSpan}>
+                                <TableHead className={"text-center"} key={header.id} colSpan={header.colSpan}>
                                     <div
                                         className={header.column.getCanSort() ? 'cursor-pointer select-none' : ''}
                                         onClick={header.column.getToggleSortingHandler()}
@@ -194,32 +177,32 @@ export default function ReactTable({
                             ))}
                         </TableRow>
                     ))}
-                    </TableHeader>
-                    <TableBody>
+                </TableHeader>
+                <TableBody>
                     {table.getRowModel().rows?.length ? isLoading ? (
-                        <TableRow><TableCell  colSpan={columns.length}>در حال بارگذاری...</TableCell></TableRow>
+                        <TableRow><TableCell colSpan={columns.length}>در حال بارگذاری...</TableCell></TableRow>
                     ) : (
                         table.getRowModel().rows.map(row => (
                             <TableRow key={row.id}>
                                 {row.getVisibleCells().map(cell => (
-                                    <TableCell  key={cell.id}>
+                                    <TableCell key={cell.id}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </TableCell>
                                 ))}
                             </TableRow>
                         ))
-                    ): (
+                    ) : (
                         <TableRow>
                             <TableCell
                                 colSpan={columns.length}
                                 className="h-24 text-center"
                             >
-                               نتایجی یافت نشد.
+                                نتایجی یافت نشد.
                             </TableCell>
                         </TableRow>
                     )}
-                    </TableBody>
-                </Table>
+                </TableBody>
+            </Table>
 
             <div className="flex justify-center items-center gap-2 mt-4">
 
@@ -263,14 +246,14 @@ function DebouncedInput({
     }, [value])
 
     return (
-            <div className={"relative w-full sm:w-max"}>
-                <Input
-                    {...props} className={`${props.className} text-sm w-full lg:!w-[300px] !pr-8`}
+        <div className={"relative w-full sm:w-max"}>
+            <Input
+                {...props} className={`${props.className} text-sm w-full lg:!w-[300px] !pr-8`}
 
-                    value={value} onChange={e => setValue(e.target.value)}
-                />
-                <SearchIcon className="absolute inset-y-0 my-auto right-2 h-4 w-4" />
-            </div>
+                value={value} onChange={e => setValue(e.target.value)}
+            />
+            <SearchIcon className="absolute inset-y-0 my-auto right-2 h-4 w-4"/>
+        </div>
     )
 }
 

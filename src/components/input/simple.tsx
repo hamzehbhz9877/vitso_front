@@ -1,89 +1,91 @@
-'use client';
+'use client'
 import React, {
     DetailedHTMLProps,
     InputHTMLAttributes,
     useEffect,
     useRef,
     useState
-} from 'react';
-import { useField } from 'formik';
-
-// css
-import './index.scss';
-import { cn } from '@/lib/utils';
+} from 'react'
+import { useField } from 'formik'
+import { cn } from '@/lib/utils'
+import { Input } from '@/components/ui/input'
 
 type propsType = DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
->;
+>
 
 interface Props extends propsType {
-    type: 'text' | 'number' | 'email' | 'password' | 'hidden' | 'url'|'tel';
-    label?: string | React.ReactNode;
-    name?: string;
-    showError?: boolean;
-    prefix?: string;
-    icon?: React.ReactNode;
+    type: 'text' | 'number' | 'email' | 'password' | 'hidden' | 'url' | 'tel'
+    label?: string | React.ReactNode
+    name?: string
+    showError?: boolean
+    prefix?: string
+    icon?: React.ReactNode
 }
 
-// تابع کمکی برای تبدیل مقدار به رشته مناسب برای input
 function safeInputValue(value: any): string {
-    if (value === null || value === undefined) return '';
-    if (typeof value === 'object') return JSON.stringify(value);
-    return String(value);
+    if (value === null || value === undefined) return ''
+    if (typeof value === 'object') return JSON.stringify(value)
+    return String(value)
 }
 
-const SimpleInput = ({
-                         type,
-                         showError = true,
-                         label,
-                         prefix,
+// بیس اینپوت که وابستگی به فرومیک نداره
+const BaseInput = ({
+                       type,
+                       showError = true,
+                       label,
+                       prefix,
                          name,
-                         icon,
-                         className,
-                         value: propsValue,
-                         ...rest
-                     }: Props) => {
-    // فقط اگر name داده شده بود useField اجرا کن، وگرنه مقدار پیش‌فرض بده
-    const [field, meta] = name ? useField(name) : [{}, {}];
-
-    const prefixRef = useRef<HTMLSpanElement>(null);
-    const [prefixWidth, setPrefixWidth] = useState(0);
+                       icon,
+                       className,
+                       value,
+                       meta,
+                       field,
+                       ...rest
+                   }: Props & { field: any; meta: any }) => {
+    const prefixRef = useRef<HTMLSpanElement>(null)
+    const [prefixWidth, setPrefixWidth] = useState(0)
 
     useEffect(() => {
         if (prefixRef.current) {
-            const width = prefixRef.current.offsetWidth;
-            setPrefixWidth(width + 14); // اضافه کردن فاصله بین prefix و input
+            const width = prefixRef.current.offsetWidth
+            setPrefixWidth(width + 14)
         }
-    }, [prefix]);
+    }, [prefix])
 
-    // مقدار نهایی که به input می‌دهیم:
-    // اولویت با propsValue است، اگر نبود مقدار فرم، و اگر نبود رشته خالی
-    const finalValue = safeInputValue(
-        propsValue !== undefined && propsValue !== null ? propsValue : (field.value ?? '')
-    );
+    const finalValue = safeInputValue(value ?? field.value ?? '')
 
     return (
-        <div className="custom-input simple">
-            {label && <label className="custom-input__title dark:!text-base-content">{label}</label>}
+        <div className="rounded-[11px]">
+            {label && (
+                <label className="text-[13px] leading-[21px] text-[#62666d] block mb-[10px]">
+                    {label}
+                </label>
+            )}
 
-            <div className="relative custom-input__wrapper">
+            <div className="relative flex items-center">
                 {prefix && (
-                    <span ref={prefixRef} className="custom-input__prefix dark:!bg-base-300 dark:!text-base-content">
-                        {prefix}
-                    </span>
+                    <span
+                        style={{direction:"ltr"}}
+                        ref={prefixRef}
+                        className="absolute text-[13px] text-gray-500 pointer-events-none whitespace-nowrap left-[4px] top-1/2 -translate-y-1/2 direction-ltr
+                   bg-blue-50 h-[calc(100%-8px)] px-2 flex items-center
+                   dark:bg-neutral-700 dark:text-gray-300 dark:border dark:border-neutral-600"
+                    >
+        {prefix}
+    </span>
                 )}
 
-                <input
+                <Input
                     {...field}
                     {...rest}
                     type={type}
-                    name={name}
                     className={cn(
-                        'input-field dark:!bg-base-300 dark:!text-base-content',
-                        icon && 'input-has-icon',
-                        prefix && 'input-has-prefix',
-                        meta.touched && meta.error && 'input-field--error',
+                        icon && 'pr-[35px]',
+                        prefix && 'text-left',
+                        name === 'phone' && 'text-left',
+                        meta?.touched && meta?.error && 'border border-solid',
                         className
                     )}
                     style={{
@@ -92,14 +94,34 @@ const SimpleInput = ({
                     value={finalValue}
                 />
 
-                {icon && <div className="custom-input__icon">{icon}</div>}
+                {icon && (
+                    <div className="absolute -translate-y-2/4 right-2.5 top-2/4">
+                        {icon}
+                    </div>
+                )}
             </div>
 
-            {showError && meta.touched && meta.error && (
-                <div className="validation-error">{meta.error}</div>
+            {showError && meta?.touched && meta?.error && (
+                <div className="text-right text-xs text-red-500 mt-[5px]">
+                    {meta.error}
+                </div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default SimpleInput;
+// نسخه‌ای که با Formik وصل میشه
+const FormikInput = (props: Props & { name: string }) => {
+    const [field, meta] = useField(props.name)
+    return <BaseInput {...props} field={field} meta={meta} />
+}
+
+// ورودی اصلی
+const SimpleInput = (props: Props) => {
+    if (!props.name) {
+        return <BaseInput {...props} field={{}} meta={{}} />
+    }
+    return <FormikInput {...props as Props & { name: string }} />
+}
+
+export default SimpleInput

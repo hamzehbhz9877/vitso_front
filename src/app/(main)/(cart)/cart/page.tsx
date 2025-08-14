@@ -44,51 +44,55 @@ const Page = () => {
     });
 
     return (
-        <div className={"cart-page container"}>
+        <div className={"cart-page container my-10"}>
 
             {data?.data.items.length === 0 ?
-                <div className=" card w-full bg-base-100 card-md shadow-md border  my-6">
+                <div className=" card w-full bg-base-100 card-md">
                     <div className="cart-empty-icon"></div>
                     <div className="card-body pt-0 text-center cart-empty-description flex-1">
                         <div className="">
-                            <div>
+                            <p className={"text-lg"}>
                                 سبد خرید شما در حال حاضر خالی است.
-                            </div>
+                            </p>
                         </div>
                         <p>با جستجو در فروشگاه میتوانید محصولات مورد علاقه خود را به سبد خرید خود اضافه کنید.</p>
                         <p className={"mt-3"}>
-                            <Link className="btn btn-accent" href="/">
+                            <Link className="btn btn-primary" href="/">
                                 بازگشت به فروشگاه </Link>
                         </p>
                     </div>
                 </div> :
-                <div className="flex items-start gap-3 px-16">
-                    <div className={"card w-full bg-base-100 card-md shadow-md border  my-6 p-3"}>
+                <div className="flex flex-col md:flex-row items-start gap-3 px-3 xl:px-16">
+                    <div className={"card w-full bg-base-100 card-md shadow-md border   p-3"}>
                         {data?.data.items.map((item, index) => (
                             <div key={index}>
-                                <div className={"flex gap-3"}>
-                                    <Image className={"aspect-auto rounded-xl"}
-                                           src={item.image}
-                                           alt={item.name} width={170} height={170}/>
+                                <div className={"flex flex-col min-[550px]:flex-row gap-3"}>
+                                    <Image
+                                        className="rounded-xl w-full min-[550px]:w-[170px] h-auto object-contain"
+                                        src={item.image}
+                                        alt={item.name}
+                                        width={170}
+                                        height={170}
+                                    />
 
                                     <div
-                                        className={"flex flex-col h-[-webkit-fill-available] flex-1 justify-between"}>
+                                        className={"flex flex-col gap-3 h-[-webkit-fill-available] flex-1 justify-between"}>
                                         <span className={"line-clamp-2 text-sm"}>{item.name}</span>
                                         <div className={"flex gap-2 text-base-content"}>
                                             <div className="flex w-full gap-1 justify-between items-center">
                                                 <div className="flex items-center gap-2.5 text-nowrap">
 
                                                     {item.discountPercentage ?
-                                                        <div className="text-xs p-1 rounded bg-c-primary text-white">
+                                                        <div className="text-xs p-1 rounded bg-primary text-white">
                                                             {item.discountPercentage}%
                                                         </div> : ""}
                                                     {item.discountPercentage ? <div className="flex flex-col">
                                         <span
                                             className="text-xs text-slate-500 dark:text-white/70 -mb-1.5 line-through">{item.price}</span>
-                                                        <span className="text-c-primary">
+                                                        <span className="text-primary">
                             {item.payablePrice} <span className=" text-xs">تومان</span>
                                         </span>
-                                                    </div> : <span className="text-c-primary">
+                                                    </div> : <span className="text-primary">
                             {item.payablePrice} <span className="text-xs">تومان</span>
                                         </span>}
                                                 </div>
@@ -107,7 +111,7 @@ const Page = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="card bg-base-100 card-md shadow-md border my-6 p-3 w-[480px]">
+                    <div className="card bg-base-100 card-md shadow-md border  p-3 w-full mx-auto min-[400px]:w-[330px]  lg:w-[480px]">
                         <div className="text-sm card-body p-1 flex flex-col gap-4">
                             <div className="flex items-center justify-between">
                                 <span>مبلغ کل</span>

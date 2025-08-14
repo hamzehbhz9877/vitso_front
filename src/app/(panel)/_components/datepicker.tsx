@@ -53,7 +53,7 @@ export function CalendarHijriInput({
 
     return (
         <div>
-            <Label htmlFor="date" className="custom-input__title">
+            <Label htmlFor="date" className="text-[13px] leading-[21px] text-[#62666d] block mb-[10px] ">
                 {label}
             </Label>
             <div className="relative flex gap-2">
@@ -200,7 +200,7 @@ function Calendar({
                 range_middle: cn("rounded-none bg-accent", defaultClassNames.range_middle),
                 range_end: cn("rounded-r-md bg-accent", defaultClassNames.range_end),
                 today: cn(
-                    "bg-accent text-accent-foreground rounded-md data-[selected=true]:rounded-none",
+                    "bg-accent text-accent-foreground rounded-full data-[selected=true]:rounded-none",
                     defaultClassNames.today
                 ),
                 outside: cn(

@@ -1,9 +1,8 @@
 'use client'
 
-import React, { useCallback, useState } from 'react';
-import Select from "react-select";
-import {ErrorMessage, useField} from "formik";
-import { Props as SelectProps } from 'react-select';
+import React, { useCallback, useState } from 'react'
+import Select, { Props as SelectProps } from 'react-select'
+import { ErrorMessage, useField } from 'formik'
 
 type OptionType = {
     value: string | number
@@ -32,54 +31,64 @@ const MultiSelect = ({
                          formikProps,
                          name,
                          data = [],
-                         valueKey = "id",
-                         labelKey = "name",
+                         valueKey = 'id',
+                         labelKey = 'name',
                          isMulti = true,
                          isClearable = true,
                          selectProps = {},
                          isSearchable = true,
                          isDisabled = false,
                          isLoading = false,
-                         placeholder = "لطفا مقداری را وارد کنید..."
+                         placeholder = 'لطفا مقداری را وارد کنید...'
                      }: Props) => {
-    const [inputValue, setInputValue] = useState<string>("");
+    const [inputValue, setInputValue] = useState<string>('')
 
-    const labelizeData = useCallback((items: any[]): OptionType[] => {
-        return items?.map((item) => ({
-            value: item[valueKey],
-            label: item[labelKey],
-        }));
-    }, [valueKey, labelKey]);
-    const [field, meta] = useField(name as string);
+    const labelizeData = useCallback(
+        (items: any[]): OptionType[] => {
+            return items?.map((item) => ({
+                value: item[valueKey],
+                label: item[labelKey]
+            }))
+        },
+        [valueKey, labelKey]
+    )
 
-    const options = labelizeData(data);
+    const [field, meta] = useField(name as string)
 
-    const handleChange = useCallback((selected: any) => {
-        if (isMulti) {
-            const ids = selected?.map((item: any) => item.value) ?? [];
-            formikProps.setFieldValue(name, ids);
-        } else {
-            formikProps.setFieldValue(name, selected?.value || '');
-        }
-    }, [formikProps, name, isMulti]);
+    const options = labelizeData(data)
+
+    const handleChange = useCallback(
+        (selected: any) => {
+            if (isMulti) {
+                const ids = selected?.map((item: any) => item.value) ?? []
+                formikProps.setFieldValue(name, ids)
+            } else {
+                formikProps.setFieldValue(name, selected?.value || '')
+            }
+        },
+        [formikProps, name, isMulti]
+    )
 
     const getValue = () => {
-        const currentValue = formikProps.values[name];
+        const currentValue = formikProps.values[name]
         if (isMulti) {
-            return options.filter(option => currentValue?.includes(option.value));
+            return options.filter((option) => currentValue?.includes(option.value))
         } else {
-            return options.find(option => option.value === currentValue) || null;
+            return options.find((option) => option.value === currentValue) || null
         }
-    };
+    }
 
     return (
         <div className="form-group text-[#8D8D8D]">
-            <label htmlFor={name} className="block mb-2 text-sm font-medium">
+            <label
+                htmlFor={name}
+                className="text-[13px] leading-[21px] text-[#62666d] mb-[10px] block"
+            >
                 {title}
             </label>
 
             <Select
-                instanceId={`multi-select-${name}`}  // این خط را اضافه کنید
+                instanceId={`multi-select-${name}`}
                 isMulti={isMulti}
                 isClearable={isClearable}
                 isSearchable={isSearchable}
@@ -93,83 +102,56 @@ const MultiSelect = ({
                 value={getValue()}
                 name={name}
                 components={{
-                    IndicatorSeparator: () => null,  // این خط separator رو حذف میکنه
+                    IndicatorSeparator: () => null
                 }}
-                noOptionsMessage={() => "هیچ گزینه‌ای یافت نشد"}
-                styles={{
-                    control: (base, state) => ({
-                        ...base,
-                        backgroundColor: "#ffffff",
-                        border: "1px solid",
-                        borderColor: (meta.touched && meta.error && name) ? '#f00 !important': state.isFocused ? "#000000 !important" : "#e0e0e2 !important",
-                        paddingTop: "2px",
-                        marginTop: "11px",
-                        paddingBottom: "2px",
-                        paddingLeft: "10px",
-                        paddingRight: "0px",
-                        fontSize: "14px",
-                        color: "#030a16",
-                        width: "100%",
-                        lineHeight: "1.5rem",
-                        borderRadius: "0px",
-                        boxShadow: "none",
-                        "&:hover": {
-                            borderColor: state.isFocused ? "#000000" : "#e0e0e2",
-                        },
-                    }),
-                    input: (base) => ({
-                        ...base,
-                        color: "#030a16",
-                        fontSize: "14px",
-                    }),
-                    placeholder: (base) => ({
-                        ...base,
-                        fontSize: "14px",
-                        color: "#999999",
-                    }),
-                    multiValue: (base) => ({
-                        ...base,
-                        backgroundColor: "#f0f0f0",
-                        fontSize:"13px",
-                        borderRadius: "6px",
-                        padding: "0px 4px",
-                        margin: "0px 5px",
-                    }),
-                    multiValueLabel: (base) => ({
-                        ...base,
-                        fontSize: "14px",
-                    }),
-                    menu: (base) => ({
-                        ...base,
-                        backgroundColor: '#ffffff',  // پس‌زمینه منو
-                        borderRadius: '4px',
-                        boxShadow: '0 4px 11px rgba(0,0,0,0.1)', // سایه ملایم
-                        marginTop: 4,
-                    }),
-                    menuList: (base) => ({
-                        ...base,
-                        maxHeight: '200px',
-                        paddingTop: 0,
-                        paddingBottom: 0,
-                    }),
-                    option: (base, state) => ({
-                        ...base,
-                        backgroundColor: state.isFocused ? '#e8f0fe' : 'transparent',  // رنگ پس‌زمینه گزینه هنگام هاور یا انتخاب
-                        color: state.isSelected ? '#1a73e8' : '#333',  // رنگ متن گزینه انتخاب شده
-                        cursor: 'pointer',
-                        padding: '8px 12px',
-                    }),
+                noOptionsMessage={() => 'هیچ گزینه‌ای یافت نشد'}
+                unstyled
+                classNames={{
+                    control: ({ isFocused }) =>
+                        `flex w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors 
+            placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 
+            disabled:cursor-not-allowed disabled:opacity-50 md:text-sm 
+            ${
+                            meta.touched && meta.error
+                                ? 'focus-visible:ring-red-500'
+                                : isFocused
+                                    ? 'border focus-visible:ring-neutral-950 dark:focus-visible:ring-neutral-300'
+                                    : 'border'
+                        }
+            dark:file:text-neutral-50 dark:placeholder:text-neutral-400`,
+                    placeholder: () => 'text-neutral-500 text-sm',
+
+
+                    multiValue: () =>
+                        'bg-neutral-100 dark:bg-neutral-700 rounded px-1 py-0.5 m-0.5',
+                    multiValueLabel: () => 'text-sm',
+                    multiValueRemove: () =>
+                        'hover:bg-red-500 hover:text-white rounded-full p-0.5 mr-1 transition-colors cursor-pointer',
+
+                    option: ({ isFocused, isSelected }) =>
+                        `cursor-pointer px-2 text-foreground  rounded-sm py-1 ${
+                            isSelected
+                                ? 'bg-neutral-200 text-neutral-900 dark:bg-neutral-600 dark:text-white'
+                                : isFocused
+                                    ? 'bg-neutral-100 dark:bg-neutral-700'
+                                    : ''
+                        }`,
+                    menu: () =>
+                        'bg-white dark:bg-neutral-950 border rounded shadow-md mt-1 z-50',
+                    menuList: () => 'max-h-48 overflow-auto p-1 text-[14px]'
                 }}
                 {...selectProps}
             />
-            {name?
-            <ErrorMessage
-                name={name}
-                className="validation-error"
-                component="div"
-            />:""}
-        </div>
-    );
-};
 
-export default MultiSelect;
+            {name && (
+                <ErrorMessage
+                    name={name}
+                    className="text-red-500 text-xs mt-1"
+                    component="div"
+                />
+            )}
+        </div>
+    )
+}
+
+export default MultiSelect

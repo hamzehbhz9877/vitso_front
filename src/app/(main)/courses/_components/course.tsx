@@ -115,7 +115,7 @@ const Course = ({type, categories, course, searchParams}: {
                 }
             ]}/>
 
-            <CategoryList categories={categories}/>
+            <CategoryList type={type} categories={categories}/>
 
 
             <div className="flex flex-col lg:flex-row gap-3">

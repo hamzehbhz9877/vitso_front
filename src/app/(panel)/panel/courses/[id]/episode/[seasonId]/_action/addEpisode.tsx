@@ -2,7 +2,6 @@ import React from 'react';
 import { getValidationSchema, getInitialValues } from "./validation";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import SimpleInput from "@/components/input/simple";
-import { ModalHeader } from "@/components/modal";
 import useModal from "@/hooks/useModal";
 import { IoCloseOutline } from "react-icons/io5";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -13,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { CalendarHijriInput } from "@/app/(panel)/_components/datepicker";
 import {TimePickerDemo} from "@/components/timePicker";
 import {RegisterEpisodes} from "@/services/Episode";
+import {DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 
 const AddEpisode = () => {
     const { handleClose } = useModal();
@@ -38,14 +38,10 @@ const AddEpisode = () => {
     const rawId = params.seasonId;
     const seasonId: string | undefined = Array.isArray(rawId) ? rawId[0] : rawId;
     return (
-        <div>
-            <ModalHeader>
-                <div className="flex items-center justify-between">
-                    <span className="text-[16px] font-bold text-[#2F2F2F]">افزودن اپیزد</span>
-                    <IoCloseOutline className="cursor-pointer" size={24} color="#2F2F2F" onClick={handleClose} />
-                </div>
-            </ModalHeader>
-            <hr className="border-[#ABAFB1] my-[20px]" />
+        <DialogContent>
+            <DialogHeader>
+                <DialogTitle>افزودن جلسه</DialogTitle>
+            </DialogHeader>
 
             <Formik
                 initialValues={getInitialValues({ seasonId })}
@@ -80,7 +76,7 @@ const AddEpisode = () => {
                                 {/* تاریخ انتشار */}
                                 <CalendarHijriInput
                                     name="publishedAt"
-                                    label="تاریخ انتشار اپیزد"
+                                    label="تاریخ انتشار جلسه"
                                     placeholder="یک تاریخ را انتخاب کنید"
                                     onChange={(date) => {
                                         if (date) formikProps.setFieldValue('publishedAt', date);
@@ -99,7 +95,7 @@ const AddEpisode = () => {
                                                     form.setFieldValue(field.name, checked);
                                                 }}
                                             />
-                                            <label htmlFor="isFree" className="text-sm pr-2">
+                                            <label htmlFor="isFree" className="text-sm">
                                                 رایگان
                                             </label>
                                             {meta.touched && meta.error && (
@@ -117,7 +113,7 @@ const AddEpisode = () => {
                     );
                 }}
             </Formik>
-        </div>
+              </DialogContent>
     );
 };
 

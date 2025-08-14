@@ -11,11 +11,11 @@ const CourseLinks = ({tagList,categoryName,shortLink }:Pick<Course, 'shortLink'|
 
 
                 <div className="link-kootah relative mt-2">
-                    <button className={"text-center flex items-center" +
+                    <button className={"text-center flex items-center bg-primary" +
                         " absolute top-1/2 -translate-y-1/2 justify-center left-1"} onClick={() => {
                         copyToClipboard(shortLink)
                         showToast("success", "کپی شد")
-                    }}><IoCopyOutline className={"text-white"} size={20}/></button>
+                    }}><IoCopyOutline className={"text-white cursor-pointer"} size={20}/></button>
                     <input id="myInput" readOnly defaultValue={shortLink}/>
                 </div>
             </div>

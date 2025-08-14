@@ -12,7 +12,6 @@ import {NumericFormat, NumericFormatProps} from 'react-number-format';
 import {Input} from '@/components/ui/input';
 import {Label} from "@/components/ui/label";
 import * as React from "react";
-import "./input/index.scss"
 import {ErrorMessage, FormikProps, useField} from "formik";
 import {cn} from "@/lib/utils";
 
@@ -131,7 +130,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
         return (
             <div className="custom-input">
-                <Label htmlFor={props.id} className="custom-input__title">
+                <Label htmlFor={props.id} className="text-[13px] leading-[21px] text-[#62666d] block mb-[10px]">
                     {props.label}
                 </Label>
                 <NumericFormat

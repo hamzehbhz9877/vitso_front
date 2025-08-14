@@ -8,22 +8,22 @@ const stats = [
     {
         key: 'countCourses',
         title: 'تعداد دوره‌ها',
-        icon: <FaBookOpen className="text-c-primary text-3xl" />
+        icon: <FaBookOpen className="text-primary text-3xl" />
     },
     {
         key: 'countComments',
         title: 'تعداد نظرات',
-        icon: <FaComments className="text-c-primary text-3xl" />
+        icon: <FaComments className="text-primary text-3xl" />
     },
     {
         key: 'countInvoices',
         title: 'فاکتورها',
-        icon: <FaFileInvoice className="text-c-primary text-3xl" />
+        icon: <FaFileInvoice className="text-primary text-3xl" />
     },
     {
         key: 'countTransactions',
         title: 'تراکنش‌ها',
-        icon: <FaCreditCard className="text-c-primary text-3xl" />
+        icon: <FaCreditCard className="text-primary text-3xl" />
     }
 ]
 const DashboardStat = () => {
@@ -48,7 +48,7 @@ const DashboardStat = () => {
                             {stat.icon}
                             <div>
                                 <p className="text-sm text-gray-500 dark:text-gray-400">{stat.title}</p>
-                                <h2 className="text-2xl font-bold text-c-primary dark:text-white">
+                                <h2 className="text-2xl font-bold text-primary dark:text-white">
                                     {data?.data[stat.key] ?? 0}
                                 </h2>
                             </div>

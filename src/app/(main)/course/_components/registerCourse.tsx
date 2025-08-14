@@ -42,7 +42,7 @@ const RegisterCourse = ({discountPercentage,isStudentOfCourse
             <div className={"mt-5 flex justify-between  items-center"}>
 
                 {isStudentOfCourse?
-                <span className={"text-xs text-success badge badge-soft badge-sm px-3 py-4"}>شما دانشجوی این دوره هستید</span>:
+                <span className={"text-xs text-info badge badge-soft badge-sm px-3 py-4"}>شما دانشجوی این دوره هستید</span>:
                 <button className={"btn btn-primary"} disabled={isPending}
                         onClick={() => mutate({courseId: id})}>
                     <GraduationCap size={20}/>

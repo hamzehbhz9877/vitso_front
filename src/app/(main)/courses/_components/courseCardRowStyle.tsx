@@ -79,7 +79,7 @@ const CourseCardRowStyle = ({
 
                         <h2 className="card-title text-[13px] line-clamp-1 relative pr-2 mt-1">
                             <span
-                                className="absolute right-0 top-1/2 -translate-y-1/2 w-[4px] h-[4px] bg-c-primary rounded-full"></span>
+                                className="absolute right-0 top-1/2 -translate-y-1/2 w-[4px] h-[4px] bg-primary rounded-full"></span>
                             {title}
                         </h2>
 
@@ -110,20 +110,20 @@ const CourseCardRowStyle = ({
                             {/* قیمت */}
                             {discountPercentage ? (
                                 <>
-                                    <div className="text-[11px] p-1 rounded bg-c-primary text-white order-1 lg:order-2">
+                                    <div className="text-[11px] p-1 rounded bg-primary text-white order-1 lg:order-2">
                                         {discountPercentage}%
                                     </div>
                                     <div className="flex flex-col order-3 lg:order-3">
                     <span className="text-[11px] text-slate-500 dark:text-white/70 line-through -mb-0.5">
                       {price}
                     </span>
-                                        <span className="text-c-primary text-[13px] whitespace-nowrap">
+                                        <span className="text-primary text-[13px] whitespace-nowrap">
                       {payablePrice} <span className="text-[11px]">تومان</span>
                     </span>
                                     </div>
                                 </>
                             ) : (
-                                <span className="text-c-primary text-[13px] whitespace-nowrap order-3">
+                                <span className="text-primary text-[13px] whitespace-nowrap order-3">
                   {payablePrice} <span className="text-[11px]">تومان</span>
                 </span>
                             )}

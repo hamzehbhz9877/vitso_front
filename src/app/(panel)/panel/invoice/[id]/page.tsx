@@ -3,7 +3,7 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { InvoiceDetail } from '@/services/Invoice'
-import { useParams } from 'next/navigation'
+import {useParams, useRouter} from 'next/navigation'
 import Link from 'next/link'
 import {
     Card,
@@ -23,6 +23,8 @@ import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { CheckCircle, Clock, XCircle } from 'lucide-react'
+import {Button} from "@/components/ui/button";
+import {FaAngleRight} from "react-icons/fa6";
 
 const Page = () => {
     const params = useParams()
@@ -32,6 +34,9 @@ const Page = () => {
         queryFn: () => InvoiceDetail(params.id),
         enabled: !!params.id,
     })
+
+    const router=useRouter()
+
     if (isLoading) {
         return (
             <div className="p-4 space-y-6">
@@ -68,7 +73,7 @@ const Page = () => {
                                 <Skeleton className="h-4 w-24 bg-gray-200"/>
                             </div>
                         ))}
-                        <div className="flex justify-end">
+                        <div className="flex justify-center">
                             <Skeleton className="h-6 w-32 bg-gray-200"/>
                         </div>
                     </CardContent>
@@ -123,20 +128,26 @@ const Page = () => {
 
     return (
         <div className="p-4 space-y-6">
+            <div className="flex gap-2 items-center mb-3">
+                <Button variant="outline">
+                    <FaAngleRight onClick={() => router.back()}/>
+                </Button>
+                <h2 className="text-xl font-bold lg:text-2xl">جزییات فاکتور</h2>
+            </div>
             <Card>
                 <CardHeader>
-                    <CardTitle className="text-2xl text-center border-b pb-2">
-                        جزییات فاکتور
+                    <CardTitle>
+                        جزییات
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="grid gap-6">
                     <div className="grid md:grid-cols-3 gap-4 text-base">
                         <div className="flex gap-2 items-center">
-                            <span className="font-semibold">نام و نام خانوادگی:</span>
+                            <span>نام و نام خانوادگی:</span>
                             {fullName}
                         </div>
                         <div className="flex gap-2 items-center">
-                            <span className="font-semibold">تاریخ پرداخت:</span>
+                            <span>تاریخ پرداخت:</span>
                             {status === 'در انتظار پرداخت' || !paymentDate ? (
                                 <Badge variant="outline" className="text-yellow-600 border-yellow-600">
                                     پرداخت انجام نشده
@@ -147,16 +158,16 @@ const Page = () => {
                         </div>
 
                         <div className="flex gap-2 items-center">
-                            <span className="font-semibold">کد پیگیری:</span>
+                            <span>کد پیگیری:</span>
                             {serial}
                         </div>
                         <div className="flex gap-2 items-center">
-                            <span className="font-semibold">وضعیت:</span>
+                            <span>وضعیت:</span>
                             {getStatusBadge(status)}
                         </div>
 
                         <div className="flex gap-2 items-center">
-                            <span className="font-semibold">تعداد دوره‌ها:</span> {courseCount}
+                            <span>تعداد دوره‌ها:</span> {courseCount}
                         </div>
                     </div>
                 </CardContent>
@@ -164,25 +175,22 @@ const Page = () => {
 
             <Card>
                 <CardHeader>
-                    <CardTitle className="text-xl">لیست دوره‌ها</CardTitle>
+                    <CardTitle>لیست دوره‌ها</CardTitle>
                 </CardHeader>
                 <CardContent className="overflow-x-auto ">
-                    <Table className="bg-white rounded-md">
+                    <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead className="text-center bg-gray-200 text-black">تصویر</TableHead>
-                                <TableHead className="text-center bg-gray-200 text-black">عنوان دوره</TableHead>
-                                <TableHead className="text-center bg-gray-200 text-black">قیمت</TableHead>
+                                <TableHead>تصویر</TableHead>
+                                <TableHead>عنوان دوره</TableHead>
+                                <TableHead>قیمت</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {items?.map((item: any, index: number) => (
                                 <TableRow
                                     key={item.courseId}
-                                    className={cn(
-                                        "hover:bg-gray-50",
-                                        index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                                    )}
+
                                 >
                                     <TableCell className="text-center">
                                         <Link href={`/course/${item.slug}`}>

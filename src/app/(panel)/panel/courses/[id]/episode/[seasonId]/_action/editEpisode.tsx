@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import { getValidationSchema, getInitialValues } from "./validation";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import SimpleInput from "@/components/input/simple";
-import { ModalHeader } from "@/components/modal";
 import useModal from "@/hooks/useModal";
 import { IoCloseOutline } from "react-icons/io5";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -14,6 +13,7 @@ import { CalendarHijriInput } from "@/app/(panel)/_components/datepicker";
 import { parseJalaliDateToDate } from "@/lib/utils";
 import { TimePickerDemo } from "@/components/timePicker";
 import { EditEpisodes, GetForEditEpisodes } from "@/services/Episode";
+import {DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 
 const EditEpisode = ({ id }: { id: string }) => {
     const { handleClose } = useModal();
@@ -51,19 +51,10 @@ const EditEpisode = ({ id }: { id: string }) => {
             setDatePicker(  parseJalaliDateToDate(episode?.data?.publishedAt.split(" ")[0]));
     }, [episode]);
     return (
-        <div>
-            <ModalHeader>
-                <div className="flex items-center justify-between">
-                    <span className="text-[16px] font-bold text-[#2F2F2F]">ویرایش اپیزد</span>
-                    <IoCloseOutline
-                        className="cursor-pointer"
-                        size={24}
-                        color="#2F2F2F"
-                        onClick={handleClose}
-                    />
-                </div>
-            </ModalHeader>
-            <hr className="border-[#ABAFB1] my-[20px]" />
+        <DialogContent>
+            <DialogHeader>
+                <DialogTitle>ویرایش جلسه</DialogTitle>
+            </DialogHeader>
 
             <Formik
                 initialValues={getInitialValues({ isEdit: true, ...episode?.data, isFree: isFreeValue })}
@@ -101,7 +92,7 @@ const EditEpisode = ({ id }: { id: string }) => {
                                 <CalendarHijriInput
                                     initialDate={episode?.data?.publishedAt ? parseJalaliDateToDate(episode?.data?.publishedAt?.split(" ")[0]) : undefined}
                                     initValue={ episode?.data?.publishedAt?.split(" ")[0]}                                    name="publishedAt"
-                                    label="تاریخ انتشار اپیزد"
+                                    label="تاریخ انتشار جلسه"
                                     placeholder="یک تاریخ را انتخاب کنید"
                                     onChange={(date) => {
                                         if (date) formikProps.setFieldValue("publishedAt", date);
@@ -120,7 +111,7 @@ const EditEpisode = ({ id }: { id: string }) => {
                                                     form.setFieldValue(field.name, checked);
                                                 }}
                                             />
-                                            <label htmlFor="isFree" className="text-sm pr-2">
+                                            <label htmlFor="isFree" className="text-sm ">
                                                 رایگان
                                             </label>
                                             {meta.touched && meta.error && (
@@ -143,7 +134,7 @@ const EditEpisode = ({ id }: { id: string }) => {
                     );
                 }}
             </Formik>
-        </div>
+        </DialogContent>
     );
 };
 

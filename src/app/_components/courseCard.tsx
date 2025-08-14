@@ -69,17 +69,17 @@ const CourseCard = ({
                         </div>
                     </div>
 
-                    <h2 className="card-title text-xs sm:text-sm line-clamp-1 relative pr-3">
-                        <span className="absolute right-0 top-1/2 -translate-y-1/2 w-[5px] h-[5px] bg-c-primary rounded-full"></span>
+                    <h2 className="card-title text-sm line-clamp-1 relative pr-3">
+                        <span className="absolute right-0 top-1/2 -translate-y-1/2 w-[5px] h-[5px] bg-primary rounded-full"></span>
                         {title}
                     </h2>
 
                     <div className="card-actions justify-between mt-2 text-zinc-500">
-                        <div className="flex gap-1 text-xs sm:text-sm items-center">
+                        <div className="flex gap-1 text-sm items-center">
                             <UserRound size={15} />
                             {author}
                         </div>
-                        <div className="flex gap-1 text-xs sm:text-sm items-center">
+                        <div className="flex gap-1 text-sm items-center">
                             <Clock4 size={15} />
                             {time}
                         </div>
@@ -88,28 +88,28 @@ const CourseCard = ({
                     <hr className="border-gray-300 dark:border-gray-600 my-[0px]" />
 
                     <div className="card-actions justify-between items-center mt-2 text-zinc-500">
-                        <div className="flex gap-1 text-xs sm:text-sm">
+                        <div className="flex gap-1 text-sm">
                             <UserRound size={15} />2451
                         </div>
                         <div className="flex gap-1 text-sm items-center">
                             <div className="flex items-center gap-x-2.5">
                                 {discountPercentage ? (
                                     <>
-                                        <div className="text-sm p-1 rounded bg-c-primary text-white">
+                                        <div className="text-sm p-1 rounded bg-primary text-white">
                                             {discountPercentage}%
                                         </div>
                                         <div className="flex flex-col">
-                      <span className="text-xs sm:text-sm text-slate-500 dark:text-white/70 -mb-1.5 line-through">
+                      <span className="text-sm text-slate-500 dark:text-white/70 -mb-1.5 line-through">
                         {price}
                       </span>
-                                            <span className="text-c-primary text-base sm:text-lg">
+                                            <span className="text-primary text-base sm:text-lg">
                         {payablePrice}{" "}
                                                 <span className="text-sm sm:text-base">تومان</span>
                       </span>
                                         </div>
                                     </>
                                 ) : (
-                                    <span className="text-c-primary text-base sm:text-lg">
+                                    <span className="text-primary text-base sm:text-lg">
                     {payablePrice} <span className="text-sm sm:text-base">تومان</span>
                   </span>
                                 )}

@@ -1,8 +1,15 @@
 import React from 'react';
 import {initialValues, validationSchema} from "./validation";
-import { Form, Formik} from "formik";
+import {Form, Formik} from "formik";
 import SimpleInput from "@/components/input/simple";
-import {ModalHeader} from "@/components/modal";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 import useModal from "@/hooks/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
@@ -16,36 +23,31 @@ const AddUser = () => {
     const {handleClose} = useModal();
 
 
-    const queryClient=useQueryClient();
+    const queryClient = useQueryClient();
 
-    const {mutate,isPending} = useMutation({
-        mutationFn: RegisterUsers,onSettled: async (_, error)=>{
-            if(!error){
-                queryClient.invalidateQueries({queryKey:["users"]});
+    const {mutate, isPending} = useMutation({
+        mutationFn: RegisterUsers, onSettled: async (_, error) => {
+            if (!error) {
+                queryClient.invalidateQueries({queryKey: ["users"]});
                 handleClose()
             }
         }
     });
 
 
-    const {data:roles}=useQuery({
-        queryFn:GetAllRoleForSelect,
-        queryKey:["GetAllRoleForSelect"]
+    const {data: roles} = useQuery({
+        queryFn: GetAllRoleForSelect,
+        queryKey: ["GetAllRoleForSelect"]
     })
 
 
-    const handleSubmit=(values)=>mutate(values)
-    return (
-        <div>
-            <ModalHeader>
-                <div className={"flex items-center justify-between"}>
-                    <span
-                        className="text-[16px] font-bold text-[#2F2F2F]">افزودن کاربر</span>
-                    <IoCloseOutline className={"cursor-pointer"} size={24} color={"#2F2F2F"} onClick={handleClose}/>
-                </div>
-            </ModalHeader>
-            <hr className={"border-[#ABAFB1] my-[20px]"}/>
+    const handleSubmit = (values) => mutate(values)
 
+    return (
+        <DialogContent>
+            <DialogHeader>
+                <DialogTitle> افزودن کاربر</DialogTitle>
+            </DialogHeader>
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -68,10 +70,8 @@ const AddUser = () => {
                                     <SimpleInput label={"رمز عبور"} name={"password"} type={"password"}/>
                                     <SimpleInput label={"تکرار رمز عبور"} name={"confirmPassword"} type={"password"}/>
                                 </div>
-
-
                                 <Button isPending={isPending} type={"submit"} disabled={isPending}
-                                        variant={"default"}
+                                        variant={"outline"}
                                 >
                                     ثبت نام
                                 </Button>
@@ -80,7 +80,7 @@ const AddUser = () => {
                     )
                 }}
             </Formik>
-        </div>
+        </DialogContent>
 
     );
 };

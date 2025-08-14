@@ -2,7 +2,14 @@
 
 import React from 'react';
 import {IoMdClose} from "react-icons/io";
-import {ModalBody, ModalHeader} from "@/components/modal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import useModal from "@/context/modal/useModal";
 import {DeleteEpisodes} from "@/services/Episode";
@@ -23,26 +30,21 @@ const DeleteEpisode = ({id, name}: { id: string, name: string }) => {
     })
 
     return (
-        <div>
-            <ModalHeader>
-                <div className={"flex justify-between items-center"}>
-                    <span className={"text-[18px] text-[#333333] font-bold"}>
-                       حذف اپیزد
-                    </span>
-                    <div className="cursor-pointer">
-                        <IoMdClose onClick={closeModal} size="24"/>
-                    </div>
-                </div>
-            </ModalHeader>
-            <hr className={"border-[#ABAFB1] my-[20px]"}/>
-            <ModalBody>
+        <DialogContent>
+            <DialogHeader>
+               
+                <DialogTitle>حذف جلسه</DialogTitle>
+                <DialogDescription>آیا میخواید جلسه {name} را حذف کنید?</DialogDescription>
+
+            </DialogHeader>
+    
+            
                 <div>
-                    <p>آیا میخواید اپیزد {name} را حذف کنید?</p>
                     <div className={"flex justify-end gap-[10px] mt-[20px]"}>
-                        <Button type="button" onClick={() => closeModal()} variant={"redOutline"}>
+                        <Button type="button" onClick={() => closeModal()} variant="outline">
                             بستن
                         </Button>
-                        <Button variant={"red"} isPending={isPending}  disabled={isPending} onClick={(e) => {
+                        <Button  isPending={isPending}  disabled={isPending} onClick={(e) => {
                             e.stopPropagation()
                             mutate(id)
                         }}>
@@ -50,8 +52,8 @@ const DeleteEpisode = ({id, name}: { id: string, name: string }) => {
                         </Button>
                     </div>
                 </div>
-            </ModalBody>
-        </div>
+            
+        </DialogContent>
     );
 };
 

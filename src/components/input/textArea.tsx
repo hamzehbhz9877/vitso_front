@@ -1,49 +1,58 @@
-'use client';
-import React from 'react';
-import {ErrorMessage, useField} from "formik";
+'use client'
+import React from 'react'
+import {ErrorMessage, useField} from 'formik'
+import {cn} from '@/lib/utils'
+import {Textarea as TextAreaShadCn} from "@/components/ui/textarea"
 
-
-// css
-import "./index.scss"
-
-type propsType = React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
+type propsType = React.DetailedHTMLProps<
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
+>
 
 interface Props extends propsType {
-    label?: string | React.ReactNode;
-    name?: string;
+    label?: string | React.ReactNode
+    name?: string
     icon?: React.ReactNode
 }
 
-
 const TextArea = ({label, name, icon, className, ...rest}: Props) => {
-
-
-
-    const [field, meta] = useField(name as string);
+    const [field, meta] = useField(name as string)
 
     return (
-        <div className="custom-input simple">
-            {
-                label ? <label className="custom-input__title dark:!text-base-content">{label}</label> : ""
-            }
-
+        <div className="rounded-[11px]">
+            {/* label */}
+            {label && (
+                <label className="text-[13px] leading-[21px] text-[#62666d] block mb-[10px] ">
+                    {label}
+                </label>
+            )}
 
             <div className="relative">
-                <textarea
+                <TextAreaShadCn
+                    {...field}
                     name={name}
                     value={meta.value}
-                    onChange={field.onChange}
-                    className={`input-field dark:!bg-base-300 dark:!text-base-content w-full p-4 resize-none rounded-lg border border-gray-300 caret-primary-200 ${meta.touched && meta.error ? 'input-field--error' : ""} ${className ?? ""}`}
-                    {...rest}
-                >
+                    className={cn(
+                        // textarea specific
+                        'w-full p-4 resize-none rounded-lg border border-gray-300 caret-primary-200',
+                        // error
+                        meta.touched && meta.error && 'border border-solid',
+                        className
+                    )}
 
-                </textarea>
+                    {...rest}
+                />
             </div>
 
-            { name ? <ErrorMessage name={name} className="validation-error" component="div"/> : ""
-            }
+            {name && (
+                <ErrorMessage
+                    name={name}
+                    className="text-right text-xs text-red-500 mt-[5px]"
+                    component="div"
+                />
+            )}
         </div>
-    );
-};
+    )
+}
 
-export default TextArea;
+export default TextArea

@@ -91,10 +91,10 @@ export function RegisterForm({
                                              name={"code"}/>
                                 <AutoSubmitToken/>
 
-                                <Button variant={"default"} isPending={confirmPhonePending} type={"submit"}
-                                        className="w-full mt-4" disabled={confirmPhonePending}>
+                                <button  type={"submit"}
+                                        className="w-full mt-4 btn btn-primary" disabled={confirmPhonePending}>
                                     ثبت نام
-                                </Button>
+                                </button>
                             </Form>)
                     }}
                 </Formik>:
@@ -109,25 +109,25 @@ export function RegisterForm({
                             <>
 
                                 <div
-                                    className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-[16px] mb-[20px] "}>
+                                    className={"grid grid-cols-1 md:grid-cols-2 gap-[16px] mb-[20px] "}>
                                     <SimpleInput placeholder={"نام"} icon={<FiUser/>} name={"firstName"} type={"text"}/>
                                     <SimpleInput placeholder={"نام خانوادگی"} icon={<FiUser/>} name={"lastName"} type={"text"}/>
                                     <SimpleInput placeholder={"نام کاربری"} icon={<FaRegUserCircle/>} name={"userName"} type={"text"}/>
-                                    <SimpleInput placeholder={"0912***1232"} icon={<FiPhone/>} name={"phone"} type={"text"}/>
+                                    <SimpleInput placeholder={"1232***0912"} icon={<FiPhone/>} name={"phone"} type={"text"}/>
                                     <SimpleInput placeholder={"پسورد"} icon={<HiOutlineKey/>} name={"password"} type={"password"}/>
                                     <SimpleInput placeholder={"تکرار پسورد"} icon={<HiOutlineKey/>} name={"confirmPassword"} type={"password"}/>
                                 </div>
 
-                                <Button variant={"default"} isPending={isPending} type={"submit"}
-                                        className="w-full" disabled={isPending}>
+                                <button type={"submit"}
+                                        className="w-full btn btn-primary" disabled={isPending}>
                                     دریافت کد
-                                </Button>
+                                </button>
 
-                                <p className={"text-center text-sm"}>حساب کاربری دارید? <Link href={"/auth/login"}
-                                                                                              className={"font-bold"}>وارد
+                                <p className={"text-center text-sm mt-2"}>حساب کاربری دارید? <Link href={"/auth/login"}
+                                                                                              className={"font-bold text-primary"}>وارد
                                     شوید</Link></p>
 
-                                <div className={"text-center pt-2"}>
+                                <div className={"text-center pt-1"}>
                                     <small>
                                         نسخه: 0.1.0
                                     </small>

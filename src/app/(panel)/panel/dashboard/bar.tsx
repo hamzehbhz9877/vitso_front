@@ -46,7 +46,7 @@ export function ChartBarLabelCustom({ weeklySales }: { weeklySales: { date: stri
 
     // تبدیل داده‌ها به فرمت مورد نیاز برای BarChart عمودی (ماه شمسی + مقدار فروش)
     const chartData = weeklySales.map(({ date, value }) => ({
-        month: moment(date, "YYYY-MM-DD").locale("fa").format("jDD jMMMM"),
+        month: moment(date, "YYYY-MM-DD").locale("fa").format("jDD"),
         desktop: value,
     }));
 
@@ -68,7 +68,7 @@ export function ChartBarLabelCustom({ weeklySales }: { weeklySales: { date: stri
                             right: 16,
                         }}
                     >
-                        <CartesianGrid horizontal={false} />
+                        {/*<CartesianGrid horizontal={false} />*/}
                         <YAxis
                             dataKey="month"
                             type="category"
@@ -106,14 +106,14 @@ export function ChartBarLabelCustom({ weeklySales }: { weeklySales: { date: stri
                     </BarChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 leading-none font-medium">
-                    روند صعودی ۵.۲٪ در این ماه <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="text-muted-foreground leading-none">
-                    نمایش مجموع فروش در ۷ روز گذشته
-                </div>
-            </CardFooter>
+            {/*<CardFooter className="flex-col items-start gap-2 text-sm">*/}
+            {/*    <div className="flex gap-2 leading-none font-medium">*/}
+            {/*        روند صعودی ۵.۲٪ در این ماه <TrendingUp className="h-4 w-4" />*/}
+            {/*    </div>*/}
+            {/*    <div className="text-muted-foreground leading-none">*/}
+            {/*        نمایش مجموع فروش در ۷ روز گذشته*/}
+            {/*    </div>*/}
+            {/*</CardFooter>*/}
         </Card>
     );
 }

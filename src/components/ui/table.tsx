@@ -6,10 +6,10 @@ const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <div className="relative flex flex-col w-full h-full overflow-x-auto text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+  <div className="relative flex flex-col w-full h-full overflow-x-auto rounded-xl bg-clip-border border">
     <table
       ref={ref}
-      className={cn("w-full text-left table-auto min-w-max text-slate-800 text-sm", className)}
+      className={cn("w-full text-left table-auto min-w-max  text-sm", className)}
       {...props}
     />
   </div>
@@ -20,7 +20,7 @@ const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <thead ref={ref} className={cn("[&_tr]:border-b text-slate-500 border-b border-slate-300 bg-slate-50", className)} {...props} />
+  <thead ref={ref} className={cn("[&_tr]:border-b text-slate-500 border-b border-slate-300", className)} {...props} />
 ))
 TableHeader.displayName = "TableHeader"
 
@@ -58,7 +58,7 @@ const TableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "hover:bg-gray-100 data-[state=selected]:bg-muted transition-colors odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200",
+      "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
       className
     )}
     {...props}

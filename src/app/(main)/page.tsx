@@ -42,8 +42,8 @@ export default async function Home() {
 
                             <div className="mx-auto">
                                 {/* عنوان اصلی */}
-                                <h1 className="text-3xl sm:text-3xl lg:text-4xl font-extrabold leading-relaxed sm:leading-snug">
-    <span className="text-transparent bg-clip-text bg-gradient-to-r from-c-primary to-c-primary">
+                                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-relaxed sm:leading-snug">
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary">
       ویتسو،
     </span>{" "}
                                     اولین گام مطمئن به‌سوی آینده برنامه‌نویسی 🎓
@@ -51,8 +51,8 @@ export default async function Home() {
 
                                 {/* متن معرفی */}
                                 <p className="text-base sm:text-lg text-base-content/80 mt-4 leading-8">
-                                    {/*در ویتسو، با <span className="font-semibold text-c-primary">۱۲۰۰+ دانشجوی فعال</span> و*/}
-                                    {/*<span className="font-semibold text-c-primary"> ۵۰+ دوره تخصصی</span>، مسیری هدفمند برای یادگیری توسعه وب، بک‌اند، فرانت‌اند و علوم داده ایجاد کرده‌ایم.*/}
+                                    {/*در ویتسو، با <span className="font-semibold text-primary">۱۲۰۰+ دانشجوی فعال</span> و*/}
+                                    {/*<span className="font-semibold text-primary"> ۵۰+ دوره تخصصی</span>، مسیری هدفمند برای یادگیری توسعه وب، بک‌اند، فرانت‌اند و علوم داده ایجاد کرده‌ایم.*/}
                                     <span className="hidden sm:block pt-3"/>
                                     آموزش‌ها از مفاهیم پایه تا پروژه‌های واقعی طراحی شده‌اند تا شما را برای بازار
                                     کار آماده کنند.
@@ -63,15 +63,15 @@ export default async function Home() {
                                 <div
                                     className="flex flex-wrap items-center  gap-3 mt-6 text-sm sm:text-base">
                                     <div className="flex items-center gap-2 bg-base-200 rounded-full py-1 px-4">
-                                        <BsCheckCircle className="text-c-primary text-lg"/>
+                                        <BsCheckCircle className="text-primary text-lg"/>
                                         پروژه‌محور
                                     </div>
                                     <div className="flex items-center gap-2 bg-base-200 rounded-full py-1 px-4">
-                                        <BsCheckCircle className="text-c-primary text-lg"/>
+                                        <BsCheckCircle className="text-primary text-lg"/>
                                         پشتیبانی فنی اختصاصی
                                     </div>
                                     <div className="flex items-center gap-2 bg-base-200 rounded-full py-1 px-4">
-                                        <BsCheckCircle className="text-c-primary text-lg"/>
+                                        <BsCheckCircle className="text-primary text-lg"/>
                                         سرفصل‌های به‌روز
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@ export default async function Home() {
                                 <div className="flex  items-center justify-start md:justify-center gap-8 lg:gap-4 mt-8">
                                     <GoToCategories/>
                                     <Link href={"/courses"}
-                                          className={"flex items-center gap-2 text-c-primary hover:underline text-sm sm:text-base"}>
+                                          className={"flex items-center gap-2 text-primary hover:underline text-sm sm:text-base"}>
 
                                         <HiPlayCircle className="text-2xl"/>
                                         ‌نمایش دوره‌ها
@@ -95,10 +95,10 @@ export default async function Home() {
                                 {/* کارت اول */}
                                 <div
                                     className="flex flex-col md:flex-row items-center justify-between px-1 md:px-6 py-2 md:py-4 min-w-max lg:min-w-[140px]">
-                                    <HiBookOpen className="w-6 h-6 md:w-8 md:h-8 text-c-primary"/>
+                                    <HiBookOpen className="w-6 h-6 md:w-8 md:h-8 text-primary"/>
                                     <div className="flex flex-col text-center md:text-right mr-0 md:mr-4">
                                             <span
-                                                className="text-lg md:text-xl font-extrabold leading-tight text-c-primary">{homeStatInfo?.data.courseCount}+</span>
+                                                className="text-lg md:text-xl font-extrabold leading-tight text-primary">{homeStatInfo?.data.courseCount}+</span>
                                         <span
                                             className="text-xs md:text-sm text-base-content/70 mt-1">دوره آموزشی</span>
                                     </div>
@@ -110,10 +110,10 @@ export default async function Home() {
                                 {/* کارت دوم */}
                                 <div
                                     className="flex flex-col md:flex-row items-center justify-between px-1 md:px-6 py-2 md:py-4 min-w-max lg:min-w-[140px]">
-                                    <HiUserGroup className="w-6 h-6 md:w-8 md:h-8 text-c-primary"/>
+                                    <HiUserGroup className="w-6 h-6 md:w-8 md:h-8 text-primary"/>
                                     <div className="flex flex-col text-center md:text-right mr-0 md:mr-4">
                                             <span
-                                                className="text-lg md:text-xl font-extrabold leading-tight text-c-primary">{homeStatInfo?.data.userCount}+</span>
+                                                className="text-lg md:text-xl font-extrabold leading-tight text-primary">{homeStatInfo?.data.userCount}+</span>
                                         <span
                                             className="text-xs md:text-sm text-base-content/70 mt-1">دانشجو فعال</span>
                                     </div>
@@ -125,10 +125,10 @@ export default async function Home() {
                                 {/* کارت سوم */}
                                 <div
                                     className="flex flex-col md:flex-row items-center justify-between px-1 md:px-6 py-2 md:py-4 min-w-max lg:min-w-[140px]">
-                                    <HiDocumentText className="w-6 h-6 md:w-8 md:h-8 text-c-primary"/>
+                                    <HiDocumentText className="w-6 h-6 md:w-8 md:h-8 text-primary"/>
                                     <div className="flex flex-col text-center md:text-right mr-0 md:mr-4">
                                         <span
-                                            className="text-lg md:text-xl font-extrabold leading-tight text-c-primary">{homeStatInfo?.data.articleCount}</span>
+                                            className="text-lg md:text-xl font-extrabold leading-tight text-primary">{homeStatInfo?.data.articleCount}</span>
                                         <span
                                             className="text-xs md:text-sm text-base-content/70 mt-1">مقاله آموزشی</span>
                                     </div>

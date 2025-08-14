@@ -64,7 +64,7 @@ const User = () => {
                 >
                     {user?.roles?.includes('مدیر') && (
                         <li>
-                            <Link href="/panel/users" className="text-xs">
+                            <Link href="/panel/dashboard" className="text-xs">
                                 <FaUserTie size={13} />
                                 ورود به پنل ادمین
                             </Link>

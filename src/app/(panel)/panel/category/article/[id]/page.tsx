@@ -8,9 +8,9 @@ const Page = () => {
 
 
     return (
-        <div>
-
-          <Columns/>
+        <div className={"sub-article-category"}>
+            <h2 className={"text-xl font-bold mb-3 lg:text-2xl"}>زیر دسته بندی مقاله ها</h2>
+            <Columns/>
         </div>
     );
 };

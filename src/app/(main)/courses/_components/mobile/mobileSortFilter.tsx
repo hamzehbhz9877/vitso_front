@@ -54,7 +54,7 @@ export default function SortFilter({ data, query }: SortFilterProps) {
                             // رنگ متن در حالت عادی خاکستری روشن
                             "text-gray-800 dark:text-gray-200",
                             // اگر اکتیو بود فقط رنگ متن primary شود
-                            isActive && "!text-c-primary font-semibold"
+                            isActive && "!text-primary font-semibold"
                         )}
                     >
                         {name}

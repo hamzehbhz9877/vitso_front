@@ -16,7 +16,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                         {/* === Sidebar Header === */}
                         <div className="flex items-center justify-between p-4">
                             <span className="text-xl font-bold">ویتسو</span>
-                            <label htmlFor="sidebar" className="btn btn-circle btn-error btn-soft">
+                            <label htmlFor="sidebar" className="btn btn-circle btn-primary btn-soft">
                                 <IoClose size={17}/>
                             </label>
                         </div>

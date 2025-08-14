@@ -9,7 +9,9 @@ const Page = () => {
 
     return (
         <div className={"users"}>
-                <Columns/>
+            <h2 className={"text-xl font-bold mb-3 lg:text-2xl"}>مدیریت کاربران</h2>
+
+            <Columns/>
         </div>
 
     );

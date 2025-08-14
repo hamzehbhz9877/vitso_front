@@ -95,7 +95,7 @@ export default function CoursesTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button  onClick={() => router.push(`courses/add`)}
+                    <Button variant={"outline"}  onClick={() => router.push(`courses/add`)}
                     >
                         افزودن دوره
                     </Button>

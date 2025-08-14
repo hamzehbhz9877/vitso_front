@@ -2,7 +2,14 @@ import React from 'react';
 import {getValidationSchema, getInitialValues} from "./validation";
 import { Form, Formik} from "formik";
 import SimpleInput from "@/components/input/simple";
-import {ModalHeader} from "@/components/modal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import useModal from "@/hooks/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
@@ -45,15 +52,12 @@ const EditSeason = ({id}:{id:string}) => {
 
 
     return (
-        <div>
-            <ModalHeader>
-                <div className={"flex items-center justify-between"}>
-                    <span
-                        className="text-[16px] font-bold text-[#2F2F2F]">ویرایش فصل</span>
-                    <IoCloseOutline className={"cursor-pointer"} size={24} color={"#2F2F2F"} onClick={handleClose}/>
-                </div>
-            </ModalHeader>
-            <hr className={"border-[#ABAFB1] my-[20px]"}/>
+        <DialogContent>
+            <DialogHeader>
+
+                <DialogTitle>ویرایش فصل</DialogTitle>
+            </DialogHeader>
+    
 
             <Formik
                 initialValues={getInitialValues({courseId:params.id,isEdit:true,...season?.data})}
@@ -72,7 +76,7 @@ const EditSeason = ({id}:{id:string}) => {
                                 </div>
 
                                 <Button isPending={isPending} type={"submit"} disabled={isPending}
-                                        variant={"default"}
+                                        variant={"outline"}
                                 >
                                     ویرایش اطلاعات
                                 </Button>
@@ -81,7 +85,7 @@ const EditSeason = ({id}:{id:string}) => {
                     )
                 }}
             </Formik>
-        </div>
+              </DialogContent>
 
     );
 };

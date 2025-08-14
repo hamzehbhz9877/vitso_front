@@ -18,7 +18,7 @@ const NavbarDropDown = ({data,type}:{type:'articles'|'courses',data:any}) => {
                         d.subCategories.length > 0 ? "has-submenu" : ""
                     }`}
                 >
-                    <Link href={`/${type}?slugCategory=${d.slug}`}  className="flex items-center justify-between py-2.5 pr-3 pl-2.5 border-r-2 border-r-transparent bg-transparent text-base-content group-hover:bg-blue-100 dark:group-hover:bg-[#0a97d41a] group-hover:text-c-primary group-hover:border-r-c-primary transition-all">
+                    <Link href={`/${type}?slugCategory=${d.slug}`}  className="flex items-center justify-between py-2.5 pr-3 pl-2.5 border-r-2 border-r-transparent bg-transparent text-base-content group-hover:bg-blue-100 dark:group-hover:bg-[#0a97d41a] group-hover:text-primary group-hover:border-r-primary transition-all">
                        <span className={"flex gap-2 items-center"}>
                             {d.icon!==null?<Image src={d.icon} alt={d.name} width={20} height={20} />:""}
                            {d.name}
@@ -29,7 +29,7 @@ const NavbarDropDown = ({data,type}:{type:'articles'|'courses',data:any}) => {
                     {d.subCategories.length > 0 && (
                         <ul className="absolute submenu h-full rounded-l-[6px]  border-r bg-white dark:bg-base-200  right-[calc(100%-16px)] top-0 p-0 hidden group-hover:block  w-48 z-10 shadow">
                             {d.subCategories.map((sub) => (
-                                <li key={sub.id} className={"hover:text-c-primary"}>
+                                <li key={sub.id} className={"hover:text-primary"}>
                                     <Link href={`/${type}?slugCategory=${d.slug}`} className="bg-transparent shadow-none">{sub.name}</Link>
                                 </li>
                             ))}

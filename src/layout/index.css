@@ -1,6 +1,5 @@
 .header-carter {
   color: #fff;
-  @apply bg-c-primary;
 }
 .header-carter span {
   margin-left: 0;

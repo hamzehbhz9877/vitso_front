@@ -13,6 +13,7 @@ import { useRouter} from "next/navigation";
 import EditCategory from "@/app/(panel)/panel/category/course/_action/editCategory";
 import DeleteCategory from "@/app/(panel)/panel/category/course/_action/deleteCategory";
 import {BiTrash} from "react-icons/bi";
+import Image from "next/image";
 
 export default function CategorysTable() {
 
@@ -43,6 +44,20 @@ export default function CategorysTable() {
                 accessorKey: 'نام دسته',
                 accessorFn: row => row.name,
 
+            }, {
+                header: 'آیکن',
+                cell: ({ row }) =>
+                    row.original.icon ? (
+                        <Image
+                            className={"mx-auto"}
+                            width={30}
+                            height={30}
+                            src={row.original.icon}
+                            alt={row.original.name}
+                        />
+                    ) : (
+                        "--"
+                    ),
             },
             {
                 accessorKey: 'تعداد زیر دسته ها',
@@ -97,7 +112,7 @@ export default function CategorysTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button onClick={() => openModal(<AddCategory/>)}
+                    <Button variant={"outline"} onClick={() => openModal(<AddCategory/>)}
                     >
                         افزودن دسته بندی
                     </Button>

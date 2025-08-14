@@ -1,6 +1,6 @@
 import React from 'react';
 import Bottom from "@/layout/userpanel/bottom";
-import "./index.scss"
+import "./index.css"
 import Top from "@/layout/userpanel/top";
 const UserPanelSideBar = () => {
     return (

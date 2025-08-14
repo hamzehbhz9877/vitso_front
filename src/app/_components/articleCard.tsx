@@ -27,12 +27,12 @@ const ArticleCard = ({
             </figure>
             <Link href={`/article/${slug}`}>
                 <div className="card-body bg-base-200 py-[15px] px-[12px] rounded-b-[10px]">
-                    <div className="badge badge-soft badge-primary text-xs sm:text-sm">
+                    <div className="badge badge-soft badge-primary text-sm">
                         {categoryName ?? "دسته بندی"}
                     </div>
 
-                    <h2 className="card-title text-xs sm:text-sm line-clamp-2 relative pr-3">
-                        <span className="absolute right-0 top-1/2 -translate-y-1/2 w-[5px] h-[5px] bg-c-primary rounded-full"></span>
+                    <h2 className="card-title text-sm line-clamp-2 relative pr-3">
+                        <span className="absolute right-0 top-1/2 -translate-y-1/2 w-[5px] h-[5px] bg-primary rounded-full"></span>
                         {title}
                     </h2>
 
@@ -41,11 +41,11 @@ const ArticleCard = ({
                     </p>
 
                     <div className="card-actions justify-between mt-2 text-zinc-500">
-                        <div className="flex gap-1 text-xs sm:text-sm items-center">
+                        <div className="flex gap-1 text-sm items-center">
                             <UserRound size={15} />
                             {author}
                         </div>
-                        <div className="flex gap-1 text-xs sm:text-sm items-center">
+                        <div className="flex gap-1 text-sm items-center">
                             <Clock4 size={15} />
                             {diffDays(publishDate) + " پیش"}
                         </div>

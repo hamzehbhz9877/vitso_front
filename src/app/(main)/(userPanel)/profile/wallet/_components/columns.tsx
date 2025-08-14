@@ -123,7 +123,7 @@ export default function WalletTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <button className={"btn  btn-primary"}
+                    <button  className={"btn  btn-primary"}
                             onClick={() => {
                                 const dialog = document.getElementById('addDeposit') as HTMLDialogElement
                                 dialog?.showModal()

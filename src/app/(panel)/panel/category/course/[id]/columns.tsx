@@ -13,6 +13,7 @@ import { FaEdit} from "react-icons/fa";
 import { RequestSubCategory} from "@/services/Category";
 import {useParams, useRouter} from "next/navigation";
 import {BiTrash} from "react-icons/bi";
+import {FaAngleRight} from "react-icons/fa6";
 
 export default function CategorysTable() {
 
@@ -80,13 +81,12 @@ export default function CategorysTable() {
 
     return (
         <>
-          <div className={"flex justify-end"}>
-              {/*<Button size={"icon"} onClick={() => router.back()}*/}
-              {/*        variant={"default"}*/}
-              {/*>*/}
-              {/*    <FaArrowLeft/>*/}
-              {/*</Button>*/}
-          </div>
+            <div className="flex gap-2 items-center mb-3">
+                <Button variant="outline">
+                    <FaAngleRight onClick={() => router.back()}/>
+                </Button>
+                <h2 className="text-xl font-bold lg:text-2xl">زیر دسته بندی دوره ها</h2>
+            </div>
             <ReactTable
                 searchPlaceholder="جستجوی دسته بندی ..."
                 data={categoryData?.data.categories || []}
@@ -98,7 +98,7 @@ export default function CategorysTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button onClick={() => openModal(<AddCategory/>)}
+                    <Button variant={"outline"} onClick={() => openModal(<AddCategory/>)}
                     >
                         افزودن زیر دسته بندی
                     </Button>

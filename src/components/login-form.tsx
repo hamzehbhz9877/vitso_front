@@ -48,7 +48,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
         }
     }, [captcha])
 
-    const { mutate, isPending } = useMutation({
+    const { mutate, isPending,error } = useMutation({
         mutationFn: RequestLogin,
         onSettled: async (data, error) => {
             const {image,...rest} = data.data
@@ -59,8 +59,14 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                 else router.push("/")
             }
             if (error) refetch()
+
         },
     })
+
+    useEffect(()=>{
+        if(error)
+            refetch()
+    },[error])
 
     const handleSubmit = (values: LoginRequest) => mutate({ ...values })
 
@@ -108,16 +114,14 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                                         {({ field, form, meta }) => (
                                             <div className="flex items-center space-x-2">
                                                 <Checkbox
+                                                    className={"w-4 h-4"}
                                                     id="rememberMe"
-                                                    className={
-                                                        "data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
-                                                    }
                                                     checked={field.value}
                                                     onCheckedChange={(checked) => {
                                                         form.setFieldValue(field.name, checked)
                                                     }}
                                                 />
-                                                <label htmlFor="rememberMe" className="text-sm pr-2">
+                                                <label htmlFor="rememberMe" className="text-sm">
                                                     مرا به خاطر بسپار
                                                 </label>
                                                 {meta.touched && meta.error && <div className="text-red-500 text-sm">{meta.error}</div>}
@@ -125,18 +129,19 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                                         )}
                                     </Field>
                                 </div>
-                                <Button variant={"default"} isPending={isPending} type={"submit"} className="w-full" disabled={isPending}>
+
+                                <button  type={"submit"} className="w-full btn btn-primary" disabled={isPending}>
                                     ورود
-                                </Button>
+                                </button>
 
                                 <p className={"text-center text-sm mt-2"}>
                                     حساب کاربری ندارید?{" "}
-                                    <Link href={"/auth/register"} className={"font-bold"}>
+                                    <Link href={"/auth/register"} className={"font-bold text-primary"}>
                                         ثبت نام کنید
                                     </Link>
                                 </p>
 
-                                <div className={"text-center pt-2"}>
+                                <div className={"text-center pt-1"}>
                                     <small>نسخه: 0.1.0</small>
                                 </div>
                             </>

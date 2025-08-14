@@ -9,6 +9,7 @@ import {Button} from "@/components/ui/button";
 import {GetAllPriceWithPagination} from "@/services/Course";
 import {useParams, useRouter} from "next/navigation";
 import AddPrice from "@/app/(panel)/panel/courses/[id]/price/_action/addPrice";
+import {FaAngleRight} from "react-icons/fa6";
 
 export default function PricesTable() {
 
@@ -58,6 +59,13 @@ export default function PricesTable() {
 
     return (
         <>
+
+            <div className="flex gap-2 items-center mb-3">
+                <Button variant="outline">
+                    <FaAngleRight onClick={() => router.back()}/>
+                </Button>
+                <h2 className="text-xl font-bold lg:text-2xl">مدیریت قیمت دوره</h2>
+            </div>
             <ReactTable
                 searchPlaceholder="جستجوی قیمت ..."
                 data={seasonData?.data.prices || []}
@@ -69,7 +77,7 @@ export default function PricesTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button onClick={() => openModal(<AddPrice/>)}
+                    <Button variant={"outline"} onClick={() => openModal(<AddPrice/>)}
                     >
                         افزودن قیمت جدید
                     </Button>

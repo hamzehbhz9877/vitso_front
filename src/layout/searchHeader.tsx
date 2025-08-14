@@ -20,14 +20,14 @@ export default function SearchInput() {
             </button>
 
 
-            <ul className="dropdown dropdown-center top-14 sm:top-0 search menu static w-[92%] mx-auto sm:mx-0 mx- sm:w-max rounded-box bg-base-100 shadow-sm mt-3"
+            <ul className="dropdown dropdown-center top-14 sm:top-0 dropdown-full menu static w-[92%] mx-auto sm:mx-0  sm:w-max rounded-box bg-base-100 shadow-sm mt-3"
                 popover="auto" id="popover-search" style={{positionAnchor: "--anchor-search"} as React.CSSProperties}>
                 <label
-                    className="relative input input-md items-center w-full sm:w-[280px] rounded-md border border-c-primary bg-gray-50 text-c-primary dark:bg-base-200 dark:text-gray-200 dark:border-gray-600 focus-within:outline-none"
+                    className="relative input input-md items-center w-full sm:w-[280px] rounded-md border border-primary bg-gray-50 text-primary dark:bg-base-200 dark:text-gray-200 dark:border-gray-600 focus-within:outline-none"
                 >
                     {/* آیکن سرچ */}
                     <svg
-                        className="h-[1.7em] text-c-primary opacity-50 dark:text-gray-400"
+                        className="h-[1.7em] text-primary opacity-50 dark:text-gray-400"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="none"
@@ -45,7 +45,7 @@ export default function SearchInput() {
                         ref={inputRef}
                         type="text"
                         autoFocus
-                        className="grow bg-transparent pl-2 focus:outline-none placeholder:text-c-primary/40 dark:placeholder:text-gray-400"
+                        className="grow bg-transparent pl-2 focus:outline-none placeholder:text-primary/40 dark:placeholder:text-gray-400"
                         placeholder="جستجو..."
                         value={value}
                         onChange={(e) => setValue(e.target.value)}
@@ -56,7 +56,7 @@ export default function SearchInput() {
                         <button
                             type="button"
                             onClick={clearInput}
-                            className="absolute left-2 text-c-primary opacity-50 hover:opacity-80 transition-opacity dark:text-gray-300"
+                            className="absolute left-2 text-primary opacity-50 hover:opacity-80 transition-opacity dark:text-gray-300"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

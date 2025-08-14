@@ -8,9 +8,8 @@ const Page = () => {
 
 
     return (
-        <div>
-
-          <Columns/>
+        <div className={"sub-course-category"}>
+            <Columns/>
         </div>
     );
 };

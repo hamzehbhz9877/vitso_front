@@ -53,7 +53,7 @@ export function ChartBarLabel({weeklyViews}) {
                         data={weeklyViews}
                         margin={{ top: 20 }}
                     >
-                        <CartesianGrid vertical={false} />
+                        {/*<CartesianGrid vertical={false} />*/}
                         <XAxis
                             dataKey="date"
                             tickLine={false}
@@ -61,7 +61,7 @@ export function ChartBarLabel({weeklyViews}) {
                             axisLine={false}
                             tickFormatter={(value) => {
                                 const m = moment(value, "YYYY-MM-DD").locale("fa");
-                                return m.format("jDD jMMMM");
+                                return m.format("jDD");
                             }}
                         />
                         <ChartTooltip
@@ -79,14 +79,14 @@ export function ChartBarLabel({weeklyViews}) {
                     </BarChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 leading-none font-medium">
-                    روند صعودی ۵.۲٪ در این ماه <TrendingUp className="h-4 w-4"/>
-                </div>
-                <div className="text-muted-foreground leading-none">
-                    نمایش مجموع بازدیدها در ۷ روز گذشته
-                </div>
-            </CardFooter>
+            {/*<CardFooter className="flex-col items-start gap-2 text-sm">*/}
+            {/*    <div className="flex gap-2 leading-none font-medium">*/}
+            {/*        روند صعودی ۵.۲٪ در این ماه <TrendingUp className="h-4 w-4"/>*/}
+            {/*    </div>*/}
+            {/*    <div className="text-muted-foreground leading-none">*/}
+            {/*        نمایش مجموع بازدیدها در ۷ روز گذشته*/}
+            {/*    </div>*/}
+            {/*</CardFooter>*/}
         </Card>
     );
 }

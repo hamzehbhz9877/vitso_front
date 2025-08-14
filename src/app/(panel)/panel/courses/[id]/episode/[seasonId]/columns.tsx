@@ -13,6 +13,7 @@ import DeleteSeason from "@/app/(panel)/panel/courses/[id]/episode/[seasonId]/_a
 import {BiTrash} from "react-icons/bi";
 import AddEpisode from "@/app/(panel)/panel/courses/[id]/episode/[seasonId]/_action/addEpisode";
 import EditEpisode from "@/app/(panel)/panel/courses/[id]/episode/[seasonId]/_action/editEpisode";
+import {FaAngleRight} from "react-icons/fa6";
 
 export default function EpisodesTable() {
 
@@ -80,8 +81,14 @@ export default function EpisodesTable() {
 
     return (
         <>
+            <div className="flex gap-2 items-center mb-3">
+                <Button variant="outline">
+                    <FaAngleRight onClick={() => router.back()}/>
+                </Button>
+                <h2 className="text-xl font-bold lg:text-2xl">مدیریت جلسات</h2>
+            </div>
             <ReactTable
-                searchPlaceholder="جستجوی اپیزد ..."
+                searchPlaceholder="جستجوی جلسه ..."
                 data={episodeData?.data || []}
                 columns={columns}
                 totalPages={episodeData?.data.totalPage ?? 1}
@@ -91,9 +98,9 @@ export default function EpisodesTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button onClick={() => openModal(<AddEpisode />)}
+                    <Button variant={"outline"} onClick={() => openModal(<AddEpisode/>)}
                     >
-                        افزودن اپیزد
+                        افزودن جلسه
                     </Button>
                 }
             />

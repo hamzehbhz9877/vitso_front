@@ -8,7 +8,7 @@ export const RegisterUsers =  (data:any) =>
     instantClient.post('User', data);
 
 export const ChangeProfileStudent =  (data:any) =>
-    instantClient.post('Account/ChangeProfileStudent', data);
+    instantClient.post('Account/ChangeProfile', data);
 
 export const EditUsers =  (data:any) =>
     instantClient.put(`User/${data.id}`, data);
@@ -20,7 +20,7 @@ export const ChangeStatusUsers =  (id) =>
     instantClient.get(`User/ChangeStatus/${id}`);
 
 export const ProfileStudent =  (id) =>
-    instantClient.get(`Account/ProfileStudent`);
+    instantClient.get(`Account/Profile`);
 
 export const DeleteUsers =  (id) =>
     instantClient.delete(`User/${id}`);

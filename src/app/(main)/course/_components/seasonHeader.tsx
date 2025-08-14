@@ -13,7 +13,7 @@ const SeasonHeader = ({index,title,episodes,duration}:any) => {
             group peer-checked:text-white"
             >
                 <div className="flex items-center gap-4 peer-checked:bg-red">
-                    <div className={cn("rounded-[6px] flex season-count text-c-primary ",isOpen&&"text-white")}>
+                    <div className={cn("rounded-[6px] flex season-count text-primary ",isOpen&&"text-white")}>
                         {index + 1}
                     </div>
                     <span className="group-peer-checked:text-white">{title}</span>

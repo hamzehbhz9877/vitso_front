@@ -2,7 +2,14 @@ import React from 'react';
 import * as Yup from "yup";
 import { Form, Formik} from "formik";
 import SimpleInput from "@/components/input/simple";
-import {ModalHeader} from "@/components/modal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import useModal from "@/hooks/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
@@ -27,7 +34,7 @@ const AddUser = ({id}: { id: string }) => {
 
     const {data: category} = useQuery({
         queryFn: () => GetForEditCategory(id),
-        queryKey: ["user", id]
+        queryKey: ["category", id]
     })
 
 
@@ -47,14 +54,10 @@ const AddUser = ({id}: { id: string }) => {
 
 
     return (
-        <div>
-            <ModalHeader>
-                <div className={"flex items-center justify-between"}>
-                    <span
-                        className="text-[20px] font-bold text-[#2F2F2F]">ویرایش زیر دسته بندی</span>
-                    <IoCloseOutline className={"cursor-pointer"} size={32} color={"#2F2F2F"} onClick={handleClose}/>
-                </div>
-            </ModalHeader>
+        <DialogContent>
+            <DialogHeader>
+                <DialogTitle>ویرایش زیر دسته بندی</DialogTitle>
+            </DialogHeader>
             <Formik
                 initialValues={{
                     name: category?.data.name,
@@ -81,7 +84,7 @@ const AddUser = ({id}: { id: string }) => {
                                 </div>
 
                                 <Button isPending={isPending} type={"submit"} disabled={isPending}
-                                        variant={"default"}
+                                        variant={"outline"}
                                 >
                                     ویرایش
                                 </Button>
@@ -90,7 +93,7 @@ const AddUser = ({id}: { id: string }) => {
                     )
                 }}
             </Formik>
-        </div>
+              </DialogContent>
 
     );
 };

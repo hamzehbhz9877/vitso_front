@@ -82,7 +82,7 @@ export default function CategorysTable() {
         <>
           <div className={"flex justify-end"}>
               {/*<Button size={"icon"} onClick={() => router.back()}*/}
-              {/*        variant={"default"}*/}
+              {/*        variant={"outline"}*/}
               {/*>*/}
               {/*    <FaArrowLeft/>*/}
               {/*</Button>*/}
@@ -98,7 +98,7 @@ export default function CategorysTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button onClick={() => openModal(<AddCategory/>)}
+                    <Button variant={"outline"} onClick={() => openModal(<AddCategory/>)}
                     >
                         افزودن زیر دسته بندی
                     </Button>

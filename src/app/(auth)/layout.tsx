@@ -1,5 +1,6 @@
 import type {Metadata} from "next";
 import "../(main)/globals.scss";
+import "../(main)/config.css";
 
 import {
     dehydrate,
@@ -39,21 +40,36 @@ export default function RootLayout({
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
-
+    const hour = new Date().getHours();
+    const theme = (hour >= 20 || hour < 6) ? 'dark' : 'light';
     const queryClient = getQueryClient()
     return (
-        <html dir="rtl"  lang="fa-IR">
-        <body className={`${bYekan.variable} rtl main font-sans`} >
+        <html dir="rtl" lang="fa-IR" className={theme} data-theme={theme}>
+        {/*<head>*/}
+        {/*    <script*/}
+        {/*        dangerouslySetInnerHTML={{*/}
+        {/*            __html: `*/}
+        {/*      (function() {*/}
+        {/*        const hour = new Date().getHours();*/}
+        {/*        const theme = (hour >= 20 || hour < 6) ? 'dark' : 'light';*/}
+        {/*        document.documentElement.classList.add(theme);*/}
+        {/*        document.documentElement.setAttribute('data-theme', theme);*/}
+        {/*      })();*/}
+        {/*    `,*/}
+        {/*        }}*/}
+        {/*    />*/}
+        {/*</head>*/}
+        <body className={`${bYekan.variable} rtl main font-sans`}>
         <ClientReactQueryProvider>
             <ToastProvider>
                 <Auth>
-                <ModalContext>
-                    <HydrationBoundary state={dehydrate(queryClient)}>
-                        <main>
-                            {children}
-                        </main>
-                    </HydrationBoundary>
-                </ModalContext>
+                    <ModalContext>
+                        <HydrationBoundary state={dehydrate(queryClient)}>
+                            <main>
+                                {children}
+                            </main>
+                        </HydrationBoundary>
+                    </ModalContext>
                 </Auth>
             </ToastProvider>
         </ClientReactQueryProvider>

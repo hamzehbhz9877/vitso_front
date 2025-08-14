@@ -4,10 +4,10 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const Category = ({ name, icon }: { name: string; icon: string }) => {
+const Category = ({ name, icon,type }: {type:string ,name: string; icon: string }) => {
     return (
         <div className="border border-gray-300 dark:border-gray-600 bg-base-300 text-center relative px-4 py-2 rounded-lg min-w-[140px]">
-            <Link href={`/category?${name}`}>
+            <Link href={`/${type}?slugCategory=${name}`}>
                 {icon?
                 <Image
                     src={icon??null}

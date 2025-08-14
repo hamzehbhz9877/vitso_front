@@ -10,20 +10,20 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
-                // default:
-                    // "bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90",
+                default:
+                    "bg-neutral-900 text-neutral-50  hover:bg-neutral-900/90 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90",
                 destructive:
-                    "bg-red-500 text-neutral-50 shadow-sm hover:bg-red-500/90 dark:bg-red-900 dark:text-neutral-50 dark:hover:bg-red-900/90",
+                    "bg-red-500 text-neutral-50  hover:bg-red-500/90 dark:bg-red-900 dark:text-neutral-50 dark:hover:bg-red-900/90",
                 outline:
-                    "border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
+                    "border border-neutral-200 bg-white  hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
                 secondary:
-                    "bg-neutral-100 text-neutral-900 shadow-sm hover:bg-neutral-100/80 dark:bg-neutral-800 dark:text-neutral-50 dark:hover:bg-neutral-800/80",
+                    "bg-neutral-100 text-neutral-900  hover:bg-neutral-100/80 dark:bg-neutral-800 dark:text-neutral-50 dark:hover:bg-neutral-800/80",
                 ghost: "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
                 link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
 
 
 
-                default: "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center   dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                // default: "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center   dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
                 defaultOutline: "text-blue-700 border border-blue-700 bg-transparent hover:bg-blue-50 focus:ring-4 focus:ring-blue-100 rounded-full text-sm px-5 py-2.5   dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-800 dark:hover:text-white dark:focus:ring-blue-800",
 
                 alternative: "py-2.5 px-5   text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700",
@@ -39,7 +39,7 @@ const buttonVariants = cva(
                 greenOutline: "text-green-700 border border-green-700 bg-transparent hover:bg-green-100 focus:ring-4 focus:ring-green-200 rounded-full text-sm px-5 py-2.5   dark:text-green-400 dark:border-green-400 dark:hover:bg-green-700 dark:hover:text-white dark:focus:ring-green-800",
 
                 red: "text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center   dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900",
-                redOutline: "text-red-700 border border-red-700 bg-transparent hover:bg-red-100 focus:ring-4 focus:ring-red-200 rounded-full text-sm px-5 py-2.5   dark:text-red-400 dark:border-red-400 dark:hover:bg-red-700 dark:hover:text-white dark:focus:ring-red-800",
+                // secondary: "text-red-700 border border-red-700 bg-transparent hover:bg-red-100 focus:ring-4 focus:ring-red-200 rounded-full text-sm px-5 py-2.5   dark:text-red-400 dark:border-red-400 dark:hover:bg-red-700 dark:hover:text-white dark:focus:ring-red-800",
 
                 yellow: "text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center   dark:focus:ring-yellow-900",
                 yellowOutline: "text-yellow-600 border border-yellow-400 bg-transparent hover:bg-yellow-100 focus:ring-4 focus:ring-yellow-200 rounded-full text-sm px-5 py-2.5   dark:text-yellow-400 dark:border-yellow-400 dark:hover:bg-yellow-600 dark:hover:text-white dark:focus:ring-yellow-800",
@@ -74,7 +74,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         const Comp = asChild ? Slot : "button"
         return (
             <Comp
-                className={cn("m-0",buttonVariants({variant, size, className}))}
+                className={cn("m-0 cursor-pointer",buttonVariants({variant, size, className}))}
                 ref={ref}
                 {...props}
             >

@@ -16,12 +16,13 @@ const useModal = () => {
     }, []);
 
     const handleClose = () => {
-        document.querySelector(".custom-modal-slide--active")?.classList.remove("custom-modal-slide--active");
-        document.querySelector(".custom-modal-overlay--active")?.classList.remove("custom-modal-overlay--active");
-        setTimeout(() => {
-            setModals([]);
-            document.body.style.overflowY = 'auto';
-        }, 300); // Close first modal after animation
+        // document.querySelector(".custom-modal-slide--active")?.classList.remove("custom-modal-slide--active");
+        // document.querySelector(".custom-modal-overlay--active")?.classList.remove("custom-modal-overlay--active");
+        // setTimeout(() => {
+        //     setModals([]);
+        //     document.body.style.overflowY = 'auto';
+        // }, 300); // Close first modal after animation
+        setModals([]);
     }
 
     const backToPrevModal = useCallback(() => {

@@ -13,6 +13,7 @@ import DeleteSeason from "@/app/(panel)/panel/courses/[id]/_action/deleteSeason"
 import {BiTrash} from "react-icons/bi";
 import AddSeason from "@/app/(panel)/panel/courses/[id]/_action/addSeason";
 import EditSeason from "@/app/(panel)/panel/courses/[id]/_action/editSeason";
+import {FaAngleRight} from "react-icons/fa6";
 
 export default function SeasonsTable() {
 
@@ -75,6 +76,12 @@ export default function SeasonsTable() {
 
     return (
         <>
+            <div className="flex gap-2 items-center mb-3">
+                <Button variant="outline">
+                    <FaAngleRight onClick={() => router.back()}/>
+                </Button>
+                <h2 className="text-xl font-bold lg:text-2xl">مدیریت فصل ها</h2>
+            </div>
             <ReactTable
                 searchPlaceholder="جستجوی فصل ..."
                 data={seasonData?.data.seasons || []}
@@ -86,7 +93,7 @@ export default function SeasonsTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button onClick={() => openModal(<AddSeason/>)}
+                    <Button variant={"outline"} onClick={() => openModal(<AddSeason/>)}
                     >
                         افزودن فصل
                     </Button>

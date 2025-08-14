@@ -51,7 +51,7 @@ export function ChartLineLabel({ weeklyTransactions }: { weeklyTransactions: { d
                         data={weeklyTransactions}
                         margin={{ top: 20, left: 12, right: 12 }}
                     >
-                        <CartesianGrid vertical={false} />
+                        {/*<CartesianGrid vertical={false}  />*/}
                         <XAxis
                             dataKey="date"
                             tickLine={false}
@@ -90,14 +90,14 @@ export function ChartLineLabel({ weeklyTransactions }: { weeklyTransactions: { d
                     </LineChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 leading-none font-medium">
-                    روند صعودی ۵.۲٪ در این ماه <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="text-muted-foreground leading-none">
-                    نمایش مجموع تراکنش‌ها در ۷ روز گذشته
-                </div>
-            </CardFooter>
+            {/*<CardFooter className="flex-col items-start gap-2 text-sm">*/}
+            {/*    <div className="flex gap-2 leading-none font-medium">*/}
+            {/*        روند صعودی ۵.۲٪ در این ماه <TrendingUp className="h-4 w-4" />*/}
+            {/*    </div>*/}
+            {/*    <div className="text-muted-foreground leading-none">*/}
+            {/*        نمایش مجموع تراکنش‌ها در ۷ روز گذشته*/}
+            {/*    </div>*/}
+            {/*</CardFooter>*/}
         </Card>
     )
 }

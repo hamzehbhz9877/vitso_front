@@ -8,11 +8,11 @@ import CommentsSection from "@/app/(main)/course/_components/comments";
 import AuthorProfile from "@/app/(main)/course/_components/authorProfile";
 
 
-export default function CourseTabs({ seasons, description, id,authorName }: {
+export default function CourseTabs({ seasons, description, id,author }: {
     seasons: any[]
     description: string
     id: string
-    authorName:string
+    author:Pick<Course, "authorName"|'authorAvatar'|'authorId'>
 }) {
     const [activeTab, setActiveTab] = useState<'seasons' | 'content' | 'comments'|'author'>('seasons')
     const [_, setHasOpenedComments] = useState(false)
@@ -25,7 +25,7 @@ export default function CourseTabs({ seasons, description, id,authorName }: {
     return (
         <div className="tabs gap-2 shadow-none sm:gap-0 tabs-box sm:tabs-border  flex-1 bg-transparent">
 
-            <label className="tab text-c-primary hover:text-c-primary bg-base-300 sm:bg-transparent  flex gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
+            <label className="tab text-primary hover:text-primary bg-base-300 sm:!shadow-none sm:!bg-transparent  flex gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
                 <input
                     type="radio"
                     name="course_tabs"
@@ -43,7 +43,7 @@ export default function CourseTabs({ seasons, description, id,authorName }: {
                 </div>
             )}
 
-            <label className="tab text-c-primary hover:text-c-primary bg-base-300 sm:bg-transparent  flex gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
+            <label className="tab text-primary hover:text-primary bg-base-300 sm:!shadow-none sm:!bg-transparent  flex gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
                 <input
                     type="radio"
                     name="course_tabs"
@@ -59,7 +59,7 @@ export default function CourseTabs({ seasons, description, id,authorName }: {
                 </div>
             )}
 
-            <label className="tab text-c-primary hover:text-c-primary bg-base-300 sm:bg-transparent  flex gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
+            <label className="tab text-primary hover:text-primary bg-base-300 sm:!shadow-none sm:!bg-transparent  flex gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
                 <input
                     type="radio"
                     name="course_tabs"
@@ -77,7 +77,7 @@ export default function CourseTabs({ seasons, description, id,authorName }: {
 
 
 
-            <label className="tab flex md:hidden text-c-primary hover:text-c-primary bg-base-300 sm:bg-transparent  gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
+            <label className="tab flex md:hidden text-primary hover:text-primary bg-base-300 sm:!shadow-none sm:!bg-transparent  gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
                 <input
                     type="radio"
                     name="course_tabs"
@@ -89,7 +89,7 @@ export default function CourseTabs({ seasons, description, id,authorName }: {
             </label>
             {activeTab === 'author' && (
                 <div className="tab-content border-t-base-300 dark:border-t-white/30 py-6">
-                    <AuthorProfile authorName={authorName}/>
+                    <AuthorProfile author={author}/>
                 </div>
             )}
 

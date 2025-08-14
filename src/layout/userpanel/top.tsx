@@ -19,10 +19,8 @@ const SideBarTop = () => {
     const {user} = useAuth()
 
 
-
-
     return (
-        <div className="sideBar__top">
+        <div className="sideBar__top bg-base-300">
             <div className="user">
                 <div className="profile">
                     {!user ? (

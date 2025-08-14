@@ -2,12 +2,20 @@ import React from 'react';
 import * as Yup from "yup";
 import { Form, Formik} from "formik";
 import SimpleInput from "@/components/input/simple";
-import {ModalHeader} from "@/components/modal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import useModal from "@/hooks/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {Button} from "@/components/ui/button";
 import {EditCategory, GetAllForSelectCategory, GetForEditCategory} from "@/services/Category";
+import InputDemo from "@/components/input-12";
 
 const AddUser = ({id}: { id: string }) => {
 
@@ -27,7 +35,7 @@ const AddUser = ({id}: { id: string }) => {
 
     const {data: category} = useQuery({
         queryFn: () => GetForEditCategory(id),
-        queryKey: ["user", id]
+        queryKey: ["category", id]
     })
 
     const validationSchema = Yup.object({
@@ -50,15 +58,12 @@ const AddUser = ({id}: { id: string }) => {
     })
 
     return (
-        <div>
-            <ModalHeader>
-                <div className={"flex items-center justify-between"}>
-                    <span
-                        className="text-[16px] font-bold text-[#2F2F2F]">ویرایش دسته بندی</span>
-                    <IoCloseOutline className={"cursor-pointer"} size={24} color={"#2F2F2F"} onClick={handleClose}/>
-                </div>
-            </ModalHeader>
-            <hr className={"border-[#ABAFB1] my-[20px]"}/>
+        <DialogContent>
+            <DialogHeader>
+
+                <DialogTitle> ویرایش دسته بندی</DialogTitle>
+            </DialogHeader>
+    
 
             <Formik
                 initialValues={{
@@ -78,10 +83,15 @@ const AddUser = ({id}: { id: string }) => {
                                     <SimpleInput label={"نام دسته"} name={"name"} type={"text"}/>
                                     <SimpleInput label={"اولویت"} name={"priority"} type={"number"}/>
                                 </div>
-
+                                <div className={"w-max mb-5"}>
+                                    <InputDemo defaultData={category?.data.icon} name={"Image"} title={"تصویر مقاله"}
+                                               onChange={(file) => {
+                                                   formikProps.setFieldValue("Image", file); // یا اگر باید base64 یا URL باشد، اینجا تبدیل کن
+                                               }}/>
+                                </div>
 
                                 <Button isPending={isPending} type={"submit"} disabled={isPending}
-                                        variant={"default"}
+                                        variant={"outline"}
                                 >
                                     ویرایش
                                 </Button>
@@ -90,7 +100,7 @@ const AddUser = ({id}: { id: string }) => {
                     )
                 }}
             </Formik>
-        </div>
+        </DialogContent>
 
     );
 };

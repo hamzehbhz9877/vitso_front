@@ -58,7 +58,7 @@ export function ChartAreaDefault({
                         data={weeklyUserRegistrations}
                         margin={{ left: 12, right: 12 }}
                     >
-                        <CartesianGrid vertical={false} />
+                        {/*<CartesianGrid vertical={false} />*/}
                         <XAxis
                             dataKey="date"
                             tickLine={false}
@@ -88,18 +88,18 @@ export function ChartAreaDefault({
                     </AreaChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter>
-                <div className="flex w-full items-start gap-2 text-sm">
-                    <div className="grid gap-2">
-                        <div className="flex items-center gap-2 leading-none font-medium">
-                            روند صعودی ۵.۲٪ در این ماه <TrendingUp className="h-4 w-4" />
-                        </div>
-                        <div className="text-muted-foreground flex items-center gap-2 leading-none">
-                            نمایش مجموع ثبت‌نام‌ها در ۷ روز گذشته
-                        </div>
-                    </div>
-                </div>
-            </CardFooter>
+            {/*<CardFooter>*/}
+            {/*    <div className="flex w-full items-start gap-2 text-sm">*/}
+            {/*        <div className="grid gap-2">*/}
+            {/*            <div className="flex items-center gap-2 leading-none font-medium">*/}
+            {/*                روند صعودی ۵.۲٪ در این ماه <TrendingUp className="h-4 w-4" />*/}
+            {/*            </div>*/}
+            {/*            <div className="text-muted-foreground flex items-center gap-2 leading-none">*/}
+            {/*                نمایش مجموع ثبت‌نام‌ها در ۷ روز گذشته*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</CardFooter>*/}
         </Card>
     )
 }

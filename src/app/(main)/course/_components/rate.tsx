@@ -10,7 +10,7 @@ const Rate = ({commentCount}:Pick<Course, 'commentCount'>) => {
                 {/*    2.3*/}
                 {/*</span>*/}
                 {/*<div className={"w-1 h-1 rounded-full bg-gray-300"}></div>*/}
-                <span className={"font-bold text-[13px] text-c-primary text-sm text-nowrap"}>{commentCount} رای</span>
+                <span className={"font-bold text-[13px] text-primary text-sm text-nowrap"}>{commentCount} رای</span>
             </div>
         </div>
     );

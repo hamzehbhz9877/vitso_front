@@ -92,7 +92,7 @@ export default function ArticlesTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button  onClick={() => router.push(`article/add`)}
+                    <Button variant={"outline"}  onClick={() => router.push(`article/add`)}
                     >
                         افزودن مقاله
                     </Button>

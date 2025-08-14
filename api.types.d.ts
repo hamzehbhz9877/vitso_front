@@ -48,6 +48,8 @@ type Article = {
 }
 
 type ArticleDetail = Article & {
+    authorId:string
+    authorAvatar:string
     authorName?: string
     content?: string
     metaTitle?: string
@@ -86,6 +88,8 @@ type Season = {
 }
 
 type Course = {
+    authorId:string
+    authorAvatar:string
     shortDescription: string,
     shortLink: string,
     completionPercentage: number,
@@ -228,4 +232,14 @@ type Comments={
 
 type CommentsUsers= Comments  & {
     replies:Array<Comments>;
+}
+
+
+type Teacher = {
+    avatar: string
+    firstName: string
+    lastName: string
+    skill: string
+    degree: string
+    aboutMe: string
 }

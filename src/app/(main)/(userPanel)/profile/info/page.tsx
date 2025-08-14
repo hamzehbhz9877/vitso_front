@@ -10,6 +10,7 @@ import {ChangeProfileStudent, ProfileStudent} from '@/services/User'
 import {objectToFormData} from "@/lib/utils"
 import useAuth from "@/context/authentication/useAuth"
 import {MdEdit, MdOutlineEditOff} from "react-icons/md";
+import UploadImageCard from "@/components/input-daisy";
 
 const validationSchema = Yup.object().shape({
     FirstName: Yup.string().required('نام الزامی است'),
@@ -57,7 +58,7 @@ const Page = () => {
                         LastName: initialData?.data.lastName ?? '',
                         UserName: initialData?.data.userName ?? '',
                         Phone: initialData?.data.phone ?? '',
-                        Image: null,
+                        Avatar: null,
                     }}
                     enableReinitialize
                     validationSchema={validationSchema}
@@ -65,55 +66,63 @@ const Page = () => {
                 >
                     {(formikProps) => (
                         <Form>
-                            <div className="flex items-center gap-5 flex-col lg:flex-row">
-                                <div className="w-full lg:w-[200px]">
-                                    <InputDemo
-                                        defaultData={initialData?.data.avatar}
-                                        name="Image"
-                                        className="rounded-full"
-                                        onChange={(file) =>
-                                            formikProps.setFieldValue('Image', file)
-                                        }
-                                    />
+                            <div className="flex gap-3 flex-col lg:flex-row">
+                                <UploadImageCard
+                                    defaultData={initialData?.data.avatar}
+                                    name="Avatar"
+                                    title={"تصویر کاربر"}
+                                    onChange={(file) =>
+                                        formikProps.setFieldValue('Avatar', file)
+                                    }
+                                />
+
+                                <div className={"card bg-base-100 shadow-lg flex-1"}>
+                                    <div className={"card-body"}>
+                                        <h2 className="card-title">اطلاعات کاربر</h2>
+                                        <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <SimpleInput label={
+                                                <p className={"flex items-center gap-2"}>
+                                                    <span>نام</span>
+                                                    <MdEdit size={20} className={"text-primary"}/>
+                                                </p>
+                                            } name="FirstName" type="text"/>
+                                            <SimpleInput label={
+                                                <p className={"flex items-center gap-2"}>
+                                                    <span>نام خانواگی</span>
+                                                    <MdEdit size={20} className={"text-primary"}/>
+                                                </p>
+                                            } name="LastName" type="text"/>
+                                            <SimpleInput label={
+                                                <p className={"flex items-center gap-2"}>
+                                                    <span>نام کاربری</span>
+                                                    <MdEdit size={20} className={"text-primary"}/>
+                                                </p>
+                                            } name="UserName" type="text"/>
+                                            <SimpleInput readOnly disabled label={
+                                                <p className={"flex items-center gap-2"}>
+                                                    <span>شماره همراه</span>
+                                                    <MdOutlineEditOff size={20} className={"text-red-500"}/>
+                                                </p>
+                                            } name="Phone" type="text"/>
+                                        </div>
+                                        <div className={"card-footer"}>
+                                            <div className="pt-9 text-center">
+                                                <button
+                                                    className="btn btn-primary"
+                                                    type="submit"
+                                                    disabled={isPending}
+                                                >
+                                                    ذخیره تغییرات
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <SimpleInput label={
-                                        <p className={"flex items-center gap-2"}>
-                                            <span>نام</span>
-                                            <MdEdit size={20} className={"text-c-primary"}/>
-                                        </p>
-                                    } name="FirstName" type="text"/>
-                                    <SimpleInput label={
-                                        <p className={"flex items-center gap-2"}>
-                                            <span>نام خانواگی</span>
-                                            <MdEdit size={20} className={"text-c-primary"}/>
-                                        </p>
-                                    } name="LastName" type="text"/>
-                                    <SimpleInput label={
-                                        <p className={"flex items-center gap-2"}>
-                                            <span>نام کاربری</span>
-                                            <MdEdit size={20} className={"text-c-primary"}/>
-                                        </p>
-                                    } name="UserName" type="text"/>
-                                    <SimpleInput readOnly disabled label={
-                                        <p className={"flex items-center gap-2"}>
-                                            <span>شماره همراه</span>
-                                            <MdOutlineEditOff  size={20} className={"text-red-500"}/>
-                                        </p>
-                                    } name="Phone" type="text"/>
-                                </div>
                             </div>
 
-                            <div className="pt-9 text-center">
-                                <button
-                                    className="btn btn-primary"
-                                    type="submit"
-                                    disabled={isPending}
-                                >
-                                    ذخیره تغییرات
-                                </button>
-                            </div>
+
                         </Form>
                     )}
                 </Formik>

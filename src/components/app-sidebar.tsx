@@ -11,13 +11,17 @@ import {
     SidebarHeader,
     SidebarRail,
 } from "@/components/ui/sidebar"
-import {sidebarItems} from "@/layout/panel/sidebar-items";
+import {getSidebarItems} from "@/layout/panel/sidebar-items";
+import useAuth from "@/context/authentication/useAuth";
 
 
 
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
+
+    const { user } = useAuth()
+    const sidebarItems = getSidebarItems(user)
     return (
-        <Sidebar collapsible="icon" {...props} side={"right"}>
+        <Sidebar collapsible="icon"  {...props} side={"right"}>
             <SidebarHeader>
                 <NavUser user={sidebarItems.user}/>
 

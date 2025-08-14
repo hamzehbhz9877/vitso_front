@@ -2,7 +2,14 @@ import React from 'react';
 import {getValidationSchema, initialValues} from "./validation";
 import { Form, Formik} from "formik";
 import SimpleInput from "@/components/input/simple";
-import {ModalHeader} from "@/components/modal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import useModal from "@/hooks/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
@@ -37,15 +44,12 @@ const AddPrice = () => {
         queryKey: ["GetForEditSeason",params.id],
     })
     return (
-        <div>
-            <ModalHeader>
-                <div className={"flex items-center justify-between"}>
-                    <span
-                        className="text-[16px] font-bold text-[#2F2F2F]">افزودن قیمت</span>
-                    <IoCloseOutline className={"cursor-pointer"} size={24} color={"#2F2F2F"} onClick={handleClose}/>
-                </div>
-            </ModalHeader>
-            <hr className={"border-[#ABAFB1] my-[20px]"}/>
+        <DialogContent>
+            <DialogHeader>
+                <DialogTitle>افزودن قیمت</DialogTitle>
+
+            </DialogHeader>
+    
 
             <Formik
                 initialValues={initialValues}
@@ -80,7 +84,7 @@ const AddPrice = () => {
                                 </div>
 
                                 <Button isPending={isPending} type={"submit"} disabled={isPending}
-                                        variant={"default"}
+                                        variant={"outline"}
                                 >
                                     ثبت اطلاعات
                                 </Button>
@@ -89,7 +93,7 @@ const AddPrice = () => {
                     )
                 }}
             </Formik>
-        </div>
+              </DialogContent>
 
     );
 };

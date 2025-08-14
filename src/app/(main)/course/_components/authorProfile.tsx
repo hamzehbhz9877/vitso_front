@@ -1,14 +1,15 @@
 import React from 'react';
 import Image from "next/image";
+import Link from "next/link";
 
-const AuthorProfile = ({authorName}:Pick<Course, "authorName">) => {
+const AuthorProfile = ({author:{authorName,authorAvatar,authorId}}:{author:Pick<Course, "authorName"|'authorAvatar'|'authorId'>}) => {
     return (
         <div>
             <div
                 className="flex w-full bg-[#f2f6fc] dark:bg-base-200 p-[15px] box-border rounded-[10px]">
                 <Image
                     loading="lazy"
-                    src={null}
+                    src={authorAvatar}
                     alt="Avatar"
                     className="w-[65px] rounded-full shadow-[0px_2px_5px_#3b43591f] "
                     width="65"
@@ -24,8 +25,7 @@ const AuthorProfile = ({authorName}:Pick<Course, "authorName">) => {
             </div>
 
             <div className={"text-center mt-3"}>
-                <button className={"btn btn-outline btn-success"}>مشاهده پروفایل من</button>
-
+                <Link href={`/author/${authorId}`} className={"btn  btn-primary"}>مشاهده پروفایل من</Link>
             </div>
         </div>
     );

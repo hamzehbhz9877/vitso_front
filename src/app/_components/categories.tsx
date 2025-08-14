@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from "next/image";
+import Link from "next/link";
 
 const Categories = ({data}:{data:Category[]}) => {
     return (
@@ -11,13 +12,13 @@ const Categories = ({data}:{data:Category[]}) => {
             <div className="w-full grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-5 text-sm mt-5">
 
                 {data.map((category, index) => (
-                    <a key={index}
+                    <Link href={`/courses?slugCategory=${category.name.replaceAll(" ","-")}`} key={index}
                        className={"flex cursor-pointer flex-col text-xs lg:text-sm text-center w-full items-center\n" +
                            "         p-5 rounded-3xl justify-center h-[100px] block gap-2 border border-base-content/10\n" +
-                           "         hover:bg-c-primary hover:text-primary-content transition-colors duration-300"}>
+                           "         hover:bg-primary hover:text-primary-content transition-colors duration-300"}>
                         {category.icon!==null?<Image src={category.icon} alt={category.name} width={30} height={30} />:""}
                         {category.name}
-                    </a>
+                    </Link>
                 ))}
             </div>
         </section>

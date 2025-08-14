@@ -10,9 +10,9 @@ const GoToCategories = () => {
     return (
         <div>
             <button onClick={handleGoToCategories}
-                    className="bg-c-primary text-white font-bold py-3 px-6 rounded-xl text-sm sm:text-base shadow-md hover:bg-c-primary/90 transition">
+                    className="btn btn-primary text-sm sm:text-base transition">
                 شروع یادگیری
-                <HiArrowLeft className="inline-block mr-2 text-xl"/>
+                <HiArrowLeft className="inline-block mr-2 text-lg"/>
             </button>
         </div>
     );

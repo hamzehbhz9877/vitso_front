@@ -7,7 +7,7 @@ const Page = () => {
 
 
     return (
-        <div>
+        <div className={"season"}>
             <Columns/>
         </div>
     );

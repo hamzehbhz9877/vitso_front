@@ -37,13 +37,17 @@ export default function SelectWithCustomDropdownIconDemo({
 
     return (
         <div>
-            <Label className="custom-input__title">{label}</Label>
+            <Label className="text-[13px] leading-[21px] text-[#62666d] block mb-[10px]">{label}</Label>
             <Select value={value}  dir={"rtl"} onValueChange={(data)=>formikProps.setFieldValue(name,data)}>
                 <SelectPrimitive.Trigger
                     className={cn(
                         "flex w-full items-center justify-between whitespace-nowrap"+
                         "focus:outline-none [&>span]:line-clamp-1" ,
-                        "input-field",
+                        "flex h-9 w-full rounded-md border border-neutral-200 bg-transparent px-3 py-1 text-base shadow-sm " +
+                        "transition-colors text-neutral-500 focus-visible:outline-none focus-visible:ring-1 " +
+                        "focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm " +
+                        "dark:border-neutral-800 dark:text-neutral-400" +
+                        "dark:focus-visible:ring-neutral-300",
                         meta.touched && meta.error && 'input-field--error'
                     )}
                 >

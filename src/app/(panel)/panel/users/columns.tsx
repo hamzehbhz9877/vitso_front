@@ -13,6 +13,8 @@ import {Button} from "@/components/ui/button";
 import {FaEdit} from "react-icons/fa";
 import {Switch} from "@/components/ui/switch";
 import {BiTrash} from "react-icons/bi";
+import {DialogTrigger} from "@/components/ui/dialog";
+import {AvatarImage} from "@/components/ui/avatar";
 
 export default function UsersTable() {
 
@@ -27,6 +29,7 @@ export default function UsersTable() {
         }),
         queryKey: ['users', pageIndex + 1, search],
     })
+    const [open, setOpen] = useState(false)
 
     const [switchStates, setSwitchStates] = useState<Record<string, boolean>>({})
 
@@ -86,7 +89,7 @@ export default function UsersTable() {
                         <Switch
                             checked={switchStates[user.id] ?? (user.status === "فعال")}
                             onCheckedChange={(checked) => handleToggle(user.id, checked)}
-                            className="data-[state=checked]:bg-indigo-500"
+                            // className="data-[state=checked]:bg-indigo-500"
                         />
 
                     );
@@ -130,7 +133,7 @@ export default function UsersTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button onClick={() => openModal(<AddUser/>)}
+                    <Button variant={"outline"} onClick={() => openModal(<AddUser />)}
                     >
                         افزودن کاربر
                     </Button>

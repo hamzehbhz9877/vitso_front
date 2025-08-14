@@ -9,11 +9,13 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { sidebarItems } from "@/layout/panel/sidebar-items"
+import { getSidebarItems } from "@/layout/panel/sidebar-items"
+import useAuth from "@/context/authentication/useAuth";
 
 export default function BreadcrumbNav() {
     const pathname = usePathname()
-
+    const { user } = useAuth()
+    const sidebarItems = getSidebarItems(user)
     if (!Array.isArray(sidebarItems.navMain)) return null
 
     const activeMain = sidebarItems.navMain.find((main) => {
@@ -37,7 +39,7 @@ export default function BreadcrumbNav() {
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href="/panel/dashboard">داشبورد</BreadcrumbLink>
+                    <BreadcrumbLink href="/(panel)/panel.css/dashboard">داشبورد</BreadcrumbLink>
                 </BreadcrumbItem>
 
                 {!isDashboard && activeMain && (

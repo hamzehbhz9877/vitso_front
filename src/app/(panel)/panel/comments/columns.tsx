@@ -99,7 +99,7 @@ export default function CommentsTable() {
                                 checked={isApproved}
                                 onCheckedChange={() => handleStatusToggle(comment.id, !isApproved)}
                                 color={"primary"}
-                                className="bg-gray-200  data-[state=checked]:bg-indigo-500"
+                                // className="bg-gray-200  data-[state=checked]:bg-indigo-500"
                             />
                     );
                 },
