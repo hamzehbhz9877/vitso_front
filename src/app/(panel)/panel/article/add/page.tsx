@@ -1,56 +1,56 @@
 'use client'
 
-import React, { useMemo } from 'react';
-import { ErrorMessage, Form, Formik } from "formik";
+import React, {useMemo} from 'react';
+import {ErrorMessage, Form, Formik} from "formik";
 import SimpleInput from "@/components/input/simple";
-import { Button } from "@/components/ui/button";
-import { GetAllTagForSelect } from "@/services/Tag";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { RegisterArticles } from "@/services/Article";
+import {Button} from "@/components/ui/button";
+import {GetAllTagForSelect} from "@/services/Tag";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import {RegisterArticles} from "@/services/Article";
 import useModal from "@/hooks/useModal";
 import InputDemo from "@/components/input-12";
 import TextArea from "@/components/input/textArea";
-import { GetAllForSelectCategory } from "@/services/Category";
+import {GetAllForSelectCategory} from "@/services/Category";
 import dynamic from "next/dynamic";
-import { CalendarHijriInput } from "@/app/(panel)/_components/datepicker";
-import { initialValues, validationSchema } from "@/app/(panel)/panel/article/validation";
-import { formatDate, objectToFormData } from "@/lib/utils";
+import {CalendarHijriInput} from "@/app/(panel)/_components/datepicker";
+import {initialValues, validationSchema} from "@/app/(panel)/panel/article/validation";
+import {formatDate, objectToFormData} from "@/lib/utils";
 import CustomCreatableSelect from "@/components/input/creatableSelect";
 import MultiSelect from "@/components/input/multiSelect";
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
+import {Card, CardHeader, CardContent, CardTitle} from "@/components/ui/card";
 import {FaAngleLeft, FaAngleRight} from "react-icons/fa6";
 import {useRouter} from "next/navigation";
 
-const Editor = dynamic(() => import('@/components/editor'), { ssr: false });
+const Editor = dynamic(() => import('@/components/editor'), {ssr: false});
 
 const Page = () => {
-    const { handleClose } = useModal();
+    const {handleClose} = useModal();
     const queryClient = useQueryClient();
     const today = useMemo(() => new Date(), []);
 
-    const { mutate, isPending } = useMutation({
+    const {mutate, isPending} = useMutation({
         mutationFn: RegisterArticles,
         onSettled: async (_, error) => {
             if (!error) {
-                queryClient.invalidateQueries({ queryKey: ["articles"] });
+                queryClient.invalidateQueries({queryKey: ["articles"]});
                 handleClose();
             }
         }
     });
 
-    const router=useRouter();
+    const router = useRouter();
 
     const handleSubmit = (values) => {
         const data = objectToFormData(values);
         mutate(data);
     };
 
-    const { data: tags } = useQuery({
+    const {data: tags} = useQuery({
         queryFn: GetAllTagForSelect,
         queryKey: ["GetAllTagForSelect"]
     });
 
-    const { data: category } = useQuery({
+    const {data: category} = useQuery({
         queryFn: () => GetAllForSelectCategory(1),
         queryKey: ["GetAllCategoryForSelect", 1]
     });
@@ -60,20 +60,20 @@ const Page = () => {
     return (
         <div className="container mx-auto">
 
-           <div className={"flex gap-2 items-center mb-3"}>
-               <Button variant={"outline"} onClick={()=>router.back()}>
-                   <FaAngleRight />
-               </Button>
-               <h2 className={"text-xl font-bold  lg:text-2xl"}>افزودن مقاله</h2>
-           </div>
+            <div className={"flex gap-2 items-center mb-3"}>
+                <Button variant={"outline"} onClick={() => router.back()}>
+                    <FaAngleRight/>
+                </Button>
+                <h2 className={"text-xl font-bold  lg:text-2xl"}>افزودن مقاله</h2>
+            </div>
 
             <Formik
-                initialValues={initialValues({date: formatDate(today)})}
+                initialValues={initialValues({date: null})}
                 onSubmit={handleSubmit}
                 validationSchema={validationSchema}
             >
-                {(formikProps) => (
-                    <Form className="space-y-4">
+                {(formikProps) => {
+                    return <Form className="space-y-4">
                         <div className="flex flex-col lg:flex-row gap-4">
 
 
@@ -100,6 +100,7 @@ const Page = () => {
                                             placeholder="یک تاریخ را انتخاب کنید"
                                             onChange={(date) => formikProps.setFieldValue('PublishedAt', date)}
                                             initialDate={today}
+                                            name={"PublishedAt"}
                                         />
                                         <CustomCreatableSelect
                                             name={"Tags"}
@@ -174,7 +175,7 @@ const Page = () => {
                             </Button>
                         </div>
                     </Form>
-                )}
+                }}
             </Formik>
         </div>
     );

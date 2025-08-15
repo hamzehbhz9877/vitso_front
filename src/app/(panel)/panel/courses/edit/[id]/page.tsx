@@ -102,6 +102,7 @@ const EditCoursePage = () => {
                                             onChange={(date) => date && formikProps.setFieldValue('PublishedAt', date)}
                                             initialDate={course?.data?.publishedAt ? parseJalaliDateToDate(course?.data.publishedAt.split(" ")[0]) : today}
                                             initValue={course?.data?.publishedAt?.split(" ")[0]}
+                                            name={"PublishedAt"}
                                         />
 
                                         <SimpleInput label="تعداد تقریبی جلسات" name="ApproximateEpisodeCount" type="text" />

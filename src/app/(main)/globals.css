@@ -209,4 +209,10 @@ a:hover {
   padding-left: 1rem;
 }
 
+.validation-error {
+  font-size: 13px;
+  color: #ef4444;
+  margin-top: 3px;
+}
+
 /*# sourceMappingURL=globals.css.map */

@@ -139,6 +139,7 @@ const EditPage = () => {
                                             placeholder="یک تاریخ را انتخاب کنید"
                                             onChange={(date) => formikProps.setFieldValue('PublishedAt', date)}
                                             initialDate={today}
+                                            name={"PublishedAt"}
                                         />
 
                                         <SimpleInput label="تعداد تقریبی جلسات" name="ApproximateEpisodeCount" type="text" />

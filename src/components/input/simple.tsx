@@ -6,7 +6,7 @@ import React, {
     useRef,
     useState
 } from 'react'
-import { useField } from 'formik'
+import {ErrorMessage, useField} from 'formik'
 import { cn } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 
@@ -101,11 +101,9 @@ const BaseInput = ({
                 )}
             </div>
 
-            {showError && meta?.touched && meta?.error && (
-                <div className="text-right text-xs text-red-500 mt-[5px]">
-                    {meta.error}
-                </div>
-            )}
+            {name?
+                <ErrorMessage name={name} className="validation-error" component="div" />:""}
+
         </div>
     )
 }

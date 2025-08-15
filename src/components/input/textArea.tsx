@@ -47,7 +47,7 @@ const TextArea = ({label, name, icon, className, ...rest}: Props) => {
             {name && (
                 <ErrorMessage
                     name={name}
-                    className="text-right text-xs text-red-500 mt-[5px]"
+                    className="validation-error"
                     component="div"
                 />
             )}

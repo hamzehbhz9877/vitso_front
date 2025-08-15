@@ -105,6 +105,7 @@ const EditPage = () => {
                                             placeholder="یک تاریخ را انتخاب کنید"
                                             onChange={(date) => formikProps.setFieldValue('PublishedAt', date)}
                                             initialDate={today}
+                                            name={"PublishedAt"}
                                             initValue={article?.data?.publishedAt?.split(" ")[0]}
                                         />
                                         <CustomCreatableSelect
