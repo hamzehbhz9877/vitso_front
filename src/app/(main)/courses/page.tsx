@@ -15,7 +15,7 @@ export default async function Page({
 
     return (
         <div className="category-filter container mb-8">
-            <Course searchParams={resolvedParams} course={course.data} categories={getCategoriesWithSub.data}/>
+            <Course type={"courses"} searchParams={resolvedParams} course={course.data} categories={getCategoriesWithSub.data}/>
         </div>
     );
 };

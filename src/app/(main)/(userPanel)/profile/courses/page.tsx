@@ -3,7 +3,7 @@ import Courses from "@/app/(main)/(userPanel)/profile/courses/_components/course
 
 const Page = () => {
     return (
-        <div>
+        <div id={"courses"}>
             <h2 className={"text-xl font-bold mb-3 px-2"}>دوره های من</h2>
             <Courses/>
         </div>

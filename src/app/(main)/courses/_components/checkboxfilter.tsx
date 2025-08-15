@@ -50,9 +50,23 @@ export default function CheckBoxFilter({
     }
 
     const filteredData = hasSearch
-        ? data.filter((d) =>
-            d.name.toLowerCase().includes(searchValue.toLowerCase())
-        )
+        ? data
+            .flatMap(d => {
+                // اگر parent match شد، کل parent با زیرشاخه‌ها برگردد
+                if (d.name.toLowerCase().includes(searchValue.toLowerCase())) {
+                    return [d]
+                }
+
+                // اگر parent match نشد، اما زیرشاخه‌ها match شدند، فقط زیرشاخه‌ها برگردند
+                if (d.subCategories) {
+                    return d.subCategories
+                        .filter(sub => sub.name.toLowerCase().includes(searchValue.toLowerCase()))
+                        .map(sub => ({ ...sub, subCategories: [] })) // فقط خود sub بدون sub-sub
+                }
+
+                // هیچ matchی نبود
+                return []
+            })
         : data
 
     return (
@@ -81,7 +95,7 @@ export default function CheckBoxFilter({
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             placeholder={searchPlaceholder}
-                            className="input input-bordered focus:bg-transparent dark:caret-white focus:outline-none w-full pr-10 text-xs text-gray-800 placeholder-gray-400 focus:text-gray-900 focus:placeholder-gray-500"
+                            className="input input-bordered dark:text-white/80 focus:bg-transparent dark:caret-white focus:outline-none w-full pr-10 text-xs text-gray-800 placeholder-gray-400 focus:text-gray-900 focus:placeholder-gray-500"
                         />
                         <RiSearchLine
                             size={20}

@@ -8,7 +8,7 @@ const Page = () => {
 
     return (
 
-        <div className={"dashboard"}>
+        <div className={"dashboard"} id={"dashboard"}>
             <h2 className={"text-xl font-bold mb-3 px-2"}>داشبورد</h2>
             <DashboardStat/>
         </div>

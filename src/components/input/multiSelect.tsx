@@ -79,10 +79,10 @@ const MultiSelect = ({
     }
 
     return (
-        <div className="form-group text-[#8D8D8D]">
+        <div className="form-group grid gap-2">
             <label
                 htmlFor={name}
-                className="text-[13px] leading-[21px] text-[#62666d] mb-[10px] block"
+                className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
             >
                 {title}
             </label>

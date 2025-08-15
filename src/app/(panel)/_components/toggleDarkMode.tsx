@@ -1,46 +1,32 @@
+// SwitchDark.tsx
 'use client'
-
 import * as React from "react";
-import {MoonIcon, PanelLeft, SunMediumIcon} from "lucide-react";
-import {Button} from "@/components/ui/button";
-import {cn} from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import LightIcon from "next/dist/client/components/react-dev-overlay/ui/icons/light-icon";
 import DarkIcon from "next/dist/client/components/react-dev-overlay/ui/icons/dark-icon";
+import {useEffect, useState} from "react";
 
-const SwitchDark =React.forwardRef<
+const SwitchDark = React.forwardRef<
     React.ElementRef<typeof Button>,
     React.ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
+    const [theme, setTheme] = useState<string | null>(null)
 
-    const [isDarkMode, setIsDarkMode] = React.useState(false);
+    useEffect(() => {
+        const current = document.documentElement.getAttribute('data-theme') || 'light'
+        setTheme(current)
+    }, [])
 
-    React.useEffect(() => {
-        // بارگذاری وضعیت ذخیره شده از localStorage یا مقدار پیش‌فرض
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme === "dark") {
-            setIsDarkMode(true);
-            document.documentElement.classList.add("dark");
-            document.documentElement.classList.remove("light");
-        } else {
-            setIsDarkMode(false);
-            document.documentElement.classList.add("light");
-            document.documentElement.classList.remove("dark");
-        }
-    }, []);
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light'
+        document.documentElement.classList.remove('light', 'dark')
+        document.documentElement.classList.add(newTheme)
+        document.documentElement.setAttribute('data-theme', newTheme)
+        setTheme(newTheme)
+    }
 
-    const toggleTheme = (checked: boolean) => {
-        setIsDarkMode(checked);
-
-        if (checked) {
-            document.documentElement.classList.add("dark");
-            document.documentElement.classList.remove("light");
-            localStorage.setItem("theme", "dark");
-        } else {
-            document.documentElement.classList.add("light");
-            document.documentElement.classList.remove("dark");
-            localStorage.setItem("theme", "light");
-        }
-    };
+    if (!theme) return null
 
     return (
         <Button
@@ -49,14 +35,15 @@ const SwitchDark =React.forwardRef<
             size="icon"
             className={cn("h-7 w-7", className)}
             onClick={(event) => {
-                onClick?.(event)
-                toggleTheme(!isDarkMode);
+                onClick?.(event);
+                toggleTheme();
             }}
             {...props}
+            ref={ref}
         >
-            {isDarkMode?<LightIcon />:<DarkIcon/>}
+            {theme==="dark" ? <LightIcon /> : <DarkIcon />}
         </Button>
     );
-})
+});
 
 export default SwitchDark;

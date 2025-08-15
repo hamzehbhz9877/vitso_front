@@ -82,8 +82,8 @@ export default function CategorysTable() {
     return (
         <>
             <div className="flex gap-2 items-center mb-3">
-                <Button variant="outline">
-                    <FaAngleRight onClick={() => router.back()}/>
+                <Button variant="outline" onClick={() => router.back()}>
+                    <FaAngleRight />
                 </Button>
                 <h2 className="text-xl font-bold lg:text-2xl">زیر دسته بندی دوره ها</h2>
             </div>

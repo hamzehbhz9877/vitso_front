@@ -44,6 +44,29 @@ const Course = ({type, categories, course, searchParams}: {
         setFilterOpen(false);
         setSortOpen(false);
     };
+    useEffect(() => {
+        const preventScroll = (e: TouchEvent | WheelEvent) => {
+            // اگر داخل فیلتر یا مدال هست، اجازه اسکرول بده
+            if ((e.target as HTMLElement).closest('.filter-modal')) {
+                return;
+            }
+            e.preventDefault();
+        };
+
+        if (filterOpen || sortOpen) {
+            document.addEventListener("touchmove", preventScroll, { passive: false });
+            document.addEventListener("wheel", preventScroll, { passive: false });
+        } else {
+            document.removeEventListener("touchmove", preventScroll);
+            document.removeEventListener("wheel", preventScroll);
+        }
+
+        return () => {
+            document.removeEventListener("touchmove", preventScroll);
+            document.removeEventListener("wheel", preventScroll);
+        };
+    }, [filterOpen, sortOpen]);
+
     const {
         status,
         data,
@@ -56,10 +79,10 @@ const Course = ({type, categories, course, searchParams}: {
         isFetched,
         ...rest
     } = useInfiniteQuery({
-        queryKey: [type==="course"?'course':'article', Object.values(searchParams).join(",")],
+        queryKey: [type === "course" ? 'course' : 'article', Object.values(searchParams).join(",")],
         queryFn: ({pageParam}) => {
-            if (type==="course")
-            return CourseByCategory(searchParams)
+            if (type === "course")
+                return CourseByCategory(searchParams)
             else
                 return ArticleByCategory(searchParams)
         },
@@ -97,28 +120,34 @@ const Course = ({type, categories, course, searchParams}: {
         {id: "3", name: "پایان یافته", slug: "2"},
         {id: "4", name: "منسوخ شده", slug: "3"},
     ]
+    const sort = Object.keys(searchParams).includes("sort");
 
     const filterCount = Object.keys(searchParams)
         .filter(k => k !== "page" && searchParams[k]) // حذف کلیدهای غیر فیلتر و خالی
-        .length;
+        .length-(sort?1:0);
+
+
+    const breakCrumb = [
+        {
+            url: type === "courses" ? "/courses" : "/articles",
+            title: type === "courses" ? "دوره" : "مقاله"
+        },
+    ]
 
     return (
         <>
-            <BreadCrumb data={[
-                {
-                    url:type==="course"? "/courses":"/articles",
-                    title: type==="course"?"دوره":"مقاله"
-                },
-                {
-                    url: "",
-                    title: searchParams.slugCategory?.replace(/-/g, " "),
+            <BreadCrumb
+                data={
+                    searchParams.slugCategory
+                        ? [...breakCrumb, {url: "", title: searchParams.slugCategory.replace(/-/g, " ")}]
+                        : breakCrumb
                 }
-            ]}/>
+            />
 
             <CategoryList type={type} categories={categories}/>
 
 
-            <div className="flex flex-col lg:flex-row gap-3">
+            <div className="flex flex-col lg:flex-row  gap-3">
                 {/* فقط دسکتاپ: فیلتر کناری */}
                 <div className="hidden lg:flex flex-col gap-2 w-[250px]">
                     <CheckBoxFilter
@@ -131,62 +160,61 @@ const Course = ({type, categories, course, searchParams}: {
                     />
 
                     {
-                        type==="article"?"":
+                        type === "article" ? "" :
 
 
-                    <CheckBoxFilter
-                        hasSearch={false}
-                        multiSelect
-                        query={"status"}
-                        title={"وضعیت دوره"}
-                        data={[
-                            {id: "1", name: "درحال آماده سازی", slug: "0"},
-                            {id: "2", name: "درحال برگذاری", slug: "1"},
-                            {id: "3", name: "پایان یافته", slug: "2"},
-                            {id: "4", name: "منسوخ شده", slug: "3"},
-                        ]}
-                    />}
+                            <CheckBoxFilter
+                                hasSearch={false}
+                                multiSelect
+                                query={"status"}
+                                title={"وضعیت دوره"}
+                                data={[
+                                    {id: "1", name: "درحال آماده سازی", slug: "0"},
+                                    {id: "2", name: "درحال برگذاری", slug: "1"},
+                                    {id: "3", name: "پایان یافته", slug: "2"},
+                                    {id: "4", name: "منسوخ شده", slug: "3"},
+                                ]}
+                            />}
                 </div>
 
                 {/* موبایل: دکمه‌ها */}
 
-                <div className="flex lg:hidden justify-between gap-2 mb-3 px-2">
+                <div className="flex lg:hidden gap-2 mb-3 px-2">
                     <button
-                        className="btn btn-outline btn-primary flex-1 gap-2 relative"
+                        className="flex-1 text-sm flex items-center justify-center gap-2 rounded-xl bg-primary text-white shadow-md py-3 active:scale-95 transition"
                         onClick={toggleFilter}
                     >
-                        <div className="flex items-center gap-2">
-                            <Filter size={18}/>
-                            فیلتر
-                            {filterCount > 0 && (
-                                <span className="badge badge-info badge-soft badge-sm ">
-                {filterCount}
-            </span>
-                            )}
-                        </div>
+                        <Filter size={18}/>
+                        <span>فیلتر</span>
+                        {filterCount > 0 && (
+                            <span className="badge badge-error badge-sm text-white">
+        {filterCount}
+    </span>
+                        )}
                     </button>
 
                     <button
-                        className="btn btn-outline btn-primary flex-1 gap-2"
+                        className="flex-1 text-sm flex items-center justify-center gap-2 rounded-xl bg-base-200 text-base-content shadow-md py-3 active:scale-95 transition"
                         onClick={toggleSort}
                     >
                         <ArrowUpDown size={18}/>
-                        مرتب‌سازی
+                        <span>مرتب‌سازی</span>
                     </button>
                 </div>
+
 
                 {/* محتوا */}
                 <div className="flex-1">
                     <SortFilter type={type} courseCount={course?.length}/>
                     {course?.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mb-5">
-                            {type==="article"?
-                                course?.map((article,index) => (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-col-4 gap-3 mb-5">
+                            {type === "article" ?
+                                course?.map((article, index) => (
                                     <ArticleCard {...article} key={index}/>
                                 ))
-                                :course?.map((course,index) => (
-                                <CourseCard isFilterPage {...course} key={index}/>
-                            ))}
+                                : course?.map((course, index) => (
+                                    <CourseCard isFilterPage {...course} key={index}/>
+                                ))}
                         </div>
                     ) : (
                         <div role="alert" className="alert alert-error alert-soft">
@@ -201,13 +229,13 @@ const Course = ({type, categories, course, searchParams}: {
                 {(filterOpen || sortOpen) && (
                     <div
                         onClick={closeMenus}
-                        className="fixed inset-0 bg-black bg-opacity-40 z-40"
+                        className="fixed inset-0 bg-black/40 dark:bg-gray-900/60 z-40"
                     ></div>
                 )}
 
                 {/* پنل فیلتر کشویی پایین */}
                 <div
-                    className={`fixed bottom-0 left-0 right-0 bg-base-100 z-50 p-4 border-t rounded-t-xl border-gray-300 dark:border-gray-700 transition-transform duration-300 max-h-[70vh] flex flex-col ${
+                    className={`fixed bottom-0 left-0 right-0 bg-base-100 dark:bg-base-300 z-50 p-4 border-t rounded-t-xl border-gray-300 dark:border-gray-700 transition-transform duration-300 max-h-[70vh] flex flex-col ${
                         filterOpen ? "translate-y-0" : "translate-y-full"
                     }`}
                 >
@@ -220,7 +248,7 @@ const Course = ({type, categories, course, searchParams}: {
                     </div>
 
                     {/* بخش اسکرول‌شونده */}
-                    <div className="flex-grow overflow-y-auto flex flex-col gap-3">
+                    <div className="flex-grow overflow-y-auto flex flex-col gap-3 filter-modal">
                         <CheckBoxFilter
                             isOpen
                             hasSearch={true}
@@ -231,21 +259,21 @@ const Course = ({type, categories, course, searchParams}: {
                             data={categories}
                         />
 
-                        {type === "article" ?"":
-                        <CheckBoxFilter
-                            hasSearch={false}
-                            multiSelect
-                            query={"status"}
-                            title={"وضعیت دوره"}
-                            data={sortData}
-                        />}
+                        {type === "article" ? "" :
+                            <CheckBoxFilter
+                                hasSearch={false}
+                                multiSelect
+                                query={"status"}
+                                title={"وضعیت دوره"}
+                                data={sortData}
+                            />}
                     </div>
                 </div>
 
 
                 {/* پنل مرتب سازی کشویی پایین */}
                 <div
-                    className={`fixed bottom-0 left-0 right-0 bg-base-100 z-50 p-4 rounded-t-xl border-t border-gray-300 dark:border-gray-700 transition-transform duration-300 ${
+                    className={`fixed bottom-0 left-0 right-0 bg-base-100 dark:bg-base-300 z-50 p-4 rounded-t-xl border-t border-gray-300 dark:border-gray-700 transition-transform duration-300 ${
                         sortOpen ? "translate-y-0" : "translate-y-full"
                     }`}
                 >

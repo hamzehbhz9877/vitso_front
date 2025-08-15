@@ -151,17 +151,23 @@
 
     --sidebar-width-icon: 3rem;
     --header-height: calc(var(--spacing) * 14);
+
+    --breakpoint-sm: 31.5rem;   /* قبلاً 45rem */
+    --breakpoint-md: 44.1rem;   /* قبلاً 63rem */
+    --breakpoint-lg: 51.8rem;   /* قبلاً 74rem */
+    --breakpoint-xl: 56rem;     /* قبلاً 80rem */
+    --breakpoint-2xl: 63rem;    /* قبلاً 90rem */
 }
 
 @layer base {
-    * {
+    .panel * {
         border-color: var(--border);
         outline-color: var(--ring);
         scrollbar-width: thin;
         scrollbar-color: var(--border) transparent;
     }
 
-    body {
+    body.panel {
         color: var(--foreground);
     }
 }
@@ -176,4 +182,10 @@ html body[data-scroll-locked] {
     overflow-y: scroll !important;
     overscroll-behavior: contain !important;
     margin-right: 0 !important;
+}
+
+@media (max-width: 767.98px){
+    .container {
+        padding: 0 !important;
+    }
 }

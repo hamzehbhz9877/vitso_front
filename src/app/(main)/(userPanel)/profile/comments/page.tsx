@@ -3,7 +3,7 @@ import Comments from "@/app/(main)/(userPanel)/profile/comments/_components/comm
 
 const Page = () => {
     return (
-        <div className={"comments-user"}>
+        <div className={"comments-user"} id={"comments"}>
             <h2 className={"text-xl font-bold mb-3 px-2"}>کامنت ها</h2>
             <Comments/>
         </div>

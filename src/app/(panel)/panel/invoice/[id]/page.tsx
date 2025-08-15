@@ -129,8 +129,8 @@ const Page = () => {
     return (
         <div className="p-4 space-y-6">
             <div className="flex gap-2 items-center mb-3">
-                <Button variant="outline">
-                    <FaAngleRight onClick={() => router.back()}/>
+                <Button variant="outline" onClick={() => router.back()}>
+                    <FaAngleRight />
                 </Button>
                 <h2 className="text-xl font-bold lg:text-2xl">جزییات فاکتور</h2>
             </div>

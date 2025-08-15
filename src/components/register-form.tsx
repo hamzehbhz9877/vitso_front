@@ -129,7 +129,7 @@ export function RegisterForm({
 
                                 <div className={"text-center pt-1"}>
                                     <small>
-                                        نسخه: 0.1.0
+                                        نسخه: 0.2.0
                                     </small>
                                 </div>
                             </>

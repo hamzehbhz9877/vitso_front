@@ -43,7 +43,7 @@ const Page = () => {
     }
 
     return (
-        <div className="user-account">
+        <div className="user-account" id={"account"}>
             <h2 className="text-xl font-bold mb-4 px-2">حساب کاربری</h2>
 
             {!initialData ? (

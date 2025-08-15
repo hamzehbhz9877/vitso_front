@@ -46,7 +46,7 @@ const Profile = () => {
     }
 
     return (
-        <div className="user-account container">
+        <div className="user-account ">
                 <Formik
                     initialValues={{
                         FirstName: initialData?.data.firstName ?? '',

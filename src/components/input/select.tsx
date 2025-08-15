@@ -36,8 +36,8 @@ export default function SelectWithCustomDropdownIconDemo({
     const [field, meta] = useField(name); // استفاده از useField برای مدیریت ارور و وضعیت فیلد
 
     return (
-        <div>
-            <Label className="text-[13px] leading-[21px] text-[#62666d] block mb-[10px]">{label}</Label>
+        <div className={"form-group grid gap-2"}>
+            <Label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50">{label}</Label>
             <Select value={value}  dir={"rtl"} onValueChange={(data)=>formikProps.setFieldValue(name,data)}>
                 <SelectPrimitive.Trigger
                     className={cn(

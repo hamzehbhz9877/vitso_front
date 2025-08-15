@@ -57,9 +57,9 @@ const BaseInput = ({
     const finalValue = safeInputValue(value ?? field.value ?? '')
 
     return (
-        <div className="rounded-[11px]">
+        <div className="form-group grid gap-2">
             {label && (
-                <label className="text-[13px] leading-[21px] text-[#62666d] block mb-[10px]">
+                <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50">
                     {label}
                 </label>
             )}

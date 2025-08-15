@@ -3,7 +3,7 @@ import Invoices from "@/app/(main)/(userPanel)/profile/invoice/_components/invoi
 
 const Page = () => {
     return (
-        <div className={"invoice"}>
+        <div className={"invoice"} id={"invoices"}>
             <h2 className={"text-xl font-bold mb-3 px-2"}>فاکتور ها</h2>
             <Invoices />
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import {IoClose} from "react-icons/io5";
+import Link from "next/link";
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -26,10 +27,10 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
 
                         {/* === Sidebar Menu === */}
                         <ul className="menu p-4 gap-4 w-full">
-                            <li><a href="/courses">اطلاعات دوره‌ها</a></li>
-                            <li><a href="/articles">مقاله‌ها</a></li>
-                            <li><a href="/about">درباره ما</a></li>
-                            <li><a href="/contact">تماس با ما</a></li>
+                            <li><Link href="/courses"> دوره‌ها</Link></li>
+                            <li><Link href="/articles">مقاله‌ها</Link></li>
+                            <li><Link href="/about">درباره ما</Link></li>
+                            <li><Link href="/contact-us">تماس با ما</Link></li>
                         </ul>
                     </div>
                 </div>

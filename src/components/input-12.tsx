@@ -21,7 +21,7 @@ const ImagePreview = ({ url, onRemove }: { url: string; onRemove: () => void }) 
             height={500}
             width={500}
             alt=""
-            className="border object-contain border-neutral-200 h-50 w-50 rounded-md dark:border-neutral-800"
+            className="border object-contain border-neutral-200 w-full h-full rounded-md dark:border-neutral-800"
         />
     </div>
 )

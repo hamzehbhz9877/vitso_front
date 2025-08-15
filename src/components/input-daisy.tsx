@@ -5,7 +5,7 @@ import { ErrorMessage, useField } from "formik"
 import React, { useEffect, useState } from "react"
 
 const ImagePreview = ({ url, onRemove }: { url: string; onRemove: () => void }) => (
-    <div className="relative aspect-auto">
+    <div className="relative w-full h-full sm:w-[190px] sm:h-[190px]">
         <button
             type="button"
             className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2"
@@ -18,10 +18,11 @@ const ImagePreview = ({ url, onRemove }: { url: string; onRemove: () => void }) 
             height={500}
             width={500}
             alt=""
-            className="border object-contain border-neutral-200 h-50 w-50  rounded-md dark:border-neutral-800"
+            className="border object-contain border-neutral-200 w-full h-full rounded-md dark:border-neutral-800"
         />
     </div>
 )
+
 
 export default function UploadImageCard({
                                             onChange,
@@ -48,12 +49,12 @@ export default function UploadImageCard({
             <div className="card-body pb-0 flex-row items-center justify-between">
                 <h2 className="card-title">{title}</h2>
                 {hasLink?
-                <button
-                    type="button"
-                    className="text-xs hover:underline"
-                >
-                    افزودن از طریق لینک
-                </button>:""}
+                    <button
+                        type="button"
+                        className="text-xs hover:underline"
+                    >
+                        افزودن از طریق لینک
+                    </button>:""}
             </div>
 
             {/* Card Content */}
@@ -85,14 +86,16 @@ export default function UploadImageCard({
                             <div
                                 {...getRootProps()}
                                 className={`border border-dashed flex flex-col items-center justify-center rounded-md p-6 text-center cursor-pointer 
-                  border-neutral-700 transition 
-                  ${isDragActive && isDragAccept ? "border-primary bg-base-200" : ""}
-                  ${isDragActive && isDragReject ? "border-error bg-base-200" : ""}
-                `}
+        border-neutral-700 transition
+     w-full h-full sm:w-[190px] sm:h-[190px]
+        ${isDragActive && isDragAccept ? "border-primary bg-base-200" : ""}
+        ${isDragActive && isDragReject ? "border-error bg-base-200" : ""}   
+    `}
+
                             >
                                 <input {...getInputProps()} />
                                 <ImageIcon className="h-8 w-8 mb-2 opacity-60" />
-                                <p className="text-sm font-medium">تصاویر خود را اینجا رها کنید</p>
+                                <p className="text-sm font-medium">تصویر را رها کنید</p>
                                 <p className="text-xs opacity-60">PNG یا JPG (حداکثر 5MB)</p>
                                 <button
                                     type="button"

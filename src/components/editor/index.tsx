@@ -88,7 +88,7 @@ export default function TiptapEditor({
 
     return (
         <div className={cn("space-y-4 border p-3", meta.touched && meta.error && 'input-field--error')}>
-            <Toolbar variant="fixed" className="bg-white">
+            <Toolbar variant="floating"  className="bg-white overflow-y-auto">
                 <ToolbarGroup>
                     <ImageUploadButton editor={editor} />
                 </ToolbarGroup>

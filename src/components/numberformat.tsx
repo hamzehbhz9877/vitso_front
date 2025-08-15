@@ -130,7 +130,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
         return (
             <div className="custom-input">
-                <Label htmlFor={props.id} className="text-[13px] leading-[21px] text-[#62666d] block mb-[10px]">
+                <Label htmlFor={props.id} className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50">
                     {props.label}
                 </Label>
                 <NumericFormat

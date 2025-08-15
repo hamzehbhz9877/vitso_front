@@ -61,8 +61,8 @@ const Page = () => {
         <div className="container mx-auto">
 
            <div className={"flex gap-2 items-center mb-3"}>
-               <Button variant={"outline"}>
-                   <FaAngleRight onClick={()=>router.back()}/>
+               <Button variant={"outline"} onClick={()=>router.back()}>
+                   <FaAngleRight />
                </Button>
                <h2 className={"text-xl font-bold  lg:text-2xl"}>افزودن مقاله</h2>
            </div>
@@ -84,7 +84,7 @@ const Page = () => {
                                     <CardHeader>
                                         <CardTitle>جزییات مقاله</CardTitle>
                                     </CardHeader>
-                                    <CardContent className="space-y-3">
+                                    <CardContent className="space-y-4">
                                         <SimpleInput label="عنوان" name="Title" type="text"/>
                                         <MultiSelect
                                             isMulti={false}

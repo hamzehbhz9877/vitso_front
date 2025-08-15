@@ -3,7 +3,7 @@ import TransActions from "@/app/(main)/(userPanel)/profile/wallet/_components/tr
 
 const Page = () => {
     return (
-        <div className={"wallet"}>
+        <div className={"wallet"} id={"wallet"}>
             <h2 className={"text-xl font-bold mb-3 px-2"}>کیف پول</h2>
             <TransActions />
         </div>
