@@ -52,8 +52,8 @@ export function CalendarHijriInput({
     const [field, meta] = useField(name); // استفاده از useField برای مدیریت ارور و وضعیت فیلد
 
     return (
-        <div className={"form-group grid gap-2"}>
-            <Label htmlFor="date" className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 ">
+        <div className={""}>
+            <Label htmlFor="date" className="flex items-center mb-2 gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 ">
                 {label}
             </Label>
             <div className="relative flex gap-2">
@@ -200,7 +200,7 @@ function Calendar({
                 range_middle: cn("rounded-none bg-accent", defaultClassNames.range_middle),
                 range_end: cn("rounded-r-md bg-accent", defaultClassNames.range_end),
                 today: cn(
-                    "bg-accent text-accent-foreground rounded-full data-[selected=true]:rounded-none",
+                    "bg-none text-accent-foreground rounded-full data-[selected=true]:rounded-none",
                     defaultClassNames.today
                 ),
                 outside: cn(

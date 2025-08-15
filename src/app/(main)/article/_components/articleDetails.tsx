@@ -45,7 +45,7 @@ const ArticleDetails = ({
                                 </div>
                             </div>
                         </div>
-                        <Image width={900} className={"mb-4 rounded-lg"} height={400} src={image} alt={"image"}/>
+                        <Image width={900} className={"mb-4 rounded-lg mx-auto"} height={400} src={image} alt={"image"}/>
                         <div className={"tiptap ProseMirror"}>
                             {parse(content)}
                         </div>

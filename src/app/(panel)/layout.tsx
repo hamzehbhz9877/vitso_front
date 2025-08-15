@@ -31,7 +31,7 @@ export default function PanelLayout({ children }: { children: React.ReactNode })
     const queryClient = getQueryClient();
 
     return (
-        <html dir="rtl" lang="fa-IR" suppressHydrationWarning className="dark">
+        <html dir="rtl" lang="fa-IR" suppressHydrationWarning>
         <head>
             <script
                 dangerouslySetInnerHTML={{

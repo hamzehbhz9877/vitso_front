@@ -85,7 +85,8 @@ export function NavUser({
                             </SidebarMenuButton>}
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
-                        className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                        style={{direction:"rtl"}}
+                        className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg "
                         side={isMobile || inHeader ? "bottom" : "right"}
                         align={inHeader?"start":"end"}
                         sideOffset={4}
@@ -96,32 +97,32 @@ export function NavUser({
                                     <AvatarImage src={user.avatar} alt={user.name}/>
                                     <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                                 </Avatar>
-                                <div className="grid flex-1 text-left text-sm leading-tight">
+                                <div className="grid flex-1 text-right text-sm leading-tight">
                                     <span className="truncate font-semibold">{user.name}</span>
                                     <span className="truncate text-xs">{user.email}</span>
                                 </div>
                             </div>
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator/>
-                        <DropdownMenuGroup>
+                        <DropdownMenuGroup onClick={()=>router.push("/")}>
                             <DropdownMenuItem>
                                 <Sparkles/>
-                                Upgrade to Pro
+                                ورود به صفحه اصلی
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator/>
                         <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                <BadgeCheck/>
-                                Account
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <CreditCard/>
-                                Billing
-                            </DropdownMenuItem>
+                            {/*<DropdownMenuItem>*/}
+                            {/*    <BadgeCheck/>*/}
+                            {/*    Account*/}
+                            {/*</DropdownMenuItem>*/}
+                            {/*<DropdownMenuItem>*/}
+                            {/*    <CreditCard/>*/}
+                            {/*    Billing*/}
+                            {/*</DropdownMenuItem>*/}
                             <DropdownMenuItem>
                                 <Bell/>
-                                Notifications
+                                اعلانات
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator/>

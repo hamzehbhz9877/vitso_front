@@ -160,7 +160,7 @@
 }
 
 @layer base {
-    .panel * {
+     * {
         border-color: var(--border);
         outline-color: var(--ring);
         scrollbar-width: thin;
@@ -187,5 +187,17 @@ html body[data-scroll-locked] {
 @media (max-width: 767.98px){
     .container {
         padding: 0 !important;
+    }
+}
+
+
+.dark{
+    .rdp-dropdown option {
+        background-color: #1f1f1f; /* برای منوی بازشونده */
+        color: white;
+    }
+    .rdp-dropdown {
+        background-color: #1f1f1f; /* بک‌گراند دارک */
+        color: white;
     }
 }

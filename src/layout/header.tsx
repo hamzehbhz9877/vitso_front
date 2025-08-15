@@ -12,6 +12,8 @@ import User from "@/layout/user";
 import Link from "next/link";
 import Sidebar from "@/layout/sidebar";
 import SearchInput from "@/layout/searchHeader";
+import Article from "@/layout/navbarDropdownWrapper";
+import NavbarDropdownWrapper from "@/layout/navbarDropdownWrapper";
 
 const Header = async () => {
 
@@ -41,26 +43,21 @@ const Header = async () => {
                             {/*<Image alt={"logo"} src={Logo} width={130} height={130}/>*/}
                         {/*</a>*/}
                     </div>
-                    <div className="flex-1 hidden lg:block">
+                    <div className="flex-1 relative flex items-center">
                     {/*<a className={"btn btn-link px-0 "}>*/}
                             {/*<Image alt={"logo"} src={Logo} width={130} height={130}/>*/}
                         {/*</a>*/}
 
-                        <div className="dropdown dropdown-bottom dropdown-start">
-                            <div tabIndex={0} role="button" className="btn  dark:bg-base-200 m-1">
-                                <GraduationCap size={23}/>
-                                دسته بندی دوره ها
-                            </div>
-                            <NavbarDropDown type={"courses"} data={courseCategories}/>
-                        </div>
-
-                        <div className="dropdown dropdown-bottom dropdown-start">
-                            <div tabIndex={0} role="button" className="btn  dark:bg-base-200 m-1">
-                                <Newspaper size={20}/>
-                                دسته بندی مقاله ها
-                            </div>
-                            <NavbarDropDown  type={"articles"} data={articleCategories}/>
-                        </div>
+                        <NavbarDropdownWrapper
+                            label={<><GraduationCap size={23}/> دسته بندی دوره ها</>}
+                            type="courses"
+                            data={courseCategories}
+                        />
+                        <NavbarDropdownWrapper
+                            label={<><Newspaper size={20}/> دسته بندی مقاله ها</>}
+                            type="articles"
+                            data={articleCategories}
+                        />
 
                         <a className="btn btn-link">درباره ما</a>
 

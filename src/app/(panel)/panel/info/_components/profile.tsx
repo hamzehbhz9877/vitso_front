@@ -108,13 +108,13 @@ const Profile = () => {
                                                         <span>مدرک تحصیلی</span>
                                                         <MdEdit size={20} className={"text-primary"}/>
                                                     </p>
-                                                } name="Skill" type="text"/>
+                                                } name="Degree" type="text"/>
                                                 <SimpleInput label={
                                                     <p className={"flex items-center gap-2"}>
                                                         <span>تخصص</span>
                                                         <MdEdit size={20} className={"text-primary"}/>
                                                     </p>
-                                                } name="Degree" type="text"/>
+                                                } name="Skill" type="text"/>
 
                                                 <SimpleInput readOnly disabled label={
                                                     <p className={"flex items-center gap-2"}>
