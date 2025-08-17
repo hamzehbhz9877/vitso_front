@@ -76,7 +76,7 @@ const AddCategory = () => {
 
 
 
-                                <div className={"mb-5 w-auto h-auto md:w-50"}>
+                                <div className={"mb-5 w-auto h-auto md:w-64"}>
                                     <InputDemo  name={"Icon"} title={"آیکن دسته بندی"} onChange={(file) => {
                                         formikProps.setFieldValue("Icon", file); // یا اگر باید base64 یا URL باشد، اینجا تبدیل کن
                                     }}/>
