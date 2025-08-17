@@ -3,10 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 import DonationModal from "@/app/(main)/course/_components/modal/donationModal";
 import {Heart, User, User2} from "lucide-react";
+import useAuth from "@/context/authentication/useAuth";
+import {useRouter} from "next/navigation";
 
-const AuthorProfile = ({author: {authorName, authorAvatar, authorId,id}}: {
-    author: Pick<Course, "authorName" | 'authorAvatar' | 'authorId'|'id'>
+const AuthorProfile = ({author: {authorName, authorAvatar, authorId, id}}: {
+    author: Pick<Course, "authorName" | 'authorAvatar' | 'authorId' | 'id'>
 }) => {
+
+    const {user} = useAuth();
+
+    const router = useRouter();
+
     return (
         <div>
             <div
@@ -32,7 +39,11 @@ const AuthorProfile = ({author: {authorName, authorAvatar, authorId,id}}: {
                 <button
                     onClick={() => {
                         const show = document.getElementById('donation') as HTMLDialogElement;
-                        show?.showModal();
+                        if (user) {
+                            show?.showModal();
+                        } else {
+                            router.push("/auth/login")
+                        }
                     }}
                     className="btn flex-auto lg:flex-1 flex items-center gap-2 border-none bg-red-500 text-white
                hover:bg-red-600 transition-colors duration-300

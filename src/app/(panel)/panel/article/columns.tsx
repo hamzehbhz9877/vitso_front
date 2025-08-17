@@ -13,6 +13,7 @@ import DeleteArticle from "@/app/(panel)/panel/article/_action/deleteArticle";
 import {BiTrash} from "react-icons/bi";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {PiSealQuestionFill} from "react-icons/pi";
+import {CirclePlus} from "lucide-react";
 
 export default function ArticlesTable() {
 
@@ -103,6 +104,7 @@ export default function ArticlesTable() {
                 headerActions={
                     <Button variant={"outline"}  onClick={() => router.push(`article/add`)}
                     >
+                        <CirclePlus/>
                         افزودن مقاله
                     </Button>
                 }

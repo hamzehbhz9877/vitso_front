@@ -15,6 +15,7 @@ import {Switch} from "@/components/ui/switch";
 import {BiTrash} from "react-icons/bi";
 import {DialogTrigger} from "@/components/ui/dialog";
 import {AvatarImage} from "@/components/ui/avatar";
+import {CirclePlus} from "lucide-react";
 
 export default function UsersTable() {
 
@@ -133,8 +134,8 @@ export default function UsersTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button variant={"outline"} onClick={() => openModal(<AddUser />)}
-                    >
+                    <Button onClick={() => openModal(<AddUser />)}>
+                        <CirclePlus/>
                         افزودن کاربر
                     </Button>
                 }

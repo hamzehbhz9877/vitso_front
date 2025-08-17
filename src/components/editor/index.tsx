@@ -39,11 +39,11 @@ export default function TiptapEditor({
                                          name
                                      }: {
     defaultData?: string,
-    name: string,
-    uploadUrl: string,
+    name?: string,
+    uploadUrl?: string,
     getEditorData: (data: string, text: string) => void
 }) {
-    const [field, meta] = useField(name)
+    // const [field, meta] = useField(name)
 
     const editor = useEditor({
         extensions: [
@@ -87,7 +87,7 @@ export default function TiptapEditor({
     if (!editor) return null
 
     return (
-        <div className={cn("space-y-4 border p-3", meta.touched && meta.error && 'input-field--error')}>
+        <div className={cn("space-y-4 border p-3")}>
             <Toolbar variant="floating"  className="bg-white overflow-y-auto">
                 <ToolbarGroup>
                     <ImageUploadButton editor={editor} />

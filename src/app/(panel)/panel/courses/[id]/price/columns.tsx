@@ -10,6 +10,7 @@ import {GetAllPriceWithPagination} from "@/services/Course";
 import {useParams, useRouter} from "next/navigation";
 import AddPrice from "@/app/(panel)/panel/courses/[id]/price/_action/addPrice";
 import {FaAngleRight} from "react-icons/fa6";
+import {CirclePlus} from "lucide-react";
 
 export default function PricesTable() {
 
@@ -77,8 +78,9 @@ export default function PricesTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button variant={"outline"} onClick={() => openModal(<AddPrice/>)}
+                    <Button  onClick={() => openModal(<AddPrice/>)}
                     >
+                        <CirclePlus/>
                         افزودن قیمت جدید
                     </Button>
                 }

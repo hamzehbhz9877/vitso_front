@@ -15,6 +15,7 @@ import Auth from "@/context/authentication";
 import localFont from "next/font/local";
 import BodyScrollLock from "@/app/(main)/_components/overFlowScroll";
 import * as React from "react";
+import Providers from "@/utils/nprogress-client";
 
 const bYekan = localFont({
     src: [
@@ -33,9 +34,20 @@ const bYekan = localFont({
     display: "swap",
 });
 
+
 export const metadata: Metadata = {
     title: "ویتسو - آموزش برنامه نویسی",
-    description: "ویتسو یک پلتفرم آموزشی تخصصی برای یادگیری برنامه‌نویسی از صفر تا پیشرفته است که با ارائه مقالات، دوره‌های ویدئویی و پروژه‌های عملی، به شما کمک می‌کند مهارت‌های لازم برای ورود به بازار کار برنامه‌نویسی را کسب کنید."
+    description: "ویتسو یک پلتفرم آموزشی تخصصی برای یادگیری برنامه‌نویسی از صفر تا پیشرفته است که با ارائه مقالات، دوره‌های ویدئویی و پروژه‌های عملی، به شما کمک می‌کند مهارت‌های لازم برای ورود به بازار کار برنامه‌نویسی را کسب کنید.",
+
+    icons: {
+        icon: [
+            { url: '/logo.ico' }, // Path to your favicon.ico
+            // { url: '/icon.png', type: 'image/png' }, // For other icon types
+        ],
+        // apple: [
+        //     { url: '/apple-icon.png' }, // For Apple devices
+        // ],
+    },
 };
 
 export default function RootLayout({
@@ -77,12 +89,14 @@ export default function RootLayout({
             <ToastProvider>
                 <Auth>
                     <ModalContext>
+                        <Providers>
                         <HydrationBoundary state={dehydrate(queryClient)}>
                             <Header/>
-                            <BodyScrollLock/>
+                            {/*<BodyScrollLock/>*/}
                             <main>{children}</main>
                             <Footer/>
                         </HydrationBoundary>
+                        </Providers>
                     </ModalContext>
                 </Auth>
             </ToastProvider>

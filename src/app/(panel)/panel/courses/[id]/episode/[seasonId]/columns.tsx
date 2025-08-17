@@ -14,6 +14,7 @@ import {BiTrash} from "react-icons/bi";
 import AddEpisode from "@/app/(panel)/panel/courses/[id]/episode/[seasonId]/_action/addEpisode";
 import EditEpisode from "@/app/(panel)/panel/courses/[id]/episode/[seasonId]/_action/editEpisode";
 import {FaAngleRight} from "react-icons/fa6";
+import {CirclePlus} from "lucide-react";
 
 export default function EpisodesTable() {
 
@@ -98,8 +99,9 @@ export default function EpisodesTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button variant={"outline"} onClick={() => openModal(<AddEpisode/>)}
+                    <Button  onClick={() => openModal(<AddEpisode/>)}
                     >
+                        <CirclePlus/>
                         افزودن جلسه
                     </Button>
                 }

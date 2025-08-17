@@ -46,6 +46,7 @@ const getValidationSchema = (isEdit = false) => {
             .required("مدت زمان الزامی است"),
 
         order: Yup.number()
+            .nonNullable("ترتیب را وارد کنید")
             .typeError("ترتیب باید یک عدد باشد")
             .min(0, "ترتیب باید حداقل ۰ باشد"),
 

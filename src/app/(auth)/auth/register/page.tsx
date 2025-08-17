@@ -4,6 +4,7 @@ import Image from "next/image";
 import LoginPlaceHolder from "../../../../../public/images/placeholder.svg"
 import {RegisterForm} from "@/components/register-form";
 import {Suspense} from "react";
+import AuthImg from "@/app/(auth)/_components/authImg";
 
 export default function RegisterPage() {
     return (
@@ -26,13 +27,14 @@ export default function RegisterPage() {
                 </div>
             </div>
             <div className="relative hidden bg-neutral-100 lg:block dark:bg-neutral-800">
-                <Image
-                    width="400"
-                    height="400"
-                    src={LoginPlaceHolder}
-                    alt="Image"
-                    className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-                />
+                {/*<Image*/}
+                {/*    width="400"*/}
+                {/*    height="400"*/}
+                {/*    src={LoginPlaceHolder}*/}
+                {/*    alt="Image"*/}
+                {/*    className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"*/}
+                {/*/>*/}
+                <AuthImg/>
             </div>
         </div>
     )

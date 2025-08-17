@@ -9,20 +9,8 @@ const nextConfig: NextConfig = {
                 hostname: 'vitso.ir',
                 pathname: '/**',
             },{
-                protocol: 'http',
-                hostname: 'localhost',
-                pathname: '/**',
-            },{
                 protocol: 'https',
-                hostname: 'sabzlearn.ir',
-                pathname: '/**',
-            },{
-                protocol: 'https',
-                hostname: 'encrypted-tbn0.gstatic.com',
-                pathname: '/**',
-            },{
-                protocol: 'https',
-                hostname: 'www.svgrepo.com',
+                hostname: 'randomuser.me',
                 pathname: '/**',
             },
         ],

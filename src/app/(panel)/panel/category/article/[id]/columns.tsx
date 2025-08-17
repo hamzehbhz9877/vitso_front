@@ -13,6 +13,7 @@ import { FaEdit} from "react-icons/fa";
 import { RequestSubCategory} from "@/services/Category";
 import {useParams, useRouter} from "next/navigation";
 import {BiTrash} from "react-icons/bi";
+import {CirclePlus} from "lucide-react";
 
 export default function CategorysTable() {
 
@@ -98,8 +99,9 @@ export default function CategorysTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button variant={"outline"} onClick={() => openModal(<AddCategory/>)}
+                    <Button  onClick={() => openModal(<AddCategory/>)}
                     >
+                        <CirclePlus/>
                         افزودن زیر دسته بندی
                     </Button>
                 }

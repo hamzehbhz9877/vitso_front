@@ -74,7 +74,7 @@ const EditPage = () => {
             <Formik
                 initialValues={getInitialValues({ date: formatDate(today) })}
                 onSubmit={handleSubmit}
-                validationSchema={getValidationSchema({ isEdit: true })}
+                validationSchema={getValidationSchema({ isEdit: false })}
             >
                 {(formikProps) => (
                     <Form className="space-y-4">

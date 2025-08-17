@@ -15,6 +15,9 @@ import SearchInput from "@/layout/searchHeader";
 import Article from "@/layout/navbarDropdownWrapper";
 import NavbarDropdownWrapper from "@/layout/navbarDropdownWrapper";
 
+
+import Logo from "@/layout/logo";
+
 const Header = async () => {
 
     const homepageCategory = await GetHomepageCategory();
@@ -39,14 +42,12 @@ const Header = async () => {
                         </Sidebar>
 
 
-                        {/*<a className={"btn btn-link px-0 "}>*/}
-                        {/*<Image alt={"logo"} src={Logo} width={130} height={130}/>*/}
-                        {/*</a>*/}
+
+                        <Logo/>
+
                     </div>
                     <div className="flex-1 hidden lg:flex relative items-center">
-                        {/*<a className={"btn btn-link px-0 "}>*/}
-                        {/*<Image alt={"logo"} src={Logo} width={130} height={130}/>*/}
-                        {/*</a>*/}
+                        <Logo/>
 
                         <NavbarDropdownWrapper
                             label={<><GraduationCap size={23}/> دسته بندی دوره ها</>}
@@ -59,8 +60,7 @@ const Header = async () => {
                             data={articleCategories}
                         />
 
-                        <a className="btn btn-link">درباره ما</a>
-
+                        <Link href={"/about-us"} className="btn btn-link mr-1">درباره ما</Link>
                         <Link href={"/contact-us"} className="btn btn-link mr-1">تماس با ما</Link>
                     </div>
 

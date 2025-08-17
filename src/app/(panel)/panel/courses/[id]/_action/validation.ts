@@ -24,7 +24,7 @@ const getValidationSchema = () => {
             .min(3, "عنوان باید حداقل ۳ کاراکتر باشد"),
 
         order: Yup.number()
-            .nullable()
+            .nonNullable("ترتیب را وارد کنید")
             .typeError("ترتیب باید یک عدد باشد")
             .min(0, "ترتیب باید حداقل ۱ باشد"),
     });

@@ -6,7 +6,7 @@ import {
     ChevronsUpDown,
     CreditCard,
     LogOut,
-    Sparkles,
+    Sparkles, User2,
 } from "lucide-react"
 
 import {
@@ -108,6 +108,11 @@ export function NavUser({
                             <DropdownMenuItem>
                                 <Sparkles/>
                                 ورود به صفحه اصلی
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup> <DropdownMenuGroup onClick={()=>router.push("/profile")}>
+                            <DropdownMenuItem>
+                                <User2/>
+                                ورود به صفحه پنل کاربری
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator/>

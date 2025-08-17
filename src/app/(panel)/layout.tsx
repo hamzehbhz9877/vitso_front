@@ -17,6 +17,8 @@ import { Separator } from "@/components/ui/separator";
 import { CommandDialogDemo } from "@/app/(panel)/_components/generalSearch";
 import User from "@/app/(panel)/_components/user";
 import * as React from "react";
+import NProgressProviders from "@/utils/nprogress-client";
+import Providers from "@/utils/nprogress-client";
 
 const bYekan = localFont({
     src: [
@@ -63,6 +65,7 @@ export default function PanelLayout({ children }: { children: React.ReactNode })
                 <ToastProvider>
                     <Auth>
                         <ModalContext>
+                            <Providers>
                             <HydrationBoundary state={dehydrate(queryClient)}>
                                 <SidebarProvider>
                                     <AppSidebar/>
@@ -86,10 +89,11 @@ export default function PanelLayout({ children }: { children: React.ReactNode })
                                                 <User/>
                                             </div>
                                         </header>
-                                        <div className="gap-2 p-4 rounded-lg">{children}</div>
+                                        <div className="gap-2 p-4 rounded-lg ">{children}</div>
                                     </SidebarInset>
                                 </SidebarProvider>
                             </HydrationBoundary>
+                            </Providers>
                         </ModalContext>
                     </Auth>
                 </ToastProvider>

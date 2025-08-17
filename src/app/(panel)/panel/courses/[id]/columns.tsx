@@ -14,6 +14,7 @@ import {BiTrash} from "react-icons/bi";
 import AddSeason from "@/app/(panel)/panel/courses/[id]/_action/addSeason";
 import EditSeason from "@/app/(panel)/panel/courses/[id]/_action/editSeason";
 import {FaAngleRight} from "react-icons/fa6";
+import {CirclePlus} from "lucide-react";
 
 export default function SeasonsTable() {
 
@@ -93,8 +94,9 @@ export default function SeasonsTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button variant={"outline"} onClick={() => openModal(<AddSeason/>)}
+                    <Button  onClick={() => openModal(<AddSeason/>)}
                     >
+                        <CirclePlus/>
                         افزودن فصل
                     </Button>
                 }

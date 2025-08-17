@@ -14,6 +14,7 @@ import {BiTrash} from "react-icons/bi";
 import {TbReportMoney} from "react-icons/tb";
 import {PiSealQuestionFill} from "react-icons/pi";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
+import {CirclePlus} from "lucide-react";
 
 export default function CoursesTable() {
 
@@ -114,6 +115,7 @@ export default function CoursesTable() {
                 headerActions={
                     <Button variant={"outline"}  onClick={() => router.push(`courses/add`)}
                     >
+                        <CirclePlus/>
                         افزودن دوره
                     </Button>
                 }

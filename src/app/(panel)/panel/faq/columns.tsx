@@ -16,6 +16,7 @@ import {useRouter} from "next/navigation";
 import DeleteCategory from "@/app/(panel)/panel/category/article/_action/deleteCategory";
 import DeleteFaqs from "@/app/(panel)/panel/faq/_action/deleteFaq";
 import useModal from "@/context/modal/useModal";
+import {CirclePlus} from "lucide-react";
 
 
 export default function FaqTable() {
@@ -104,6 +105,7 @@ export default function FaqTable() {
                 headerActions={
                     <Button variant={"outline"} onClick={() => router.push(`faq/add`)}
                     >
+                        <CirclePlus/>
                         افزودن سوالات
                     </Button>
                 }

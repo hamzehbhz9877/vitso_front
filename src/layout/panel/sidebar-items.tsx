@@ -12,6 +12,7 @@ import {LiaComments} from "react-icons/lia";
 import {TiUser} from "react-icons/ti";
 import {BiDonateHeart} from "react-icons/bi";
 import {PiSealQuestionFill} from "react-icons/pi";
+import {BsInfoCircleFill} from "react-icons/bs";
 
 export interface SidebarUser {
     fullName: string;
@@ -114,6 +115,13 @@ export function getSidebarItems(user: SidebarUser) {
                 title: "ارتباط با ما",
                 url: "/panel/contactus",
                 icon: MdOutlineContactPhone,
+                isActive: false,
+                items: []
+            },
+            {
+                title: "درباره ما",
+                url: "/panel/about-us",
+                icon: BsInfoCircleFill,
                 isActive: false,
                 items: []
             },

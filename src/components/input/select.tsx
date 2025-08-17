@@ -92,7 +92,7 @@ export default function SelectWithCustomDropdownIconDemo({
             </Select>
 
             {/* نمایش ارور مربوط به فیلد */}
-            <ErrorMessage name={name} className="validation-error" component="div"/>
+            {name?  <ErrorMessage name={name} className="validation-error" component="div"/>:''}
         </div>
     );
 }

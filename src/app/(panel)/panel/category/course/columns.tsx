@@ -14,6 +14,7 @@ import EditCategory from "@/app/(panel)/panel/category/course/_action/editCatego
 import DeleteCategory from "@/app/(panel)/panel/category/course/_action/deleteCategory";
 import {BiTrash} from "react-icons/bi";
 import Image from "next/image";
+import {CirclePlus} from "lucide-react";
 
 export default function CategorysTable() {
 
@@ -112,8 +113,9 @@ export default function CategorysTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button variant={"outline"} onClick={() => openModal(<AddCategory/>)}
+                    <Button  onClick={() => openModal(<AddCategory/>)}
                     >
+                        <CirclePlus/>
                         افزودن دسته بندی
                     </Button>
                 }
