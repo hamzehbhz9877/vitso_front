@@ -13,6 +13,8 @@ import Footer from "@/layout/footer";
 import Auth from "@/context/authentication";
 
 import localFont from "next/font/local";
+import BodyScrollLock from "@/app/(main)/_components/overFlowScroll";
+import * as React from "react";
 
 const bYekan = localFont({
     src: [
@@ -49,13 +51,24 @@ export default function RootLayout({
             <script
                 dangerouslySetInnerHTML={{
                     __html: `
-              (function() {
-                const hour = new Date().getHours();
-                const theme = (hour >= 20 || hour < 6) ? 'dark' : 'light';
-                document.documentElement.classList.add(theme);
-                document.documentElement.setAttribute('data-theme', theme);
-              })();
-            `,
+        (function() {
+          try {
+            var COOKIE_KEY = "theme";
+            function getCookieTheme() {
+              var match = document.cookie.match(new RegExp("(^| )" + COOKIE_KEY + "=([^;]+)"));
+              return match ? match[2] : null;
+            }
+            function getSystemTheme() {
+              var hour = new Date().getHours();
+              return (hour >= 20 || hour < 6) ? "dark" : "light";
+            }
+            var theme = getCookieTheme() || getSystemTheme();
+            document.documentElement.classList.remove("light","dark");
+            document.documentElement.classList.add(theme);
+            document.documentElement.setAttribute("data-theme", theme);
+          } catch(e) {}
+        })();
+      `,
                 }}
             />
         </head>
@@ -66,6 +79,7 @@ export default function RootLayout({
                     <ModalContext>
                         <HydrationBoundary state={dehydrate(queryClient)}>
                             <Header/>
+                            <BodyScrollLock/>
                             <main>{children}</main>
                             <Footer/>
                         </HydrationBoundary>

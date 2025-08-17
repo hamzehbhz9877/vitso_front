@@ -11,6 +11,8 @@ import {RequestArticles} from "@/services/Article";
 import {useRouter} from "next/navigation";
 import DeleteArticle from "@/app/(panel)/panel/article/_action/deleteArticle";
 import {BiTrash} from "react-icons/bi";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
+import {PiSealQuestionFill} from "react-icons/pi";
 
 export default function ArticlesTable() {
 
@@ -61,7 +63,14 @@ export default function ArticlesTable() {
 
                     return (
                         <div className="flex gap-3 justify-center">
-
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <PiSealQuestionFill   size={20} className={"cursor-pointer "} onClick={() => router.push(`article/${article.id}/faq`)}/>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>سوالات متداول</p>
+                                </TooltipContent>
+                            </Tooltip>
                             <FaEdit size={20} className={"cursor-pointer"}
                                     onClick={() => router.push(`article/edit/${article.id}`)}/>
 

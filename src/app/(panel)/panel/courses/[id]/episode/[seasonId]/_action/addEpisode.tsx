@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import { getValidationSchema, getInitialValues } from "./validation";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import SimpleInput from "@/components/input/simple";
@@ -13,11 +13,13 @@ import { CalendarHijriInput } from "@/app/(panel)/_components/datepicker";
 import {TimePickerDemo} from "@/components/timePicker";
 import {RegisterEpisodes} from "@/services/Episode";
 import {DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {convertDateToJalaliString, formatDate} from "@/lib/utils";
 
 const AddEpisode = () => {
     const { handleClose } = useModal();
     const params = useParams();
     const queryClient = useQueryClient();
+    const today = useMemo(() => new Date(), []);
 
     const { mutate, isPending } = useMutation({
         mutationFn: RegisterEpisodes,
@@ -44,7 +46,7 @@ const AddEpisode = () => {
             </DialogHeader>
 
             <Formik
-                initialValues={getInitialValues({ seasonId })}
+                initialValues={getInitialValues({ seasonId,publishedAt:formatDate(today) })}
                 onSubmit={handleSubmit}
                 validationSchema={getValidationSchema()}
             >
@@ -75,6 +77,8 @@ const AddEpisode = () => {
 
                                 {/* تاریخ انتشار */}
                                 <CalendarHijriInput
+                                    initialDate={today}
+                                    initValue={convertDateToJalaliString(today)}
                                     name="publishedAt"
                                     label="تاریخ انتشار جلسه"
                                     placeholder="یک تاریخ را انتخاب کنید"

@@ -14,7 +14,7 @@ import {GetAllForSelectCategory} from "@/services/Category";
 import dynamic from "next/dynamic";
 import {CalendarHijriInput} from "@/app/(panel)/_components/datepicker";
 import {initialValues, validationSchema} from "@/app/(panel)/panel/article/validation";
-import {formatDate, objectToFormData} from "@/lib/utils";
+import {convertDateToJalaliString, formatDate, objectToFormData, parseJalaliDateToDate} from "@/lib/utils";
 import CustomCreatableSelect from "@/components/input/creatableSelect";
 import MultiSelect from "@/components/input/multiSelect";
 import {Card, CardHeader, CardContent, CardTitle} from "@/components/ui/card";
@@ -68,7 +68,7 @@ const Page = () => {
             </div>
 
             <Formik
-                initialValues={initialValues({date: null})}
+                initialValues={initialValues({date: formatDate(today)})}
                 onSubmit={handleSubmit}
                 validationSchema={validationSchema}
             >
@@ -100,6 +100,7 @@ const Page = () => {
                                             placeholder="یک تاریخ را انتخاب کنید"
                                             onChange={(date) => formikProps.setFieldValue('PublishedAt', date)}
                                             initialDate={today}
+                                            initValue={convertDateToJalaliString(today)}
                                             name={"PublishedAt"}
                                         />
                                         <CustomCreatableSelect

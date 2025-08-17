@@ -79,7 +79,7 @@ export function RegisterForm({
                     {() => {
                         return (
                             <Form>
-                                <SimpleInput onKeyPress={(e) => {
+                                <SimpleInput  onKeyPress={(e) => {
                                     const {value, maxLength}: any = e.target;
                                     if (String(value).length >= maxLength) {
                                         e.preventDefault();
@@ -123,7 +123,7 @@ export function RegisterForm({
                                     دریافت کد
                                 </button>
 
-                                <p className={"text-center text-sm mt-2"}>حساب کاربری دارید? <Link href={"/auth/login"}
+                                <p className={"text-center text-sm mt-2"}>حساب کاربری دارید؟ <Link href={"/auth/login"}
                                                                                               className={"font-bold text-primary"}>وارد
                                     شوید</Link></p>
 

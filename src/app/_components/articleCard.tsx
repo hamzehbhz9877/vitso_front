@@ -14,7 +14,7 @@ const ArticleCard = ({
                          shortDescription
                      }: Article) => {
     return (
-        <div className="card carousel-item shadow-sm max-w-[250px] lg:max-w-[300px] overflow-hidden md:max-w-[300px] rounded-[10px]">
+        <div className="card carousel-item  shadow-sm max-w-[250px] lg:max-w-[300px] overflow-hidden md:max-w-[300px] rounded-[10px]">
             <figure className="relative w-full aspect-[16/9] overflow-hidden">
                 <Image
                     src={image}
@@ -25,8 +25,8 @@ const ArticleCard = ({
                     priority={true}
                 />
             </figure>
-            <Link href={`/article/${slug}`}>
-                <div className="card-body bg-base-200 py-[15px] px-[12px] rounded-b-[10px]">
+            <Link href={`/article/${slug}`} className={"flex-1"}>
+                <div className="card-body bg-base-200 py-[15px] px-[12px] rounded-b-[10px] h-full" >
                     <div className="badge badge-soft badge-primary text-sm">
                         {categoryName ?? "دسته بندی"}
                     </div>
@@ -40,7 +40,7 @@ const ArticleCard = ({
                         {shortDescription}
                     </p>
 
-                    <div className="card-actions justify-between mt-2 text-zinc-500">
+                    <div className="card-actions justify-between mt-2 text-zinc-500 mt-auto">
                         <div className="flex gap-1 text-sm items-center">
                             <UserRound size={15} />
                             {author}

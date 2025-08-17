@@ -1,58 +1,67 @@
 'use client'
-import React from 'react'
-import {ErrorMessage, useField} from 'formik'
+
+import React, {DetailedHTMLProps, InputHTMLAttributes, useEffect, useRef, useState} from 'react'
+import {useField, useFormikContext, ErrorMessage} from 'formik'
 import {cn} from '@/lib/utils'
-import {Textarea as TextAreaShadCn} from "@/components/ui/textarea"
+import {Input} from '@/components/ui/input'
+import {Textarea as TextAreaShadCn} from '@/components/ui/textarea'
 
-type propsType = React.DetailedHTMLProps<
-    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    HTMLTextAreaElement
->
-
-interface Props extends propsType {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     label?: string | React.ReactNode
     name?: string
     icon?: React.ReactNode
+    isShadcn?: boolean
+    value?: any
 }
 
-const TextArea = ({label, name, icon, className, ...rest}: Props) => {
-    const [field, meta] = useField(name as string)
+const BaseTextArea = ({label, isShadcn = true, className, value, field = {}, meta = {}, ...rest}: TextAreaProps & {
+    field?: any;
+    meta?: any
+}) => {
+    const finalValue = value ?? meta?.value ?? ''
 
     return (
-        <div className="">
-            {/* label */}
-            {label && (
-                <label className="flex mb-2 items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 ">
-                    {label}
-                </label>
-            )}
+        <div>
+            {label && <label className="flex mb-2 gap-2 text-sm font-medium">{label}</label>}
 
-            <div className="relative">
+            {isShadcn ? (
                 <TextAreaShadCn
                     {...field}
-                    name={name}
-                    value={meta.value}
+                    value={finalValue}
                     className={cn(
-                        // textarea specific
                         'w-full p-4 resize-none rounded-lg border border-gray-300 caret-primary-200',
-                        // error
-                        meta.touched && meta.error && 'border border-solid',
+                        meta?.touched && meta?.error && 'border border-solid',
                         className
                     )}
-
                     {...rest}
                 />
-            </div>
-
-            {name && (
-                <ErrorMessage
-                    name={name}
-                    className="validation-error"
-                    component="div"
+            ) : (
+                <textarea
+                    {...field}
+                    value={finalValue}
+                    className={cn(
+                        'w-full p-4 resize-none rounded-lg border border-gray-300 caret-primary-200',
+                        meta?.touched && meta?.error && 'border border-solid',
+                        className
+                    )}
+                    {...rest}
                 />
             )}
+
+            {meta?.touched && meta?.error &&
+                <ErrorMessage name={field?.name} className="validation-error" component="div"/>}
         </div>
     )
 }
 
+const FormikTextArea = (props: TextAreaProps) => {
+    const {name, ...rest} = props
+    const [field, meta] = useField(name)
+
+    return <BaseTextArea {...rest} field={field} meta={meta} name={name}/>
+}
+
+ const TextArea = (props: TextAreaProps) => {
+    return props.name ? <FormikTextArea {...props} /> : <BaseTextArea {...props} />
+}
 export default TextArea

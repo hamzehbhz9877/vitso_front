@@ -12,6 +12,7 @@ import ToastProvider from "@/utils/react-toastify-client";
 import ModalContext from "@/context/modal";
 import Auth from "@/context/authentication";
 import localFont from "next/font/local";
+import * as React from "react";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -40,25 +41,35 @@ export default function RootLayout({
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const hour = new Date().getHours();
-    const theme = (hour >= 20 || hour < 6) ? 'dark' : 'light';
     const queryClient = getQueryClient()
+
     return (
-        <html dir="rtl" lang="fa-IR" className={theme} data-theme={theme}>
-        {/*<head>*/}
-        {/*    <script*/}
-        {/*        dangerouslySetInnerHTML={{*/}
-        {/*            __html: `*/}
-        {/*      (function() {*/}
-        {/*        const hour = new Date().getHours();*/}
-        {/*        const theme = (hour >= 20 || hour < 6) ? 'dark' : 'light';*/}
-        {/*        document.documentElement.classList.add(theme);*/}
-        {/*        document.documentElement.setAttribute('data-theme', theme);*/}
-        {/*      })();*/}
-        {/*    `,*/}
-        {/*        }}*/}
-        {/*    />*/}
-        {/*</head>*/}
+        <html dir="rtl" lang="fa-IR">
+        <head>
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `
+        (function() {
+          try {
+            var COOKIE_KEY = "theme";
+            function getCookieTheme() {
+              var match = document.cookie.match(new RegExp("(^| )" + COOKIE_KEY + "=([^;]+)"));
+              return match ? match[2] : null;
+            }
+            function getSystemTheme() {
+              var hour = new Date().getHours();
+              return (hour >= 20 || hour < 6) ? "dark" : "light";
+            }
+            var theme = getCookieTheme() || getSystemTheme();
+            document.documentElement.classList.remove("light","dark");
+            document.documentElement.classList.add(theme);
+            document.documentElement.setAttribute("data-theme", theme);
+          } catch(e) {}
+        })();
+      `,
+                }}
+            />
+        </head>
         <body className={`${bYekan.variable} rtl main font-sans`}>
         <ClientReactQueryProvider>
             <ToastProvider>

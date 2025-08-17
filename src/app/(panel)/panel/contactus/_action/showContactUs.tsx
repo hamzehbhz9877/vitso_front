@@ -9,16 +9,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useModal from "@/hooks/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useQuery} from "@tanstack/react-query";
 import {Button} from "@/components/ui/button";
 import {GetForEditContactUs} from "@/services/ContactUs";
 import TextArea from "@/components/input/textArea";
+import useModal from "@/context/modal/useModal";
 
 const AddUser = ({id}: { id: string }) => {
 
-    const {handleClose} = useModal();
+    const {closeModal} = useModal();
     
 
     const {data: contactus} = useQuery({
@@ -60,7 +60,7 @@ const AddUser = ({id}: { id: string }) => {
                                 </div>
                                 <TextArea label={"توضیحات"} name={"message"} rows={5}/>
 
-                                <Button type={"button"} onClick={handleClose}
+                                <Button type={"button"} onClick={closeModal}
                                         variant={"outline"}
                                 >
                                     بستن

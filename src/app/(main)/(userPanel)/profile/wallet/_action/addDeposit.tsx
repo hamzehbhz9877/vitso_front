@@ -7,16 +7,9 @@ import * as Yup from "yup";
 import {cn} from "@/lib/utils";
 import {useMutation} from "@tanstack/react-query";
 import { DepositUserWallet} from "@/services/Wallet";
+import DaisyInput from "@/components/input/daisyInput";
 
-const DaisyInput = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
-    ({ className,type, ...props },ref) => {
-    return <input
-        type={type}
-        className={cn("input input-bordered w-full",className)}
-        ref={ref}
-        {...props}
-    />
-});
+
 
 const AddDeposit = () => {
 
@@ -40,14 +33,12 @@ const AddDeposit = () => {
 
     return (
         <dialog id="addDeposit" className="modal">
-            <div className="modal-box w-full lg:w-[400px]">
+            <div className="modal-box w-auto bg-base-100 dark:bg-base-300 lg:w-[400px]">
                 <form method="dialog">
                     {/* if there is a button in form, it will close the modal */}
                     <button className="btn btn-sm btn-circle btn-ghost absolute left-2 top-2">✕</button>
                 </form>
                 <h3 className="font-bold text-lg">شارژ کیف پول</h3>
-
-
                 <div className="mt-3">
                     <Formik
                         initialValues={{amount: 0}}

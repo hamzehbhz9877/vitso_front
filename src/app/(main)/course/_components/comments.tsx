@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import { FaComment } from "react-icons/fa"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { GetCommentsForArticle, GetCommentsForCourse, RegisterComments } from "@/services/Comment"
-import AddCommentModal from "@/app/(main)/course/_components/addCommentModal";
-import ReplyModal from "@/app/(main)/course/_components/replyCommentModal";
+import AddCommentModal from "@/app/(main)/course/_components/modal/addCommentModal";
+import ReplyModal from "@/app/(main)/course/_components/modal/replyCommentModal";
 import CommentItem from "@/app/(main)/course/_components/commentItem";
 
 

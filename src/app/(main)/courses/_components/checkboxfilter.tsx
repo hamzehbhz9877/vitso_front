@@ -72,7 +72,7 @@ export default function CheckBoxFilter({
     return (
         <div
             className={cn(
-                "collapse filter-collapse text-sm collapse-arrow bg-base-100 border border-base-300 min-h-max",
+                "collapse filter-collapse text-sm collapse-arrow  bg-base-100 border border-base-300 min-h-max",
                 { "collapse-open": open }
             )}
         >

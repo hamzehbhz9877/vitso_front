@@ -1,8 +1,12 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
+import DonationModal from "@/app/(main)/course/_components/modal/donationModal";
+import {Heart, User, User2} from "lucide-react";
 
-const AuthorProfile = ({author:{authorName,authorAvatar,authorId}}:{author:Pick<Course, "authorName"|'authorAvatar'|'authorId'>}) => {
+const AuthorProfile = ({author: {authorName, authorAvatar, authorId,id}}: {
+    author: Pick<Course, "authorName" | 'authorAvatar' | 'authorId'|'id'>
+}) => {
     return (
         <div>
             <div
@@ -24,9 +28,31 @@ const AuthorProfile = ({author:{authorName,authorAvatar,authorId}}:{author:Pick<
                 </div>
             </div>
 
-            <div className={"text-center mt-3"}>
-                <Link href={`/author/${authorId}`} className={"btn  btn-primary"}>مشاهده پروفایل من</Link>
+            <div className="flex justify-center items-center mt-6 gap-2">
+                <button
+                    onClick={() => {
+                        const show = document.getElementById('donation') as HTMLDialogElement;
+                        show?.showModal();
+                    }}
+                    className="btn flex-auto lg:flex-1 flex items-center gap-2 border-none bg-red-500 text-white
+               hover:bg-red-600 transition-colors duration-300
+               relative overflow-hidden group"
+                >
+                    <Heart
+                        size={18}
+                        className="text-yellow-300 animate-bounce transition-transform duration-300 transform group-hover:scale-125"
+                    />
+                    حمایت مالی
+                </button>
+                <Link
+                    href={`/author/${authorId}`}
+                    className="btn btn-primary flex flex-auto lg:flex-1 flex-1 items-center gap-2 text-nowrap"
+                >
+                    <User2 size={18}/> {/* آیکن پروفایل دلخواه */}
+                    مشاهده پروفایل
+                </Link>
             </div>
+            <DonationModal type={"course"} id={id}/>
         </div>
     );
 };

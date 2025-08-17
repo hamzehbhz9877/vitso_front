@@ -6,14 +6,14 @@ import SimpleInput from "@/components/input/simple";
 import { Button } from "@/components/ui/button";
 import { GetAllTagForSelect } from "@/services/Tag";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { EditCourses, GetForEditCourses } from "@/services/Course";
+import {EditCourses, GetForEditCourses, RegisterCourses} from "@/services/Course";
 import useModal from "@/hooks/useModal";
 import InputDemo from "@/components/input-12";
 import TextArea from "@/components/input/textArea";
 import { GetAllForSelectCategory } from "@/services/Category";
 import { CalendarHijriInput } from "@/app/(panel)/_components/datepicker";
 import { getValidationSchema, getInitialValues } from "@/app/(panel)/panel/courses/validation";
-import { objectToFormData } from "@/lib/utils";
+import {convertDateToJalaliString, formatDate, objectToFormData} from "@/lib/utils";
 import { useParams, useRouter } from "next/navigation";
 import MultiSelect from "@/components/input/multiSelect";
 import CustomCreatableSelect from "@/components/input/creatableSelect";
@@ -34,7 +34,7 @@ const EditPage = () => {
     const today = useMemo(() => new Date(), []);
 
     const { mutate, isPending } = useMutation({
-        mutationFn: EditCourses,
+        mutationFn: RegisterCourses,
         onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({ queryKey: ["courses"] });
@@ -58,10 +58,6 @@ const EditPage = () => {
         queryKey: ["GetAllCategoryForSelect"]
     });
 
-    const { data: course } = useQuery({
-        queryFn: () => GetForEditCourses(params.id),
-        queryKey: ["GetForEditCourses", params.id]
-    });
 
     const cleanUrl = (process.env.NEXT_PUBLIC_HOST_ADDRESS || '').replace('/api', '');
 
@@ -76,8 +72,7 @@ const EditPage = () => {
             </div>
 
             <Formik
-                initialValues={getInitialValues({ ...course?.data, isEdit: true, date: today })}
-                enableReinitialize
+                initialValues={getInitialValues({ date: formatDate(today) })}
                 onSubmit={handleSubmit}
                 validationSchema={getValidationSchema({ isEdit: true })}
             >
@@ -135,6 +130,7 @@ const EditPage = () => {
                                         />
 
                                         <CalendarHijriInput
+                                            initValue={convertDateToJalaliString(today)}
                                             label="تاریخ انتشار دوره"
                                             placeholder="یک تاریخ را انتخاب کنید"
                                             onChange={(date) => formikProps.setFieldValue('PublishedAt', date)}
@@ -160,7 +156,6 @@ const EditPage = () => {
                                 <InputDemo
                                     name="Image"
                                     title="تصویر دوره"
-                                    defaultData={course?.data.image}
                                     onChange={(file) => formikProps.setFieldValue("Image", file)}
                                 />
                             </div>
@@ -174,7 +169,6 @@ const EditPage = () => {
                                     <CardContent>
                                        <div className={"mb-5"}>
                                            <Editor
-                                               defaultData={course?.data.description}
                                                name="Description"
                                                uploadUrl="Upload/ImageCourseContent"
                                                getEditorData={(data, getText) => {

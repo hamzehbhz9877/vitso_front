@@ -6,9 +6,9 @@ import React, {
     useRef,
     useState
 } from 'react'
-import {ErrorMessage, useField} from 'formik'
-import { cn } from '@/lib/utils'
-import { Input } from '@/components/ui/input'
+import {ErrorMessage, useField, useFormikContext} from 'formik'
+import {cn} from '@/lib/utils'
+import {Input} from '@/components/ui/input'
 
 type propsType = DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
@@ -30,13 +30,13 @@ function safeInputValue(value: any): string {
     return String(value)
 }
 
-// بیس اینپوت که وابستگی به فرومیک نداره
+// بیس اینپوت (بدون وابستگی مستقیم به Formik)
 const BaseInput = ({
                        type,
                        showError = true,
                        label,
                        prefix,
-                         name,
+                       name,
                        icon,
                        className,
                        value,
@@ -54,12 +54,12 @@ const BaseInput = ({
         }
     }, [prefix])
 
-    const finalValue = safeInputValue(value ?? field.value ?? '')
+    const finalValue = safeInputValue(value ?? field?.value ?? '')
 
     return (
-        <div className="">
+        <div>
             {label && (
-                <label className="flex mb-2 items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50">
+                <label className="flex mb-2 items-center gap-2 text-sm leading-none font-medium select-none">
                     {label}
                 </label>
             )}
@@ -67,14 +67,12 @@ const BaseInput = ({
             <div className="relative flex items-center">
                 {prefix && (
                     <span
-                        style={{direction:"ltr"}}
+                        style={{direction: 'ltr'}}
                         ref={prefixRef}
-                        className="absolute text-[13px] text-gray-500 pointer-events-none whitespace-nowrap left-[4px] top-1/2 -translate-y-1/2 direction-ltr
-                   bg-blue-50 h-[calc(100%-8px)] px-2 flex items-center
-                   dark:bg-neutral-700 dark:text-gray-300 dark:border dark:border-neutral-600"
+                        className="absolute text-[13px] text-gray-500 pointer-events-none whitespace-nowrap left-[4px] top-1/2 -translate-y-1/2 bg-blue-50 h-[calc(100%-8px)] px-2 flex items-center dark:bg-neutral-700 dark:text-gray-300 dark:border dark:border-neutral-600"
                     >
-        {prefix}
-    </span>
+            {prefix}
+          </span>
                 )}
 
                 <Input
@@ -101,23 +99,28 @@ const BaseInput = ({
                 )}
             </div>
 
-            {name?
-                <ErrorMessage name={name} className="validation-error" component="div" />:""}
-
+            {name && showError && (
+                <ErrorMessage
+                    name={name}
+                    className="validation-error"
+                    component="div"
+                />
+            )}
         </div>
     )
 }
 
-// نسخه‌ای که با Formik وصل میشه
 const FormikInput = (props: Props & { name: string }) => {
+
     const [field, meta] = useField(props.name)
-    return <BaseInput {...props} field={field} meta={meta} />
+
+    return <BaseInput {...props} field={field} meta={meta}/>
 }
 
 // ورودی اصلی
 const SimpleInput = (props: Props) => {
     if (!props.name) {
-        return <BaseInput {...props} field={{}} meta={{}} />
+        return <BaseInput {...props} field={{}} meta={{}}/>
     }
     return <FormikInput {...props as Props & { name: string }} />
 }

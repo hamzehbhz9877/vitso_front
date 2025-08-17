@@ -243,3 +243,26 @@ type Teacher = {
     degree: string
     aboutMe: string
 }
+
+
+type Donate={
+    id: string,
+    amount: number,
+    fromUser: string,
+    donationDate: string,
+    message: string,
+    for: string
+}
+
+type Faq={
+    entityName: string,
+    positionFa:? string,
+    position: string,
+    questionCount: number,
+    createdAt:string,
+    listFaq:{
+        priority:string
+        question:string
+        answer:string
+    }[]
+}

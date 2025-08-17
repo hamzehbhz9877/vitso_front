@@ -105,7 +105,7 @@ authorId,
                         </div>
                     </div>
                     <div className={"w-[350px] shadow mt-4 dark:bg-base-300  p-3 rounded-lg"}>
-                        <AuthorProfile author={{authorName,authorAvatar,authorId}} />
+                        <AuthorProfile author={{authorName,authorAvatar,authorId,id}} />
                     </div>
                     <div className={"w-[350px] shadow mt-4 dark:bg-base-300 p-4 rounded-lg"}>
                         <CourseLinks shortLink={shortLink} tagList={tagList} categoryName={categoryName}/>

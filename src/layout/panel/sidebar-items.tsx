@@ -10,6 +10,8 @@ import {MdOutlineArticle, MdOutlineContactPhone, MdOutlineSpaceDashboard} from "
 import {RiTodoLine} from "react-icons/ri";
 import {LiaComments} from "react-icons/lia";
 import {TiUser} from "react-icons/ti";
+import {BiDonateHeart} from "react-icons/bi";
+import {PiSealQuestionFill} from "react-icons/pi";
 
 export interface SidebarUser {
     fullName: string;
@@ -84,6 +86,20 @@ export function getSidebarItems(user: SidebarUser) {
                 title: "نظرات",
                 url: "/panel/comments",
                 icon: LiaComments,
+                isActive: false,
+                items: []
+            },
+            {
+                title: "سوالات متداول",
+                url: "/panel/faq",
+                icon: PiSealQuestionFill,
+                isActive: false,
+                items: []
+            },
+            {
+                title: "دونیت",
+                url: "/panel/donation",
+                icon: BiDonateHeart,
                 isActive: false,
                 items: []
             },

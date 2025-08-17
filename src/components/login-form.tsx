@@ -135,7 +135,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                                 </button>
 
                                 <p className={"text-center text-sm mt-2"}>
-                                    حساب کاربری ندارید?{" "}
+                                    حساب کاربری ندارید؟{" "}
                                     <Link href={"/auth/register"} className={"font-bold text-primary"}>
                                         ثبت نام کنید
                                     </Link>

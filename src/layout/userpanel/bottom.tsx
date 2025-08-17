@@ -10,6 +10,8 @@ import {FaRegCircleUser} from "react-icons/fa6";
 import {RxExit} from "react-icons/rx";
 import {LiaComments} from "react-icons/lia";
 import {RiTodoLine} from "react-icons/ri";
+import {FaDonate} from "react-icons/fa";
+import {BiDonateHeart} from "react-icons/bi";
 
 
 const SidebarBottom = () => {
@@ -38,13 +40,16 @@ const SidebarBottom = () => {
             title: 'کیف پول',
             url: "/profile/wallet",
             icon: <LuWallet size={21} color={"text-base-content"}/>
+        },  {
+            title: 'دونیت',
+            url: "/profile/donation",
+            icon: <BiDonateHeart  size={21} color={"text-base-content"}/>
         },
         {
             title: 'نظرات',
             url: "/profile/comments",
             icon: <LiaComments  size={21} color={"text-base-content"}/>
         },
-
         {
             title: 'خروج از حساب کاربری',
             url: "logout",
@@ -53,7 +58,6 @@ const SidebarBottom = () => {
     ]
 
     const pathname = usePathname()
-
 
     return (
         <div className="sideBar__bottom bg-base-300 rounded-xl">

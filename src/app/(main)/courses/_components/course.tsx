@@ -45,25 +45,19 @@ const Course = ({type, categories, course, searchParams}: {
         setSortOpen(false);
     };
     useEffect(() => {
-        const preventScroll = (e: TouchEvent | WheelEvent) => {
-            // اگر داخل فیلتر یا مدال هست، اجازه اسکرول بده
-            if ((e.target as HTMLElement).closest('.filter-modal')) {
-                return;
-            }
-            e.preventDefault();
-        };
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
         if (filterOpen || sortOpen) {
-            document.addEventListener("touchmove", preventScroll, { passive: false });
-            document.addEventListener("wheel", preventScroll, { passive: false });
+            document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = `${scrollbarWidth}px`; // جلوگیری از شیفت
         } else {
-            document.removeEventListener("touchmove", preventScroll);
-            document.removeEventListener("wheel", preventScroll);
+            document.body.style.overflow = 'auto';
+            document.body.style.paddingRight = '0px';
         }
 
         return () => {
-            document.removeEventListener("touchmove", preventScroll);
-            document.removeEventListener("wheel", preventScroll);
+            document.body.style.overflow = 'auto';
+            document.body.style.paddingRight = '0px';
         };
     }, [filterOpen, sortOpen]);
 

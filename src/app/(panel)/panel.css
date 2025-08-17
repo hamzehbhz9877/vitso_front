@@ -178,8 +178,8 @@
     }
 }
 
-html body[data-scroll-locked] {
-    overflow-y: scroll !important;
+html body.panel[data-scroll-locked] {
+    /*overflow-y: scroll !important;*/
     overscroll-behavior: contain !important;
     margin-right: 0 !important;
 }

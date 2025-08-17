@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {getValidationSchema, initialValues} from "./validation";
 import { Form, Formik} from "formik";
 import SimpleInput from "@/components/input/simple";
@@ -18,12 +18,14 @@ import {Button} from "@/components/ui/button";
 import {useParams} from "next/navigation";
 import {NumberInput} from "@/components/numberformat";
 import {CalendarHijriInput} from "@/app/(panel)/_components/datepicker";
+import {convertDateToJalaliString, formatDate} from "@/lib/utils";
 
 const AddPrice = () => {
 
     const {handleClose} = useModal();
 
     const params=useParams()
+    const today = useMemo(() => new Date(), []);
 
     const queryClient = useQueryClient();
 
@@ -52,7 +54,7 @@ const AddPrice = () => {
     
 
             <Formik
-                initialValues={initialValues}
+                initialValues={{...initialValues,endDateDiscount:formatDate(today)}}
                 onSubmit={handleSubmit}
                 validationSchema={getValidationSchema()}
             >
@@ -73,7 +75,8 @@ const AddPrice = () => {
                                     />
                                     <SimpleInput label={"درصد تخفیف"} name={"discountPercentage"} type={"text"}/>
                                     <CalendarHijriInput
-                                        initialDate={undefined}
+                                        initialDate={today}
+                                        initValue={convertDateToJalaliString(today)}
                                         name="endDateDiscount"
                                         label="تاریخ اتمام درصد تخفیف"
                                         placeholder="یک تاریخ را انتخاب کنید"

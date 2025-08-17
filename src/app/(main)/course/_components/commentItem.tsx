@@ -14,16 +14,16 @@ type CommentItemProps = {
 
 export default function CommentItem({ comment, type, onReplyClick }: CommentItemProps) {
     return (
-        <div className="card shadow-md bg-base-200 border border-base-300 overflow-hidden max-w-full">
-            <div className="card-body p-3 sm:p-4 space-y-3 overflow-hidden max-w-full">
+        <div className="card shadow-md bg-base-200 border border-base-300 max-w-full">
+            <div className="card-body p-3 sm:p-4 space-y-3 max-w-full">
 
-                <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3 overflow-hidden max-w-full">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3 max-w-full">
 
                     {/* Avatar */}
                     <div className="avatar flex-none">
                         <div
                             className={clsx(
-                                "w-8 sm:w-10 rounded-full overflow-hidden",
+                                "w-8 sm:w-10 rounded-full",
                                 comment?.isTeacher && "ring ring-info ring-offset-base-100 ring-offset-1 sm:ring-offset-2"
                             )}
                         >
@@ -38,13 +38,15 @@ export default function CommentItem({ comment, type, onReplyClick }: CommentItem
                     </div>
 
                     {/* Main content */}
-                    <div className="flex-1 min-w-0 max-w-full overflow-hidden">
+                    <div className="flex-1">
 
                         {/* Header row */}
-                        <div className="flex flex-wrap sm:flex-nowrap items-center mb-1 w-full min-w-0 max-w-full overflow-hidden gap-1">
+                        <div
+                            className="flex flex-wrap sm:flex-nowrap items-center mb-1 w-full gap-1">
 
                             {/* Left: Name + Badges */}
-                            <div className="flex items-center flex-1 basis-0 min-w-0 max-w-full overflow-hidden space-x-2 rtl:space-x-reverse">
+                            <div
+                                className="flex items-center flex-1 gap-2 basis-0 space-x-2 rtl:space-x-reverse">
                 <span className="font-semibold text-sm sm:text-base truncate block max-w-full">
                   {comment?.fullName}
                 </span>
@@ -64,15 +66,15 @@ export default function CommentItem({ comment, type, onReplyClick }: CommentItem
 
                             {/* Right: Date + Reply */}
                             {type && (
-                                <div className="flex items-center flex-none shrink-0 min-w-0 max-w-full overflow-hidden gap-2 sm:text-gray-500 dark:text-gray-400">
+                                <div className="flex items-center gap-2 sm:text-gray-500 dark:text-gray-400">
                                     <span className="whitespace-nowrap">{comment?.createdAt}</span>
-                                    <span className="hidden sm:block h-4 w-px bg-gray-300 dark:bg-gray-600" />
-                                    <div className="tooltip tooltip-left tooltip-xs sm:tooltip-sm" data-tip="پاسخ">
+                                    <span className="hidden sm:block h-4 w-px bg-gray-300 dark:bg-gray-600"/>
+                                    <div className="tooltip tooltip-top tooltip-primary" data-tip="پاسخ">
                                         <button
                                             onClick={() => onReplyClick?.(comment)}
-                                            className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full border border-primary text-primary hover:bg-primary/10 hover:shadow-md transition-all"
+                                            className="w-6 cursor-pointer h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full border border-primary text-primary hover:bg-primary/10 hover:shadow-md transition-all"
                                         >
-                                            <CornerUpLeft className="w-3 h-3 sm:w-4 sm:h-4" strokeWidth={1.75} />
+                                            <CornerUpLeft className="w-3 h-3 sm:w-4 sm:h-4" strokeWidth={1.75}/>
                                         </button>
                                     </div>
                                 </div>
@@ -88,7 +90,7 @@ export default function CommentItem({ comment, type, onReplyClick }: CommentItem
 
                 {/* Replies */}
                 {comment?.replies?.length > 0 && (
-                    <div className="border-t border-dashed border-base-300 pt-2 sm:pt-3 space-y-2 sm:space-y-3 min-w-0 max-w-full overflow-hidden">
+                    <div className="border-t border-dashed border-base-300 pt-2 sm:pt-3 space-y-2 sm:space-y-3">
                         {comment?.replies.map(reply => (
                             <ReplyItem key={reply.id} reply={reply} type={type} />
                         ))}

@@ -6,12 +6,14 @@ import ReactTable from "@/app/(panel)/_components/table";
 import {useQuery} from "@tanstack/react-query";
 import useModal from "@/context/modal/useModal";
 import {Button} from "@/components/ui/button";
-import {FaEdit, FaEye} from "react-icons/fa";
+import {FaDollarSign, FaEdit, FaEye} from "react-icons/fa";
 import {RequestCourses} from "@/services/Course";
 import {useRouter} from "next/navigation";
 import DeleteCourse from "@/app/(panel)/panel/courses/_action/deleteCourse";
 import {BiTrash} from "react-icons/bi";
 import {TbReportMoney} from "react-icons/tb";
+import {PiSealQuestionFill} from "react-icons/pi";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 
 export default function CoursesTable() {
 
@@ -62,7 +64,22 @@ export default function CoursesTable() {
 
                     return (
                         <div className="flex gap-3 justify-center">
-                            <TbReportMoney  size={20} className={"cursor-pointer "} onClick={() => router.push(`courses/${course.id}/price`)}/>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <FaDollarSign   size={20} className={"cursor-pointer "} onClick={() => router.push(`courses/${course.id}/price`)}/>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>لیست قیمت ها</p>
+                                </TooltipContent>
+                            </Tooltip>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <PiSealQuestionFill   size={20} className={"cursor-pointer "} onClick={() => router.push(`courses/${course.id}/faq`)}/>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>سوالات متداول</p>
+                                </TooltipContent>
+                            </Tooltip>
                             <FaEye size={20} className={"cursor-pointer "} onClick={() => router.push(`courses/${course.id}`)}/>
 
                             <FaEdit size={20} className={"cursor-pointer"}

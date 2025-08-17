@@ -15,7 +15,7 @@ const Category = ({ name, icon,type }: {type:string ,name: string; icon: string 
                     height={60}
                     title={name}
                     alt={name}
-                    className="mx-auto max-h-10 max-w-10 md:max-h-12 md:max-w-12"
+                    className="mx-auto max-h-10 max-w-10"
                 />:""}
                 <h2 className="mt-auto pt-2 text-xs font-semibold text-gray-700 dark:text-base-content leading-tight overflow-visible">
                     {name}

@@ -43,7 +43,7 @@ const Header = async () => {
                         {/*<Image alt={"logo"} src={Logo} width={130} height={130}/>*/}
                         {/*</a>*/}
                     </div>
-                    <div className="flex-1 relative flex items-center">
+                    <div className="flex-1 hidden lg:flex relative items-center">
                         {/*<a className={"btn btn-link px-0 "}>*/}
                         {/*<Image alt={"logo"} src={Logo} width={130} height={130}/>*/}
                         {/*</a>*/}
