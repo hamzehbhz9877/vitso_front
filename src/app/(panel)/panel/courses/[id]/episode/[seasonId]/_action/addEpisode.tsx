@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import { getValidationSchema, getInitialValues } from "./validation";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import SimpleInput from "@/components/input/simple";
-import useModal from "@/hooks/useModal";
+import useModal from "@/context/modal/useModal";
 import { IoCloseOutline } from "react-icons/io5";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetForEditSeasons } from "@/services/Season";
@@ -16,7 +16,7 @@ import {DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {convertDateToJalaliString, formatDate} from "@/lib/utils";
 
 const AddEpisode = () => {
-    const { handleClose } = useModal();
+    const { closeModal } = useModal();
     const params = useParams();
     const queryClient = useQueryClient();
     const today = useMemo(() => new Date(), []);
@@ -26,7 +26,7 @@ const AddEpisode = () => {
         onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({ queryKey: ["episodes"] });
-                handleClose();
+                closeModal();
             }
         }
     });

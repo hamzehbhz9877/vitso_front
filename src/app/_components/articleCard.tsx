@@ -11,10 +11,11 @@ const ArticleCard = ({
                          categoryName,
                          publishDate,
                          slug,
-                         shortDescription
-                     }: Article) => {
+                         shortDescription,
+                         isFilterPage=false
+                     }: Article & { isFilterPage?: boolean }) => {
     return (
-        <div className="card carousel-item  shadow-sm max-w-[250px] lg:max-w-[300px] overflow-hidden md:max-w-[300px] rounded-[10px]">
+        <div className={`card carousel-item  shadow-sm ${!isFilterPage?"w-[250px] sm:w-auto":'w-auto'}   overflow-hidden  rounded-[10px]`}>
             <figure className="relative w-full aspect-[16/9] overflow-hidden">
                 <Image
                     src={image}

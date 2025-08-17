@@ -10,15 +10,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useModal from "@/hooks/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {Button} from "@/components/ui/button";
 import {EditCategory, GetForEditCategory} from "@/services/Category";
+import useModal from "@/context/modal/useModal";
 
 const AddUser = ({id}: { id: string }) => {
 
-    const {handleClose} = useModal();
+    const {closeModal} = useModal()
 
 
     const queryClient = useQueryClient();
@@ -27,7 +27,7 @@ const AddUser = ({id}: { id: string }) => {
         mutationFn: EditCategory, onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({queryKey: ["subcategories"]});
-                handleClose()
+                closeModal()
             }
         }
     });

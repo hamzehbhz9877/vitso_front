@@ -73,9 +73,9 @@ const Course = ({type, categories, course, searchParams}: {
         isFetched,
         ...rest
     } = useInfiniteQuery({
-        queryKey: [type === "course" ? 'course' : 'article', Object.values(searchParams).join(",")],
+        queryKey: [type === "courses" ? 'courses' : 'articles', Object.values(searchParams).join(",")],
         queryFn: ({pageParam}) => {
-            if (type === "course")
+            if (type === "courses")
                 return CourseByCategory(searchParams)
             else
                 return ArticleByCategory(searchParams)
@@ -154,7 +154,7 @@ const Course = ({type, categories, course, searchParams}: {
                     />
 
                     {
-                        type === "article" ? "" :
+                        type === "articles" ? "" :
 
 
                             <CheckBoxFilter
@@ -201,10 +201,10 @@ const Course = ({type, categories, course, searchParams}: {
                 <div className="flex-1">
                     <SortFilter type={type} courseCount={course?.length}/>
                     {course?.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-col-4 gap-3 mb-5">
-                            {type === "article" ?
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mb-5">
+                            {type === "articles" ?
                                 course?.map((article, index) => (
-                                    <ArticleCard {...article} key={index}/>
+                                    <ArticleCard  isFilterPage {...article} key={index}/>
                                 ))
                                 : course?.map((course, index) => (
                                     <CourseCard isFilterPage {...course} key={index}/>
@@ -212,7 +212,7 @@ const Course = ({type, categories, course, searchParams}: {
                         </div>
                     ) : (
                         <div role="alert" className="alert alert-error alert-soft">
-                            {type !== "article" ?
+                            {type !== "articles" ?
                                 <span>دوره ای یافت نشد.</span>
                                 : <span>مقاله ای یافت نشد.</span>}
                         </div>
@@ -253,7 +253,7 @@ const Course = ({type, categories, course, searchParams}: {
                             data={categories}
                         />
 
-                        {type === "article" ? "" :
+                        {type === "articles" ? "" :
                             <CheckBoxFilter
                                 hasSearch={false}
                                 multiSelect

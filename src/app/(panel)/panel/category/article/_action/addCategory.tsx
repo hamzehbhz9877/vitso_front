@@ -10,17 +10,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useModal from "@/hooks/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {GetAllForSelectCategory, RegisterCategory} from "@/services/Category";
 import {Button} from "@/components/ui/button";
 import InputDemo from "@/components/input-12";
 import {objectToFormData} from "@/lib/utils";
+import useModal from "@/context/modal/useModal";
 
 const AddCategory = () => {
 
-    const {handleClose} = useModal();
+    const {closeModal} = useModal()
 
 
     const [categoryType, setCategoryType] = React.useState<number>();
@@ -32,7 +32,7 @@ const AddCategory = () => {
         mutationFn: RegisterCategory, onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({queryKey: ["categories"]});
-                handleClose()
+                closeModal()
             }
         }
     });
@@ -76,7 +76,7 @@ const AddCategory = () => {
 
 
 
-                                <div className={"w-max mb-5"}>
+                                <div className={"mb-5 w-auto h-auto md:w-50"}>
                                     <InputDemo  name={"Icon"} title={"آیکن دسته بندی"} onChange={(file) => {
                                         formikProps.setFieldValue("Icon", file); // یا اگر باید base64 یا URL باشد، اینجا تبدیل کن
                                     }}/>

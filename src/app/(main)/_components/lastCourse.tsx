@@ -17,7 +17,7 @@ const LastCourse = ({data}: { data:Course[] }) => {
                 <Link href={"/courses"}  className={"btn btn-primary text-white"}>مشاهده همه</Link>
             </div>
             <div
-                className="carousel sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[16px] mb-[20px] ">
+                className="carousel sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-[16px] mb-[20px] ">
                 {data.map((d, index) => {
                     return <CourseCard  key={index} {...d}/>
                 })}

@@ -10,16 +10,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useModal from "@/hooks/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import { GetForEditCategory, RegisterCategory} from "@/services/Category";
 import {Button} from "@/components/ui/button";
 import {useParams} from "next/navigation";
+import useModal from "@/context/modal/useModal";
 
 const AddCategory = () => {
 
-    const {handleClose} = useModal();
+    const {closeModal} = useModal()
 
 
 
@@ -32,7 +32,7 @@ const AddCategory = () => {
         mutationFn: RegisterCategory, onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({queryKey: ["subcategories"]});
-                handleClose()
+                closeModal()
             }
         }
     });

@@ -13,6 +13,7 @@ import ModalContext from "@/context/modal";
 import Auth from "@/context/authentication";
 import localFont from "next/font/local";
 import * as React from "react";
+import "./auth.css"
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -44,31 +45,26 @@ export default function RootLayout({
     const queryClient = getQueryClient()
 
     return (
-        <html dir="rtl" lang="fa-IR">
+        <html dir="rtl" lang="fa-IR" suppressHydrationWarning>
         <head>
             <script
                 dangerouslySetInnerHTML={{
                     __html: `
-        (function() {
-          try {
-            var COOKIE_KEY = "theme";
-            function getCookieTheme() {
-              var match = document.cookie.match(new RegExp("(^| )" + COOKIE_KEY + "=([^;]+)"));
-              return match ? match[2] : null;
-            }
-            function getSystemTheme() {
-              var hour = new Date().getHours();
-              return (hour >= 20 || hour < 6) ? "dark" : "light";
-            }
-            var theme = getCookieTheme() || getSystemTheme();
-            document.documentElement.classList.remove("light","dark");
-            document.documentElement.classList.add(theme);
-            document.documentElement.setAttribute("data-theme", theme);
-          } catch(e) {}
-        })();
-      `,
+      (function() {
+        try {
+          var theme = document.cookie.match(/theme=([^;]+)/)?.[1];
+          if (!theme) {
+            var hour = new Date().getHours();
+            theme = (hour >= 20 || hour < 6) ? 'dark' : 'light';
+          }
+          document.documentElement.classList.add(theme);
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch(e) {}
+      })();
+    `,
                 }}
             />
+
         </head>
         <body className={`${bYekan.variable} rtl main font-sans`}>
         <ClientReactQueryProvider>

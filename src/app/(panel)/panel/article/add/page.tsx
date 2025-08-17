@@ -7,7 +7,6 @@ import {Button} from "@/components/ui/button";
 import {GetAllTagForSelect} from "@/services/Tag";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {RegisterArticles} from "@/services/Article";
-import useModal from "@/hooks/useModal";
 import InputDemo from "@/components/input-12";
 import TextArea from "@/components/input/textArea";
 import {GetAllForSelectCategory} from "@/services/Category";
@@ -20,11 +19,12 @@ import MultiSelect from "@/components/input/multiSelect";
 import {Card, CardHeader, CardContent, CardTitle} from "@/components/ui/card";
 import {FaAngleLeft, FaAngleRight} from "react-icons/fa6";
 import {useRouter} from "next/navigation";
+import useModal from "@/context/modal/useModal";
 
 const Editor = dynamic(() => import('@/components/editor'), {ssr: false});
 
 const Page = () => {
-    const {handleClose} = useModal();
+    const {closeModal} = useModal()
     const queryClient = useQueryClient();
     const today = useMemo(() => new Date(), []);
 
@@ -33,7 +33,7 @@ const Page = () => {
         onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({queryKey: ["articles"]});
-                handleClose();
+                closeModal();
             }
         }
     });
@@ -155,7 +155,7 @@ const Page = () => {
                                     </CardHeader>
                                     <CardContent className="space-y-4">
                                         <SimpleInput label="عنوان" name="MetaTitle" type="text"/>
-                                        <SimpleInput prefix={cleanUrl + "/"} label="اسلاگ" name="Slug" type="text"/>
+                                        <SimpleInput prefix={cleanUrl + "/course/"} label="اسلاگ" name="Slug" type="text"/>
                                         <TextArea rows={5} label="توضیحات" name="MetaDescription"/>
                                         <CustomCreatableSelect
                                             name={"MetaKeywords"}

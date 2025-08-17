@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useModal from "@/hooks/useModal";
+import useModal from "@/context/modal/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import { RegisterSeasons} from "@/services/Season";
@@ -20,7 +20,7 @@ import {GetForEditCourses} from "@/services/Course";
 
 const AddSeason = () => {
 
-    const {handleClose} = useModal();
+    const {closeModal} = useModal()
 
     const params=useParams()
 
@@ -30,7 +30,7 @@ const AddSeason = () => {
         mutationFn: RegisterSeasons, onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({queryKey: ["seasons"]});
-                handleClose()
+                closeModal();
             }
         }
     });

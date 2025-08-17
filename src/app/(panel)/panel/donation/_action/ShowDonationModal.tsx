@@ -30,7 +30,7 @@ const ShowDonationModal = ({id}: { id: string }) => {
     return (
         <DialogContent>
             <DialogHeader>
-                <DialogTitle> نمایش اطلاعات</DialogTitle>
+                <DialogTitle> نمایش اطلاعات دونیت</DialogTitle>
 
             </DialogHeader>
 

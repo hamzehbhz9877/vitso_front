@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useModal from "@/hooks/useModal";
+import useModal from "@/context/modal/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {EditSeasons, GetForEditSeasons} from "@/services/Season";
@@ -20,7 +20,7 @@ import {useParams} from "next/navigation";
 
 const EditSeason = ({id}:{id:string}) => {
 
-    const {handleClose} = useModal();
+    const {closeModal} = useModal()
 
 
     const params=useParams();
@@ -31,7 +31,7 @@ const EditSeason = ({id}:{id:string}) => {
         mutationFn: EditSeasons, onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({queryKey: ["seasons"]});
-                handleClose()
+                closeModal();
             }
         }
     });

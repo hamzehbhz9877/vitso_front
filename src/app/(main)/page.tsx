@@ -147,7 +147,7 @@ export default async function Home() {
             </div>
 
 
-            <div className={"container"}>
+            <div className={"container mb-12"}>
                 <Categories data={courseCategories}/>
 
                 <LastCourse data={coursesAndArticles?.data?.courses}/>

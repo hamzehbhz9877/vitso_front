@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { GetAllTagForSelect } from "@/services/Tag";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { EditArticles, GetForEditArticles } from "@/services/Article";
-import useModal from "@/hooks/useModal";
 import InputDemo from "@/components/input-12";
 import TextArea from "@/components/input/textArea";
 import { GetAllForSelectCategory } from "@/services/Category";
@@ -20,11 +19,12 @@ import MultiSelect from "@/components/input/multiSelect";
 import CustomCreatableSelect from "@/components/input/creatableSelect";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import {FaAngleRight} from "react-icons/fa6";
+import useModal from "@/context/modal/useModal";
 
 const Editor = dynamic(() => import('@/components/editor'), { ssr: false });
 
 const EditPage = () => {
-    const { handleClose } = useModal();
+    const {closeModal} = useModal()
     const queryClient = useQueryClient();
     const params = useParams();
     const router = useRouter();
@@ -36,7 +36,7 @@ const EditPage = () => {
         onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({ queryKey: ["articles"] });
-                handleClose();
+                closeModal();
             }
         }
     });
@@ -158,7 +158,7 @@ const EditPage = () => {
                                     </CardHeader>
                                     <CardContent className="space-y-4">
                                         <SimpleInput label="عنوان" name="MetaTitle" type="text" />
-                                        <SimpleInput prefix={cleanUrl + "/"} label="اسلاگ" name="Slug" type="text" />
+                                        <SimpleInput prefix={cleanUrl + "/article/"} label="اسلاگ" name="Slug" type="text" />
                                         <TextArea rows={5} label="توضیحات" name="MetaDescription" />
                                         <CustomCreatableSelect
                                             name="MetaKeywords"

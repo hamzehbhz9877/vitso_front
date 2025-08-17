@@ -10,7 +10,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import useModal from "@/hooks/useModal";
+import useModal from "@/context/modal/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {RegisterUsers} from "@/services/User";
@@ -20,7 +20,7 @@ import {Button} from "@/components/ui/button";
 
 const AddUser = () => {
 
-    const {handleClose} = useModal();
+    const {closeModal} = useModal()
 
 
     const queryClient = useQueryClient();
@@ -29,7 +29,7 @@ const AddUser = () => {
         mutationFn: RegisterUsers, onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({queryKey: ["users"]});
-                handleClose()
+                closeModal()
             }
         }
     });

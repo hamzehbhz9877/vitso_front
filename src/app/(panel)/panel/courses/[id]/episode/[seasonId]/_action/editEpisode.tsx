@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { getValidationSchema, getInitialValues } from "./validation";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import SimpleInput from "@/components/input/simple";
-import useModal from "@/hooks/useModal";
+import useModal from "@/context/modal/useModal";
 import { IoCloseOutline } from "react-icons/io5";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetForEditSeasons } from "@/services/Season";
@@ -16,7 +16,7 @@ import { EditEpisodes, GetForEditEpisodes } from "@/services/Episode";
 import {DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 
 const EditEpisode = ({ id }: { id: string }) => {
-    const { handleClose } = useModal();
+    const { closeModal } = useModal();
 
     const [datePicker, setDatePicker] = useState<Date | null>(new Date());
     const params = useParams();
@@ -27,7 +27,7 @@ const EditEpisode = ({ id }: { id: string }) => {
         onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({ queryKey: ["episodes"] });
-                handleClose();
+                closeModal();
             }
         },
     });

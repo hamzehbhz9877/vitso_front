@@ -10,16 +10,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useModal from "@/hooks/useModal";
+import useModal from "@/context/modal/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {Button} from "@/components/ui/button";
 import {EditCategory, GetForEditCategory} from "@/services/Category";
 import InputDemo from "@/components/input-12";
+import {objectToFormData} from "@/lib/utils";
 
 const AddUser = ({id}: { id: string }) => {
 
-    const {handleClose} = useModal();
+    const {closeModal} = useModal()
 
 
     const queryClient = useQueryClient();
@@ -28,7 +29,7 @@ const AddUser = ({id}: { id: string }) => {
         mutationFn: EditCategory, onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({queryKey: ["categories"]});
-                handleClose()
+                closeModal();
             }
         }
     });
@@ -40,19 +41,20 @@ const AddUser = ({id}: { id: string }) => {
 
 
     const validationSchema = Yup.object({
-        name: Yup.string()
+        Name: Yup.string()
             .required("نام دسته الزامی است")
             .min(3, "حداقل باید ۳ کاراکتر باشد"),
 
-        priority: Yup.number()
+        Priority: Yup.number()
             .required("اولویت الزامی است"),
 
     });
 
-    const handleSubmit = (values) => {
-        mutate({data:values,id})
-    }
 
+    const handleSubmit = (values) => {
+        const data = objectToFormData(values)
+        mutate({data,id})
+    }
 
     return (
         <DialogContent>
@@ -64,9 +66,9 @@ const AddUser = ({id}: { id: string }) => {
 
             <Formik
                 initialValues={{
-                    parentId:null,
-                    name: category?.data.name,
-                    priority: category?.data.priority,
+                    ParentId:null,
+                    Name: category?.data.name,
+                    Priority: category?.data.priority,
                 }}
                 enableReinitialize
                 onSubmit={handleSubmit}
@@ -78,13 +80,13 @@ const AddUser = ({id}: { id: string }) => {
                             <>
                                 <div
                                     className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-[16px] mb-[20px]"}>
-                                    <SimpleInput label={"نام دسته"} name={"name"} type={"text"}/>
-                                    <SimpleInput label={"اولویت"} name={"priority"} type={"number"}/>
+                                    <SimpleInput label={"نام دسته"} name={"Name"} type={"text"}/>
+                                    <SimpleInput label={"اولویت"} name={"Priority"} type={"number"}/>
                                 </div>
-                                <div className={"w-max mb-5"}>
-                                    <InputDemo defaultData={category?.data.icon} name={"Image"} title={"تصویر مقاله"}
+                                <div className={"mb-5 w-auto h-auto md:w-50"}>
+                                    <InputDemo defaultData={category?.data.icon} name={"Icon"} title={"آیکن دسته بندی"}
                                                onChange={(file) => {
-                                                   formikProps.setFieldValue("Image", file); // یا اگر باید base64 یا URL باشد، اینجا تبدیل کن
+                                                   formikProps.setFieldValue("Icon", file); // یا اگر باید base64 یا URL باشد، اینجا تبدیل کن
                                                }}/>
                                 </div>
 

@@ -8,7 +8,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/componen
 import { GetAllTagForSelect } from "@/services/Tag";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { EditCourses, GetForEditCourses } from "@/services/Course";
-import useModal from "@/hooks/useModal";
+import useModal from "@/context/modal/useModal";
 import InputDemo from "@/components/input-12";
 import TextArea from "@/components/input/textArea";
 import { GetAllForSelectCategory } from "@/services/Category";
@@ -24,7 +24,7 @@ import { FaAngleRight } from "react-icons/fa6";
 const Editor = dynamic(() => import('@/components/editor'), { ssr: false });
 
 const EditCoursePage = () => {
-    const { handleClose } = useModal();
+    const { closeModal } = useModal();
     const queryClient = useQueryClient();
     const params = useParams();
     const router = useRouter();
@@ -35,7 +35,7 @@ const EditCoursePage = () => {
         onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({ queryKey: ["courses"] });
-                handleClose();
+                closeModal();
             }
         }
     });
@@ -155,7 +155,7 @@ const EditCoursePage = () => {
                                     </CardHeader>
                                     <CardContent className="space-y-4">
                                         <SimpleInput label="عنوان" name="MetaTitle" type="text" />
-                                        <SimpleInput prefix={cleanUrl + "/"} label="اسلاگ" name="Slug" type="text" />
+                                        <SimpleInput prefix={cleanUrl + "/article/"} label="اسلاگ" name="Slug" type="text" />
                                         <TextArea rows={5} label="توضیحات" name="MetaDescription" />
                                         <CustomCreatableSelect
                                             name="MetaKeywords"

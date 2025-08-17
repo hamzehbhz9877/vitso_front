@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useModal from "@/hooks/useModal";
+import useModal from "@/context/modal/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import { RegisterCategory} from "@/services/Category";
@@ -20,7 +20,7 @@ import {objectToFormData} from "@/lib/utils";
 
 const AddCategory = () => {
 
-    const {handleClose} = useModal();
+    const {closeModal} = useModal()
 
 
     const [categoryType, setCategoryType] = React.useState<number>();
@@ -32,7 +32,7 @@ const AddCategory = () => {
         mutationFn: RegisterCategory, onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({queryKey: ["categories"]});
-                handleClose()
+                closeModal();
             }
         }
     });
@@ -69,7 +69,7 @@ const AddCategory = () => {
 
                                     <SimpleInput label={"اولویت"} name={"Priority"} type={"number"}/>
                                 </div>
-                                <div className={"w-max mb-5"}>
+                                <div className={"mb-5 w-auto h-auto md:w-50"}>
 
                                     <InputDemo  name={"Icon"} title={"آیکن دسته بندی"} onChange={(file) => {
                                         formikProps.setFieldValue("Icon", file); // یا اگر باید base64 یا URL باشد، اینجا تبدیل کن

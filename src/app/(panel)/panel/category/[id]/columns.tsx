@@ -86,7 +86,7 @@ export default function CategorysTable() {
                 <Button variant="outline" onClick={() => router.back()}>
                     <FaAngleRight />
                 </Button>
-                <h2 className="text-xl font-bold lg:text-2xl">زیر دسته بندی دوره ها</h2>
+                <h2 className="text-xl font-bold lg:text-2xl">زیر دسته بندی</h2>
             </div>
             <ReactTable
                 searchPlaceholder="جستجوی زیر دسته بندی ..."

@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useModal from "@/hooks/useModal";
+import useModal from "@/context/modal/useModal";
 import {IoCloseOutline} from "react-icons/io5";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {GetForEditCourses, NewPrice} from "@/services/Course";
@@ -22,7 +22,7 @@ import {convertDateToJalaliString, formatDate} from "@/lib/utils";
 
 const AddPrice = () => {
 
-    const {handleClose} = useModal();
+    const {closeModal} = useModal()
 
     const params=useParams()
     const today = useMemo(() => new Date(), []);
@@ -33,7 +33,7 @@ const AddPrice = () => {
         mutationFn: NewPrice, onSettled: async (_, error) => {
             if (!error) {
                 queryClient.invalidateQueries({queryKey: ["prices"]});
-                handleClose()
+                closeModal()
             }
         }
     });
