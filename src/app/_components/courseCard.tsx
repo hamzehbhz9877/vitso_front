@@ -21,7 +21,7 @@ const CourseCard = ({
         <div
             className={cn(
                 "card carousel-item shadow-sm  overflow-hidden rounded-[10px]",
-                isFilterPage ? "w-full" : "w-[250px] sm:w-auto"
+                isFilterPage ? "w-full" : "w-[240px] sm:w-auto"
             )}
         >
             <Link href={`/course/${slug}`}>

@@ -17,7 +17,7 @@ const LastArticles = ({data}: { data:Article[] }) => {
                 <Link href={"/articles"} className={"btn btn-primary text-white"}>مشاهده همه</Link>
             </div>
             <div
-                className="carousel sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-[16px] mb-[20px] ">
+                className="carousel w-full sm:w-auto sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-[16px] mb-[20px] ">
                 {data.map((d, index) => {
                     return <ArticleCard key={index} {...d}/>
                 })}
