@@ -16,7 +16,7 @@ export default function Error({
     return (
         <ErrorPage
             code="500"
-            message="خطای سرور"
+            message="خطای سمت سرور"
             color="text-red-600"
             bg="from-background to-red-500/5"
             action={

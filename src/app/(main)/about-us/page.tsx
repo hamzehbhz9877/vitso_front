@@ -9,9 +9,9 @@ const Page = async () => {
     const aboutus = await GetAboutUs();
 
     return (
-        <main className="aboutUs container mx-auto px-4 py-12 space-y-16">
-            <section className="prose max-w-none text-center mx-auto">
-                {parse(aboutus.data.content??'')}
+        <main className="aboutUs container mx-auto px-4 py-12">
+            <section className="prose max-w-none">
+                {parse(aboutus.data??'')}
             </section>
 
             {/*/!* اهداف آموزشی *!/*/}

@@ -110,7 +110,7 @@ export default function ReactTable({
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline">
+                            <Button>
                                 <Columns3/>
                                 <span className="hidden sm:inline-block">ستون‌ها</span>
                                 <ChevronDown className="hidden sm:inline-block" size={13}/>

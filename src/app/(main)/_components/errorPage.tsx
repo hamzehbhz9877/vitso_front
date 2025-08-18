@@ -1,5 +1,5 @@
+'use client'
 import React from "react"
-import Link from "next/link"
 
 type ErrorPageProps = {
     code: string
@@ -25,7 +25,7 @@ const ErrorPage = ({ code, message, color, bg, action }: ErrorPageProps) => {
 
             <div className="absolute right-0 bottom-0 left-0 h-1/3 bg-gradient-to-t from-background/80 to-transparent"></div>
 
-            <div className="flex justify-center mt-10">{action}</div>
+            <div className="flex justify-center mt-10 z-20">{action}</div>
         </div>
     )
 }

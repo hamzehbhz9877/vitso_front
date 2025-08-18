@@ -36,7 +36,7 @@ export default function CourseTabs({ seasons, description, id,author }: {
                 سرفصل ها
             </label>
             {activeTab === 'seasons' && (
-                <div className="tab-content border-t-base-300 dark:border-t-white/30 py-6">
+                <div className="tab-content border-t-base-300 dark:border-t-white/30 py-6 space-y-3">
                     {seasons.map((season, index) => (
                         <Season key={season.id} {...season} index={index} />
                     ))}

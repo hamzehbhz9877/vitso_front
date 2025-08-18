@@ -5,7 +5,7 @@ import { ProgressProvider } from '@bprogress/next/app';
 const Providers = ({ children }: { children: React.ReactNode }) => {
     return (
         <ProgressProvider
-            height="4px"
+            height="3px"
             color="#048970"
             options={{ showSpinner: false }}
             shallowRouting

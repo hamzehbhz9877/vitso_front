@@ -70,7 +70,7 @@ export function NavMain({
                                 <SidebarMenuSubItem key={subItem.title}>
                                   <SidebarMenuSubButton
                                       asChild
-                                      className={active ? "bg-primary hover:bg-primary text-white" : ""}
+                                      className={active ? "bg-primary hover:bg-primary hover:text-white text-white" : ""}
                                   >
                                     <Link href={subItem.url}>
                                       <span>{subItem.title}</span>
@@ -88,7 +88,7 @@ export function NavMain({
                     <Link href={item.url}>
                       <SidebarMenuButton
                           tooltip={item.title}
-                          className={pathname === item.url ? "bg-primary hover:bg-primary text-white" : ""}
+                          className={pathname === item.url ? "bg-primary hover:bg-primary hover:text-white text-white" : ""}
                       >
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
