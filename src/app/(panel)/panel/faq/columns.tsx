@@ -103,7 +103,7 @@ export default function FaqTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button variant={"outline"} onClick={() => router.push(`faq/add`)}
+                    <Button  onClick={() => router.push(`faq/add`)}
                     >
                         <CirclePlus/>
                         افزودن سوالات

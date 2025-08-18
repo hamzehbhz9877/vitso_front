@@ -113,7 +113,7 @@ export default function CoursesTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button variant={"outline"}  onClick={() => router.push(`courses/add`)}
+                    <Button  onClick={() => router.push(`courses/add`)}
                     >
                         <CirclePlus/>
                         افزودن دوره
