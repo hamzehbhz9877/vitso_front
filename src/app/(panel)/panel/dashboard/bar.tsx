@@ -22,13 +22,11 @@ import moment from "jalali-moment";
 export const description = "نمودار میله‌ای عمودی با برچسب سفارشی";
 
 const chartConfig = {
-    sales: {
-        label: "مبلغ فروش",
-        color: "var(--chart-2)",
+    desktop: {
+        label: "بازدیدها",
+        color: "var(--chart-1)",
     },
-    label: {
-        color: "var(--background)",
-    },
+
 } satisfies ChartConfig;
 
 
@@ -85,7 +83,7 @@ export function ChartBarLabelCustom({ weeklySales }: { weeklySales: { date: stri
                         />
                         <Bar
                             dataKey="desktop"
-                            fill="#048970"
+                            fill="var(--color-desktop)"
                             radius={4}
                         >
                             <LabelList

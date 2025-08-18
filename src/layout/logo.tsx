@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import LogoLight from "../../public/images/logoDark.svg";
 import LogoDark from "../../public/images/logoLight.svg";
+import Link from "next/link";
 
 const Logo = () => {
     const [theme, setTheme] = useState<"light" | "dark" | "">("");
@@ -27,14 +28,16 @@ const Logo = () => {
     }, []);
 
     return (
-        <Image
-            alt="logo"
-            className="mx-3"
-            src={theme === "dark" ?  LogoLight:  LogoDark}
-            width={50}
-            height={50}
-            priority
-        />
+       <Link href={"/"}>
+           <Image
+               alt="logo"
+               className="mx-3"
+               src={theme === "dark" ?  LogoLight:  LogoDark}
+               width={50}
+               height={50}
+               priority
+           />
+       </Link>
     );
 };
 

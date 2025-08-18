@@ -188,7 +188,9 @@
     .bg-card {
         background-color: var(--card);
     }
-
+    .bg-popover {
+        background-color: var(--popover);
+    }
     .border-input {
         border-color: var(--input);
     }

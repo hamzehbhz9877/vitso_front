@@ -15,7 +15,7 @@ export function StatsGrid({ stats, data }: {
                         >
                             {title}
                         </CardTitle>
-                        <div className="text-primary bg-muted flex size-12 items-center justify-center rounded-full border">
+                        <div className="bg-muted flex size-12 items-center justify-center rounded-full border">
                             {icon}
                         </div>
                     </CardHeader>

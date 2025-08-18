@@ -87,7 +87,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
 
                                 <div className="flex items-center justify-between gap-3 mt-5">
                                     <SimpleInput
-                                        className={"!text-[12px]"}
+                                        className={"!text-[12px] w-max"}
                                         showError={false}
                                         placeholder={"کد امنیتی را وارد کنید"}
                                         name={"captcha"}
