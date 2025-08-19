@@ -40,6 +40,11 @@ export function NavMain({
     }
     return item.url === pathname
   }
+  
+  const activeDropDown=(data:string)=>{
+    console.log(data)
+   return pathname.startsWith(data)
+  }
 
   return (
       <SidebarGroup>
@@ -65,12 +70,11 @@ export function NavMain({
                       <CollapsibleContent>
                         <SidebarMenuSub>
                           {item.items.map((subItem) => {
-                            const active = pathname === subItem.url
                             return (
                                 <SidebarMenuSubItem key={subItem.title}>
                                   <SidebarMenuSubButton
                                       asChild
-                                      className={active ? "bg-primary hover:bg-primary hover:text-white text-white" : ""}
+                                      className={activeDropDown(subItem.url) ? "bg-primary hover:bg-primary hover:text-white text-white" : ""}
                                   >
                                     <Link href={subItem.url}>
                                       <span>{subItem.title}</span>
@@ -88,7 +92,7 @@ export function NavMain({
                     <Link href={item.url}>
                       <SidebarMenuButton
                           tooltip={item.title}
-                          className={pathname === item.url ? "bg-primary hover:bg-primary hover:text-white text-white" : ""}
+                          className={ activeDropDown(item.url) ? "bg-primary hover:bg-primary hover:text-white text-white" : ""}
                       >
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>

@@ -86,7 +86,6 @@ export default function UsersTable() {
                     const user = row.original;
 
                     return (
-
                         <Switch
                             checked={switchStates[user.id] ?? (user.status === "فعال")}
                             onCheckedChange={(checked) => handleToggle(user.id, checked)}
