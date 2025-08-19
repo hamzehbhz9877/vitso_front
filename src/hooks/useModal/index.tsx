@@ -11,7 +11,7 @@ const useModal = () => {
     }[]>([]);
 
     const handleOpen = useCallback((data: ReactNode, options?: any, preserveState = false) => {
-        document.body.style.overflowY = 'hidden';
+        // document.body.style.overflowY = 'hidden';
         setModals(prev => [...prev, {id: Date.now(), data, options, preserveState}]);
     }, []);
 
