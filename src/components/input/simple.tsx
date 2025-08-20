@@ -57,7 +57,7 @@ const BaseInput = ({
     const finalValue = safeInputValue(value ?? field?.value ?? '')
 
     return (
-        <div>
+        <div className={"simple-input"}>
             {label && (
                 <label className="flex mb-2 items-center gap-2 text-sm leading-none font-medium select-none">
                     {label}

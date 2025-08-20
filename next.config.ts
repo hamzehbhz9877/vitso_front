@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'randomuser.me',
                 pathname: '/**',
+            },{
+                protocol: "https",
+                hostname: "dl.vitso.ir",
+                pathname: "/vitso/images/**",
             },
         ],
     },
