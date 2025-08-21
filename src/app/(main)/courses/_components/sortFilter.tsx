@@ -31,13 +31,13 @@ const SortFilter = ({courseCount,type}:{type:string,courseCount:number}) => {
                     </div>
                     <div className="flex gap-2">
                         <button className={cn("btn btn-xs",+search.get('sort')===0?"btn-primary":"btn-ghost")} onClick={()=>addQueryParam("sort",0)}>جدید ترین</button>
-                        {type!=="article"?<button className={cn("btn btn-xs",+search.get('sort')===1?"btn-primary":"btn-ghost")} onClick={()=>addQueryParam("sort",1)}>ارزان ترین</button>:""}
-                        {type!=="article"?<button className={cn("btn btn-xs",+search.get('sort')===2?"btn-primary":"btn-ghost")} onClick={()=>addQueryParam("sort",2)}>گرانترین</button>:""}
+                        {type!=="articles"?<button className={cn("btn btn-xs",+search.get('sort')===1?"btn-primary":"btn-ghost")} onClick={()=>addQueryParam("sort",1)}>ارزان ترین</button>:""}
+                        {type!=="articles"?<button className={cn("btn btn-xs",+search.get('sort')===2?"btn-primary":"btn-ghost")} onClick={()=>addQueryParam("sort",2)}>گرانترین</button>:""}
                         <button className={cn("btn btn-xs",+search.get('sort')===3?"btn-primary":"btn-ghost")} onClick={()=>addQueryParam("sort",3)}>پربازدید ترین</button>
                     </div>
                 </div>
                 <div className="flex gap-2 items-center">
-                    <span className="font-medium">{(courseCount??0)+" "+(type==="article"?"مقاله" :"دوره")} </span>
+                    <span className="font-medium">{(courseCount??0)+" "+(type==="articles"?"مقاله" :"دوره")} </span>
                 </div>
             </div>
 
