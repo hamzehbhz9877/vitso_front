@@ -32,6 +32,7 @@ import {
 import {useMutation} from "@tanstack/react-query";
 import {RequestLogout} from "@/services/Account";
 import {useRouter} from "next/navigation";
+import useAuth from "@/context/authentication/useAuth";
 
 export function NavUser({
                             user,
@@ -46,6 +47,8 @@ export function NavUser({
 }) {
     const {isMobile} = useSidebar()
 
+
+    const {resetUserCookie}=useAuth()
     const router = useRouter()
 
 
@@ -53,6 +56,7 @@ export function NavUser({
         mutationFn: RequestLogout,
         onSettled: async (_, error) => {
             if (!error) {
+                resetUserCookie()
                 router.replace("/auth/login")
             }
         }

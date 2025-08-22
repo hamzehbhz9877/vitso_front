@@ -95,7 +95,7 @@ export default function TiptapEditor({
                 isFullscreen && "fixed inset-0 z-50 w-screen h-screen p-6 bg-background"
             )}
         >
-            <Toolbar variant="floating" className="bg-background overflow-y-auto">
+            <Toolbar variant="floating" className="bg-background !overflow-x-auto overflow-y-auto">
                 <ToolbarGroup>
                     <ImageUploadButton editor={editor}/>
                 </ToolbarGroup>

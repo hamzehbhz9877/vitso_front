@@ -121,6 +121,7 @@ export function RegisterForm({
                                 <button type={"submit"}
                                         className="w-full btn btn-primary" disabled={isPending}>
                                     دریافت کد
+                                    {isPending?<div className={"loading loading-spinner"}></div>:""}
                                 </button>
 
                                 <p className={"text-center text-sm mt-2"}>حساب کاربری دارید؟ <Link href={"/auth/login"}
