@@ -5,7 +5,7 @@ import { Button, ButtonProps } from "@/components/tiptap-ui-primitive/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Maximize2, Minimize2 } from "lucide-react"
 
-export interface FullscreenButtonProps extends Omit<ButtonProps, "type"> {
+export interface FullscreenButtonProps extends Omit<ButtonProps, "type" | "onToggle"> {
     /**
      * Optional callback when fullscreen toggles.
      */
