@@ -15,7 +15,7 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
   SidebarMenuSubButton,
-  SidebarMenuSubItem,
+  SidebarMenuSubItem, useSidebar,
 } from "@/components/ui/sidebar"
 
 export function NavMain({
@@ -40,7 +40,9 @@ export function NavMain({
     }
     return item.url === pathname
   }
-  
+
+
+  const {setOpenMobile}=useSidebar()
   const activeDropDown=(data:string)=>pathname.startsWith(data)
 
   return (
@@ -70,6 +72,7 @@ export function NavMain({
                             return (
                                 <SidebarMenuSubItem key={subItem.title}>
                                   <SidebarMenuSubButton
+                                      onClick={()=>setOpenMobile(false)}
                                       asChild
                                       className={activeDropDown(subItem.url) ? "bg-primary hover:bg-primary hover:text-white text-white" : ""}
                                   >
@@ -88,6 +91,7 @@ export function NavMain({
                   <SidebarMenuItem key={item.title}>
                     <Link href={item.url}>
                       <SidebarMenuButton
+                          onClick={()=>setOpenMobile(false)}
                           tooltip={item.title}
                           className={ activeDropDown(item.url) ? "bg-primary hover:bg-primary hover:text-white text-white" : ""}
                       >
