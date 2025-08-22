@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Field, Form, Formik } from "formik"
-import { initialValues, validationSchema } from "@/app/(auth)/auth/login/validation"
+import { initialValues, validationSchema } from "@/app/(main)/(auth)/auth/login/validation"
 import SimpleInput from "@/components/input/simple"
 import { FiUser } from "react-icons/fi"
 import { HiOutlineKey } from "react-icons/hi"
