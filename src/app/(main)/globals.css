@@ -156,7 +156,7 @@ a:hover {
 }
 
 .panel .prose-fullscreen .tiptap {
-  max-height: calc(100vh - 120px);
+  max-height: calc(100dvh - 120px);
   overflow-y: auto;
 }
 
@@ -218,10 +218,6 @@ a:hover {
   font-size: 13px;
   color: #ef4444;
   margin-top: 3px;
-}
-
-.modal {
-  z-index: 999;
 }
 
 /*# sourceMappingURL=globals.css.map */

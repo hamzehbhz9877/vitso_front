@@ -14,7 +14,7 @@ const ErrorPage = ({ code, message, color, bg, action }: ErrorPageProps) => {
         <div
             className={`py-10 flex-col w-full flex items-center justify-center bg-gradient-to-b ${bg ?? "from-background to-secondary/10"} border border-red-600/10`}
         >
-            <div className="relative z-10 text-center">
+            <div className="relative text-center">
                 <div className={`${color} mb-4 text-8xl font-black tracking-tighter sm:text-9xl`}>
                     {code}
                 </div>
