@@ -4,6 +4,7 @@ import * as React from "react"
 import { Button, ButtonProps } from "@/components/tiptap-ui-primitive/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Maximize2, Minimize2 } from "lucide-react"
+import {useEffect} from "react";
 
 export interface FullscreenButtonProps extends Omit<ButtonProps, "type" | "onToggle"> {
     /**
@@ -35,6 +36,11 @@ export const FullscreenButton = React.forwardRef<HTMLButtonElement, FullscreenBu
             },
             [onToggle]
         )
+
+
+        useEffect(() => {
+            setIsFullscreen(initialFullscreen)
+        }, [initialFullscreen]);
 
         return (
             <TooltipProvider>

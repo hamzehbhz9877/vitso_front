@@ -62,7 +62,6 @@ export function NavUser({
         }
     })
 
-
     return (
         <SidebarMenu>
             <SidebarMenuItem>

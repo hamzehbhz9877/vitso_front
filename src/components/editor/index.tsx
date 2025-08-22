@@ -137,7 +137,7 @@ export default function TiptapEditor({
                 <ToolbarSeparator/>
 
                 <ToolbarGroup>
-                    <FullscreenButton  onClick={() => setIsFullscreen(prev => !prev)}/>
+                    <FullscreenButton initialFullscreen={isFullscreen} onClick={() => setIsFullscreen(prev => !prev)}/>
                 </ToolbarGroup>
             </Toolbar>
 
