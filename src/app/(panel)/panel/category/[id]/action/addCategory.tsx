@@ -16,6 +16,7 @@ import { GetForEditCategory, RegisterCategory} from "@/services/Category";
 import {Button} from "@/components/ui/button";
 import {useParams} from "next/navigation";
 import useModal from "@/context/modal/useModal";
+import {objectToFormData} from "@/lib/utils";
 
 const AddCategory = () => {
 
@@ -46,7 +47,10 @@ const AddCategory = () => {
 
 
 
-    const handleSubmit = (values) => mutate(values)
+    const handleSubmit = (values) => {
+        const data = objectToFormData(values);
+        mutate(data);
+    }
 
         return (
         <DialogContent>

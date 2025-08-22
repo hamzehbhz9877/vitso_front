@@ -4,15 +4,14 @@ import { GetAboutUs } from "@/services/AboutUs";
 import Image from "next/image";
 import Link from "next/link";
 import CountUp from "@/components/countUp";
+import TipTapEditor from "@/components/tiptap/tiptapEditor";
 
 const Page = async () => {
     const aboutus = await GetAboutUs();
 
     return (
         <main className="aboutUs container mx-auto px-4 py-12">
-            <section className="prose max-w-none">
-                {parse(aboutus.data??'')}
-            </section>
+            <TipTapEditor content={aboutus.data??''}/>
 
             {/*/!* اهداف آموزشی *!/*/}
             {/*<section className="text-center">*/}

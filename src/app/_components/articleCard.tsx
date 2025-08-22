@@ -15,25 +15,31 @@ const ArticleCard = ({
                          isFilterPage=false
                      }: Article & { isFilterPage?: boolean }) => {
     return (
-        <div className={`card carousel-item  shadow-sm ${!isFilterPage?"w-[240px] sm:w-auto":'w-auto'}   overflow-hidden  rounded-[10px]`}>
-            <figure className="relative w-full aspect-[16/9] overflow-hidden">
+        <div
+            className={`card carousel-item  shadow-sm ${!isFilterPage ? "w-[240px] sm:w-auto" : 'w-auto'}   overflow-hidden  rounded-[10px]`}>
+            <figure className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
                     src={image}
                     alt={title}
                     fill
-                    sizes="(max-width: 1024px) 100vw, 300px"
-                    style={{ objectFit: 'contain' }}
+                    sizes="(max-width: 640px) 100vw,
+       (max-width: 1024px) 50vw,
+       (max-width: 1280px) 33vw,
+       (max-width: 1536px) 25vw,
+       20vw"
+                    style={{objectFit: "cover"}}
                     priority={true}
                 />
             </figure>
             <Link href={`/article/${slug}`} className={"flex-1"}>
-                <div className="card-body bg-base-200 py-[15px] px-[12px] rounded-b-[10px] h-full" >
+                <div className="card-body bg-base-200 py-[15px] px-[12px] rounded-b-[10px] h-full">
                     <div className="badge badge-soft badge-primary text-sm">
                         {categoryName ?? "دسته بندی"}
                     </div>
 
                     <h2 className="card-title text-sm line-clamp-2 relative pr-3">
-                        <span className="absolute right-0 top-1/2 -translate-y-1/2 w-[5px] h-[5px] bg-primary rounded-full"></span>
+                        <span
+                            className="absolute right-0 top-1/2 -translate-y-1/2 w-[5px] h-[5px] bg-primary rounded-full"></span>
                         {title}
                     </h2>
 
@@ -43,11 +49,11 @@ const ArticleCard = ({
 
                     <div className="card-actions justify-between mt-2 text-zinc-500 mt-auto">
                         <div className="flex gap-1 text-sm items-center">
-                            <UserRound size={15} />
+                            <UserRound size={15}/>
                             {author}
                         </div>
                         <div className="flex gap-1 text-sm items-center">
-                            <Clock4 size={15} />
+                            <Clock4 size={15}/>
                             {diffDays(publishDate) + " پیش"}
                         </div>
                     </div>

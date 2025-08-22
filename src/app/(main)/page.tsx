@@ -21,7 +21,6 @@ export default async function Home() {
     const homeStatInfo = await GetHomeStatInfo();
     const courseCategories = homepageCategory?.data?.categoriesForCourse || [];
 
-
     return (
         <div className={"main"}>
 

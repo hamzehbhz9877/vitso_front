@@ -4,10 +4,10 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const Category = ({ name, icon,type }: {type:string ,name: string; icon: string }) => {
+const Category = ({ name, icon,type,slug }: {type:string ,slug:string,name: string; icon: string }) => {
     return (
         <div className="border  border-gray-300 dark:border-gray-800 bg-base-300 text-center relative px-2 py-2 rounded-lg min-w-[120px] md:min-w-[130px]">
-            <Link href={`/${type}?slugCategory=${name?.replaceAll(" ","-")}`} className={"h-full flex flex-col"}>
+            <Link href={`/${type}?slugCategory=${slug}`} className={"h-full flex flex-col"}>
                 {icon?
                 <Image
                     src={icon??null}

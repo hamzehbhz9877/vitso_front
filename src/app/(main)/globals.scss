@@ -157,6 +157,10 @@ a:hover {
   max-height: 400px;
   overflow-y: auto;
 }
+.panel .prose-fullscreen .tiptap {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
 .tiptap h1 {
   font-size: 2.25rem;
   font-weight: 700;
@@ -219,4 +223,8 @@ a:hover {
   font-size:13px;
   color: #ef4444;
   margin-top: 3px;
+}
+
+.modal{
+  z-index: 999;
 }

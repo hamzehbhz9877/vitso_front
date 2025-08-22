@@ -68,7 +68,7 @@ const Page = () => {
                         <Form>
                             <div className="flex gap-3 flex-col lg:flex-row">
                                 <UploadImageCard
-                                    defaultData={initialData?.data.avatar}
+                                    defaultData={initialData?.data.avatar?`${initialData?.data.avatar}?t=${Date.now()}` : null }
                                     name="Avatar"
                                     title={"تصویر کاربر"}
                                     onChange={(file) =>

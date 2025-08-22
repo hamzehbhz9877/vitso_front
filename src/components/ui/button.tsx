@@ -85,7 +85,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 {...props}
             >
                 {props.children}
-                <LuLoaderCircle className={`${isPending?"opacity-100 static":"opacity-0 absolute"} animate-spin`} />
+                <LuLoaderCircle className={`${(isPending||props.disabled)?"opacity-100 static":"opacity-0 absolute"} animate-spin`} />
             </Comp>
         )
     }

@@ -5,10 +5,10 @@ import {redirectStatus} from "@/utils/notFound-server";
 import { cookies } from 'next/headers';
 
 const fetchAPi = async ({url, option}: any) => {
-    const cookieHeader = cookies().toString();
+    const cookieHeader = await cookies();
 
     const res = await fetch(url.toString(), {headers:{
-            Cookie: cookieHeader,
+            Cookie: cookieHeader?.toString(),
         },
         cache: 'no-cache',credentials:"include", ...option
     })

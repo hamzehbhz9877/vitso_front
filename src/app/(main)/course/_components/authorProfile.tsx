@@ -22,9 +22,9 @@ const AuthorProfile = ({author: {authorName, authorAvatar, authorId, id}}: {
                     loading="lazy"
                     src={authorAvatar}
                     alt="Avatar"
-                    className="w-[65px] rounded-full shadow-[0px_2px_5px_#3b43591f] "
-                    width="65"
-                    height="65"
+                    width={65}
+                    height={65}
+                    className="object-cover rounded-full shadow-[0px_2px_5px_#3b43591f]"
                 />
                 <div className={"flex flex-1 items-center justify-start"}>
                     <span className="p-[10px] flex items-center box-border text-[14px]">{authorName}</span>
@@ -63,7 +63,7 @@ const AuthorProfile = ({author: {authorName, authorAvatar, authorId, id}}: {
                     مشاهده پروفایل
                 </Link>
             </div>
-            <DonationModal type={"course"} id={id}/>
+                <DonationModal type={"course"} id={id}/>
         </div>
     );
 };

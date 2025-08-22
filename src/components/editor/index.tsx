@@ -1,6 +1,7 @@
 'use client'
 
-import {useEditor, EditorContent} from '@tiptap/react'
+import * as React from "react"
+import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Heading from '@tiptap/extension-heading'
 import {Image} from '@tiptap/extension-image'
@@ -23,14 +24,19 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator} from "@/components/tiptap-ui-pr
 import {MarkButton} from '@/components/tiptap-ui/mark-button'
 import {TextAlignButton} from '@/components/tiptap-ui/text-align-button'
 
+import {Button} from "@/components/ui/button"
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip"
+import {Maximize2, Minimize2} from "lucide-react"
+
 import '@/components/tiptap-node/image-upload-node/image-upload-node.scss'
 import '@/components/tiptap-node/code-block-node/code-block-node.scss'
 import '@/components/tiptap-node/list-node/list-node.scss'
 import '@/components/tiptap-node/paragraph-node/paragraph-node.scss'
 
-import {useField} from "formik"
-import {useEffect} from "react"
+import {useEffect, useState} from "react"
 import {cn} from "@/lib/utils"
+import {FullscreenButton} from "@/components/tiptap-ui/fullscreen-button";
+import {useDisableBodyScroll} from "@/hooks/useDisableBodyScroll/useDisableBodyScroll";
 
 export default function TiptapEditor({
                                          uploadUrl,
@@ -43,17 +49,14 @@ export default function TiptapEditor({
     uploadUrl?: string,
     getEditorData: (data: string, text: string) => void
 }) {
-    // const [field, meta] = useField(name)
+    const [isFullscreen, setIsFullscreen] = useState(false)
 
     const editor = useEditor({
         extensions: [
-            StarterKit.configure({
-                bulletList: false,
-                listItem: false,
-            }),
+            StarterKit.configure({ bulletList: false, listItem: false }),
             BulletList,
             ListItem,
-            Heading.configure({levels: [1, 2, 3, 4, 5, 6]}),
+            Heading.configure({levels: [1,2,3,4,5,6]}),
             Image,
             ImageUploadNode.configure({
                 accept: 'image/*',
@@ -67,13 +70,11 @@ export default function TiptapEditor({
             Underline,
             Superscript,
             Subscript,
-            TextAlign.configure({types: ['heading', 'paragraph']})
+            TextAlign.configure({types: ['heading','paragraph']})
         ],
         content: defaultData ?? '',
         onUpdate({editor}) {
-            const html = editor.getHTML()
-            const text = editor.getText()
-            getEditorData(html, text)
+            getEditorData(editor.getHTML(), editor.getText())
         },
         immediatelyRender: false,
     })
@@ -84,26 +85,32 @@ export default function TiptapEditor({
         }
     }, [editor, defaultData])
 
-    if (!editor) return null
+
+    useDisableBodyScroll([isFullscreen])
 
     return (
-        <div className={cn("space-y-4 border p-3")}>
-            <Toolbar variant="floating"  className="bg-white overflow-y-auto">
+        <div
+            className={cn(
+                "space-y-4 border p-3 relative transition-all",
+                isFullscreen && "fixed inset-0 z-50 w-screen h-screen p-6 bg-background"
+            )}
+        >
+            <Toolbar variant="floating" className="bg-background overflow-y-auto">
                 <ToolbarGroup>
-                    <ImageUploadButton editor={editor} />
+                    <ImageUploadButton editor={editor}/>
                 </ToolbarGroup>
 
                 <ToolbarSeparator/>
 
                 <ToolbarGroup>
-                    <HeadingDropdownMenu tooltip="عناوین" levels={[1, 2, 3, 4, 5, 6]} editor={editor}/>
+                    <HeadingDropdownMenu tooltip="عناوین" levels={[1,2,3,4,5,6]} editor={editor}/>
                 </ToolbarGroup>
 
                 <ToolbarSeparator/>
 
                 <ToolbarGroup>
                     <LinkPopover tooltip="لینک" editor={editor}/>
-                    <ListDropdownMenu tooltip="لیست" editor={editor} types={['bulletList', 'orderedList', 'taskList']}/>
+                    <ListDropdownMenu tooltip="لیست" editor={editor} types={['bulletList','orderedList','taskList']}/>
                 </ToolbarGroup>
 
                 <ToolbarSeparator/>
@@ -126,9 +133,18 @@ export default function TiptapEditor({
                     <TextAlignButton editor={editor} align="justify" tooltip="تراز‌شده"/>
                     <TextAlignButton editor={editor} align="left" tooltip="چپ‌چین"/>
                 </ToolbarGroup>
+
+                <ToolbarSeparator/>
+
+                <ToolbarGroup>
+                    <FullscreenButton  onClick={() => setIsFullscreen(prev => !prev)}/>
+                </ToolbarGroup>
             </Toolbar>
 
-            <EditorContent className="prose prose-sm rtl text-right" editor={editor} role="presentation"/>
+            <EditorContent
+                editor={editor}
+                className={cn("prose prose-sm rtl text-right h-full overflow-auto",isFullscreen&&"prose-fullscreen")}
+            />
         </div>
     )
 }

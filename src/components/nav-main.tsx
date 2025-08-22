@@ -41,10 +41,7 @@ export function NavMain({
     return item.url === pathname
   }
   
-  const activeDropDown=(data:string)=>{
-    console.log(data)
-   return pathname.startsWith(data)
-  }
+  const activeDropDown=(data:string)=>pathname.startsWith(data)
 
   return (
       <SidebarGroup>

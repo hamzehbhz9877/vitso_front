@@ -25,13 +25,17 @@ const CourseCard = ({
             )}
         >
             <Link href={`/course/${slug}`}>
-                <figure className="relative w-full aspect-[16/9] overflow-hidden">
+                <figure className="relative w-full aspect-[4/3] overflow-hidden">
                     <Image
                         src={image}
                         alt={title}
                         fill
-                        sizes="(max-width: 1024px) 100vw, 300px"
-                        style={{ objectFit: "contain" }}
+                        sizes="(max-width: 640px) 100vw,
+       (max-width: 1024px) 50vw,
+       (max-width: 1280px) 33vw,
+       (max-width: 1536px) 25vw,
+       20vw"
+                        style={{ objectFit: "cover" }}
                         priority={true}
                     />
                 </figure>

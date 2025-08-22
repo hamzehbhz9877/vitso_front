@@ -19,6 +19,7 @@ import {IoClose} from "react-icons/io5";
 import {ArrowUpDown, Filter} from "lucide-react";
 import {ArticleByCategory} from "@/services/Article";
 import ArticleCard from "@/app/_components/articleCard";
+import {useDisableBodyScroll} from "@/hooks/useDisableBodyScroll/useDisableBodyScroll";
 
 const Course = ({type, categories, course, searchParams}: {
     categories: any,
@@ -44,22 +45,10 @@ const Course = ({type, categories, course, searchParams}: {
         setFilterOpen(false);
         setSortOpen(false);
     };
-    useEffect(() => {
-        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    useDisableBodyScroll([filterOpen, sortOpen])
 
-        if (filterOpen || sortOpen) {
-            document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = `${scrollbarWidth}px`; // جلوگیری از شیفت
-        } else {
-            document.body.style.overflow = 'auto';
-            document.body.style.paddingRight = '0px';
-        }
 
-        return () => {
-            document.body.style.overflow = 'auto';
-            document.body.style.paddingRight = '0px';
-        };
-    }, [filterOpen, sortOpen]);
+
 
     const {
         status,
