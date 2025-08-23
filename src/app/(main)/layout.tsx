@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import "./config.css";
-
+import "../../styles/_keyframe-animations.scss";
+import "../../styles/_variables.scss";
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { getQueryClient } from "@/utils/get-query-client";
 import ClientReactQueryProvider from "@/utils/reactQueryProvider-client";

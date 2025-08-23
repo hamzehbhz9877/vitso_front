@@ -147,7 +147,7 @@ export default async function Home() {
             </div>
 
 
-            <div className={"container mb-12 space-y-20"}>
+            <div className={"container mb-12 space-y-10  lg:space-y-20"}>
                 <Categories data={courseCategories}/>
 
                 <Courses title={"آخرین دوره ها"}  data={coursesAndArticles?.data?.courses}/>
@@ -163,10 +163,7 @@ export default async function Home() {
                                 className="h-[3px] rounded-[0.5rem]  bg-primary absolute w-1/3 right-[32%] top-[-1px]"></div>
                         </div>
                     </div>
-                    <div className={"container"}>
                         <FaqList faqs={coursesAndArticles?.data?.faqs} className={"pt-10"}/>
-
-                    </div>
                 </div>
             </div>
         </div>

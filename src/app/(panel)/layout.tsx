@@ -17,7 +17,6 @@ import { Separator } from "@/components/ui/separator";
 import { CommandDialogDemo } from "@/app/(panel)/_components/generalSearch";
 import User from "@/app/(panel)/_components/user";
 import * as React from "react";
-import NProgressProviders from "@/utils/nprogress-client";
 import Providers from "@/utils/nprogress-client";
 
 const bYekan = localFont({

@@ -3,6 +3,7 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
+import Logo from "@/layout/logo";
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
 
@@ -23,7 +24,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                     <div className="min-h-full w-72 bg-base-200 text-base-content p-0">
                         {/* Sidebar Header */}
                         <div className="flex items-center justify-between p-4">
-                            <span className="text-xl font-bold">ویتسو</span>
+                            <Logo/>
                             <label htmlFor="sidebar" className="btn btn-circle btn-primary btn-soft">
                                 <IoClose size={17} />
                             </label>

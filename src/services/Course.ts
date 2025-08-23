@@ -2,7 +2,7 @@ import {instantClient} from "@/services/httpservice";
 import {fetchAPi} from "@/hooks/fetch";
 
 export const RequestCourses =  (params:any) =>
-    instantClient.get('Course', {params:{...params}});
+    instantClient.get('Filters', {params:{...params}});
 
 export const GetAllCourseForStudentCourse =  (params:any) =>
     instantClient.get('Course/GetAllCourseForStudent', {params:{...params}});
@@ -11,7 +11,7 @@ export const GetAllPriceWithPagination =  (params:any) =>
     instantClient.get('Course/GetAllPriceWithPagination', {params:{...params}});
 
 export const RegisterCourses =  (data:any) =>
-    instantClient.post('Course', data);
+    instantClient.post('Filters', data);
 
 export const NewPrice =  (data:any) =>
     instantClient.post('Course/NewPrice', data);

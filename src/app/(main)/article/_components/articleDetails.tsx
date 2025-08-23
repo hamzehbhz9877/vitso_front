@@ -28,7 +28,7 @@ const ArticleDetails = ({
             <div className={"flex flex-col lg:flex-row gap-[20px]"}>
                 <div className={"flex-1 mb-10"}>
                     <div
-                        className={" rounded-lg px-[18px] py-[15px] lg:px-[24px] single-section before:bg-primary dark:bg-base-300"}>
+                        className={" rounded-lg px-0 py-[15px] lg:px-[24px] single-section course-details__content  before:bg-primary dark:bg-base-300 "}>
                         <div className={"mb-5"}>
                             <h3 className={"text-lg md:text-xl  font-bold"}>{title}</h3>
 
@@ -49,7 +49,7 @@ const ArticleDetails = ({
                     </div>
 
                     <div
-                        className="flex gap-[20px] my-[40px] single-section before:bg-primary px-[18px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg">
+                        className="flex gap-[20px] my-[40px] single-section before:bg-primary px-[13px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg">
                         <ArticleTabs faqs={faqs} author={{authorName, authorAvatar, authorId}} id={id}/>
                     </div>
                 </div>

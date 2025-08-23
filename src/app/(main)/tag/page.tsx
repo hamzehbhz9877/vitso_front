@@ -1,6 +1,6 @@
 import React from 'react';
 import {GetAllWithSubCategory} from "@/services/Category";
-import Course from "@/app/(main)/courses/_components/course";
+import Filters from "@/app/(main)/courses/_components/filters";
 import {ArticleByCategory} from "@/services/Article";
 import Courses from "@/app/(main)/_components/courses";
 import Articles from "@/app/(main)/_components/articles";

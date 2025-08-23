@@ -27,7 +27,7 @@ const SideBarTop = () => {
                         <div className="skeleton w-24 h-24 shrink-0 rounded-full"></div>
                     ) : (
                         <Image
-                            src={user?.avatar ? `${user.avatar}?t=${Date.now()}` : null}
+                            src={user?.avatar}
                             alt="userAvatar"
                             width={88}
                             height={88}

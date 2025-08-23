@@ -21,7 +21,7 @@ import {ArticleByCategory} from "@/services/Article";
 import ArticleCard from "@/app/_components/articleCard";
 import {useDisableBodyScroll} from "@/hooks/useDisableBodyScroll/useDisableBodyScroll";
 
-const Course = ({type, categories, course, searchParams}: {
+const Filters = ({type, categories, course, searchParams}: {
     categories: any,
     type?: string,
     course: Course[],
@@ -46,8 +46,6 @@ const Course = ({type, categories, course, searchParams}: {
         setSortOpen(false);
     };
     useDisableBodyScroll([filterOpen, sortOpen])
-
-
 
 
     const {
@@ -97,17 +95,29 @@ const Course = ({type, categories, course, searchParams}: {
         // maxPages: 3,
     })
 
-    const sortData = [
+    const statusFilter = [
         {id: "1", name: "درحال آماده سازی", slug: "0"},
         {id: "2", name: "درحال برگذاری", slug: "1"},
         {id: "3", name: "پایان یافته", slug: "2"},
         {id: "4", name: "منسوخ شده", slug: "3"},
     ]
+
+
+    const sortFilter = type === "articles" ? [
+        {id: "1", name: "جدید ترین", slug: "0"},
+        {id: "4", name: "پربازدید ترین", slug: "3"},
+    ] : [
+        {id: "1", name: "جدید ترین", slug: "0"},
+        {id: "2", name: "ارزان ترین", slug: "1"},
+        {id: "3", name: "گرانترین", slug: "2"},
+        {id: "4", name: "پربازدید ترین", slug: "3"},
+    ]
+
     const sort = Object.keys(searchParams).includes("sort");
 
     const filterCount = Object.keys(searchParams)
         .filter(k => k !== "page" && searchParams[k]) // حذف کلیدهای غیر فیلتر و خالی
-        .length-(sort?1:0);
+        .length - (sort ? 1 : 0);
 
 
     const breakCrumb = [
@@ -127,13 +137,13 @@ const Course = ({type, categories, course, searchParams}: {
                 }
             />
 
-            {categories.length>0?
-            <CategoryList type={type} categories={categories}/>:""}
+            {categories.length > 0 ?
+                <CategoryList type={type} categories={categories}/> : ""}
 
 
             <div className="flex flex-col lg:flex-row  gap-3">
                 {/* فقط دسکتاپ: فیلتر کناری */}
-                <div className="hidden lg:flex flex-col gap-2 w-[250px]">
+                <div className="hidden lg:flex flex-col gap-2 w-[270px]">
                     <CheckBoxFilter
                         hasSearch={true}
                         searchPlaceholder={"جستجو دسته بندی"}
@@ -152,12 +162,7 @@ const Course = ({type, categories, course, searchParams}: {
                                 multiSelect
                                 query={"status"}
                                 title={"وضعیت دوره"}
-                                data={[
-                                    {id: "1", name: "درحال آماده سازی", slug: "0"},
-                                    {id: "2", name: "درحال برگذاری", slug: "1"},
-                                    {id: "3", name: "پایان یافته", slug: "2"},
-                                    {id: "4", name: "منسوخ شده", slug: "3"},
-                                ]}
+                                data={statusFilter}
                             />}
                 </div>
 
@@ -182,7 +187,7 @@ const Course = ({type, categories, course, searchParams}: {
                         onClick={toggleSort}
                     >
                         <ArrowUpDown size={18}/>
-                        <span>مرتب‌سازی</span>
+                        <span>مرتب ‌سازی</span>
                     </button>
                 </div>
 
@@ -191,10 +196,11 @@ const Course = ({type, categories, course, searchParams}: {
                 <div className="flex-1">
                     <SortFilter type={type} courseCount={course?.length}/>
                     {course?.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mb-5">
+                        <div
+                            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mb-5">
                             {type === "articles" ?
                                 course?.map((article, index) => (
-                                    <ArticleCard  isFilterPage {...article} key={index}/>
+                                    <ArticleCard isFilterPage {...article} key={index}/>
                                 ))
                                 : course?.map((course, index) => (
                                     <CourseCard isFilterPage {...course} key={index}/>
@@ -249,7 +255,7 @@ const Course = ({type, categories, course, searchParams}: {
                                 multiSelect
                                 query={"status"}
                                 title={"وضعیت دوره"}
-                                data={sortData}
+                                data={statusFilter}
                             />}
                     </div>
                 </div>
@@ -267,7 +273,7 @@ const Course = ({type, categories, course, searchParams}: {
                             <IoClose size={17}/>
                         </label>
                     </div>
-                    <MobileSortFilter data={sortData} query="sort"/>
+                    <MobileSortFilter closeSortFilter={()=>setSortOpen(false)} data={sortFilter} query="sort"/>
                 </div>
             </div>
         </>
@@ -275,4 +281,4 @@ const Course = ({type, categories, course, searchParams}: {
         ;
 };
 
-export default Course;
+export default Filters;

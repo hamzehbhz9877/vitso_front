@@ -13,16 +13,18 @@ type SortItem = {
 
 type SortFilterProps = {
     data: SortItem[]
-    query: string
+    query: string,
+    closeSortFilter:()=>void
 }
 
-export default function SortFilter({ data, query }: SortFilterProps) {
+export default function SortFilter({ data, query , closeSortFilter}: SortFilterProps) {
     const { addQueryParam, removeQueryParam } = useQueryParams()
     const search = useSearchParams()
 
     const selectedValues = search.getAll(query)
 
     const handleClick = (slug: string) => {
+        closeSortFilter()
         if (selectedValues.includes(slug)) {
             removeQueryParam(query)
         } else {

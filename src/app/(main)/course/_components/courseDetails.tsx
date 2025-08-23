@@ -75,7 +75,7 @@ authorId,
                         </div>
                     </div>
 
-                    <div className={"block lg:hidden  flex-1 mt-5 single-section before:bg-primary px-[18px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg"}>
+                    <div className={"block lg:hidden  flex-1 mt-5 single-section before:bg-primary px-[13px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg"}>
                         <CourseStatTable status={status} commentCount={commentCount} time={time}
                                          studentCount={studentCount}
                                          countEpisode={countEpisode}/>
@@ -91,7 +91,7 @@ authorId,
 
                     </div>
 
-                    <div className="flex gap-[20px] my-[40px] single-section before:bg-primary px-[18px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg">
+                    <div className="flex gap-[20px] my-[40px] single-section before:bg-primary px-[13px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg">
                         <CourseTabs faqs={faqs} author={{authorName,authorAvatar,authorId}} id={id} description={description} seasons={seasons}/>
                     </div>
                 </div>

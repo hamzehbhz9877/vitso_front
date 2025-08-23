@@ -1,6 +1,6 @@
 import React from 'react';
 import {CourseByCategory, GetAllWithSubCategory} from "@/services/Category";
-import Course from "@/app/(main)/courses/_components/course";
+import Filters from "@/app/(main)/courses/_components/filters";
 
 export default async function Page({
                                        searchParams,
@@ -15,7 +15,7 @@ export default async function Page({
 
     return (
         <div className="category-filter container mb-8">
-            <Course type={"courses"} searchParams={resolvedParams} course={course.data} categories={getCategoriesWithSub.data}/>
+            <Filters type={"courses"} searchParams={resolvedParams} course={course.data} categories={getCategoriesWithSub.data}/>
         </div>
     );
 };

@@ -6,6 +6,8 @@
 
 }
 
+
+
 .single-section::before{
   content: "";
   position: absolute;
@@ -17,6 +19,17 @@
   margin-right: -5px;
   border-radius: 90px;
 }
+
+@media (width <= 74rem) {
+  .course-details .course-details__content.single-section {
+    box-shadow: none;
+    background: transparent;
+  }
+  .course-details .course-details__content.single-section::before{
+    visibility: hidden;
+  }
+}
+
 .title-dore::before {
   content: "";
   float: right;

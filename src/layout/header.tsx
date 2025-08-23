@@ -43,7 +43,9 @@ const Header = async () => {
 
 
 
-                        <Logo/>
+                        <div className={"hidden lg:block"}>
+                            <Logo/>
+                        </div>
 
                     </div>
                     <div className="flex-1 hidden lg:flex relative items-center">

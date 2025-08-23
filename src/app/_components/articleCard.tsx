@@ -15,10 +15,9 @@ const ArticleCard = ({
                          isFilterPage=false
                      }: Article & { isFilterPage?: boolean }) => {
 
-    console.log(publishDate);
     return (
         <div
-            className={`card carousel-item  shadow-sm ${!isFilterPage ? "w-[240px] sm:w-auto" : 'w-auto'}   overflow-hidden  rounded-[10px]`}>
+            className={`card carousel-item  shadow-sm ${!isFilterPage ? "w-[270px] sm:w-auto" : 'w-auto'}   overflow-hidden  rounded-[10px]`}>
             <figure className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
                     src={image}
@@ -45,7 +44,7 @@ const ArticleCard = ({
                         {title}
                     </h2>
 
-                    <p className="line-clamp-3 text-[11px] sm:text-[13px] mt-2">
+                    <p className="line-clamp-3  text-sm mt-2">
                         {shortDescription}
                     </p>
 
