@@ -74,30 +74,23 @@ export const convertDateToJalaliString = (date: Date): string => {
 };
 
 
-export const diffDays = (data) => {
-  const date1 = moment(data, "jYYYY/jMM/jDD"); // تبدیل تاریخ شمسی به moment
-  const date2 = moment(); // تاریخ فعلی میلادی
 
-  const duration = moment.duration(date2.diff(date1));
+export const diffDays = (data: string) => {
+  const date1 = moment(data, "jYYYY/jMM/jDD"); // تاریخ شمسی ورودی
+  const date2 = moment(); // تاریخ فعلی
 
-  const months = duration.months();
-  const days = duration.days();
-  const hours = duration.hours();
-  const minutes = duration.minutes();
-  const seconds = duration.seconds();
+  const months = date2.diff(date1, "months"); // اختلاف کل ماه‌ها
+  const days = date2.diff(date1, "days");     // اختلاف کل روزها
 
   if (months > 0) {
     return months + " ماه";
   } else if (days > 0) {
     return days + " روز";
-  } else if (hours > 0) {
-    return hours + " ساعت";
-  } else if (minutes > 0) {
-    return minutes + " دقیقه";
   } else {
-    return seconds + " ثانیه";
+    return "امروز";
   }
-}
+};
+
 
 
 export function copyToClipboard(copyMe: string) {

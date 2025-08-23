@@ -14,6 +14,8 @@ const ArticleCard = ({
                          shortDescription,
                          isFilterPage=false
                      }: Article & { isFilterPage?: boolean }) => {
+
+    console.log(publishDate);
     return (
         <div
             className={`card carousel-item  shadow-sm ${!isFilterPage ? "w-[240px] sm:w-auto" : 'w-auto'}   overflow-hidden  rounded-[10px]`}>
@@ -54,7 +56,7 @@ const ArticleCard = ({
                         </div>
                         <div className="flex gap-1 text-sm items-center">
                             <Clock4 size={15}/>
-                            {diffDays(publishDate) + " پیش"}
+                            {diffDays(publishDate) === "امروز" ? "امروز" : diffDays(publishDate) + " پیش"}
                         </div>
                     </div>
                 </div>
