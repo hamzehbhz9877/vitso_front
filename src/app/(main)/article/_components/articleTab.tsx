@@ -10,17 +10,15 @@ import {PiSealQuestionFill} from "react-icons/pi";
 import FaqList from "@/components/faq/faqList";
 
 
-export default function CourseTabs({seasons, description, id, author, faqs}: {
-    seasons: any[]
-    description: string
+export default function ArticleTabs({ id, author,faqs}: {
     id: string
-    faqs: Faq["listFaq"]
     author: Pick<Course, "authorName" | 'authorAvatar' | 'authorId'>
+    faqs: Faq["listFaq"];
 }) {
-    const [activeTab, setActiveTab] = useState<'seasons' | 'content' | 'comments' | 'author' | 'faq'>('seasons')
+    const [activeTab, setActiveTab] = useState<'comments' | 'author' | 'faq'>('comments')
     const [_, setHasOpenedComments] = useState(false)
 
-    const handleTabChange = (tab: 'seasons' | 'content' | 'comments' | 'author' | 'faq') => {
+    const handleTabChange = (tab: 'comments' | 'author' | 'faq') => {
         setActiveTab(tab)
         if (tab === 'comments') setHasOpenedComments(true)
     }
@@ -33,38 +31,18 @@ export default function CourseTabs({seasons, description, id, author, faqs}: {
                 <input
                     type="radio"
                     name="course_tabs"
-                    checked={activeTab === 'seasons'}
-                    onChange={() => handleTabChange('seasons')}
+                    checked={activeTab === 'comments'}
+                    onChange={() => handleTabChange('comments')}
                 />
-                <LuListVideo size={18}/>
-                سرفصل ها
+                <LiaComments size={18}/>
+                دیدگاه کاربران
             </label>
-            {activeTab === 'seasons' && (
-                <div className="tab-content border-t-base-300 dark:border-t-white/30 py-6 space-y-3">
-                    {seasons.map((season, index) => (
-                        <Season key={season.id} {...season} index={index}/>
-                    ))}
-                </div>
-            )}
-
-            <label
-                className="tab text-primary hover:text-primary bg-base-300 sm:!shadow-none sm:!bg-transparent  flex gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
-                <input
-                    type="radio"
-                    name="course_tabs"
-                    checked={activeTab === 'content'}
-                    onChange={() => handleTabChange('content')}
-                />
-                <BiDetail size={18}/>
-                محتوای دوره
-            </label>
-            {activeTab === 'content' && (
+            {activeTab === 'comments' && (
                 <div className="tab-content border-t-base-300 dark:border-t-white/30 py-6">
-                    {parse(description)}
+                    <CommentsSection type={"article"} id={id}/>
                 </div>
             )}
-
-            {faqs?.length > 0 ?
+            {faqs?.length>0?
                 <>
                     <label
                         className="tab text-primary hover:text-primary bg-base-300 sm:!shadow-none sm:!bg-transparent  flex gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
@@ -79,26 +57,11 @@ export default function CourseTabs({seasons, description, id, author, faqs}: {
                     </label>
                     {activeTab === 'faq' && (
                         <div className="tab-content border-t-base-300 dark:border-t-white/30 py-6">
+
                             <FaqList faqs={faqs} className={"pt-5"}/>
                         </div>
                     )}
-                </> : ""}
-            <label
-                className="tab text-primary hover:text-primary bg-base-300 sm:!shadow-none sm:!bg-transparent  flex gap-2 cursor-pointer justify-start sm:justify-center  w-[calc(50%-4px)] sm:w-max">
-                <input
-                    type="radio"
-                    name="course_tabs"
-                    checked={activeTab === 'comments'}
-                    onChange={() => handleTabChange('comments')}
-                />
-                <LiaComments size={18}/>
-                دیدگاه کاربران
-            </label>
-            {activeTab === 'comments' && (
-                <div className="tab-content border-t-base-300 dark:border-t-white/30 py-6">
-                    <CommentsSection type={"course"} id={id}/>
-                </div>
-            )}
+                </>:""}
 
 
             <label
@@ -110,7 +73,7 @@ export default function CourseTabs({seasons, description, id, author, faqs}: {
                     onChange={() => handleTabChange('author')}
                 />
                 <LiaUserTieSolid size={18}/>
-                مدرس دوره
+                نویسنده
             </label>
             {activeTab === 'author' && (
                 <div className="tab-content border-t-base-300 dark:border-t-white/30 py-6">

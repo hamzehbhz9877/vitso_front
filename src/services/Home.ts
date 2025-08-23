@@ -14,3 +14,8 @@ export const GetCoursesAndArticles = async () => await fetchAPi({
 export const GetHomeStatInfo = async () => await fetchAPi({
     url: `${process.env.HOST_ADDRESS}/Home/Info`
 })
+
+
+export const GetAllFaqForCourseOrArticle = async (entityId) => await fetchAPi({
+    url: `${process.env.HOST_ADDRESS}/Faq/GetAllFaqForCourseOrArticle/${entityId}`
+})

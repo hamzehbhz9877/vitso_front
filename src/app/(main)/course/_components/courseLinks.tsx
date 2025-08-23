@@ -2,8 +2,9 @@ import React from 'react';
 import {copyToClipboard} from "@/lib/utils";
 import {showToast} from "@/components/react-toastify/react-toastify";
 import {IoCopyOutline} from "react-icons/io5";
+import Tags from "@/app/(main)/course/_components/tags";
 
-const CourseLinks = ({tagList,categoryName,shortLink }:Pick<Course, 'shortLink'|'tagList'|'categoryName'>) => {
+const CourseLinks = ({tagList,categorySlug,shortLink,categoryName }:Pick<Course, 'categoryName'|'shortLink'|'tagList'|'categorySlug'>) => {
     return (
         <div>
             <div>
@@ -20,28 +21,13 @@ const CourseLinks = ({tagList,categoryName,shortLink }:Pick<Course, 'shortLink'|
                 </div>
             </div>
 
-            <div className={"mt-5"}>
-                <h3 className={"title-dore font-bold"}>برچسب ها</h3>
-                <div className="flex flex-wrap gap-2 mt-2">
-                    {tagList.map(tag => (
-                        <div key={tag}
-                             className="bagde bg-base-300 rounded-box grid px-3 py-2  text-[14px]  place-items-center dark:bg-base-200">
-                            {tag}
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <hr className={"border-[#f2f6fc] my-[20px]"}/>
+         <div className={"mt-5"}>
+             <Tags  type={"tag"} title={"برچسب ها"} data={tagList}/>
 
-            <div>
-                <h3 className={"title-dore font-bold"}>دسته بندی ها </h3>
-                <div className="flex flex-wrap gap-2 mt-2">
-                    <div
-                        className="bagde bg-base-300 rounded-box grid px-3 py-2  text-[14px]  place-items-center dark:bg-base-200">
-                        {categoryName}
-                    </div>
-                </div>
-            </div>
+             <hr className={"border-[#f2f6fc] my-[20px]"}/>
+
+             <Tags type={"courses"}  title={"دسته بندی ها"} data={[{name:categoryName,slug:categorySlug}]}/>
+         </div>
         </div>
     );
 };

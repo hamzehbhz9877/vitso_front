@@ -155,7 +155,7 @@ const Page = () => {
                                     </CardHeader>
                                     <CardContent className="space-y-4">
                                         <SimpleInput label="عنوان" name="MetaTitle" type="text"/>
-                                        <SimpleInput prefix={cleanUrl + "/course/"} label="اسلاگ" name="Slug" type="text"/>
+                                        <SimpleInput prefix={cleanUrl + "/article/"} label="اسلاگ" name="Slug" type="text"/>
                                         <TextArea rows={5} label="توضیحات" name="MetaDescription"/>
                                         <CustomCreatableSelect
                                             name={"MetaKeywords"}

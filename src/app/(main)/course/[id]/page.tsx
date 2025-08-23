@@ -2,20 +2,24 @@ import React from 'react';
 import {CourseDetail} from "@/services/Course";
 import CourseDetails from "@/app/(main)/course/_components/courseDetails";
 import BreadCrumb from "@/components/breadcrumb/breadCrumb";
+import {GetAllFaqForCourseOrArticle} from "@/services/Home";
 
 const Page = async ({params}: any) => {
 
-    const courseDetails: any = await CourseDetail({slug: params?.id})
+
+    const {id}=await params
+    const courseDetails: any = await CourseDetail({slug: id})
+    const faqs: any = await GetAllFaqForCourseOrArticle(courseDetails.data?.id)
 
     return (
         <div className={"course-page container"}>
             <BreadCrumb data={[
                 {
-                    url: "/course",
+                    url: "/courses",
                     title: "دوره"
                 },
                 {
-                    url: `/course?category=${courseDetails.data.categoryName}`,
+                    url: `/courses?category=${courseDetails.data.categoryName}`,
                     title: courseDetails.data.categoryName
                 }, {
                     url: "",
@@ -23,7 +27,7 @@ const Page = async ({params}: any) => {
                 }
             ]}/>
 
-            <CourseDetails {...courseDetails.data} />
+            <CourseDetails {...courseDetails.data} faqs={faqs.data?.listFaq}/>
         </div>
     );
 };

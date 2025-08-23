@@ -44,6 +44,7 @@ type Article = {
     publishedAt?: string // Alternative date format
     author?: string
     categoryName?: string
+    categorySlug?: string
     viewCount?: number
 }
 
@@ -56,7 +57,7 @@ type ArticleDetail = Article & {
     metaDescription?: string
     metaKeywords?: string
     shortLink?: string
-    tagList?: string[]
+    tagList?: Array<{name:string,slug:string}>
 }
 type Episode = {
     id: string
@@ -110,6 +111,7 @@ type Course = {
     description?: string
     image?: string
     categoryName: string
+    categorySlug: string
     level?: string
     status?: string
     authorName?: string
@@ -119,7 +121,7 @@ type Course = {
     payablePrice?: string
     publishedAt: string
     viewCount: number
-    tagList?: string[]
+    tagList?: Array<{name:string,slug:string}>
     metaTitle?: string
     metaDescription?: string
     metaKeywords?: string
@@ -261,6 +263,7 @@ type Faq={
     questionCount: number,
     createdAt:string,
     listFaq:{
+        id:string
         priority:string
         question:string
         answer:string

@@ -127,7 +127,8 @@ const Course = ({type, categories, course, searchParams}: {
                 }
             />
 
-            <CategoryList type={type} categories={categories}/>
+            {categories.length>0?
+            <CategoryList type={type} categories={categories}/>:""}
 
 
             <div className="flex flex-col lg:flex-row  gap-3">

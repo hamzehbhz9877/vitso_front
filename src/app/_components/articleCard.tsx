@@ -49,7 +49,7 @@ const ArticleCard = ({
                         {shortDescription}
                     </p>
 
-                    <div className="card-actions justify-between mt-2 text-zinc-500 mt-auto">
+                    <div className="card-actions justify-between text-zinc-500 mt-auto pt-3">
                         <div className="flex gap-1 text-sm items-center">
                             <UserRound size={15}/>
                             {author}

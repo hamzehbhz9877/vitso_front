@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
-import ErrorPage from "@/app/(main)/_components/errorPage";
+import ErrorPage from "@/app/(main)/_components/errorPage"
 
 export default function Error({
                                   error,
@@ -15,13 +15,13 @@ export default function Error({
         console.error(error)
     }, [error])
 
-    const handleRetry = async () => {
+    const handleRetry = () => {
         setIsLoading(true)
-        try {
-            await reset() // اگه reset async باشه
-        } finally {
+
+        setTimeout(() => {
+            reset()
             setIsLoading(false)
-        }
+        }, 500)
     }
 
     return (

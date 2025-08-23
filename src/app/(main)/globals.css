@@ -160,6 +160,11 @@ a:hover {
   overflow-y: auto;
 }
 
+.aboutUs .tiptap {
+  min-height: auto;
+  max-height: auto;
+}
+
 .tiptap h1 {
   font-size: 2.25rem;
   font-weight: 700;

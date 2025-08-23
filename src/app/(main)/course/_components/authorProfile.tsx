@@ -18,14 +18,14 @@ const AuthorProfile = ({author: {authorName, authorAvatar, authorId, id}}: {
         <div>
             <div
                 className="flex w-full bg-[#f2f6fc] dark:bg-base-200 p-[15px] box-border rounded-[10px]">
-                <Image
-                    loading="lazy"
-                    src={authorAvatar}
-                    alt="Avatar"
-                    width={65}
-                    height={65}
-                    className="object-cover rounded-full shadow-[0px_2px_5px_#3b43591f]"
-                />
+                    <Image
+                        loading="lazy"
+                        src={authorAvatar}
+                        alt="Avatar"
+                        width={65}
+                        height={65}
+                        className="object-cover aspect-square rounded-full shadow-[0px_2px_5px_#3b43591f]"
+                    />
                 <div className={"flex flex-1 items-center justify-start"}>
                     <span className="p-[10px] flex items-center box-border text-[14px]">{authorName}</span>
                     {/*<div*/}

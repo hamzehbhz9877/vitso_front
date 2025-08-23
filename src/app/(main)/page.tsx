@@ -1,6 +1,6 @@
 import {GetCoursesAndArticles, GetHomepageCategory, GetHomeStatInfo} from "@/services/Home";
-import LastCourse from "@/app/(main)/_components/lastCourse";
-import LastArticles from "@/app/(main)/_components/lastArticles";
+import Courses from "@/app/(main)/_components/courses";
+import Articles from "@/app/(main)/_components/articles";
 import Categories from "@/app/_components/categories";
 import React from "react";
 import Code from "@/app/(main)/_components/code";
@@ -12,6 +12,7 @@ import {GetAllWithSubCategory} from "@/services/Category";
 import Link from "next/link";
 import {scrolltoHash} from "@/lib/utils";
 import GoToCategories from "@/app/(main)/_components/goToCategories";
+import FaqList from "@/components/faq/faqList";
 
 // export const revalidate = 86400 // 60 * 60 * 24 = 86400 (24 ساعت)
 
@@ -146,12 +147,27 @@ export default async function Home() {
             </div>
 
 
-            <div className={"container mb-12"}>
+            <div className={"container mb-12 space-y-20"}>
                 <Categories data={courseCategories}/>
 
-                <LastCourse data={coursesAndArticles?.data?.courses}/>
+                <Courses title={"آخرین دوره ها"}  data={coursesAndArticles?.data?.courses}/>
 
-                <LastArticles data={coursesAndArticles?.data?.articles}/>
+                <Articles title={"آخرین مقاله ها"} data={coursesAndArticles?.data?.articles}/>
+
+                <div>
+                    <div className={"flex flex-col gap-y-2 w-max "}>
+                        <h3 className={"text-xl font-bold "}>سوالات متداول</h3>
+
+                        <div className="h-[1px] bg-[#E4E4E4] w-full relative">
+                            <div
+                                className="h-[3px] rounded-[0.5rem]  bg-primary absolute w-1/3 right-[32%] top-[-1px]"></div>
+                        </div>
+                    </div>
+                    <div className={"container"}>
+                        <FaqList faqs={coursesAndArticles?.data?.faqs} className={"pt-10"}/>
+
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -13,18 +13,22 @@ import CommentsSection from "@/app/(main)/course/_components/comments";
 import AuthorProfile from "@/app/(main)/course/_components/authorProfile";
 import React from "react";
 import TipTapEditor from "@/components/tiptap/tiptapEditor";
+import CourseTabs from "@/app/(main)/course/_components/courseTab";
+import ArticleTabs from "@/app/(main)/article/_components/articleTab";
+import Categories from "@/app/(main)/course/_components/tags";
+import Tags from "@/app/(main)/course/_components/tags";
 
 const ArticleDetails = ({
                             title, image, authorId, authorAvatar,
-                            authorName, categoryName, publishedAt, content, tagList, shortLink, id
-                        }: ArticleDetail) => {
+                            authorName, categoryName, publishedAt, content, tagList, shortLink, id,faqs,categorySlug
+                        }: ArticleDetail & {faqs:Faq["listFaq"]}) => {
 
     return (
         <div className="course-details mt-6">
             <div className={"flex flex-col lg:flex-row gap-[20px]"}>
                 <div className={"flex-1 mb-10"}>
                     <div
-                        className={" rounded-lg px-[18px] py-[15px] lg:px-[24px] single-course before:bg-primary dark:bg-base-300"}>
+                        className={" rounded-lg px-[18px] py-[15px] lg:px-[24px] single-section before:bg-primary dark:bg-base-300"}>
                         <div className={"mb-5"}>
                             <h3 className={"text-lg md:text-xl  font-bold"}>{title}</h3>
 
@@ -43,13 +47,14 @@ const ArticleDetails = ({
                                alt={"image"}/>
                         <TipTapEditor content={content}/>
                     </div>
-                    <div className={"mt-5"}>
-                        <CommentsSection type={"article"} id={id}/>
+
+                    <div
+                        className="flex gap-[20px] my-[40px] single-section before:bg-primary px-[18px] py-[15px] lg:px-[24px] dark:bg-base-300 rounded-lg">
+                        <ArticleTabs faqs={faqs} author={{authorName, authorAvatar, authorId}} id={id}/>
                     </div>
                 </div>
 
                 <div>
-
                     <div className={"w-[350px] hidden lg:block shadow dark:bg-base-300 p-4 rounded-lg"}>
                         <div>
                             <h3 className={"title-dore font-bold"}>اشتراک گذاری مطلب</h3>
@@ -64,26 +69,11 @@ const ArticleDetails = ({
                         </div>
 
                         <div className={"mt-5"}>
-                            <h3 className={"title-dore font-bold"}>برچسب ها</h3>
-                            <div className="flex flex-wrap gap-2 mt-2">
-                                {tagList.map(tag => (
-                                    <div key={tag}
-                                         className="bagde bg-base-300 rounded-box grid px-3 py-2  text-[14px]  place-items-center dark:bg-base-200">
-                                        {tag}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <hr className={"border-[#f2f6fc] my-[20px]"}/>
+                            <Tags type={"tag"} title={"برچسب ها"} data={tagList}/>
 
-                        <div>
-                            <h3 className={"title-dore font-bold"}>دسته بندی ها </h3>
-                            <div className="flex flex-wrap gap-2 mt-2">
-                                <div
-                                    className="bagde bg-base-300 rounded-box grid px-3 py-2  text-[14px]  place-items-center dark:bg-base-200">
-                                    {categoryName}
-                                </div>
-                            </div>
+                            <hr className={"border-[#f2f6fc] my-[20px]"}/>
+
+                            <Tags type={"articles"} title={"دسته بندی ها"} data={[{name:categoryName,slug:categorySlug}]}/>
                         </div>
                     </div>
 

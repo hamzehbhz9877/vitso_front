@@ -30,7 +30,7 @@ const NavbarDropDown = ({ data, type, closeMenu, isOpen }: NavbarDropDownProps) 
             ref={ref}
             tabIndex={0}
             className={cn(
-                "dropdown-content menu relative p-0 bg-white dark:bg-base-200 top-[calc(100%+10px)] z-[1] w-52 text-sm rounded-l hover:rounded-l-none rounded-r shadow",
+                "dropdown-content menu relative p-0 bg-white dark:bg-base-200 top-[calc(100%+10px)] z-[1] w-64 text-sm rounded-l hover:rounded-l-none rounded-r shadow",
                 isOpen ? ""
                     : "!opacity-0",
             )}
@@ -50,7 +50,7 @@ const NavbarDropDown = ({ data, type, closeMenu, isOpen }: NavbarDropDownProps) 
                     </Link>
 
                     {d.subCategories.length > 0 && (
-                        <ul className="absolute submenu h-full rounded-l-[6px] border-r bg-white dark:bg-base-200 right-[calc(100%-16px)] top-0 p-0 hidden group-hover:block w-48 z-10 shadow">
+                        <ul className="absolute submenu h-full rounded-l-[6px] border-r bg-white dark:bg-base-200 right-[calc(100%-16px)] top-0 p-0 hidden group-hover:block w-64 z-10 shadow">
                             {d.subCategories.map((sub) => (
                                 <li key={sub.id} className="hover:text-primary" onClick={handleCloseMenu}>
                                     <Link

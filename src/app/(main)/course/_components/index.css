@@ -1,4 +1,4 @@
-.single-course {
+.single-section {
   position: relative;
   box-shadow: 0px 5px 25px rgba(79, 105, 139, .09);
 
@@ -6,7 +6,7 @@
 
 }
 
-.single-course::before{
+.single-section::before{
   content: "";
   position: absolute;
   right: 0;
