@@ -60,6 +60,7 @@ const AddCategory = () => {
             <Formik
                 initialValues={initialValues(params.id,category?.data.type==="آموزش"?0:1)}
                 onSubmit={handleSubmit}
+                enableReinitialize
                 validationSchema={validationSchema}
             >
                 {() => {

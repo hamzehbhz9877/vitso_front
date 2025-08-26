@@ -30,6 +30,9 @@ export const RequestDeleteCategory =  (id) =>
 export const GetAllForSelectCategory =  (type) =>
     instantClient.get(`Category/GetAllForSelect/${type}`);
 
+export const GetAllSubForSelect =  (type) =>
+    instantClient.get(`Category/GetAllSubForSelect/${type}`);
+
 
 
 export const CourseByCategory = async (query: any) => {

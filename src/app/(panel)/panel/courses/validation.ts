@@ -90,7 +90,11 @@ export const getValidationSchema = ({ isEdit = false }) => {
                 .required("نوع قیمت الزامی است"),
             Price: Yup.number()
                 .typeError("قیمت باید عدد باشد")
-                .required("قیمت الزامی است"),
+                .when("PriceType", {
+                    is: 1, // وقتی پولی انتخاب شده
+                    then: (schema) => schema.required("قیمت الزامی است").min(1, "قیمت باید بیشتر از 0 باشد"),
+                    otherwise: (schema) => schema.notRequired().nullable(),
+                }),
         });
     }
 

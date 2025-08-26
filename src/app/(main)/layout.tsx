@@ -17,6 +17,7 @@ import localFont from "next/font/local";
 import BodyScrollLock from "@/app/(main)/_components/overFlowScroll";
 import * as React from "react";
 import Providers from "@/utils/nprogress-client";
+import Script from "next/script";
 
 const bYekan = localFont({
     src: [
@@ -61,7 +62,22 @@ export default function RootLayout({
     return (
         <html dir="rtl" lang="fa-IR" suppressHydrationWarning>
         <head>
-            <script
+            {/*<Script*/}
+            {/*    id="clarity-script"*/}
+            {/*    strategy="afterInteractive"*/}
+            {/*    dangerouslySetInnerHTML={{*/}
+            {/*        __html: `*/}
+            {/*  (function(c,l,a,r,i,t,y){*/}
+            {/*      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};*/}
+            {/*      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;*/}
+            {/*      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);*/}
+            {/*  })(window, document, "clarity", "script", "t0ya5dx3hd");*/}
+            {/*`,*/}
+            {/*    }}*/}
+            {/*/>*/}
+            <Script
+                id="dark-mode-script"
+                strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
                     __html: `
         (function() {
@@ -91,9 +107,9 @@ export default function RootLayout({
                 <Auth>
                     <ModalContext>
                         <Providers>
-                        <HydrationBoundary state={dehydrate(queryClient)}>
-                            <Header/>
-                            {/*<BodyScrollLock/>*/}
+                            <HydrationBoundary state={dehydrate(queryClient)}>
+                                <Header/>
+                                {/*<BodyScrollLock/>*/}
                             <main>{children}</main>
                             <Footer/>
                         </HydrationBoundary>

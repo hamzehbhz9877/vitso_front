@@ -10,7 +10,7 @@ import {EditCourses, GetForEditCourses, RegisterCourses} from "@/services/Course
 import useModal from "@/context/modal/useModal";
 import InputDemo from "@/components/input-12";
 import TextArea from "@/components/input/textArea";
-import { GetAllForSelectCategory } from "@/services/Category";
+import {GetAllForSelectCategory, GetAllSubForSelect} from "@/services/Category";
 import { CalendarHijriInput } from "@/app/(panel)/_components/datepicker";
 import { getValidationSchema, getInitialValues } from "@/app/(panel)/panel/courses/validation";
 import {convertDateToJalaliString, formatDate, objectToFormData} from "@/lib/utils";
@@ -45,7 +45,7 @@ const EditPage = () => {
 
     const handleSubmit = (values) => {
         const data = objectToFormData(values);
-        mutate({ data, id: params.id });
+        mutate(data);
     };
 
     const { data: tags } = useQuery({
@@ -54,8 +54,8 @@ const EditPage = () => {
     });
 
     const { data: category } = useQuery({
-        queryFn: () => GetAllForSelectCategory(null),
-        queryKey: ["GetAllCategoryForSelect"]
+        queryFn: () => GetAllSubForSelect(0),
+        queryKey: ["GetAllSubForSelect",0]
     });
 
 
@@ -110,6 +110,7 @@ const EditPage = () => {
                                                 { value: "1", label: "پولی" },
                                             ]}
                                         />
+                                        {formikProps.values.PriceType==="1"?
                                         <NumberInput
                                             formikProps={formikProps}
                                             label="قیمت"
@@ -118,7 +119,7 @@ const EditPage = () => {
                                             placeholder="قیمت دوره آموزشی را وارد کنید..."
                                             thousandSeparator=","
                                             suffix=" تومان"
-                                        />
+                                        />:""}
                                         <MultiSelect
                                             isMulti={false}
                                             valueKey="id"

@@ -8,6 +8,7 @@ import CommentsSection from "@/app/(main)/course/_components/comments";
 import AuthorProfile from "@/app/(main)/course/_components/authorProfile";
 import {PiSealQuestionFill} from "react-icons/pi";
 import FaqList from "@/components/faq/faqList";
+import TipTapEditor from "@/components/tiptap/tiptapEditor";
 
 
 export default function CourseTabs({seasons, description, id, author, faqs}: {
@@ -60,7 +61,7 @@ export default function CourseTabs({seasons, description, id, author, faqs}: {
             </label>
             {activeTab === 'content' && (
                 <div className="tab-content border-t-base-300 dark:border-t-white/30 py-6">
-                    {parse(description)}
+                    <TipTapEditor content={description}/>
                 </div>
             )}
 
