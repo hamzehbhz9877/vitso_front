@@ -72,7 +72,7 @@ const EditPage = () => {
             </div>
 
             <Formik
-                initialValues={getInitialValues({ date: formatDate(today) })}
+                initialValues={getInitialValues({ date: formatDate(today),level:0,priceType:1 })}
                 onSubmit={handleSubmit}
                 validationSchema={getValidationSchema({ isEdit: false })}
             >
@@ -92,6 +92,7 @@ const EditPage = () => {
                                     <CardContent className="space-y-4">
                                         <SimpleInput label="عنوان" name="Title" type="text" />
                                         <SelectWithCustomDropdownIconDemo
+                                            value={formikProps.values.Level}
                                             label="سطح دوره"
                                             formikProps={formikProps}
                                             name="Level"
@@ -104,6 +105,7 @@ const EditPage = () => {
                                         <SelectWithCustomDropdownIconDemo
                                             label="نوع قیمت"
                                             formikProps={formikProps}
+                                            value={formikProps.values.PriceType}
                                             name="PriceType"
                                             options={[
                                                 { value: "0", label: "رایگان" },

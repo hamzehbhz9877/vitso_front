@@ -25,18 +25,13 @@ const CourseCard = ({
             )}
         >
             <Link href={`/course/${slug}`}>
-                <figure className="relative w-full aspect-[4/3] overflow-hidden">
+                <figure className="relative w-full aspect-[3/2] overflow-hidden">
                     <Image
                         src={image}
+                        className="object-cover w-full h-full"
                         alt={title}
                         fill
-                        sizes="(max-width: 640px) 100vw,
-       (max-width: 1024px) 50vw,
-       (max-width: 1280px) 33vw,
-       (max-width: 1536px) 25vw,
-       20vw"
-                        style={{ objectFit: "cover" }}
-                        priority={true}
+                        priority
                     />
                 </figure>
                 <div className="card-body bg-base-300 py-[15px] px-[12px]">
@@ -68,32 +63,33 @@ const CourseCard = ({
                                     ></path>
                                 </svg>
                             ) : (
-                                <RefreshCcw size={18} />
+                                <RefreshCcw size={18}/>
                             )}
                         </div>
                     </div>
 
                     <h2 className="card-title text-sm line-clamp-1 relative pr-3">
-                        <span className="absolute right-0 top-1/2 -translate-y-1/2 w-[5px] h-[5px] bg-primary rounded-full"></span>
+                        <span
+                            className="absolute right-0 top-1/2 -translate-y-1/2 w-[5px] h-[5px] bg-primary rounded-full"></span>
                         {title}
                     </h2>
 
                     <div className="card-actions justify-between mt-2 text-zinc-500">
                         <div className="flex gap-1 text-sm items-center">
-                            <UserRound size={15} />
+                            <UserRound size={15}/>
                             {author}
                         </div>
                         <div className="flex gap-1 text-sm items-center">
-                            <Clock4 size={15} />
+                            <Clock4 size={15}/>
                             {time}
                         </div>
                     </div>
 
-                    <hr className="border-gray-300 dark:border-gray-600 my-[0px]" />
+                    <hr className="border-gray-300 dark:border-gray-600 my-[0px]"/>
 
                     <div className="card-actions justify-between items-center mt-2 text-zinc-500">
                         <div className="flex gap-1 text-sm">
-                            <UserRound size={15} />2451
+                            <UserRound size={15}/>2451
                         </div>
                         <div className="flex gap-1 text-sm items-center">
                             <div className="flex items-center gap-x-2.5">

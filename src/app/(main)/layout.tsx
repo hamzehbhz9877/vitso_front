@@ -75,9 +75,7 @@ export default function RootLayout({
             {/*`,*/}
             {/*    }}*/}
             {/*/>*/}
-            <Script
-                id="dark-mode-script"
-                strategy="beforeInteractive"
+            <script
                 dangerouslySetInnerHTML={{
                     __html: `
         (function() {

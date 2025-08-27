@@ -19,7 +19,7 @@ const Page = async ({params}: any) => {
                     title: "دوره"
                 },
                 {
-                    url: `/courses?category=${courseDetails.data.categoryName}`,
+                    url: `/courses?category=${courseDetails.data.categorySlug}`,
                     title: courseDetails.data.categoryName
                 }, {
                     url: "",

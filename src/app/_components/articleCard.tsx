@@ -18,18 +18,13 @@ const ArticleCard = ({
     return (
         <div
             className={`card carousel-item  shadow-sm ${!isFilterPage ? "w-[270px] sm:w-auto" : 'w-auto'}   overflow-hidden  rounded-[10px]`}>
-            <figure className="relative w-full aspect-[4/3] overflow-hidden">
+            <figure className="relative w-full aspect-[3/2] overflow-hidden">
                 <Image
                     src={image}
+                    className="object-cover w-full h-full"
                     alt={title}
                     fill
-                    sizes="(max-width: 640px) 100vw,
-       (max-width: 1024px) 50vw,
-       (max-width: 1280px) 33vw,
-       (max-width: 1536px) 25vw,
-       20vw"
-                    style={{objectFit: "cover"}}
-                    priority={true}
+                    priority
                 />
             </figure>
             <Link href={`/article/${slug}`} className={"flex-1"}>
