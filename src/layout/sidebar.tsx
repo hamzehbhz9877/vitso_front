@@ -24,7 +24,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                     <div className="min-h-full w-72 bg-base-200 text-base-content p-0">
                         {/* Sidebar Header */}
                         <div className="flex items-center justify-between p-4">
-                            <Logo/>
+                            <Logo   className={"w-13 h-13"} onClick={closeDrawer}/>
                             <label htmlFor="sidebar" className="btn btn-circle btn-primary btn-soft">
                                 <IoClose size={17} />
                             </label>

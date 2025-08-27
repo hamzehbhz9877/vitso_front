@@ -18,6 +18,7 @@ import BodyScrollLock from "@/app/(main)/_components/overFlowScroll";
 import * as React from "react";
 import Providers from "@/utils/nprogress-client";
 import Script from "next/script";
+import { cookies } from "next/headers";
 
 const bYekan = localFont({
     src: [
@@ -59,8 +60,18 @@ export default function RootLayout({
 }>) {
     const queryClient = getQueryClient();
 
+    const cookieStore:any = cookies();
+    const cookieTheme = cookieStore.get("theme")?.value as "dark" | "light" | undefined;
+
+    const getSystemTheme = () => {
+        const hour = new Date().getHours();
+        return hour >= 20 || hour < 6 ? "dark" : "light";
+    };
+
+    const theme = cookieTheme || getSystemTheme();
+
     return (
-        <html dir="rtl" lang="fa-IR" suppressHydrationWarning>
+        <html dir="rtl" lang="fa-IR" className={theme} data-theme={theme}>
         <head>
             {/*<Script*/}
             {/*    id="clarity-script"*/}
@@ -75,29 +86,6 @@ export default function RootLayout({
             {/*`,*/}
             {/*    }}*/}
             {/*/>*/}
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `
-        (function() {
-          try {
-            var COOKIE_KEY = "theme";
-            function getCookieTheme() {
-              var match = document.cookie.match(new RegExp("(^| )" + COOKIE_KEY + "=([^;]+)"));
-              return match ? match[2] : null;
-            }
-            function getSystemTheme() {
-              var hour = new Date().getHours();
-              return (hour >= 20 || hour < 6) ? "dark" : "light";
-            }
-            var theme = getCookieTheme() || getSystemTheme();
-            document.documentElement.classList.remove("light","dark");
-            document.documentElement.classList.add(theme);
-            document.documentElement.setAttribute("data-theme", theme);
-          } catch(e) {}
-        })();
-      `,
-                }}
-            />
         </head>
         <body className={`${bYekan.variable} rtl main font-sans`}>
         <ClientReactQueryProvider>
@@ -108,9 +96,9 @@ export default function RootLayout({
                             <HydrationBoundary state={dehydrate(queryClient)}>
                                 <Header/>
                                 {/*<BodyScrollLock/>*/}
-                            <main>{children}</main>
-                            <Footer/>
-                        </HydrationBoundary>
+                                <main>{children}</main>
+                                <Footer/>
+                            </HydrationBoundary>
                         </Providers>
                     </ModalContext>
                 </Auth>

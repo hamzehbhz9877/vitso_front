@@ -1,12 +1,18 @@
 "use client";
 import React, {useEffect, useState} from "react";
-import Image from "next/image";
+import Image, {ImageProps} from "next/image";
 
 import LogoLight from "../../public/images/logoDark.svg";
 import LogoDark from "../../public/images/logoLight.svg";
 import Link from "next/link";
+import {StaticImport} from "next/dist/shared/lib/get-img-props";
 
-const Logo = () => {
+
+interface LogoProps extends Omit<ImageProps,"src"|"alt"> {
+    src?: string | StaticImport;
+    alt?: string;
+}
+const Logo = ({...rest}: LogoProps) => {
     const [theme, setTheme] = useState<"light" | "dark" | "">("");
 
     useEffect(() => {
@@ -28,16 +34,17 @@ const Logo = () => {
     }, []);
 
     return (
-       <Link href={"/"}>
-           <Image
-               alt="logo"
-               className="mx-3"
-               src={theme === "dark" ?  LogoLight:  LogoDark}
-               width={50}
-               height={50}
-               priority
-           />
-       </Link>
+        <Link href={"/"}>
+            <Image
+                alt="logo"
+                className="mx-3"
+                src={theme === "dark" ? LogoLight : LogoDark}
+                width={50}
+                height={50}
+                priority
+                {...rest}
+            />
+        </Link>
     );
 };
 

@@ -34,6 +34,7 @@ import '@/components/tiptap-node/paragraph-node/paragraph-node.scss'
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { useDisableBodyScroll } from "@/hooks/useDisableBodyScroll/useDisableBodyScroll"
+import { PageSize,PageSizeDropdown } from "../tiptap-ui/responsive-button";
 
 export default function TiptapEditor({
                                          uploadUrl,
@@ -88,6 +89,7 @@ export default function TiptapEditor({
     }, [editor, defaultData])
 
     useDisableBodyScroll([isFullscreen])
+    const [size, setSize] = React.useState<PageSize>("desktop")
 
     return (
         <div
@@ -112,9 +114,6 @@ export default function TiptapEditor({
                         types={['bulletList', 'orderedList', 'taskList']}
                     />
                 </ToolbarGroup>
-
-
-
 
                 <ToolbarSeparator />
 
@@ -145,14 +144,25 @@ export default function TiptapEditor({
                         onClick={() => setIsFullscreen(prev => !prev)}
                     />
                 </ToolbarGroup>
-
+                {isFullscreen?
+               <div className={"hidden 2xl:block"}>
+                   <ToolbarSeparator />
+                   <ToolbarGroup>
+                       <PageSizeDropdown
+                           editor={editor!}
+                           value={size}
+                           onChange={setSize}
+                       />
+                   </ToolbarGroup>
+               </div>:""}
             </Toolbar>
 
             <EditorContent
                 editor={editor}
                 className={cn(
-                    "prose prose-sm rtl text-right h-full overflow-auto",
-                    isFullscreen && "prose-fullscreen"
+                    "prose prose-sm rtl text-right h-full overflow-auto mx-auto",
+                    isFullscreen && "prose-fullscreen",
+                    isFullscreen ? size==="default"?"w-full":size==="desktop"?"w-[960px]":size==="tablet"?"w-[640px]":size==="mobile"?"w-[340px]":"w-auto":"w-auto",
                 )}
             />
         </div>

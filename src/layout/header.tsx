@@ -41,17 +41,11 @@ const Header = async () => {
                             </label>
                         </Sidebar>
 
-
-
-                        <div className={"hidden lg:block"}>
-                            <Logo/>
-                        </div>
-
                     </div>
                     <div className="flex-1 hidden lg:flex relative items-center">
                         <Logo/>
 
-                        <NavbarDropdownWrapper
+                    <NavbarDropdownWrapper
                             label={<><GraduationCap size={23}/> دسته بندی دوره ها</>}
                             type="courses"
                             data={courseCategories}

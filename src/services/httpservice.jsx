@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {toast} from "react-toastify";
-
+import Cookie from "universal-cookie"
 export const instantClient = axios.create({
     baseURL: process.env.NEXT_PUBLIC_HOST_ADDRESS ?? process.env.HOST_ADDRESS,
     withCredentials: true,
@@ -25,8 +25,9 @@ instantClient.interceptors.response.use(
     },
     error => {
         if (error.response?.status === 401) {
-            // ✅ هندل گلوبال خطای 401
-            // مثلاً: حذف توکن، رفتن به لاگین، نمایش toast
+            const cookie = new Cookie()
+            cookie.remove("user", { path: "/" });
+
             toast.error("لطفا مجددا به سیستم وارد شوید");
             window.location.href = '/auth/login';
         }
