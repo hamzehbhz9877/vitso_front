@@ -4,7 +4,7 @@ import {cn} from "@/lib/utils"
 import {Button} from "@/components/ui/button"
 import { Form, Formik, useFormikContext} from "formik";
 import {initialValues, validationSchema} from "@/app/(main)/(auth)/auth/register/validation";
-import SimpleInput from "@/components/input/simple";
+import SimpleInput  from "@/components/input/simple";
 import {FiPhone, FiUser} from "react-icons/fi";
 import {HiOutlineKey} from "react-icons/hi";
 import React, {useState} from "react";
@@ -79,7 +79,7 @@ export function RegisterForm({
                     {() => {
                         return (
                             <Form>
-                                <SimpleInput  onKeyPress={(e) => {
+                                <SimpleInput isShadcnInput={false}  onKeyPress={(e) => {
                                     const {value, maxLength}: any = e.target;
                                     if (String(value).length >= maxLength) {
                                         e.preventDefault();
@@ -110,12 +110,12 @@ export function RegisterForm({
 
                                 <div
                                     className={"grid grid-cols-1 md:grid-cols-2 gap-[16px] mb-[20px] "}>
-                                    <SimpleInput placeholder={"نام"} icon={<FiUser/>} name={"firstName"} type={"text"}/>
-                                    <SimpleInput placeholder={"نام خانوادگی"} icon={<FiUser/>} name={"lastName"} type={"text"}/>
-                                    <SimpleInput placeholder={"نام کاربری"} icon={<FaRegUserCircle/>} name={"userName"} type={"text"}/>
-                                    <SimpleInput placeholder={"1232***0912"} icon={<FiPhone/>} name={"phone"} type={"text"}/>
-                                    <SimpleInput placeholder={"پسورد"} icon={<HiOutlineKey/>} name={"password"} type={"password"}/>
-                                    <SimpleInput placeholder={"تکرار پسورد"} icon={<HiOutlineKey/>} name={"confirmPassword"} type={"password"}/>
+                                    <SimpleInput isShadcnInput={false} placeholder={"نام"} icon={<FiUser/>} name={"firstName"} type={"text"}/>
+                                    <SimpleInput isShadcnInput={false} placeholder={"نام خانوادگی"} icon={<FiUser/>} name={"lastName"} type={"text"}/>
+                                    <SimpleInput isShadcnInput={false} placeholder={"نام کاربری"} icon={<FaRegUserCircle/>} name={"userName"} type={"text"}/>
+                                    <SimpleInput isShadcnInput={false} placeholder={"1232***0912"} icon={<FiPhone/>} name={"phone"} type={"text"}/>
+                                    <SimpleInput isShadcnInput={false} placeholder={"پسورد"} icon={<HiOutlineKey/>} name={"password"} type={"password"}/>
+                                    <SimpleInput isShadcnInput={false} placeholder={"تکرار پسورد"} icon={<HiOutlineKey/>} name={"confirmPassword"} type={"password"}/>
                                 </div>
 
                                 <button type={"submit"}

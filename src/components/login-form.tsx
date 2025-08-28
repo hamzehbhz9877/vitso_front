@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils"
 import { Field, Form, Formik } from "formik"
 import { initialValues, validationSchema } from "@/app/(main)/(auth)/auth/login/validation"
-import SimpleInput from "@/components/input/simple"
+import SimpleInput  from "@/components/input/simple"
 import { FiUser } from "react-icons/fi"
 import { HiOutlineKey } from "react-icons/hi"
 import { TfiReload } from "react-icons/tfi"
@@ -77,12 +77,12 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                 {() => (
                     <Form className={cn("", className)} {...props}>
                         <div className={"grid gap-[20px]"}>
-                            <SimpleInput icon={<FiUser />} name={"userName"} type={"text"} />
-                            <SimpleInput icon={<HiOutlineKey />} name={"password"} type={"password"} />
+                            <SimpleInput isShadcnInput={false} icon={<FiUser />} name={"userName"} type={"text"} />
+                            <SimpleInput isShadcnInput={false} icon={<HiOutlineKey />} name={"password"} type={"password"} />
                         </div>
 
                         <div className="flex items-center justify-between gap-3 mt-5">
-                            <SimpleInput
+                            <SimpleInput isShadcnInput={false}
                                 className={"!text-[12px] w-full lg:w-max"}
                                 showError={false}
                                 placeholder={"کد امنیتی را وارد کنید"}

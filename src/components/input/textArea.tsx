@@ -1,10 +1,12 @@
 'use client'
 
-import React, {DetailedHTMLProps, InputHTMLAttributes, useEffect, useRef, useState} from 'react'
-import {useField, useFormikContext, ErrorMessage} from 'formik'
-import {cn} from '@/lib/utils'
-import {Input} from '@/components/ui/input'
-import {Textarea as TextAreaShadCn} from '@/components/ui/textarea'
+import React, {
+    ChangeEvent,
+    useState
+} from 'react'
+import { useField, ErrorMessage } from 'formik'
+import { cn } from '@/lib/utils'
+import { Textarea as TextAreaShadCn } from '@/components/ui/textarea'
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     label?: string | React.ReactNode
@@ -14,11 +16,27 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
     value?: any
 }
 
-const BaseTextArea = ({label, isShadcn = true, className, value, field = {}, meta = {}, ...rest}: TextAreaProps & {
-    field?: any;
-    meta?: any
-}) => {
-    const finalValue = value ?? meta?.value ?? ''
+const BaseTextArea = ({
+                          label,
+                          isShadcn = true,
+                          className,
+                          value,
+                          field = {},
+                          meta = {},
+                          ...rest
+                      }: TextAreaProps & { field?: any; meta?: any }) => {
+    const finalValue = value ?? field?.value ?? ''
+    const maxLength = rest.maxLength ?? undefined
+    const [charCount, setCharCount] = useState(finalValue.length || 0)
+
+    const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const newValue = e.target.value
+        if (maxLength && newValue.length > maxLength) {
+            return
+        }
+        field.onChange(e) // برای Formik
+        setCharCount(newValue.length)
+    }
 
     return (
         <div>
@@ -27,41 +45,50 @@ const BaseTextArea = ({label, isShadcn = true, className, value, field = {}, met
             {isShadcn ? (
                 <TextAreaShadCn
                     {...field}
+                    {...rest}
                     value={finalValue}
+                    onChange={handleChange}
                     className={cn(
-                        'w-full p-4 resize-none rounded-lg border border-gray-300 caret-primary-200',
+                        'w-full p-4 text-wrap resize-none rounded-lg',
                         meta?.touched && meta?.error && 'border border-solid',
                         className
                     )}
-                    {...rest}
                 />
             ) : (
                 <textarea
                     {...field}
+                    {...rest}
                     value={finalValue}
+                    onChange={handleChange}
                     className={cn(
-                        'w-full p-4 resize-none rounded-lg border border-gray-300 caret-primary-200',
+                        'w-full p-4 text-wrap resize-none rounded-lg border border-gray-300 caret-primary-200',
                         meta?.touched && meta?.error && 'border border-solid',
                         className
                     )}
-                    {...rest}
                 />
             )}
 
-            {meta?.touched && meta?.error &&
-                <ErrorMessage name={field?.name} className="validation-error" component="div"/>}
+            {maxLength && (
+                <p className="text-xs text-muted-foreground mt-1">
+                    {maxLength - charCount}/{maxLength}
+                </p>
+            )}
+
+            {meta?.touched && meta?.error && (
+                <ErrorMessage name={field?.name} className="validation-error" component="div" />
+            )}
         </div>
     )
 }
 
 const FormikTextArea = (props: TextAreaProps) => {
-    const {name, ...rest} = props
-    const [field, meta] = useField(name)
-
-    return <BaseTextArea {...rest} field={field} meta={meta} name={name}/>
+    const { name, ...rest } = props
+    const [field, meta] = useField(name!)
+    return <BaseTextArea {...rest} field={field} meta={meta} name={name} />
 }
 
- const TextArea = (props: TextAreaProps) => {
+const TextArea = (props: TextAreaProps) => {
     return props.name ? <FormikTextArea {...props} /> : <BaseTextArea {...props} />
 }
+
 export default TextArea

@@ -35,7 +35,7 @@ export default function AddCommentModal({ isPending, onClose, onSubmit, label = 
                 >
                     {() => (
                         <Form className="space-y-4">
-                            <TextArea name="message" label="توضیحات" rows={4} />
+                            <TextArea isShadcn={false} name="message" label="توضیحات" rows={4} />
                             <div className="modal-action mt-6 flex justify-end gap-2">
                                 <button type="submit" className="btn btn-success" disabled={isPending}>
                                     ثبت دیدگاه

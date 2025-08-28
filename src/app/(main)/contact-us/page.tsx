@@ -140,7 +140,7 @@ const ContactUsPage = () => {
                                     <SimpleInput label="موضوع" name="subject" type="text" />
                                 </div>
 
-                                <TextArea name="message" rows={5} label="پیام شما" />
+                                <TextArea isShadcn={false} name="message" rows={5} label="پیام شما" />
 
                                 <button
                                     type="submit"

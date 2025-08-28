@@ -162,7 +162,7 @@ export default function TiptapEditor({
                 className={cn(
                     "prose prose-sm rtl text-right h-full overflow-auto mx-auto",
                     isFullscreen && "prose-fullscreen",
-                    isFullscreen ? size==="default"?"w-full":size==="desktop"?"w-[960px]":size==="tablet"?"w-[640px]":size==="mobile"?"w-[340px]":"w-auto":"w-auto",
+                    isFullscreen ? size==="default"?"w-full":size==="desktop"?"w-[926px]":size==="tablet"?"w-[736px]":size==="mobile"?"w-[343px]":"w-auto":"w-auto",
                 )}
             />
         </div>

@@ -47,7 +47,7 @@ export default function ReplyModal({ replyTarget, isSubmitting, onClose, onSubmi
                 >
                     {(formikProps) => (
                         <Form className="space-y-4">
-                            <TextArea name="message" label="متن پاسخ" rows={4} />
+                            <TextArea isShadcn={false} name="message" label="متن پاسخ" rows={4} />
                             <div className="modal-action mt-6 flex justify-end gap-2">
                                 <button type="submit" className="btn btn-success" disabled={formikProps.isSubmitting || isSubmitting}>
                                     ارسال پاسخ

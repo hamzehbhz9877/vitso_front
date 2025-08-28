@@ -32,7 +32,7 @@ const ShowDonationModal = ({id}:{id:string}) => {
                     <SimpleInput readOnly defaultValue={data?.data.donationDate} label={"تاریخ دونیت"}
                                  type={"text"}/>
 
-                    <TextArea readOnly defaultValue={data?.data.message}  isShadcn={false}
+                    <TextArea  readOnly defaultValue={data?.data.message}  isShadcn={false}
                               label={"توضیحات"}/>
                 </div>
                 <div className="modal-action mt-0">

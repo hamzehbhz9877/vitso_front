@@ -46,7 +46,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/about" onClick={closeDrawer}>
+                                <Link href="/about-us" onClick={closeDrawer}>
                                     درباره ما
                                 </Link>
                             </li>

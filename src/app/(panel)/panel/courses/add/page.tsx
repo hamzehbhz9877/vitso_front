@@ -180,7 +180,7 @@ const EditPage = () => {
                                            />
                                            <ErrorMessage name="Description" className="validation-error" component="div" />
                                        </div>
-                                        <TextArea rows={3} label="توضیحات کوتاه" name="ShortDescription" />
+                                        <TextArea maxLength={250} rows={3} label="توضیحات کوتاه" name="ShortDescription" />
                                     </CardContent>
                                 </Card>
 
@@ -191,7 +191,7 @@ const EditPage = () => {
                                     <CardContent className="space-y-4">
                                         <SimpleInput label="عنوان" name="MetaTitle" type="text" />
                                         <SimpleInput prefix={cleanUrl + "/course/"} label="اسلاگ" name="Slug" type="text" />
-                                        <TextArea rows={5} label="توضیحات" name="MetaDescription" />
+                                        <TextArea maxLength={250} rows={5} label="توضیحات" name="MetaDescription" />
                                         <CustomCreatableSelect
                                             name="MetaKeywords"
                                             onChange={(values) => formikProps.setFieldValue("MetaKeywords", values)}
