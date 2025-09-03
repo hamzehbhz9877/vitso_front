@@ -13,6 +13,7 @@ import Link from "next/link";
 import {scrolltoHash} from "@/lib/utils";
 import GoToCategories from "@/app/(main)/_components/goToCategories";
 import FaqList from "@/components/faq/faqList";
+import Slider from "@/app/(main)/_components/slider";
 
 // export const revalidate = 86400 // 60 * 60 * 24 = 86400 (24 ساعت)
 
@@ -149,6 +150,8 @@ export default async function Home() {
 
             <div className={"container mb-12 space-y-10  lg:space-y-20"}>
                 <Categories data={courseCategories}/>
+                
+                <Slider data={coursesAndArticles?.data?.banners}/>
 
                 <Courses title={"آخرین دوره ها"}  data={coursesAndArticles?.data?.courses}/>
 

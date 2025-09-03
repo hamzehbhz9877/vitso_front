@@ -1,0 +1,97 @@
+
+
+:root {
+  --swiper-pagination-color: #048970;
+  --swiper-pagination-bullet-size: 4px;
+  --swiper-pagination-bullet-width: 4px;
+  --swiper-pagination-bullet-height: 4px;
+  --swiper-pagination-bullet-inactive-color: #3535357a;
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bullet-opacity: 1;
+  --swiper-pagination-bullet-horizontal-gap: 4px;
+  --swiper-pagination-bullet-vertical-gap: 0px;
+}
+.swiper-pagination-bullet-active {
+  width: 20px !important;
+  height: 6px !important;
+  border-radius: 6px !important;
+}
+.swiper-button-disabled{
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.swiper-button{
+  z-index: 10;
+  top:50%;
+  transition: 0.2s all;
+  transform: translateY(-50%);
+}
+
+.swiper-button.right {
+  position: absolute;
+  background: rgba(33, 33, 33, .2);
+  color: #fff;
+  right: 0;
+  cursor: pointer;
+
+  transition: 0.2s all;
+  padding: 12px 12px;
+  font-size: 16px;
+  border-radius: 0;
+  border-top-left-radius: 1.1rem;
+  border-bottom-left-radius: 1.1rem;
+  border: 1px solid;
+}
+
+.swiper-button.left {
+  position: absolute;
+  background: rgba(33, 33, 33, .2);
+  color: #fff;
+  left: 0;
+ cursor: pointer;
+  transition: 0.2s all;
+  border-radius: 50%;
+  padding: 12px 12px;
+  font-size: 16px;
+  border-radius: 0;
+  border-top-right-radius: 1.1rem;
+  border-bottom-right-radius: 1.1rem;
+  border: 1px solid;
+}
+
+
+.banner {
+
+  .banner-swiper{
+    border-radius: 12px;
+  }
+
+  img {
+    border-radius: 12px;
+  }
+
+
+  .sliderWide{
+    //@apply my-[30px] lg:my-0;
+  }
+
+
+  .swiper-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 10 !important;
+    bottom: 10px !important;
+    right: 50% !important;
+    transform: translateX(50%) !important;
+    margin-bottom: -15px;
+    background-repeat:  no-repeat;
+    background: none;
+    @media (min-width: 767.98px) {
+      background: url('https://pars.parskalas.com/wp-content/themes/parskala/assets/img/Vector1.svg');
+    }
+    width: 157px !important;
+    height: 35px;
+  }
+}

@@ -76,7 +76,7 @@ const Profile = () => {
                                     />
                                 </div>
 
-                                <div className={"flex-[65%] "}>
+                                <div className={"flex-[65%] min-w-0 "}>
                                     <Card>
                                         <CardHeader>
                                             <CardTitle>

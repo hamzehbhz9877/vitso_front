@@ -269,3 +269,15 @@ type Faq={
         answer:string
     }[]
 }
+
+type Banner={
+    id:string
+    entityName:string
+    bannerCount:number
+    position:string,
+    title:string,
+    link:string,
+    image:string,
+    priority:number,
+    createdAt:string
+}

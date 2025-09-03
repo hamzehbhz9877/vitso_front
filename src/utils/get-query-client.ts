@@ -37,7 +37,7 @@ function makeQueryClient() {
 
       },
       queries: {
-        retry:2,
+        retry:1,
         staleTime: 5 * 1000,
         refetchOnWindowFocus:false,
       },

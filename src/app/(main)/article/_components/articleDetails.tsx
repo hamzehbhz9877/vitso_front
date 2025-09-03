@@ -78,7 +78,7 @@ const ArticleDetails = ({
                     </div>
 
                     <div className={"w-[350px] hidden lg:block shadow dark:bg-base-300 p-4 rounded-lg mt-4"}>
-                        <AuthorProfile author={{authorName, authorAvatar, authorId, id}}/>
+                        <AuthorProfile author={{authorName, authorAvatar, authorId, id,type:"article"}}/>
                     </div>
                 </div>
             </div>

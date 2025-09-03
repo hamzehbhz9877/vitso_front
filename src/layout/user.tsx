@@ -38,7 +38,9 @@ const User = () => {
 
     const baseButtonClass = 'btn rounded-full lg:rounded-lg px-0 w-10 h-10 lg:w-40 md:h-10 btn-primary';
     const closeDropdown = () => setOpen(false);
-
+    const hasRole = ['مدیر', 'مدرس', 'پشتیبان', 'نویسنده'].some(role =>
+        user?.roles?.includes(role)
+    );
     if (loading) return <div className={`skeleton rounded-full md:rounded-lg ${baseButtonClass}`} />;
 
     if (user?.fullName) {
@@ -59,7 +61,7 @@ const User = () => {
 
                 {open && (
                     <ul className="dropdown-content  menu w-48 rounded-box bg-white dark:bg-base-200 shadow-md mt-2 absolute left-0">
-                        {user?.roles?.includes('مدیر') && (
+                        {hasRole && (
                             <li>
                                 <Link href="/panel/dashboard" className="text-xs" onClick={closeDropdown}>
                                     <FaUserTie size={13} /> ورود به پنل ادمین

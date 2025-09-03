@@ -77,7 +77,7 @@ export default function ArticleTabs({ id, author,faqs}: {
             </label>
             {activeTab === 'author' && (
                 <div className="tab-content border-t-base-300 dark:border-t-white/30 py-6">
-                    <AuthorProfile author={{...author, id}}/>
+                    <AuthorProfile author={{...author, id,type:"article"}}/>
                 </div>
             )}
 

@@ -1,5 +1,4 @@
 import {instantClient} from "@/services/httpservice";
-
 export const AddFaq = (data: any) =>
     instantClient.post('Faq', data);
 
@@ -17,5 +16,6 @@ export const EditFaq = (data) =>
 
 export const DeleteFaq = (id) =>
     instantClient.delete(`Faq/${id}`,);
+
 
 

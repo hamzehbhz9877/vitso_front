@@ -14,7 +14,7 @@ export default function SearchInput() {
 
     return (
         <>
-            <button className="btn btn-circle btn-primary btn-soft relative" popoverTarget="popover-search"
+            <button className="btn btn-circle btn-primary btn-soft relative" popoverTarget="popover-search" aria-label="search"
                style={{anchorName: "--anchor-search"}  as React.CSSProperties }>
                 <CiSearch size={25}/>
             </button>

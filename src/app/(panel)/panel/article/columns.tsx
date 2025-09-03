@@ -102,7 +102,7 @@ export default function ArticlesTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button   onClick={() => router.push(`article/add`)}
+                    <Button  onClick={() => router.push(`article/add`)}
                     >
                         <CirclePlus/>
                         افزودن مقاله

@@ -21,7 +21,7 @@ export default function DonationTable() {
     // انتخاب API بر اساس نقش کاربر
     const apiFn = React.useMemo(() => {
         if (!user) return null;
-        return user.roles.includes("مدیر") ? GetAllForTeacherDonation : GetAllDonation;
+        return user.roles.includes("مدیر") ?  GetAllDonation:  GetAllForTeacherDonation;
     }, [user]);
 
     // query فقط وقتی user آماده است اجرا می‌شود

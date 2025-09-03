@@ -164,7 +164,7 @@ const EditPage = () => {
                             </div>
 
                             {/* ستون چپ: محتوا و توضیحات */}
-                            <div className="flex-[65%] space-y-3">
+                            <div className="flex-[65%] min-w-0 space-y-3">
                                 <Card>
                                     <CardHeader>
                                         <h3 className="font-bold">محتوا</h3>

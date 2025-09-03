@@ -6,8 +6,8 @@ import {Heart, User, User2} from "lucide-react";
 import useAuth from "@/context/authentication/useAuth";
 import {useRouter} from "next/navigation";
 
-const AuthorProfile = ({author: {authorName, authorAvatar, authorId, id}}: {
-    author: Pick<Course, "authorName" | 'authorAvatar' | 'authorId' | 'id'>
+const AuthorProfile = ({author: {authorName, authorAvatar, authorId, id,type="course"}}: {
+    author: Pick<Course, "authorName" | 'authorAvatar' | 'authorId' | 'id'> & {type?: 'article'|'course'}
 }) => {
 
     const {user} = useAuth();
@@ -63,7 +63,7 @@ const AuthorProfile = ({author: {authorName, authorAvatar, authorId, id}}: {
                     مشاهده پروفایل
                 </Link>
             </div>
-                <DonationModal type={"course"} id={id}/>
+                <DonationModal type={type} id={id}/>
         </div>
     );
 };

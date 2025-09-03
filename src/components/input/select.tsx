@@ -15,8 +15,8 @@ import {Label} from "@/components/ui/label";
 type Props = SelectPrimitive.SelectProps & {
     label: string;
     options: { value: string; label: string }[];
-    formikProps: FormikProps<any>;
-    name: string;
+    formikProps?: FormikProps<any>;
+    name?: string;
     icon?: React.ReactNode;
     placeholder?: string;
     onChange?: (value:string)=>void;
@@ -35,7 +35,7 @@ export default function SelectWithCustomDropdownIconDemo({
                                                              name,
     ...rest
                                                          }: Props) {
-    const [field, meta] = useField(name); // استفاده از useField برای مدیریت ارور و وضعیت فیلد
+    const [field, meta] = useField(name??'__DUMMY__');
 
     const handleClear = () => {
         formikProps.setFieldValue(name, '');
@@ -49,6 +49,7 @@ export default function SelectWithCustomDropdownIconDemo({
             <Label
                 className="flex mb-2 items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50">{label}</Label>
             <Select value={value} dir={"rtl"} onValueChange={(data) => {
+                if (formikProps)
                 formikProps.setFieldValue(name, data)
                 if (onChange)
                 onChange(data)

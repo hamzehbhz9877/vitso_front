@@ -46,7 +46,7 @@ const ShoppingList = () => {
     return (
         <div ref={dropdownRef} className={cn("dropdown dropdown-end dropdown-full static sm:relative", { "dropdown-open": open })}>
             <div tabIndex={0}>
-                <a
+                <button aria-label={"shopping-list"}
                     className="btn btn-circle btn-primary btn-soft relative"
                     onClick={() => setOpen(!open)}
                 >
@@ -54,7 +54,7 @@ const ShoppingList = () => {
                     <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center font-semibold">
                         {data?.data.count ?? 0}
                     </span>
-                </a>
+                </button>
             </div>
 
             <div

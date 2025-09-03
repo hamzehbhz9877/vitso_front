@@ -129,7 +129,7 @@ const EditCoursePage = () => {
                             </div>
 
                             {/* ستون چپ */}
-                            <div className="flex-[65%] space-y-6">
+                            <div className="flex-[65%] min-w-0 space-y-6">
                                 <Card>
                                     <CardHeader>
                                         <CardTitle>محتوای دوره</CardTitle>

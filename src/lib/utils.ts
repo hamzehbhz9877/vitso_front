@@ -3,6 +3,7 @@ import {twMerge} from "tailwind-merge"
 import moment from "jalali-moment";
 import type {FilterFn} from "@tanstack/react-table";
 import {rankItem} from "@tanstack/match-sorter-utils";
+import { Accept } from "react-dropzone"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -13,27 +14,60 @@ export function formatDate(date?: Date) {
   return date.toLocaleDateString("fa-IR")
 }
 
-export function objectToFormData(obj: Record<string, any>): FormData {
-  const formData = new FormData()
+export function getExtensionsFromAccept(accept: Accept): string[] {
+  return Object.values(accept)
+      .filter(Boolean)
+      .flatMap(v => {
+        if (Array.isArray(v)) return [...v] // تبدیل readonly string[] به string[]
+        return [v]
+      })
+}
+export function formatFileSize(bytes: number) {
+  if (bytes < 1024) return { value: bytes, unit: "B" }
+  else if (bytes < 1024 * 1024) return { value: Math.round(bytes / 1024), unit: "KB" }
+  else return { value: Math.round(bytes / 1024 / 1024), unit: "MB" }
+}
+
+export function objectToFormData(obj: any, formData = new FormData()): FormData {
+  if (!obj) return formData;
 
   Object.entries(obj).forEach(([key, value]) => {
-    const pascalKey = key.charAt(0).toUpperCase() + key.slice(1)
-
-    if (Array.isArray(value)) {
-      value.forEach((item) => {
-        formData.append(pascalKey, item)
-      })
-    } else if (value instanceof File) {
-      formData.append(pascalKey, value)
-    } else if (value !== null && value !== undefined) {
-      formData.append(pascalKey, value)
+    if (value instanceof File) {
+      formData.append(key, value);
+    } else if (Array.isArray(value)) {
+      value.forEach((item, index) => {
+        if (typeof item === "object" && item !== null) {
+          // آرایه‌ها: کلید اصلی + [index] + زیرکلیدها با .
+          Object.entries(item).forEach(([subKey, subValue]) => {
+            if (subValue instanceof File) {
+              formData.append(`${key}[${index}].${subKey}`, subValue);
+            } else {
+              formData.append(`${key}[${index}].${subKey}`, String(subValue ?? ""));
+            }
+          });
+        } else {
+          formData.append(`${key}[${index}]`, item ?? "");
+        }
+      });
+    } else if (typeof value === "object" && value !== null) {
+      // اشیای معمولی: کلید اصلی + .subKey
+      Object.entries(value).forEach(([subKey, subValue]) => {
+        if (subValue instanceof File) {
+          formData.append(`${key}.${subKey}`, subValue);
+        } else {
+          formData.append(`${key}.${subKey}`, subValue ?? "");
+        }
+      });
     } else {
-      formData.append(pascalKey, "")
+      formData.append(key, (value ?? "").toString());
     }
-  })
+  });
 
-  return formData
+  return formData;
 }
+
+
+
 
 
 export function  asObjectArray (data,valueKey,labelKey){

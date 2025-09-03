@@ -1,20 +1,22 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { cn } from "@/lib/utils"
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
+import {Label} from "@/components/ui/label"
+import {cn, formatFileSize, getExtensionsFromAccept} from "@/lib/utils"
 import {ImageIcon, Upload, XCircleIcon} from "lucide-react"
 import Image from "next/image"
 import Dropzone from "react-dropzone"
-import { ErrorMessage, useField } from "formik"
-import React, { useEffect, useState } from "react"
+import {ErrorMessage, useField} from "formik"
+import React, {useEffect, useState} from "react"
 import {Button} from "@/components/ui/button";
+import {Toast} from "next/dist/client/components/react-dev-overlay/ui/components/toast";
+import {showToast} from "@/components/react-toastify/react-toastify";
 
-const ImagePreview = ({ url, onRemove }: { url: string; onRemove: () => void }) => (
+const ImagePreview = ({url, onRemove}: { url: string; onRemove: () => void }) => (
     <div className="relative aspect-square">
         <button
             className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2"
             onClick={onRemove}
         >
-            <XCircleIcon className="h-6 w-6 fill-black text-white dark:text-neutral-500 cursor-pointer" />
+            <XCircleIcon className="h-6 w-6 fill-black text-white dark:text-neutral-500 cursor-pointer"/>
         </button>
         <Image
             src={url}
@@ -31,28 +33,43 @@ export default function UploadImageCard({
                                             title = "تصویر",
                                             name,
                                             defaultData,
-                                            hasLink=false
+                                            hasLink = false,
+                                            dropzoneOptions // ← اضافه شد
                                         }: {
     onChange?: (file: File | string) => void
     title?: string
     name?: string
     hasLink?: boolean
     defaultData?: any
+    dropzoneOptions?: Partial<import("react-dropzone").DropzoneOptions> & { type?: string } // ← همه options اختیاری، فقط type اجباری
 }) {
     const [preview, setPreview] = useState<string | null>(null)
-    const [field, meta] = useField(name as string)
+
+    const defaultFormat = {"image/png": [".png", ".jpg", ".jpeg", ".webp"]}
 
     useEffect(() => {
-        if (defaultData) setPreview(defaultData)
+        if (defaultData) {
+            if (defaultData instanceof File) {
+                const objectUrl = URL.createObjectURL(defaultData)
+                setPreview(objectUrl)
+                return () => URL.revokeObjectURL(objectUrl)
+            } else if (typeof defaultData === "string") {
+                setPreview(defaultData)
+            }
+        }
     }, [defaultData])
 
+
+    const accept = dropzoneOptions?.accept ?? defaultFormat
+ const maxSizeText=formatFileSize(dropzoneOptions?.maxSize ?? 5 * 1024 * 1024)
+    const helptxt=getExtensionsFromAccept(accept).map(ext => ext.toUpperCase()).join(" یا ")
     return (
         <Card>
             <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>{title}</CardTitle>
                 {hasLink ? <button type={"button"} className="text-xs hover:underline">
                     افزودن از طریق لینک
-                </button>:''}
+                </button> : ''}
             </CardHeader>
 
             <CardContent>
@@ -74,12 +91,28 @@ export default function UploadImageCard({
                                 onChange?.(file)
                             }
                         }}
-                        accept={{
-                            "image/png": [".png", ".jpg", ".jpeg", ".webp"]
+                        onDropRejected={(fileRejections) => {
+                            const reason = fileRejections[0].errors[0];
+                            if (reason.code === "file-too-large") {
+                                showToast("error", `حجم فایل باید کمتر از ${maxSizeText.unit+" "+maxSizeText.value}  باشد.`);
+                            } else if (reason.code === "file-invalid-type") {
+                                showToast("error", `فرمت فایل باید ${helptxt} باشد.`);
+                            } else {
+                                showToast("error", reason.message);
+                            }
                         }}
+                        accept={
+                            defaultFormat
+                        }
+
+
+                        maxSize={5 * 1024 * 1024}
+
                         maxFiles={1}
+
+                        {...dropzoneOptions} // ← همه options از props اعمال می‌شوند
                     >
-                        {({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject }) => (
+                        {({getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject}) => (
                             <div
                                 {...getRootProps()}
                                 className={cn(
@@ -90,9 +123,12 @@ export default function UploadImageCard({
                                 )}
                             >
                                 <input {...getInputProps()} />
-                                <ImageIcon className="h-8 w-8 mb-2 opacity-60" />
+                                <ImageIcon className="h-8 w-8 mb-2 opacity-60"/>
                                 <p className="text-sm font-medium">تصویر را رها کنید</p>
-                                <p className="text-xs opacity-60">PNG یا JPG (حداکثر. 5MB)</p>
+                                <p className="text-xs opacity-60">{helptxt}
+                                    <span
+                                        className={"px-1"}>(حداکثر   <span className={"underline"}>{maxSizeText.value}</span> <span>{maxSizeText.unit}</span> )</span>
+                                </p>
                                 <Button
                                     variant={"default"}
                                     className="mt-2 text-sm"

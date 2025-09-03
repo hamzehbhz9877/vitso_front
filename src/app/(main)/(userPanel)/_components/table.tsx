@@ -110,7 +110,7 @@ export default function ReactTable({
     // const toggleColumn = (id: string) => {
     //     const newVal = !showColumns[id]
     //     setShowColumns((prev) => ({ ...prev, [id]: newVal }))
-    //     table.getColumn(id)?.toggleVisibility(newVal)
+    //     table-button.getColumn(id)?.toggleVisibility(newVal)
     // }
 
     return (

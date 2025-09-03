@@ -10,11 +10,15 @@ import {FaRegCircleUser} from "react-icons/fa6";
 import {RxExit} from "react-icons/rx";
 import {LiaComments} from "react-icons/lia";
 import {RiTodoLine} from "react-icons/ri";
-import {FaDonate} from "react-icons/fa";
 import {BiDonateHeart} from "react-icons/bi";
+import useAuth from "@/context/authentication/useAuth";
+import {useMutation} from "@tanstack/react-query";
+import {RequestLogout} from "@/services/Account";
 
 
 const SidebarBottom = () => {
+    const { resetUserCookie } = useAuth();
+
     const items = [
         {
             title: 'داشبورد',
@@ -59,12 +63,19 @@ const SidebarBottom = () => {
 
     const pathname = usePathname()
 
+    const { mutate, isPending } = useMutation({
+        mutationFn: RequestLogout,
+        onSettled: (_, error) => {
+            if (!error) resetUserCookie();
+        },
+    });
+
     return (
         <div className="sideBar__bottom bg-base-300 rounded-xl">
             <ul>
                 {items.map((item, index) => (
                     <Link key={item.title} href={item.url === "logout" ? "#" : item.url}
-                          onClick={item.url === "logout" ? null : () => {
+                          onClick={item.url === "logout" ? ()=>mutate() : () => {
                           }}
                     >
                         <li

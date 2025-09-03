@@ -59,7 +59,6 @@ const Page = () => {
 
     return (
         <div className="container mx-auto">
-
             <div className={"flex gap-2 items-center mb-3"}>
                 <Button variant={"outline"} onClick={() => router.back()}>
                     <FaAngleRight/>
@@ -126,7 +125,7 @@ const Page = () => {
                                 </div>
                             </div>
                             {/* ستون چپ: تصویر و محتوا */}
-                            <div className="flex-[65%] space-y-3">
+                            <div className="flex-[65%] min-w-0 space-y-3">
 
                                 <Card>
                                     <CardHeader>

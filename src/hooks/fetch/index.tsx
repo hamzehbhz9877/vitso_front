@@ -17,8 +17,9 @@ const fetchAPi = async ({url, option}: any) => {
     if (res.status === 204 || res.status === 401) return [];
     
     if (res.status === 500) {
-        redirect("/error")
+        throw new Error("خطای سمت سرور")
     }
+
     const data = await res.json()
 
     return redirectStatus(data)

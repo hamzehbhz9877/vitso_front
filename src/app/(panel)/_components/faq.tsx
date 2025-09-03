@@ -68,7 +68,7 @@ const FaqForm = ({mode, entityName = "Home", isPending: Loading}: {
         mutationFn,
         onSettled: (_, error) => {
             if (!error) {
-                queryClient.invalidateQueries({queryKey: ["faqs"]});
+                // queryClient.invalidateQueries({queryKey: ["faqs"]});
                 // if (mode === "add") {
                 //     setFAQs([]);
                 // }
@@ -94,10 +94,9 @@ const FaqForm = ({mode, entityName = "Home", isPending: Loading}: {
     };
 
     const handleSubmitValues = () => {
-        const faqsWithoutId = faqs.map(({id, ...rest}) => rest);
         const data = {
             entityName: entityName === "Home" ? 0 : entityName === "Article" ? 1 : 2,
-            listFaq: faqsWithoutId,
+            listFaq: faqs,
             ...(entityName !== "Home" && {entityId: params?.id}), // اگر لازمه id رو بفرستیم تو ویرایش
         };
         const withPosition=entityName==="Home"?{...data,position:0}:data
@@ -131,7 +130,7 @@ const FaqForm = ({mode, entityName = "Home", isPending: Loading}: {
                                 </CardContent>
                             </Card>
                         </div>
-                        <div className="flex-[65%] space-y-3">
+                        <div className="flex-[65%] min-w-0 space-y-3">
                             <Card>
                                 <CardHeader>
                                     <Skeleton className="h-6 w-1/3"/>
@@ -192,7 +191,7 @@ const FaqForm = ({mode, entityName = "Home", isPending: Loading}: {
                                         </Card>
                                     </div>
 
-                                    <div className="flex-[65%] space-y-3">
+                                    <div className="flex-[65%] min-w-0 space-y-3">
                                         <Card>
                                             <CardHeader>
                                                 <h3 className="font-bold">محتوا</h3>

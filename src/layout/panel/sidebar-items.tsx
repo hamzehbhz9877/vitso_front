@@ -4,7 +4,7 @@ import {
     Map,
     PieChart,
 } from "lucide-react"
-import {FaChalkboardTeacher, FaUsers, FaUserTie} from "react-icons/fa";
+import {FaChalkboardTeacher, FaRegImages, FaUsers, FaUserTie} from "react-icons/fa";
 import {TbCategory} from "react-icons/tb";
 import {MdOutlineArticle, MdOutlineContactPhone, MdOutlineSpaceDashboard} from "react-icons/md";
 import {RiTodoLine} from "react-icons/ri";
@@ -77,7 +77,7 @@ export function getSidebarItems(user: SidebarUser) {
                 url: "/panel/article",
                 icon: MdOutlineArticle,
                 isActive: false,
-                roles:["نویسنده","مدیر"],
+                roles:["نویسنده","مدرس","مدیر"],
                 items: []
             },
             {
@@ -100,6 +100,13 @@ export function getSidebarItems(user: SidebarUser) {
                 title: "سوالات متداول",
                 url: "/panel/faq",
                 icon: PiSealQuestionFill,
+                isActive: false,
+                roles:["مدیر"],
+                items: []
+            }, {
+                title: "بنر ها",
+                url: "/panel/banner",
+                icon: FaRegImages,
                 isActive: false,
                 roles:["مدیر"],
                 items: []

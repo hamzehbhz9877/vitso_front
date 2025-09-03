@@ -15,6 +15,7 @@ import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {Button} from "@/components/ui/button";
 import {EditCategory, GetForEditCategory} from "@/services/Category";
 import useModal from "@/context/modal/useModal";
+import {objectToFormData} from "@/lib/utils";
 
 const AddUser = ({id}: { id: string }) => {
 
@@ -39,17 +40,22 @@ const AddUser = ({id}: { id: string }) => {
 
 
     const validationSchema = Yup.object({
-        name: Yup.string()
+        Name: Yup.string()
             .required("نام دسته الزامی است")
             .min(3, "حداقل باید ۳ کاراکتر باشد"),
 
-        priority: Yup.number()
+        Priority: Yup.number()
             .required("اولویت الزامی است"),
 
-        parentId: Yup.string().nullable(),
+        ParentId: Yup.string().nullable(),
     });
 
-    const handleSubmit = (values) => mutate({id,data:values})
+    const handleSubmit = (values) => {
+
+        const data = objectToFormData(values)
+
+        mutate({id,data})
+    }
 
 
 
@@ -60,10 +66,10 @@ const AddUser = ({id}: { id: string }) => {
             </DialogHeader>
             <Formik
                 initialValues={{
-                    name: category?.data.name,
-                    priority: category?.data.priority,
-                    parentId: category?.data.parentId,
-                    type: category?.data.type === "آموزش" ? 0 : 1,
+                    Name: category?.data.name,
+                    Priority: category?.data.priority,
+                    ParentId: category?.data.parentId,
+                    Type: category?.data.type === "آموزش" ? 0 : 1,
                 }}
                 enableReinitialize
                 onSubmit={handleSubmit}
@@ -77,10 +83,10 @@ const AddUser = ({id}: { id: string }) => {
                                     className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-[16px] mb-[20px]"}>
                                     <SimpleInput label={"دسته"} readOnly disabled type={"text"} value={category?.data.type}/>
                                     <SimpleInput label={"دسته والد"} readOnly disabled type={"text"} value={category?.data.parentName}/>
-                                    <SimpleInput label={"نام دسته"} name={"name"} type={"text"}/>
+                                    <SimpleInput label={"نام دسته"} name={"Name"} type={"text"}/>
 
 
-                                    <SimpleInput label={"اولویت"} name={"priority"} type={"number"}/>
+                                    <SimpleInput label={"اولویت"} name={"Priority"} type={"number"}/>
                                 </div>
 
                                 <Button isPending={isPending} type={"submit"} disabled={isPending}
