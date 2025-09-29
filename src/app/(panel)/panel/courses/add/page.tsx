@@ -59,7 +59,7 @@ const EditPage = () => {
     });
 
 
-    const cleanUrl = (process.env.NEXT_PUBLIC_HOST_ADDRESS || '').replace('/api', '');
+    const cleanUrl = process.env.NEXT_PUBLIC_HOST_ADDRESS || '';
 
     return (
         <div className="container mx-auto">

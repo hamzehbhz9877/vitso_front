@@ -51,7 +51,7 @@ authorId,
                         )}
                         <div className={isVideoReady ? '' : 'hidden'}>
                             <PlyrPlayer
-                                src={seasons[0].episodes[0].videoUrl}
+                                src={seasons[0]?seasons[0]?.episodes[0]?.videoUrl:""}
                                 poster={image}
                                 onReady={() => setIsVideoReady(true)}
                             />

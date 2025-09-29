@@ -52,7 +52,7 @@ const EditCoursePage = () => {
     const { data: category } = useQuery({ queryFn: () => GetAllForSelectCategory(null), queryKey: ["GetAllCategoryForSelect"] });
     const { data: course } = useQuery({ queryFn: () => GetForEditCourses(params.id), queryKey: ["GetForEditCourses", params.id] });
 
-    const cleanUrl = (process.env.NEXT_PUBLIC_HOST_ADDRESS || '').replace('/api', '');
+    const cleanUrl = process.env.NEXT_PUBLIC_HOST_ADDRESS || '';
 
     return (
         <div className="container mx-auto">
