@@ -13,6 +13,28 @@ export function formatDate(date?: Date) {
   if (!date) return ""
   return date.toLocaleDateString("fa-IR")
 }
+export const formatSpeed = (bytesPerSec: number | null) => {
+  if (bytesPerSec === null) return "--";
+  const kb = bytesPerSec / 1024;
+  const mb = kb / 1024;
+
+  if (mb >= 1) return mb.toFixed(2) + " MB/s";
+  return kb.toFixed(1) + " KB/s";
+};
+
+export function capitalizeKeys(obj: any): any {
+  if (Array.isArray(obj)) {
+    return obj.map(capitalizeKeys)
+  } else if (obj !== null && typeof obj === "object") {
+    return Object.fromEntries(
+        Object.entries(obj).map(([key, value]) => [
+          key.charAt(0).toUpperCase() + key.slice(1),
+          value
+        ])
+    )
+  }
+  return obj
+}
 
 export function getExtensionsFromAccept(accept: Accept): string[] {
   return Object.values(accept)

@@ -142,7 +142,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                         </p>
 
                         <div className={"text-center pt-1"}>
-                            <small>نسخه: 0.2.0</small>
+                            <small>نسخه: {process.env.NEXT_PUBLIC_VERSION}</small>
                         </div>
                     </Form>
                 )}

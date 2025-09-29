@@ -5,7 +5,7 @@ const DaisyInput = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<
     ({ className,type, ...props },ref) => {
         return <input
             type={type}
-            className={cn("input input-bordered w-full",className)}
+            className={cn("input input-bordered focus:bg-transparent w-full",className)}
             ref={ref}
             {...props}
         />

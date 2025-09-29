@@ -11,6 +11,7 @@ import {
 } from '@tanstack/react-table'
 import Pagination from "@/components/pagination";
 import {fuzzyFilter} from "@/lib/utils";
+import {MakePagination} from "@/hooks/usePagination/makePagination";
 
 
 
@@ -72,28 +73,7 @@ export default function ReactTable({
         globalFilterFn: fuzzyFilter,
     })
 
-    // تابع ساخت pagination ساده
-    const MakePagination = (
-        current: number,
-        total: number,
-        onClick: (page: number) => void
-    ) => {
-        const pages = []
-        for (let i = 1; i <= total; i++) {
-            pages.push(
-                <button
-                    key={i}
-                    className={`btn btn-sm ${
-                        i === current ? 'btn-primary' : 'btn-ghost'
-                    }`}
-                    onClick={() => onClick(i)}
-                >
-                    {i}
-                </button>
-            )
-        }
-        return pages
-    }
+
 
     const pages = MakePagination(currentPage + 1, totalPages, (page) =>
         onPageChange(page - 1)
@@ -109,7 +89,7 @@ export default function ReactTable({
 
     // const toggleColumn = (id: string) => {
     //     const newVal = !showColumns[id]
-    //     setShowColumns((prev) => ({ ...prev, [id]: newVal }))
+    //     setShowColumns((prev) => ({ ...prev, [episodeId]: newVal }))
     //     table-button.getColumn(id)?.toggleVisibility(newVal)
     // }
 
@@ -194,7 +174,7 @@ export default function ReactTable({
                     total={totalPages}
                     pages={pages}
                     currentPage={currentPage + 1}
-                    goTo={(page) => onPageChange(page - 1)}
+                    goTo={(page) =>  onPageChange(+page)}
                     nextPage={() => onPageChange(currentPage + 1)}
                     prevPage={() => onPageChange(currentPage - 1)}
                 />

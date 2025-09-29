@@ -130,7 +130,7 @@ export function RegisterForm({
 
                                 <div className={"text-center pt-1"}>
                                     <small>
-                                        نسخه: 0.2.0
+                                        نسخه: {process.env.NEXT_PUBLIC_VERSION}
                                     </small>
                                 </div>
                             </>

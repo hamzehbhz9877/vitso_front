@@ -1,21 +1,22 @@
 import {fetchAPi} from "@/hooks/fetch";
+import {getHostAddress} from "../../app.config";
 
 export const GetHomepageCategory = async () => await fetchAPi({
-    url: `${process.env.HOST_ADDRESS}/Home/Category`
+    url: `${getHostAddress()}/Home/Category`
 })
 
 
 export const GetCoursesAndArticles = async () => await fetchAPi({
-    url: `${process.env.HOST_ADDRESS}/Home/CoursesAndArticles`
+    url: `${getHostAddress()}/Home/CoursesAndArticles`
 
 
 })
 
 export const GetHomeStatInfo = async () => await fetchAPi({
-    url: `${process.env.HOST_ADDRESS}/Home/Info`
+    url: `${getHostAddress()}/Home/Info`
 })
 
 
 export const GetAllFaqForCourseOrArticle = async (entityId) => await fetchAPi({
-    url: `${process.env.HOST_ADDRESS}/Faq/GetAllFaqForCourseOrArticle/${entityId}`
+    url: `${getHostAddress()}/Faq/GetAllFaqForCourseOrArticle/${entityId}`
 })

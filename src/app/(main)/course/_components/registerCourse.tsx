@@ -4,9 +4,9 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {RequestShoppingCartAddItem} from "@/services/ShoppingCart";
 import Countdown from "@/components/countdown";
 
-const RegisterCourse = ({discountPercentage,isStudentOfCourse
+const RegisterCourse = ({discountPercentage,isStudentOfCourse,isTeacherOfCourse
                             ,payablePrice,id,price,completionPercentage,discountRemaining}:
-                        Pick<Course,'isStudentOfCourse'|'discountRemaining'|'completionPercentage'| 'price'|'discountPercentage'|'payablePrice'|'id'>) => {
+                        Pick<Course,'isTeacherOfCourse'|'isStudentOfCourse'|'discountRemaining'|'completionPercentage'| 'price'|'discountPercentage'|'payablePrice'|'id'>) => {
 
 
     const queryClient=useQueryClient();
@@ -41,17 +41,21 @@ const RegisterCourse = ({discountPercentage,isStudentOfCourse
 
             <div className={"mt-5 flex justify-between  items-center"}>
 
-                {isStudentOfCourse?
-                <span className={"text-xs text-info badge badge-soft badge-sm px-3 py-4"}>شما دانشجوی این دوره هستید</span>:
-                <button className={"btn btn-primary"} disabled={isPending}
-                        onClick={() => mutate({courseId: id})}>
-                    <GraduationCap size={20}/>
-                    ثبت نام در دوره
-                    {isPending ? <span className="loading loading-spinner"></span> : ""}
+                {isTeacherOfCourse ?
+                    <span
+                        className={"text-xs text-info badge badge-soft badge-sm px-3 py-4"}>شما مدرس این دوره هستید</span>:
+                    isStudentOfCourse ?
+                        <span className={"text-xs text-info badge badge-soft badge-sm px-3 py-4"}>شما دانشجوی این دوره هستید</span> :
+                        <button className={"btn btn-primary"} disabled={isPending}
+                                onClick={() => mutate({courseId: id})}>
+                            <GraduationCap size={20}/>
+                            ثبت نام در دوره
+                            {isPending ? <span className="loading loading-spinner"></span> : ""}
 
-                </button>}
+                        </button>}
                 <div className="flex items-center gap-x-2.5">
-                    {discountPercentage ? <div className="flex flex-col">
+                    {+price===0?<span className="text-primary text-base sm:text-lg">رایگان</span>:
+                    discountPercentage ? <div className="flex flex-col">
                                         <span
                                             className="text-sm text-slate-500 dark:text-white/70 -mb-1.5 line-through">{price}</span>
                         <span className=" text-lg font-bold">

@@ -63,7 +63,7 @@ const User = () => {
                     <ul className="dropdown-content  menu w-48 rounded-box bg-white dark:bg-base-200 shadow-md mt-2 absolute left-0">
                         {hasRole && (
                             <li>
-                                <Link href="/panel/dashboard" className="text-xs" onClick={closeDropdown}>
+                                <Link href="/panel" className="text-xs" onClick={closeDropdown}>
                                     <FaUserTie size={13} /> ورود به پنل ادمین
                                 </Link>
                             </li>

@@ -23,7 +23,7 @@ const Auth = ({children}: Props) => {
 
     const router = useRouter();
 
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<UserLoggedIn | null>( null);
 
     const resetUserCookie = async () => {
         await cookie.remove("user", {path: "/"});
@@ -35,11 +35,9 @@ const Auth = ({children}: Props) => {
         cookie.set("user", data, {path: "/"});
         setUser(data)
     };
-
-    useEffect(() => {
-        setUser(user ? user : cookie.get('user'));
-    }, [user]);
-
+    useEffect(()=>{
+           setUser( cookie.get('user') ?? null)
+    },[])
 
 
     return (

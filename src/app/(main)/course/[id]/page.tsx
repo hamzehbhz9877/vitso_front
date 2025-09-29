@@ -11,6 +11,7 @@ const Page = async ({params}: any) => {
     const courseDetails: any = await CourseDetail({slug: id})
     const faqs: any = await GetAllFaqForCourseOrArticle(courseDetails.data?.id)
 
+
     return (
         <div className={"course-page container"}>
             <BreadCrumb data={[

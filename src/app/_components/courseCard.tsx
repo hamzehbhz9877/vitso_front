@@ -15,7 +15,8 @@ const CourseCard = ({
                         author,
                         slug,
                         status,
-                        isFilterPage
+                        isFilterPage,
+    usersCount
                     }: Course & { isFilterPage?: boolean }) => {
     return (
         <div
@@ -89,30 +90,30 @@ const CourseCard = ({
 
                     <div className="card-actions justify-between items-center mt-2 text-zinc-500">
                         <div className="flex gap-1 text-sm">
-                            <UserRound size={15}/>2451
+                            <UserRound size={15}/>{usersCount}
                         </div>
                         <div className="flex gap-1 text-sm items-center">
                             <div className="flex items-center gap-x-2.5">
-                                {discountPercentage ? (
-                                    <>
-                                        <div className="text-sm p-1 rounded bg-primary text-white">
-                                            {discountPercentage}%
-                                        </div>
-                                        <div className="flex flex-col">
+                                {+price===0?<span className="text-primary text-base sm:text-lg">رایگان</span>:discountPercentage ? (
+                                        <>
+                                            <div className="text-sm p-1 rounded bg-primary text-white">
+                                                {discountPercentage}%
+                                            </div>
+                                            <div className="flex flex-col">
                       <span className="text-sm text-slate-500 dark:text-white/70 -mb-1.5 line-through">
                         {price}
                       </span>
-                                            <span className="text-primary text-base sm:text-lg">
+                                                <span className="text-primary text-base sm:text-lg">
                         {payablePrice}{" "}
-                                                <span className="text-sm sm:text-base">تومان</span>
+                                                    <span className="text-sm sm:text-base">تومان</span>
                       </span>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <span className="text-primary text-base sm:text-lg">
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <span className="text-primary text-base sm:text-lg">
                     {payablePrice} <span className="text-sm sm:text-base">تومان</span>
                   </span>
-                                )}
+                                    )}
                             </div>
                         </div>
                     </div>

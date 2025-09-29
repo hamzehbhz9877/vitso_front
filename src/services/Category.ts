@@ -1,4 +1,5 @@
 import {instantClient} from "@/services/httpservice";
+import {getHostAddress} from "../../app.config";
 
 import {fetchAPi} from "@/hooks/fetch";
 import fetchApiClient from "@/hooks/fetch/client";
@@ -38,12 +39,12 @@ export const GetAllSubForSelect =  (type) =>
 export const CourseByCategory = async (query: any) => {
     const {pageParam = 1,isfree=true, ...rest}: any = query
     return await fetcher({
-        url: `${process.env.HOST_ADDRESS}/Course/Filter?pageCurrent=${query.pageCurrent ?? pageParam}&pageSize=10&isFree=true&` + new URLSearchParams({
+        url: `${getHostAddress()}/Course/Filter?pageCurrent=${query.pageCurrent ?? pageParam}&pageSize=10&` + new URLSearchParams({
             ...rest
         })
     })
 }
 
 export const GetAllWithSubCategory = async (type) => await fetchAPi({
-    url: `${process.env.HOST_ADDRESS}/Category/GetAllWithSub/${type}`,
+    url: `${getHostAddress()}/Category/GetAllWithSub/${type}`,
 })

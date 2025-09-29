@@ -10,6 +10,7 @@ import CourseLinks from "@/app/(main)/course/_components/courseLinks";
 import AuthorProfile from "@/app/(main)/course/_components/authorProfile";
 import CourseTabs from "@/app/(main)/course/_components/courseTab";
 import CourseStatTable from "@/app/(main)/course/_components/courseStatTable";
+import episode from "@/app/(main)/course/_components/episode";
 
 const CourseDetails = ({
                            title,
@@ -24,6 +25,7 @@ const CourseDetails = ({
                            countEpisode,
                            completionPercentage,
                            isStudentOfCourse,
+                           isTeacherOfCourse,
                            discountRemaining,
                            authorName,
 
@@ -37,7 +39,6 @@ authorId,
                            tagList, categoryName,faqs
                        }: Course& {faqs:Faq["listFaq"]}) => {
     const [isVideoReady, setIsVideoReady] = useState(false)
-
     return (
         <div className="course-details mt-6">
 
@@ -50,7 +51,7 @@ authorId,
                         )}
                         <div className={isVideoReady ? '' : 'hidden'}>
                             <PlyrPlayer
-                                src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
+                                src={seasons[0].episodes[0].videoUrl}
                                 poster={image}
                                 onReady={() => setIsVideoReady(true)}
                             />
@@ -81,7 +82,7 @@ authorId,
                                          countEpisode={countEpisode}/>
 
                         <div className={"mt-4"}>
-                            <RegisterCourse isStudentOfCourse={isStudentOfCourse}
+                            <RegisterCourse isStudentOfCourse={isStudentOfCourse} isTeacherOfCourse={isTeacherOfCourse}
                                             discountRemaining={discountRemaining}
                                             completionPercentage={completionPercentage} price={price} id={id}
                                             discountPercentage={discountPercentage}
@@ -98,7 +99,7 @@ authorId,
                 <div className="mb-20 h-max hidden lg:block">
                     <div>
                         <div className={"w-[350px] shadow rounded-lg dark:bg-base-300 p-3"}>
-                            <RegisterCourse isStudentOfCourse={isStudentOfCourse} discountRemaining={discountRemaining}
+                            <RegisterCourse isStudentOfCourse={isStudentOfCourse} discountRemaining={discountRemaining} isTeacherOfCourse={isTeacherOfCourse}
                                             completionPercentage={completionPercentage} price={price} id={id}
                                             discountPercentage={discountPercentage}
                                             payablePrice={payablePrice}/>

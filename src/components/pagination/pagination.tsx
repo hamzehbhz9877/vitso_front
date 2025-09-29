@@ -1,5 +1,4 @@
-import "./pagination.scss"
-import { FaAngleRight,FaAngleLeft } from "react-icons/fa6";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 
 export type PaginationProps = {
     pages: Array<any>;
@@ -19,49 +18,65 @@ const Pagination = ({
                         total,
                     }: PaginationProps) => {
 
-    const rows = pages.map((item, index) => (
-        <li
-            key={index}
-            id={index.toString()}
-            className={`pagination__item 
-            ${item==="..." || item==="... "||item===" ..."?"dot !cursor-default !border-none":""}
-            ${currentPage === item ? "pagination__item--active" : ""
-            }`}
-            onClick={() =>
-                item.toString() === "..."
-                    ? goTo(currentPage + 1)
-                    : item.toString() === "... "
-                        ? goTo(currentPage - 1)
-                        : item.toString() === " ..."
-                            ? goTo(currentPage + 1)
-                            : goTo(item)
-            }
-        >
-            <span className="pagination__link">{item}</span>
-        </li>
-    ));
+    const rows = pages.map((item, index) => {
+        const isDot = item === "..." || item === "... " || item === " ...";
+        const isActive = currentPage === item;
 
+        return (
+            <li
+                key={index}
+                className={`
+                    mx-0.5 md:mx-1 rounded-[8px]
+                    w-[40px] h-[35px] 
+                    text-xs md:text-sm flex items-center justify-center cursor-pointer 
+                    ${isActive ? "bg-primary text-white w-[25px] h-[35px] text-[14px] md:text-[16px]" : ""}
+                    ${isDot ? "cursor-default border-none" : ""}
+                `}
+                onClick={() => {
+                    if (item === "...") goTo(currentPage + 1);
+                    else if (item === "... ") goTo(currentPage - 1);
+                    else if (item === " ...") goTo(currentPage + 1);
+                    else goTo(item-1);
+                    window.scrollTo(0,0)
+                }}
+            >
+                {item}
+            </li>
+        )
+    });
 
     return (
-        <nav className="pagination">
-            <div className={`prev ${currentPage === 1 ? "disabled" : ""}`}
-                 onClick={currentPage === 1 ? () => {
-                 } : prevPage}>
-                <FaAngleRight size={13} />
-                <span>قبلی</span>
+        <nav className="flex flex-row items-center justify-between my-5 px-4 md:px-0 gap-5">
+            {/* Previous */}
+            <div
+                className={`
+                    flex items-center gap-2 text-sm cursor-pointer
+                    ${currentPage === 1 ? "!cursor-not-allowed opacity-50" : ""}
+                `}
+                onClick={currentPage === 1 ? undefined : prevPage}
+            >
+                <FaAngleRight className="w-[10px] md:w-[20px]" />
+                <span className="hidden lg:block">قبلی</span>
             </div>
-            <ul className="pagination__list">
+
+            {/* Pages */}
+            <ul className="flex items-center gap-2">
                 {rows}
             </ul>
-            <div className={`next ${currentPage === total ? "disabled" : ""}`}
-                 onClick={currentPage === total ? () => {
-                 } : nextPage}>
-                <span>بعدی</span>
-                <FaAngleLeft
-                       size={13}/>
+
+            {/* Next */}
+            <div
+                className={`
+                    flex items-center gap-2 text-sm cursor-pointer
+                    ${currentPage === total ? "!cursor-not-allowed opacity-50" : ""}
+                `}
+                onClick={currentPage === total ? undefined : nextPage}
+            >
+                <span className="hidden lg:block">بعدی</span>
+                <FaAngleLeft className="w-[10px] md:w-[20px]" />
             </div>
         </nav>
     );
-
 };
+
 export default Pagination;

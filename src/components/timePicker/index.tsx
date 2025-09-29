@@ -41,6 +41,7 @@ export function TimePickerDemo({ value, onChange }: TimePickerDemoProps) {
                 </Label>
                 <TimePickerInput
                     picker="hours"
+                    className={"px-0"}
                     date={localDate}
                     setDate={handleDateChange}
                     ref={hourRef}
@@ -54,6 +55,7 @@ export function TimePickerDemo({ value, onChange }: TimePickerDemoProps) {
                 <TimePickerInput
                     picker="minutes"
                     date={localDate}
+                    className={"px-0"}
                     setDate={handleDateChange}
                     ref={minuteRef}
                     onLeftFocus={() => hourRef.current?.focus()}
@@ -66,6 +68,7 @@ export function TimePickerDemo({ value, onChange }: TimePickerDemoProps) {
                 </Label>
                 <TimePickerInput
                     picker="seconds"
+                    className={"px-0"}
                     date={localDate}
                     setDate={handleDateChange}
                     ref={secondRef}

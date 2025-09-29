@@ -1,8 +1,10 @@
 import axios from 'axios';
 import {toast} from "react-toastify";
 import Cookie from "universal-cookie"
+import {getHostAddress} from "../../app.config";
+
 export const instantClient = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_HOST_ADDRESS ?? process.env.HOST_ADDRESS,
+    baseURL:getHostAddress(),
     withCredentials: true,
 })
 

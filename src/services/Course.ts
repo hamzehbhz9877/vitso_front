@@ -1,5 +1,6 @@
 import {instantClient} from "@/services/httpservice";
 import {fetchAPi} from "@/hooks/fetch";
+import {getHostAddress} from "../../app.config";
 
 export const RequestCourses =  (params:any) =>
     instantClient.get('Course', {params:{...params}});
@@ -31,7 +32,7 @@ export const DeleteCourses =  (id) =>
 
 export const CourseDetail = async (query: any) => {
     const {slug,...rest}: any = query
-    return await fetchAPi({url:`${process.env.HOST_ADDRESS}/Course/GetWithSlug/${slug}` + new URLSearchParams({
+    return await fetchAPi({url:`${getHostAddress()}/Course/GetWithSlug/${slug}` + new URLSearchParams({
             ...rest
         })
     })

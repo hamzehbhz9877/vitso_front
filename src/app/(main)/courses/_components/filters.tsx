@@ -145,6 +145,7 @@ const Filters = ({type, categories, course, searchParams}: {
                 {/* فقط دسکتاپ: فیلتر کناری */}
                 <div className="hidden lg:flex flex-col gap-2 w-[270px]">
                     <CheckBoxFilter
+                        isOpen={true}
                         hasSearch={true}
                         searchPlaceholder={"جستجو دسته بندی"}
                         multiSelect

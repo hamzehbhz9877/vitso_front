@@ -1,25 +1,25 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react';
-import { ShoppingBag, ShoppingCart } from "lucide-react";
+import React, {useState, useRef, useEffect} from 'react';
+import {ShoppingBag, ShoppingCart} from "lucide-react";
 import Image from "next/image";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { RequestShoppingCart, RequestShoppingCartDeleteItem } from "@/services/ShoppingCart";
-import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { IoClose } from "react-icons/io5";
+import {useMutation, useQuery} from "@tanstack/react-query";
+import {RequestShoppingCart, RequestShoppingCartDeleteItem} from "@/services/ShoppingCart";
+import {cn} from "@/lib/utils";
+import {useRouter} from "next/navigation";
+import {IoClose} from "react-icons/io5";
 
 const ShoppingList = () => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const { data, refetch } = useQuery<ApiResponse<ShoppingCart>>({
+    const {data, refetch} = useQuery<ApiResponse<ShoppingCart>>({
         queryFn: RequestShoppingCart,
         queryKey: ["shoppingCart"],
     });
 
-    const { mutate, isPending } = useMutation({
+    const {mutate, isPending} = useMutation({
         mutationFn: RequestShoppingCartDeleteItem,
         onSettled: (_, error) => {
             if (!error) refetch();
@@ -44,14 +44,16 @@ const ShoppingList = () => {
     };
 
     return (
-        <div ref={dropdownRef} className={cn("dropdown dropdown-end dropdown-full static sm:relative", { "dropdown-open": open })}>
+        <div ref={dropdownRef}
+             className={cn("dropdown dropdown-end dropdown-full static sm:relative", {"dropdown-open": open})}>
             <div tabIndex={0}>
                 <button aria-label={"shopping-list"}
-                    className="btn btn-circle btn-primary btn-soft relative"
-                    onClick={() => setOpen(!open)}
+                        className="btn btn-circle btn-primary btn-soft relative"
+                        onClick={() => setOpen(!open)}
                 >
-                    <ShoppingBag />
-                    <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center font-semibold">
+                    <ShoppingBag/>
+                    <span
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center font-semibold">
                         {data?.data.count ?? 0}
                     </span>
                 </button>
@@ -94,29 +96,40 @@ const ShoppingList = () => {
                                         </div>
 
                                         {/* Text */}
-                                        <div className="flex flex-col h-full gap-1 text-xs sm:gap-2 justify-between flex-1">
+                                        <div
+                                            className="flex flex-col h-full gap-1 text-xs sm:gap-2 justify-between flex-1">
                                             <span className="line-clamp-2 leading-5">{item.name}</span>
                                             <div className="flex gap-2 text-base-content">
                                                 <div className="flex items-center gap-x-2.5">
-                                                    {item.discountPercentage && (
-                                                        <div className="text-xs p-1 rounded bg-primary text-white">
-                                                            {item.discountPercentage}%
-                                                        </div>
-                                                    )}
-                                                    {item.discountPercentage ? (
-                                                        <div className="flex flex-col">
-                                                            <span className="text-xs text-slate-500 dark:text-white/70 line-through">
+                                                    {+item.price === 0 ? <span
+                                                            className="text-primary text-base sm:text-lg">رایگان</span> :
+                                                        <>
+                                                            {
+                                                                item.discountPercentage && (
+                                                                    <div
+                                                                        className="text-xs p-1 rounded bg-primary text-white">
+                                                                        {item.discountPercentage}%
+                                                                    </div>
+                                                                )}
+                                                            {item.discountPercentage ? (
+                                                                <div className="flex flex-col">
+                                                            <span
+                                                                className="text-xs text-slate-500 dark:text-white/70 line-through">
                                                                 {item.price}
                                                             </span>
-                                                            <span className="text-primary text-sm">
-                                                                {item.payablePrice} <span className="text-xs">تومان</span>
+                                                                    <span className="text-primary text-sm">
+                                                                {item.payablePrice} <span
+                                                                        className="text-xs">تومان</span>
                                                             </span>
-                                                        </div>
-                                                    ) : (
-                                                        <span className="text-primary text-sm">
+                                                                </div>
+                                                            ) : (
+                                                                <span className="text-primary text-sm">
                                                             {item.payablePrice} <span className="text-xs">تومان</span>
                                                         </span>
-                                                    )}
+                                                            )
+                                                            }
+                                                        </>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -124,14 +137,14 @@ const ShoppingList = () => {
 
                                     {/* Divider */}
                                     {index !== data.data.items.length - 1 && (
-                                        <hr className="border-[#ABAFB320] my-2 sm:my-[10px]" />
+                                        <hr className="border-[#ABAFB320] my-2 sm:my-[10px]"/>
                                     )}
                                 </div>
                             ))}
 
                             {/* Footer */}
                             <>
-                                <hr className="border-[#ABAFB31] my-2 sm:my-[10px]" />
+                                <hr className="border-[#ABAFB31] my-2 sm:my-[10px]"/>
                                 <div className="p-2 sm:p-4">
                                     <div className="flex gap-2 items-center justify-between">
                                         <span>مبلغ قابل پرداخت</span>
@@ -144,7 +157,7 @@ const ShoppingList = () => {
                                         onClick={() => {
                                             (document.activeElement as HTMLElement)?.blur(); // بستن dropdown
                                             router.push("/cart"); // رفتن به صفحه سبد خرید
-                                        }}                                        className="btn btn-primary mx-auto mt-3 w-full"
+                                        }} className="btn btn-primary mx-auto mt-3 w-full"
                                     >
                                         مشاهده سبد خرید
                                     </button>
@@ -153,8 +166,9 @@ const ShoppingList = () => {
                         </div>
                     ) : (
                         <div className="p-6 flex flex-col items-center text-center">
-                            <div className="w-20 h-20 flex items-center justify-center rounded-full bg-base-200 text-base-content">
-                                <ShoppingCart size={36} strokeWidth={1.5} />
+                            <div
+                                className="w-20 h-20 flex items-center justify-center rounded-full bg-base-200 text-base-content">
+                                <ShoppingCart size={36} strokeWidth={1.5}/>
                             </div>
                             <p className="mt-3 text-sm">هیچ محصولی در سبد خرید نیست.</p>
                         </div>

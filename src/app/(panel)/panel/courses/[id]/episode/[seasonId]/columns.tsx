@@ -8,11 +8,9 @@ import useModal from "@/context/modal/useModal";
 import {Button} from "@/components/ui/button";
 import {FaEdit} from "react-icons/fa";
 import {RequestEpisodes} from "@/services/Episode";
-import {useParams, useRouter} from "next/navigation";
+import {useParams, usePathname, useRouter} from "next/navigation";
 import DeleteSeason from "@/app/(panel)/panel/courses/[id]/episode/[seasonId]/_action/deleteEpisode";
 import {BiTrash} from "react-icons/bi";
-import AddEpisode from "@/app/(panel)/panel/courses/[id]/episode/[seasonId]/_action/addEpisode";
-import EditEpisode from "@/app/(panel)/panel/courses/[id]/episode/[seasonId]/_action/editEpisode";
 import {FaAngleRight} from "react-icons/fa6";
 import {CirclePlus} from "lucide-react";
 
@@ -23,6 +21,7 @@ export default function EpisodesTable() {
 
     const params = useParams()
     const router = useRouter()
+    const pathname=usePathname()
 
     const {data: episodeData, isLoading} = useQuery({
         queryFn: () => RequestEpisodes(params.seasonId),
@@ -51,8 +50,9 @@ export default function EpisodesTable() {
                 accessorFn: row => row.publishedAt.split(" ")[0],
             }, {
                 accessorKey: 'آدرس ویدیو',
-                accessorFn: row => new URL(row.videoUrl).origin ,
-            }, {
+                accessorFn: row => row.videoUrl?new URL(row.videoUrl).origin:row.videoUrl,
+            },
+            {
                 accessorKey: 'وضعیت دسترسی',
                 accessorFn: row => row.isFree,
             }, {
@@ -64,7 +64,7 @@ export default function EpisodesTable() {
                         <div className="flex gap-3 justify-center">
 
                             <FaEdit size={20} className={"cursor-pointer"}
-                                    onClick={() => openModal(<EditEpisode id={episode.id}/>)}/>
+                                    onClick={() => router.push(pathname+`/edit/${episode.id}`)}/>
 
                             <BiTrash size={20} className={"cursor-pointer"}
                                      onClick={() => openModal(<DeleteSeason name={episode.title}
@@ -99,7 +99,7 @@ export default function EpisodesTable() {
                 setGlobalFilter={setSearch}
                 isLoading={isLoading}
                 headerActions={
-                    <Button  onClick={() => openModal(<AddEpisode/>)}
+                    <Button  onClick={() => router.push(pathname+"/add")}
                     >
                         <CirclePlus/>
                         افزودن جلسه

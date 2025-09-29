@@ -1,6 +1,7 @@
 import {instantClient} from "@/services/httpservice";
 import {fetchAPi} from "@/hooks/fetch";
 import fetchApiClient from "@/hooks/fetch/client";
+import {getHostAddress} from "../../app.config";
 
 
 const isServer = typeof window === "undefined";
@@ -29,7 +30,7 @@ export const DeleteArticles =  (id) =>
 export const ArticleByCategory = async (query: any) => {
     const {pageParam = 1,isfree=true, ...rest}: any = query
     return await fetcher({
-        url: `${process.env.HOST_ADDRESS}/Article/Filter?pageCurrent=${query.pageCurrent ?? pageParam}&pageSize=10&` + new URLSearchParams({
+        url: `${getHostAddress()}/Article/Filter?pageCurrent=${query.pageCurrent ?? pageParam}&pageSize=10&` + new URLSearchParams({
             ...rest
         })
     })
@@ -37,7 +38,7 @@ export const ArticleByCategory = async (query: any) => {
 
 export const ArticleDetail = async (query: any) => {
     const {slug,...rest}: any = query
-    return await fetchAPi({url:`${process.env.HOST_ADDRESS}/Article/GetWithSlug/${slug}` + new URLSearchParams({
+    return await fetchAPi({url:`${getHostAddress()}/Article/GetWithSlug/${slug}` + new URLSearchParams({
             ...rest
         })
     })

@@ -50,7 +50,7 @@ const NavbarDropDown = ({ data, type, closeMenu, isOpen }: NavbarDropDownProps) 
                     </Link>
 
                     {d.subCategories.length > 0 && (
-                        <ul className="absolute submenu h-full rounded-l-[6px] border-r bg-white dark:bg-base-200 right-[calc(100%-16px)] top-0 p-0 hidden group-hover:block w-64 z-10 shadow">
+                        <ul className="absolute submenu min-h-full rounded-l-[6px] border-r bg-white dark:bg-base-200 right-[calc(100%-16px)] top-0 p-0 hidden group-hover:block w-64 z-10 shadow">
                             {d.subCategories.map((sub) => (
                                 <li key={sub.id} className="hover:text-primary" onClick={handleCloseMenu}>
                                     <Link

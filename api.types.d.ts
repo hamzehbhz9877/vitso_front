@@ -98,12 +98,14 @@ type Course = {
     commentCount: number,
     studentCount: number,
     isStudentOfCourse:boolean
+    isTeacherOfCourse:boolean
     discountRemaining: {
         daysRemaining: number,
         hoursRemaining: number,
         minutesRemaining: number,
         secondsRemaining: number
     },
+    usersCount:string,
     id: string
     slug: string
     title: string

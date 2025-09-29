@@ -4,6 +4,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { CheckTransactionUser } from '@/services/Wallet';
 import { useParams } from 'next/navigation';
+import Link from "next/link";
 
 const PaymentResult: React.FC<{ data: any }> = ({ data }) => {
     const isSuccess = data.status === 1;
@@ -34,9 +35,9 @@ const PaymentResult: React.FC<{ data: any }> = ({ data }) => {
 
                     <div className="divider" />
 
-                    <a href="/profile/wallet" className={`btn btn-block ${isSuccess ? 'btn-success' : 'btn-error'}`}>
+                    <Link href="/profile/wallet" className={`btn btn-block ${isSuccess ? 'btn-primary' : 'btn-error'}`}>
                         بازگشت به کیف پول
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

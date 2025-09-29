@@ -8,7 +8,7 @@ import {RequestShoppingCart, RequestShoppingCartDeleteItem, RequestShoppingCartP
 import Image from "next/image";
 import {calculateDiscountPercentage, cn} from "@/lib/utils";
 import {FiTrash2} from "react-icons/fi";
-import { Wallet} from "@/services/Wallet";
+import {Wallet} from "@/services/Wallet";
 import useAuth from "@/context/authentication/useAuth";
 
 const Page = () => {
@@ -35,12 +35,12 @@ const Page = () => {
         }
     });
 
-    const {user}=useAuth()
+    const {user} = useAuth()
 
-    const {data:UserWallet}=useQuery({
-        queryFn:Wallet,
-        queryKey:["wallet"],
-        enabled:!!user
+    const {data: UserWallet} = useQuery({
+        queryFn: Wallet,
+        queryKey: ["wallet"],
+        enabled: !!user
     });
 
     return (
@@ -81,20 +81,26 @@ const Page = () => {
                                         <div className={"flex gap-2 text-base-content"}>
                                             <div className="flex w-full gap-1 justify-between items-center">
                                                 <div className="flex items-center gap-2.5 text-nowrap">
-
-                                                    {item.discountPercentage ?
-                                                        <div className="text-xs p-1 rounded bg-primary text-white">
-                                                            {item.discountPercentage}%
-                                                        </div> : ""}
-                                                    {item.discountPercentage ? <div className="flex flex-col">
+                                                    {+item.price === 0 ? <span
+                                                            className="text-primary text-base sm:text-lg">رایگان</span> :
+                                                        <>
+                                                            {
+                                                            item.discountPercentage ?
+                                                                <div
+                                                                    className="text-xs p-1 rounded bg-primary text-white">
+                                                                    {item.discountPercentage}%
+                                                                </div> : ""}
+                                                        {item.discountPercentage ? <div className="flex flex-col">
                                         <span
                                             className="text-xs text-slate-500 dark:text-white/70 -mb-1.5 line-through">{item.price}</span>
-                                                        <span className="text-primary">
+                                                            <span className="text-primary">
                             {item.payablePrice} <span className=" text-xs">تومان</span>
                                         </span>
-                                                    </div> : <span className="text-primary">
+                                                        </div> : <span className="text-primary">
                             {item.payablePrice} <span className="text-xs">تومان</span>
                                         </span>}
+                                                        </>
+                                                    }
                                                 </div>
                                                 <FiTrash2
                                                     className={cn("cursor-pointer", isPending && "opacity-20")}
@@ -111,7 +117,8 @@ const Page = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="card bg-base-100 card-md shadow-md border  p-3 w-full mx-auto min-[400px]:w-[330px]  lg:w-[480px]">
+                    <div
+                        className="card bg-base-100 card-md shadow-md border  p-3 w-full mx-auto min-[400px]:w-[330px]  lg:w-[480px]">
                         <div className="text-sm card-body p-1 flex flex-col gap-4">
                             <div className="flex items-center justify-between">
                                 <span>مبلغ کل</span>
@@ -146,7 +153,7 @@ const Page = () => {
                             )}
                         </div>
 
-                        <hr className="border-[#ABAFB31] my-[10px]" />
+                        <hr className="border-[#ABAFB31] my-[10px]"/>
 
                         {user ? (
                             <>
