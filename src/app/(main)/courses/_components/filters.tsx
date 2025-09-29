@@ -20,6 +20,7 @@ import {ArrowUpDown, Filter} from "lucide-react";
 import {ArticleByCategory} from "@/services/Article";
 import ArticleCard from "@/app/_components/articleCard";
 import {useDisableBodyScroll} from "@/hooks/useDisableBodyScroll/useDisableBodyScroll";
+import ToggleFilter from "@/components/toggleFilter";
 
 const Filters = ({type, categories, course, searchParams}: {
     categories: any,
@@ -30,6 +31,7 @@ const Filters = ({type, categories, course, searchParams}: {
     const params = useParams()
     const [filterOpen, setFilterOpen] = useState(false);
     const [sortOpen, setSortOpen] = useState(false);
+
 
     const toggleFilter = () => {
         setFilterOpen(!filterOpen);
@@ -143,7 +145,12 @@ const Filters = ({type, categories, course, searchParams}: {
 
             <div className="flex flex-col lg:flex-row  gap-3">
                 {/* فقط دسکتاپ: فیلتر کناری */}
+
                 <div className="hidden lg:flex flex-col gap-2 w-[270px]">
+                    {
+                        type === "articles" ? "" :
+                            <ToggleFilter query={"isFree"} label={"فقط دوره‌های رایگان"}/>
+                    }
                     <CheckBoxFilter
                         isOpen={true}
                         hasSearch={true}
@@ -165,6 +172,7 @@ const Filters = ({type, categories, course, searchParams}: {
                                 title={"وضعیت دوره"}
                                 data={statusFilter}
                             />}
+
                 </div>
 
                 {/* موبایل: دکمه‌ها */}
@@ -240,6 +248,10 @@ const Filters = ({type, categories, course, searchParams}: {
 
                     {/* بخش اسکرول‌شونده */}
                     <div className="flex-grow overflow-y-auto flex flex-col gap-3 filter-modal">
+                        {
+                            type === "articles" ? "" :
+                                <ToggleFilter query={"isFree"} label={"فقط دوره‌های رایگان"}/>
+                        }
                         <CheckBoxFilter
                             isOpen
                             hasSearch={true}

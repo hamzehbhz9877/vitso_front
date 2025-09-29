@@ -251,7 +251,7 @@ export function shouldShowButton(props: {
  *       aria-label={label}
  *       aria-pressed={isActive}
  *     >
- *       Toggle List
+ *       ToggleFilter List
  *     </MyButton>
  *   )
  * }

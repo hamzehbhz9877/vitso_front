@@ -75,7 +75,7 @@ const CourseCard = ({
                         {title}
                     </h2>
 
-                    <div className="card-actions justify-between mt-2 text-zinc-500">
+                    <div className="card-actions flex-row md:flex-col justify-between mt-2 text-zinc-500">
                         <div className="flex gap-1 text-sm items-center">
                             <UserRound size={15}/>
                             {author}
