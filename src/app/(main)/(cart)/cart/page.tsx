@@ -10,6 +10,7 @@ import {calculateDiscountPercentage, cn} from "@/lib/utils";
 import {FiTrash2} from "react-icons/fi";
 import {Wallet} from "@/services/Wallet";
 import useAuth from "@/context/authentication/useAuth";
+import {ShoppingBag, ShoppingCart} from "lucide-react";
 
 const Page = () => {
 
@@ -48,22 +49,24 @@ const Page = () => {
 
             {data?.data.items.length === 0 ?
                 <div className=" card w-full bg-base-100 card-md">
-                    <div className="cart-empty-icon"></div>
+                    {/*<div className="cart-empty-icon">*/}
+                    {/*     */}
+                    {/*</div>*/}
                     <div className="card-body pt-0 text-center cart-empty-description flex-1">
                         <div className="">
                             <p className={"text-lg"}>
                                 سبد خرید شما در حال حاضر خالی است.
                             </p>
                         </div>
-                        <p>با جستجو در فروشگاه میتوانید محصولات مورد علاقه خود را به سبد خرید خود اضافه کنید.</p>
+                        <p>با جستجو در بخش دوره ها میتوانید دوره مورد علاقه خود را به سبد خرید خود اضافه کنید.</p>
                         <p className={"mt-3"}>
-                            <Link className="btn btn-primary" href="/">
-                                بازگشت به فروشگاه </Link>
+                            <Link className="btn btn-primary" href="/courses">
+                                مشاهده دوره ها </Link>
                         </p>
                     </div>
                 </div> :
                 <div className="flex flex-col md:flex-row items-start gap-3 px-3 xl:px-16">
-                    <div className={"card w-full bg-base-100 card-md shadow-md border   p-3"}>
+                    <div className={"card w-full bg-base-100 card-md shadow-md border border-gray-300 dark:border-gray-800   p-3"}>
                         {data?.data.items.map((item, index) => (
                             <div key={index}>
                                 <div className={"flex flex-col min-[550px]:flex-row gap-3"}>
@@ -118,7 +121,7 @@ const Page = () => {
                         ))}
                     </div>
                     <div
-                        className="card bg-base-100 card-md shadow-md border  p-3 w-full mx-auto min-[400px]:w-[330px]  lg:w-[480px]">
+                        className="card bg-base-100 card-md shadow-md border border-gray-300 dark:border-gray-800  p-3 w-full mx-auto min-[400px]:w-[330px]  lg:w-[480px]">
                         <div className="text-sm card-body p-1 flex flex-col gap-4">
                             <div className="flex items-center justify-between">
                                 <span>مبلغ کل</span>

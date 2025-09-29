@@ -75,11 +75,11 @@ const ShoppingList = () => {
                         <div className="p-2">
                             {data?.data.items.map((item, index) => (
                                 <div key={index}>
-                                    <div className="flex gap-2 items-center">
+                                    <div className="flex gap-2">
                                         {/* Image + Remove */}
                                         <div className="relative">
                                             <Image
-                                                className="rounded-xl w-30 sm:w-[130px] aspect-auto object-cover"
+                                                className="rounded-xl w-30 h-20 sm:w-[130px] aspect-auto object-cover"
                                                 src={item.image}
                                                 alt={item.name}
                                                 width={130}
@@ -97,7 +97,7 @@ const ShoppingList = () => {
 
                                         {/* Text */}
                                         <div
-                                            className="flex flex-col h-full gap-1 text-xs sm:gap-2 justify-between flex-1">
+                                            className="flex flex-col gap-1 text-xs sm:gap-2 justify-between flex-1">
                                             <span className="line-clamp-2 leading-5">{item.name}</span>
                                             <div className="flex gap-2 text-base-content">
                                                 <div className="flex items-center gap-x-2.5">
@@ -105,13 +105,13 @@ const ShoppingList = () => {
                                                             className="text-primary text-base sm:text-lg">رایگان</span> :
                                                         <>
                                                             {
-                                                                item.discountPercentage && (
+                                                                item.discountPercentage>0 && (
                                                                     <div
                                                                         className="text-xs p-1 rounded bg-primary text-white">
                                                                         {item.discountPercentage}%
                                                                     </div>
                                                                 )}
-                                                            {item.discountPercentage ? (
+                                                            {item.discountPercentage>0 ? (
                                                                 <div className="flex flex-col">
                                                             <span
                                                                 className="text-xs text-slate-500 dark:text-white/70 line-through">
@@ -170,7 +170,7 @@ const ShoppingList = () => {
                                 className="w-20 h-20 flex items-center justify-center rounded-full bg-base-200 text-base-content">
                                 <ShoppingCart size={36} strokeWidth={1.5}/>
                             </div>
-                            <p className="mt-3 text-sm">هیچ محصولی در سبد خرید نیست.</p>
+                            <p className="mt-3 text-sm">هیچ دوره ای در سبد خرید نیست.</p>
                         </div>
                     )}
                 </div>
