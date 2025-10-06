@@ -1,7 +1,7 @@
 'use client'
 
 import React, {
-    ChangeEvent,
+    ChangeEvent, useEffect,
     useState
 } from 'react'
 import { useField, ErrorMessage } from 'formik'
@@ -28,7 +28,9 @@ const BaseTextArea = ({
     const finalValue = value ?? field?.value ?? ''
     const maxLength = rest.maxLength ?? undefined
     const [charCount, setCharCount] = useState(finalValue.length || 0)
-
+    useEffect(() => {
+        setCharCount(finalValue.length)
+    }, [finalValue])
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newValue = e.target.value
         if (maxLength && newValue.length > maxLength) {

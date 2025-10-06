@@ -77,6 +77,7 @@ import {
     ContextMenuLabel, ContextMenuSeparator, ContextMenuShortcut,
     ContextMenuTrigger
 } from "@/components/ui/context-menu";
+import {Skeleton} from "@/components/ui/skeleton";
 
 
 // ---- Color Swatches
@@ -151,6 +152,7 @@ export default function TiptapEditor({
 }) {
     const [isFullscreen, setIsFullscreen] = useState(false)
 
+
     const editor = useEditor({
         extensions: [
             StarterKit.configure({
@@ -201,14 +203,18 @@ export default function TiptapEditor({
                 },
             }),
         ],
-        content: defaultData ?? '',
+        content: defaultData,
         onUpdate({editor}) {
             getEditorData(editor.getHTML(), editor.getText())
         },
         immediatelyRender: false,
     })
     const editorRef = useRef<HTMLDivElement | null>(null);
-
+    useEffect(() => {
+        if (editor && defaultData) {
+            editor.commands.setContent(defaultData);
+        }
+    }, [editor, defaultData]);
     const [showMenu, setShowMenu] = useState(false);
     const [menuStyle, setMenuStyle] = useState<{ top: number }>({
         top: 0,
@@ -244,7 +250,31 @@ export default function TiptapEditor({
 
     const [size, setSize] = React.useState<PageSize>("desktop")
 
-    if (!editor) return null
+    if (!editor) {
+        return < div
+            className = "space-y-4 border p-4 rounded-md bg-background shadow-sm" >
+            < div
+                className = "flex flex-wrap gap-2" >
+                {/* Toolbar buttons */}
+                {
+                    Array.from({length: 8}).map((_, i) => (
+                        <Skeleton key={i} className="h-8 w-8 rounded"/>
+                    ))
+                }
+                <Skeleton className="h-8 w-24 rounded"/>
+            </div>
+
+            {/* Editor content area */
+            }
+            <div className="space-y-3 mt-4">
+                <Skeleton className="h-6 w-3/4"/>
+                <Skeleton className="h-4 w-full"/>
+                <Skeleton className="h-4 w-5/6"/>
+                <Skeleton className="h-4 w-2/3"/>
+                <Skeleton className="h-4 w-3/4"/>
+            </div>
+        </div>
+    }
 
     return (
         <div
@@ -254,8 +284,6 @@ export default function TiptapEditor({
             )}
         >
             <Toolbar variant="floating" className="bg-background !overflow-x-auto overflow-y-auto">
-
-
 
 
                 <ToolbarGroup>
@@ -325,185 +353,185 @@ export default function TiptapEditor({
                     </div> : ""}
             </Toolbar>
 
-                <ContextMenu>
-                    <ContextMenuTrigger onContextMenu={(e) => {
-                        if (!(editor.isActive("tableCell") || editor.isActive("tableHeader"))) {
-                            e.preventDefault();
-                        }
-                    }}>
-                        <div className={cn("relative mx-auto", isFullscreen && "prose-fullscreen",
-                            isFullscreen ? size === "default" ? "w-full" : size === "desktop" ? "w-[926px]" :
-                                size === "tablet" ? "w-[736px]" : size === "mobile" ? "w-[343px]" : "w-auto" : "w-auto")}
-                             ref={tableRef}
-                        >
-                            <EditorContent ref={editorRef}
-                                           editor={editor}
-                                           className={cn(
-                                               "prose prose-sm  text-right h-full overflow-auto mx-auto",
-                                           )}
-                            />
-                            <div id="floating-menu">
-                                {showMenu && (
-                                    <motion.div
-                                        ref={floatingMenuRef}
-                                        initial={{opacity: 0, scale: 0.95}}
-                                        animate={{opacity: 1, scale: 1}}
-                                        className="absolute border bg-popover p-2 shadow-xl z-50 w-auto"
-                                        style={{
-                                            top: menuStyle.top,
-                                            left: 0,
-                                            right:0,
-                                            maxWidth: '100%',
-                                        }}
-                                        onMouseDown={e => e.stopPropagation()}
-                                    >
-                                        <div className="flex flex-wrap gap-1 items-center justify-start sm:justify-center">
-                                            <Toggle
-                                                pressed={editor.isActive('bold')}
-                                                onPressedChange={() => editor.chain().focus().toggleBold().run()}
-                                                aria-label="bold"
-                                            >
-                                                <Bold className="h-4 w-4"/>
-                                            </Toggle>
+            <ContextMenu>
+                <ContextMenuTrigger onContextMenu={(e) => {
+                    if (!(editor.isActive("tableCell") || editor.isActive("tableHeader"))) {
+                        e.preventDefault();
+                    }
+                }}>
+                    <div className={cn("relative mx-auto", isFullscreen && "prose-fullscreen",
+                        isFullscreen ? size === "default" ? "w-full" : size === "desktop" ? "w-[926px]" :
+                            size === "tablet" ? "w-[736px]" : size === "mobile" ? "w-[343px]" : "w-auto" : "w-auto")}
+                         ref={tableRef}
+                    >
+                        <EditorContent ref={editorRef}
+                                       editor={editor}
+                                       className={cn(
+                                           "prose prose-sm  text-right h-full overflow-auto mx-auto",
+                                       )}
+                        />
+                        <div id="floating-menu">
+                            {showMenu && (
+                                <motion.div
+                                    ref={floatingMenuRef}
+                                    initial={{opacity: 0, scale: 0.95}}
+                                    animate={{opacity: 1, scale: 1}}
+                                    className="absolute border bg-popover p-2 shadow-xl z-50 w-auto"
+                                    style={{
+                                        top: menuStyle.top,
+                                        left: 0,
+                                        right: 0,
+                                        maxWidth: '100%',
+                                    }}
+                                    onMouseDown={e => e.stopPropagation()}
+                                >
+                                    <div className="flex flex-wrap gap-1 items-center justify-start sm:justify-center">
+                                        <Toggle
+                                            pressed={editor.isActive('bold')}
+                                            onPressedChange={() => editor.chain().focus().toggleBold().run()}
+                                            aria-label="bold"
+                                        >
+                                            <Bold className="h-4 w-4"/>
+                                        </Toggle>
 
-                                            <Toggle
-                                                pressed={editor.isActive('italic')}
-                                                onPressedChange={() => editor.chain().focus().toggleItalic().run()}
-                                                aria-label="italic"
-                                            >
-                                                <Italic className="h-4 w-4"/>
-                                            </Toggle>
+                                        <Toggle
+                                            pressed={editor.isActive('italic')}
+                                            onPressedChange={() => editor.chain().focus().toggleItalic().run()}
+                                            aria-label="italic"
+                                        >
+                                            <Italic className="h-4 w-4"/>
+                                        </Toggle>
 
-                                            <Separator orientation="vertical" className="mx-1 h-6 hidden sm:block"/>
+                                        <Separator orientation="vertical" className="mx-1 h-6 hidden sm:block"/>
 
-                                            <div className="flex flex-wrap gap-1">
-                                                <Button type={"button"}
+                                        <div className="flex flex-wrap gap-1">
+                                            <Button type={"button"}
                                                     variant="ghost"
                                                     size="icon"
                                                     onClick={() => editor.chain().focus().setTextAlign('right').run()}
-                                                >
-                                                    <AlignRight className="h-4 w-4"/>
-                                                </Button>
-                                                <Button type={"button"}
+                                            >
+                                                <AlignRight className="h-4 w-4"/>
+                                            </Button>
+                                            <Button type={"button"}
                                                     variant="ghost"
                                                     size="icon"
                                                     onClick={() => editor.chain().focus().setTextAlign('center').run()}
-                                                >
-                                                    <AlignCenter className="h-4 w-4"/>
-                                                </Button>
-                                                <Button type={"button"}
+                                            >
+                                                <AlignCenter className="h-4 w-4"/>
+                                            </Button>
+                                            <Button type={"button"}
                                                     variant="ghost"
                                                     size="icon"
                                                     onClick={() => editor.chain().focus().setTextAlign('left').run()}
-                                                >
-                                                    <AlignLeft className="h-4 w-4"/>
-                                                </Button>
-                                            </div>
-
-                                            <Separator orientation="vertical" className="mx-1 h-6 hidden sm:block"/>
-
-                                            <Popover>
-                                                <PopoverTrigger asChild>
-                                                    <Button type={"button"} size="sm" variant="outline" className="gap-2">
-                                                        <PaintBucket className="h-4 w-4"/> {fa.bgColor}
-                                                    </Button>
-                                                </PopoverTrigger>
-                                                <PopoverContent align="end" className="w-full sm:w-56">
-                                                    <ColorSwatches
-                                                        onSelect={(hex) => {
-                                                            if (hex) editor.chain().focus().setCellAttribute('backgroundColor', hex).run();
-                                                            else editor.chain().focus().resetAttributes('tableCell', 'backgroundColor').run();
-                                                        }}
-                                                    />
-                                                </PopoverContent>
-                                            </Popover>
-
-                                            <Separator orientation="vertical" className="mx-1 h-6 hidden sm:block"/>
-
-                                            <Button type={"button"} size="sm" variant="outline"
-                                                    onClick={() => editor.chain().focus().toggleHeaderCell().run()}>
-                                                {fa.headerCell}
+                                            >
+                                                <AlignLeft className="h-4 w-4"/>
                                             </Button>
-
-                                            {/*<DropdownMenu>*/}
-                                            {/*    <DropdownMenuTrigger asChild>*/}
-                                            {/*        <Button type={"button"} size="sm" variant="outline" className="gap-2">*/}
-                                            {/*            {fa.cellOptions} <ChevronDown className="h-4 w-4"/>*/}
-                                            {/*        </Button>*/}
-                                            {/*    </DropdownMenuTrigger>*/}
-                                            {/*    <DropdownMenuContent onMouseDown={e => e.stopPropagation()} align="start"> <DropdownMenuItem*/}
-                                            {/*        onClick={() => editor.chain().focus().mergeCells().run()}> <Merge*/}
-                                            {/*        className="h-4 w-4 mr-2"/> {fa.merge} </DropdownMenuItem>*/}
-                                            {/*        <DropdownMenuItem*/}
-                                            {/*            onClick={() => editor.chain().focus().splitCell().run()}> <Split*/}
-                                            {/*            className="h-4 w-4 mr-2"/> {fa.split} </DropdownMenuItem>*/}
-                                            {/*        <DropdownMenuSeparator/> <DropdownMenuItem*/}
-                                            {/*            onClick={() => editor.chain().focus().addRowBefore().run()}>*/}
-                                            {/*            <Rows className="h-4 w-4 mr-2"/> {fa.addRowBefore}*/}
-                                            {/*        </DropdownMenuItem> <DropdownMenuItem*/}
-                                            {/*            onClick={() => editor.chain().focus().addRowAfter().run()}>*/}
-                                            {/*            <Rows className="h-4 w-4 mr-2"/> {fa.addRowAfter}*/}
-                                            {/*        </DropdownMenuItem> <DropdownMenuItem*/}
-                                            {/*            onClick={() => editor.chain().focus().addColumnBefore().run()}>*/}
-                                            {/*            <Columns className="h-4 w-4 mr-2"/> {fa.addColBefore}*/}
-                                            {/*        </DropdownMenuItem> <DropdownMenuItem*/}
-                                            {/*            onClick={() => editor.chain().focus().addColumnAfter().run()}>*/}
-                                            {/*            <Columns className="h-4 w-4 mr-2"/> {fa.addColAfter}*/}
-                                            {/*        </DropdownMenuItem> <DropdownMenuSeparator/> <DropdownMenuItem*/}
-                                            {/*            className="text-destructive"*/}
-                                            {/*            onClick={() => editor.chain().focus().deleteTable().run()}>*/}
-                                            {/*            <Trash2 className="h-4 w-4 mr-2"/> {fa.deleteTable}*/}
-                                            {/*        </DropdownMenuItem> </DropdownMenuContent>*/}
-                                            {/*</DropdownMenu>*/}
                                         </div>
-                                    </motion.div>
-                                )}
-                            </div>
-                            {editor && (editor.isActive('tableCell') || editor.isActive('tableHeader')) &&
-                                <ContextMenuContent>
-                                    <ContextMenuLabel>{fa.cellOptions}</ContextMenuLabel>
-                                    <ContextMenuSeparator/>
-                                    <ContextMenuItem onClick={() => editor.chain().focus().toggleHeaderCell().run()}>
-                                        <Bold className="h-4 w-4 mr-2"/> {fa.headerCell}
-                                    </ContextMenuItem>
-                                    <ContextMenuItem onClick={() => editor.chain().focus().mergeCells().run()}>
-                                        <Merge className="h-4 w-4 mr-2"/> {fa.merge}
-                                    </ContextMenuItem>
-                                    <ContextMenuItem onClick={() => editor.chain().focus().splitCell().run()}>
-                                        <Split className="h-4 w-4 mr-2"/> {fa.split}
-                                    </ContextMenuItem>
-                                    <ContextMenuSeparator/>
-                                    <ContextMenuItem onClick={() => editor.chain().focus().addRowBefore().run()}>
-                                        <Rows className="h-4 w-4 mr-2"/> {fa.addRowBefore}
-                                    </ContextMenuItem>
-                                    <ContextMenuItem onClick={() => editor.chain().focus().addRowAfter().run()}>
-                                        <Rows className="h-4 w-4 mr-2"/> {fa.addRowAfter}
-                                    </ContextMenuItem>
-                                    <ContextMenuItem onClick={() => editor.chain().focus().addColumnBefore().run()}>
-                                        <Columns className="h-4 w-4 mr-2"/> {fa.addColBefore}
-                                    </ContextMenuItem>
-                                    <ContextMenuItem onClick={() => editor.chain().focus().addColumnAfter().run()}>
-                                        <Columns className="h-4 w-4 mr-2"/> {fa.addColAfter}
-                                    </ContextMenuItem>
-                                    <ContextMenuSeparator/>
-                                    <ContextMenuItem onClick={() => editor.chain().focus().deleteRow().run()}>
-                                        <DeleteRowIcon/>
-                                        {fa.deleteRow}
 
-                                    </ContextMenuItem>
-                                    <ContextMenuItem onClick={() => editor.chain().focus().deleteColumn().run()}>
-                                        <DeleteColumnIcon/> {fa.deleteCol}
-                                    </ContextMenuItem>
-                                    <ContextMenuItem onClick={() => editor.chain().focus().deleteTable().run()}
-                                                     className="text-destructive">
-                                        <Trash2 className="h-4 w-4 mr-2"/> {fa.deleteTable}
-                                        <ContextMenuShortcut>⌫</ContextMenuShortcut>
-                                    </ContextMenuItem>
-                                </ContextMenuContent>}
+                                        <Separator orientation="vertical" className="mx-1 h-6 hidden sm:block"/>
+
+                                        <Popover>
+                                            <PopoverTrigger asChild>
+                                                <Button type={"button"} size="sm" variant="outline" className="gap-2">
+                                                    <PaintBucket className="h-4 w-4"/> {fa.bgColor}
+                                                </Button>
+                                            </PopoverTrigger>
+                                            <PopoverContent align="end" className="w-full sm:w-56">
+                                                <ColorSwatches
+                                                    onSelect={(hex) => {
+                                                        if (hex) editor.chain().focus().setCellAttribute('backgroundColor', hex).run();
+                                                        else editor.chain().focus().resetAttributes('tableCell', 'backgroundColor').run();
+                                                    }}
+                                                />
+                                            </PopoverContent>
+                                        </Popover>
+
+                                        <Separator orientation="vertical" className="mx-1 h-6 hidden sm:block"/>
+
+                                        <Button type={"button"} size="sm" variant="outline"
+                                                onClick={() => editor.chain().focus().toggleHeaderCell().run()}>
+                                            {fa.headerCell}
+                                        </Button>
+
+                                        {/*<DropdownMenu>*/}
+                                        {/*    <DropdownMenuTrigger asChild>*/}
+                                        {/*        <Button type={"button"} size="sm" variant="outline" className="gap-2">*/}
+                                        {/*            {fa.cellOptions} <ChevronDown className="h-4 w-4"/>*/}
+                                        {/*        </Button>*/}
+                                        {/*    </DropdownMenuTrigger>*/}
+                                        {/*    <DropdownMenuContent onMouseDown={e => e.stopPropagation()} align="start"> <DropdownMenuItem*/}
+                                        {/*        onClick={() => editor.chain().focus().mergeCells().run()}> <Merge*/}
+                                        {/*        className="h-4 w-4 mr-2"/> {fa.merge} </DropdownMenuItem>*/}
+                                        {/*        <DropdownMenuItem*/}
+                                        {/*            onClick={() => editor.chain().focus().splitCell().run()}> <Split*/}
+                                        {/*            className="h-4 w-4 mr-2"/> {fa.split} </DropdownMenuItem>*/}
+                                        {/*        <DropdownMenuSeparator/> <DropdownMenuItem*/}
+                                        {/*            onClick={() => editor.chain().focus().addRowBefore().run()}>*/}
+                                        {/*            <Rows className="h-4 w-4 mr-2"/> {fa.addRowBefore}*/}
+                                        {/*        </DropdownMenuItem> <DropdownMenuItem*/}
+                                        {/*            onClick={() => editor.chain().focus().addRowAfter().run()}>*/}
+                                        {/*            <Rows className="h-4 w-4 mr-2"/> {fa.addRowAfter}*/}
+                                        {/*        </DropdownMenuItem> <DropdownMenuItem*/}
+                                        {/*            onClick={() => editor.chain().focus().addColumnBefore().run()}>*/}
+                                        {/*            <Columns className="h-4 w-4 mr-2"/> {fa.addColBefore}*/}
+                                        {/*        </DropdownMenuItem> <DropdownMenuItem*/}
+                                        {/*            onClick={() => editor.chain().focus().addColumnAfter().run()}>*/}
+                                        {/*            <Columns className="h-4 w-4 mr-2"/> {fa.addColAfter}*/}
+                                        {/*        </DropdownMenuItem> <DropdownMenuSeparator/> <DropdownMenuItem*/}
+                                        {/*            className="text-destructive"*/}
+                                        {/*            onClick={() => editor.chain().focus().deleteTable().run()}>*/}
+                                        {/*            <Trash2 className="h-4 w-4 mr-2"/> {fa.deleteTable}*/}
+                                        {/*        </DropdownMenuItem> </DropdownMenuContent>*/}
+                                        {/*</DropdownMenu>*/}
+                                    </div>
+                                </motion.div>
+                            )}
                         </div>
+                        {editor && (editor.isActive('tableCell') || editor.isActive('tableHeader')) &&
+                            <ContextMenuContent>
+                                <ContextMenuLabel>{fa.cellOptions}</ContextMenuLabel>
+                                <ContextMenuSeparator/>
+                                <ContextMenuItem onClick={() => editor.chain().focus().toggleHeaderCell().run()}>
+                                    <Bold className="h-4 w-4 mr-2"/> {fa.headerCell}
+                                </ContextMenuItem>
+                                <ContextMenuItem onClick={() => editor.chain().focus().mergeCells().run()}>
+                                    <Merge className="h-4 w-4 mr-2"/> {fa.merge}
+                                </ContextMenuItem>
+                                <ContextMenuItem onClick={() => editor.chain().focus().splitCell().run()}>
+                                    <Split className="h-4 w-4 mr-2"/> {fa.split}
+                                </ContextMenuItem>
+                                <ContextMenuSeparator/>
+                                <ContextMenuItem onClick={() => editor.chain().focus().addRowBefore().run()}>
+                                    <Rows className="h-4 w-4 mr-2"/> {fa.addRowBefore}
+                                </ContextMenuItem>
+                                <ContextMenuItem onClick={() => editor.chain().focus().addRowAfter().run()}>
+                                    <Rows className="h-4 w-4 mr-2"/> {fa.addRowAfter}
+                                </ContextMenuItem>
+                                <ContextMenuItem onClick={() => editor.chain().focus().addColumnBefore().run()}>
+                                    <Columns className="h-4 w-4 mr-2"/> {fa.addColBefore}
+                                </ContextMenuItem>
+                                <ContextMenuItem onClick={() => editor.chain().focus().addColumnAfter().run()}>
+                                    <Columns className="h-4 w-4 mr-2"/> {fa.addColAfter}
+                                </ContextMenuItem>
+                                <ContextMenuSeparator/>
+                                <ContextMenuItem onClick={() => editor.chain().focus().deleteRow().run()}>
+                                    <DeleteRowIcon/>
+                                    {fa.deleteRow}
 
-                    </ContextMenuTrigger>
-                </ContextMenu>
+                                </ContextMenuItem>
+                                <ContextMenuItem onClick={() => editor.chain().focus().deleteColumn().run()}>
+                                    <DeleteColumnIcon/> {fa.deleteCol}
+                                </ContextMenuItem>
+                                <ContextMenuItem onClick={() => editor.chain().focus().deleteTable().run()}
+                                                 className="text-destructive">
+                                    <Trash2 className="h-4 w-4 mr-2"/> {fa.deleteTable}
+                                    <ContextMenuShortcut>⌫</ContextMenuShortcut>
+                                </ContextMenuItem>
+                            </ContextMenuContent>}
+                    </div>
+
+                </ContextMenuTrigger>
+            </ContextMenu>
 
         </div>
     )
